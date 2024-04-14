@@ -31,7 +31,7 @@ function MakePlaylistCards(videos: IVideoData[]) {
                     <a href={video.href} target="_blank" rel="noreferrer">
                         <Card className="h-full">
                             <CardHeader>
-                                <img src={video.thumbnail} alt={video.title} className="w-full h-48 object-cover" />
+                                <img src={video.thumbnail} alt={video.title} className="w-full object-cover aspect-video" />
                                 <CardTitle className="text-xl">{video.title}</CardTitle>
                             </CardHeader>
                         </Card>

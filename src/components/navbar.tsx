@@ -12,7 +12,7 @@ export const Navbar = () => {
     return (
         <>
             <div className="desktop-only navbar h-56 bg-cssa-navy">
-                <div className="container px-12 flex justify-start place-content-center h-full gap-8">
+                <div className="px-12 flex justify-start place-content-center h-full gap-8">
                     <div className="flex flex-col place-content-center">
                         <img src="/img/logo.svg" alt="CSSA Logo" className="w-32 h-32" />
                     </div>
