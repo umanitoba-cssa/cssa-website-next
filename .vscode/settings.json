@@ -1,0 +1,7 @@
+{
+    "editor.tabSize": 4,
+    "editor.wordWrapColumn": 112,
+    "files.associations": {
+        "*.css": "tailwindcss"
+    }
+}
