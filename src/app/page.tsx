@@ -1,5 +1,6 @@
 import BlockHeader from "@/components/block-header";
 import PageHeader from "@/components/page-header";
+import Image from "next/image";
 
 export default function Home() {
     return (
@@ -21,10 +22,12 @@ export default function Home() {
                 <div className="flex flex-col gap-8">
                     <BlockHeader title="What we do" />
                     <div className="grid lg:grid-cols-[400px_auto] gap-12 lg:gap-8 items-center">
-                        <div className="aspect-9/6 align-middle">
-                            <img
-                                className="flex aspect-3/2 w-full object-cover"
+                        <div className="aspect-3/2 align-middle relative">
+                            <Image
+                                fill
                                 src="/img/teasers/advocacy.jpg"
+                                alt="Advocacy"
+                                className="object-cover"
                             />
                         </div>
                         <div className="flex flex-col place-content-center gap-4">
@@ -39,10 +42,12 @@ export default function Home() {
                             </p>
                         </div>
 
-                        <div className="aspect-9/6">
-                            <img
-                                className="flex aspect-3/2 w-full object-cover"
+                        <div className="aspect-3/2 align-middle relative">
+                            <Image
+                                fill
                                 src="/img/teasers/community.jpg"
+                                alt="Advocacy"
+                                className="object-cover"
                             />
                         </div>
                         <div className="flex flex-col place-content-center gap-4">
@@ -57,10 +62,12 @@ export default function Home() {
                             </p>
                         </div>
 
-                        <div className="aspect-9/6">
-                            <img
-                                className="flex aspect-3/2 w-full object-cover"
+                        <div className="aspect-3/2 align-middle relative">
+                            <Image
+                                fill
                                 src="/img/teasers/support.jpg"
+                                alt="Advocacy"
+                                className="object-cover"
                             />
                         </div>
                         <div className="flex flex-col place-content-center gap-4">

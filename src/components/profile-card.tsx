@@ -1,4 +1,5 @@
 import { FaGithub, FaGlobeAmericas, FaInstagram, FaLinkedin } from "react-icons/fa";
+import Image from "next/image";
 
 interface IProfile {
     name: string
@@ -13,7 +14,9 @@ interface IProfile {
 export default function ProfileCard({ name, position, image, linkedin, instagram, github, website }: IProfile) {
     return (
         <div className="flex flex-col border-solid border border-gray-400 rounded-xl items-center p-4 gap-4 min-w-[17rem] max-w-[17rem]">
-            <div className="w-52 h-52 object-cover bg-contain rounded-full" style={{ backgroundImage: `url('${image}')` }} />
+            <div className="w-52 h-52 object-cover bg-contain rounded-full relative overflow-hidden">
+                <Image src={image} alt={name} fill className="" />
+            </div>
             <div className="text-center">
             <h3 className="text-xl font-bold pb-0">{name}</h3>
             <p className="my-0 text-xl">{position}</p>
