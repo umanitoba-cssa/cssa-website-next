@@ -6,10 +6,11 @@ import { ExecProfiles } from "@/data/team";
 export default function Sponsor() {
 
     return (
+        <>
         <main className="flex flex-col">
             <PageHeader title="Sponsor Us" image="/img/backgrounds/sponsors.jpg" />
-            <div className="p-12">
-                <div>
+            <div className="container py-12 flex flex-col gap-12">
+                <div className="flex flex-col gap-8">
                     <BlockHeader title="Why Sponsor Us?" />
                     <p>
                         Our events draw a diverse audience of potential customers, partners, and employees who 
@@ -23,7 +24,7 @@ export default function Sponsor() {
                         passions in the field.
                     </p>
                 </div>
-                <div>
+                <div className="flex flex-col gap-8">
                     <BlockHeader title="Contact Us"/>
                     <p>
                         To inquire about sponsorships, please email us at <a className="text-cssa-gold hover:underline" href="mailto:cssa@umanitoba.ca">cssa@umanitoba.ca</a>
@@ -31,5 +32,6 @@ export default function Sponsor() {
                 </div>
             </div>
         </main>
+        </>
     );
 }

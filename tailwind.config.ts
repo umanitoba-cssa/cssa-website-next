@@ -73,7 +73,10 @@ const config = {
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
-        "accordion-up": "accordion-up 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out"
+      },
+      transitionProperty: {
+        'height': 'height'
       },
       aspectRatio: {
         '3/2': '3 / 2',

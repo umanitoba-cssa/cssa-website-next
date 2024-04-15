@@ -49,11 +49,11 @@ body {
   }
 }
 
-@media only screen and (max-width: 799px) {
+@media only screen and (max-width: 901px) {
     .desktop-only { display: none !important; }
  }
 
- @media only screen and (min-width: 800px) {
+ @media only screen and (min-width: 902px) {
     .mobile-only { display: none !important; }
  }
 
@@ -74,9 +74,5 @@ h4 {
 }
 
 p {
-    @apply text-2xl font-sans my-8;
-}
-
-p.slim {
-    @apply mt-4 mb-0;
+    @apply text-2xl font-sans;
 }

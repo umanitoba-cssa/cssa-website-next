@@ -2,38 +2,45 @@ interface IRoute {
     title: string;
     href: string;
     image: string;
+    showInNavbar?: boolean;
 }
 
 export const Routes: IRoute[] = [
     {
         title: 'Home',
         href: '/',
-        image: "/img/backgrounds/home.jpg"
+        image: "/img/backgrounds/home.jpg",
+        showInNavbar: true
     },
     {
         title: 'Team',
         href: '/team',
-        image: "/img/backgrounds/home.jpg"
+        image: "/img/backgrounds/home.jpg",
+        showInNavbar: true
     },
     {
         title: 'Resources',
         href: '/resources',
-        image: "/img/backgrounds/home.jpg"
+        image: "/img/backgrounds/home.jpg",
+        showInNavbar: true
     },
     {
         title: 'Lounge',
         href: '/lounge',
-        image: "/img/backgrounds/home.jpg"
+        image: "/img/backgrounds/home.jpg",
+        showInNavbar: true
     },
     {
         title: 'Sponsor Us',
         href: '/sponsor',
-        image: "/img/backgrounds/home.jpg"
+        image: "/img/backgrounds/home.jpg",
+        showInNavbar: true
     },
     {
         title: 'Contact',
         href: '/contact',
-        image: "/img/backgrounds/home.jpg"
+        image: "/img/backgrounds/home.jpg",
+        showInNavbar: true
     },
     {
         title: '',

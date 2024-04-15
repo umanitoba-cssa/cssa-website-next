@@ -20,9 +20,9 @@ export default function Team() {
     return (
         <main className="flex flex-col">
             <PageHeader title="Team" image="/img/backgrounds/team.png" />
-            <div className="p-12">
+            <div className="container py-12 flex flex-col gap-8">
                 <BlockHeader title="Executive Team" />
-                <div className="my-8 flex flex-row gap-4 flex-wrap justify-evenly">
+                <div className="flex flex-row gap-4 flex-wrap justify-center">
                     {execCards}
                 </div>
             </div>
