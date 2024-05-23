@@ -11,7 +11,7 @@ interface IProfile {
 export const ExecProfiles = [
     {
         name: "Lyle Arcinas",
-        position: "Director of Internal Affairs",
+        position: "President",
         image: "/img/team/lyle.jpg",
         linkedin: "https://www.linkedin.com/in/lyle-arcinas/",
         instagram: "https://www.instagram.com/lel.rc/",
@@ -19,42 +19,43 @@ export const ExecProfiles = [
         website: "https://arcinas.info/"
     },
     {
-        name: "Mia Battad",
-        position: "Co-President",
-        image: "/img/team/mia.jpg",
-        linkedin: "https://www.linkedin.com/in/mia-battad/",
+        name: "Okiki Fasanmi",
+        position: "Vice President",
+        image: "/img/team/vacant.jpg",
     },
     {
-        name: "Isham Behl",
-        position: "Co-President",
-        image: "/img/team/isham.png",
-        instagram: "https://www.instagram.com/isham7920/",
-        linkedin: "https://www.linkedin.com/in/behli/",
-        github: "https://github.com/marshmallows7920"
-    },
-    {
-        name: "Noah Curoe",
+        name: "Vacant",
         position: "Director of Events",
-        image: "/img/team/noah.jpg",
-        linkedin: "https://linkedin.com/in/noahcuroe",
-        github: "https://github.com/noahc3"
+        image: "/img/team/vacant.png",
     },
     {
-        name: "Ethan Ducharme",
+        name: "Vacant",
+        position: "Director of Finance",
+        image: "/img/team/vacant.png",
+    },
+    {
+        name: "Caway Xiong",
         position: "Director of Lounge Affairs",
-        image: "/img/team/ethan.jpg",
-        linkedin: "https://www.linkedin.com/in/ethanducharme/"
+        image: "/img/team/vacant.png",
     },
     {
-        name: "Mark Lysack",
+        name: "Quoc (Peter) Hoang VU",
         position: "Director of Student Affairs",
-        image: "/img/team/mark.jpg",
-        linkedin: "https://www.linkedin.com/in/mark-lysack/",
-        github: "https://github.com/lysackm"
+        image: "/img/team/vacant.png"
     },
     {
-        name: "Ayesha Qadir",
+        name: "Tofunmi Layi-Babatunde",
         position: "Director of Advocacy",
-        image: "/img/team/ayesha.jpg"
+        image: "/img/team/vacant.png"
+    },
+    {
+        name: "Edwin Duong",
+        position: "Director of Internal Affairs",
+        image: "/img/team/vacant.png"
+    },
+    {
+        name: "Travis Friesen",
+        position: "Director of Promotions",
+        image: "/img/team/vacant.png"
     }
 ]
