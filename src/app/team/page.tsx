@@ -14,6 +14,7 @@ export default function Team() {
             instagram={profile.instagram}
             github={profile.github}
             website={profile.website}
+            discord={profile.discord}
         />
     ));
 
