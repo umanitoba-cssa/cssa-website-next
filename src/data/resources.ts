@@ -44,7 +44,7 @@ export const CSSALinks: IResourceLink[] = [
     {
         title: "CSSA Branding Guidelines",
         description: "The Branding guidelines for all CSSA resources.",
-        href: "https://umanitobacssa.ca/docs/internalDesignDocument.pdf"
+        href: "docs/internalDesignDocument.pdf"
     }
 ]
 
