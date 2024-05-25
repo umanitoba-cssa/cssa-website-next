@@ -1,4 +1,4 @@
-import { FaGithub, FaGlobeAmericas, FaInstagram, FaLinkedin } from "react-icons/fa";
+import { FaGithub, FaGlobeAmericas, FaInstagram, FaLinkedin, FaDiscord } from "react-icons/fa";
 import Image from "next/image";
 
 interface IProfile {
@@ -9,9 +9,10 @@ interface IProfile {
     instagram?: string
     github?: string
     website?: string
+    discord?: string
 }
 
-export default function ProfileCard({ name, position, image, linkedin, instagram, github, website }: IProfile) {
+export default function ProfileCard({ name, position, image, linkedin, instagram, github, website, discord }: IProfile) {
     return (
         <div className="flex flex-col border-solid border border-gray-400 rounded-xl items-center p-4 gap-4 min-w-[17rem] max-w-[17rem]">
             <div className="w-52 h-52 object-cover bg-contain rounded-full relative overflow-hidden">
@@ -34,7 +35,10 @@ export default function ProfileCard({ name, position, image, linkedin, instagram
                 </a>}
                 {website && <a className="text-3xl" href={website} target="_blank" rel="noreferrer">
                     <FaGlobeAmericas />
-                </a>}   
+                </a>}  
+                {discord && <a className="text-3xl" href={website} target="_blank" rel="noreferrer">
+                    <FaDiscord />
+                </a>}  
 
             </div>
         </div>

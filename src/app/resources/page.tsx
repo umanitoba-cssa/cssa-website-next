@@ -8,7 +8,7 @@ import {
     CarouselNext,
     CarouselPrevious
 } from "@/components/ui/carousel";
-import { IPlaylist, MeetingArchivesID, PlaylistCollections, ResourceLinks } from "@/data/resources";
+import { CSSALinks, IPlaylist, MeetingArchivesID, PlaylistCollections, ResourceLinks } from "@/data/resources";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
@@ -49,6 +49,25 @@ export default async function Resources() {
     }
 
     const resourceCards = ResourceLinks.map((link, index) => {
+        return (
+            <CarouselItem key={index} className="md:basis-1/2 lg:basis-[30%]" >
+                <div className="px-2 w-full h-full">
+                    <a href={link.href} target="_blank" rel="noreferrer">
+                        <Card className="h-full">
+                            <CardHeader>
+                                <CardTitle className="text-lg flex flex-row gap-2">
+                                    {link.title} <FaExternalLinkAlt className="my-auto" />
+                                </CardTitle>
+                                <CardDescription>{link.description}</CardDescription>
+                            </CardHeader>
+                        </Card>
+                    </a>
+                </div>
+            </CarouselItem>
+        );
+    });
+
+    const cssaCards = CSSALinks.map((link, index) => {
         return (
             <CarouselItem key={index} className="md:basis-1/2 lg:basis-[30%]" >
                 <div className="px-2 w-full h-full">
@@ -129,6 +148,17 @@ export default async function Resources() {
                         <TabsList className="w-full">{collectionTabs}</TabsList>
                         {collectionContent}
                     </Tabs>
+                </div>
+
+                <div className="flex flex-col gap-8">
+                    <BlockHeader title="CSSA Resources" />
+                    <p>All the internal materials provided by the CSSA.</p>
+
+                    <Carousel className="py-1" opts={{ align: "center" }}>
+                        <CarouselContent>{cssaCards}</CarouselContent>
+                        <CarouselNext />
+                        <CarouselPrevious />
+                    </Carousel>
                 </div>
 
                 <div className="flex flex-col gap-8">

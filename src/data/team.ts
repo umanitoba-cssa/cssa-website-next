@@ -11,50 +11,61 @@ interface IProfile {
 export const ExecProfiles = [
     {
         name: "Lyle Arcinas",
-        position: "Director of Internal Affairs",
+        position: "President",
         image: "/img/team/lyle.jpg",
         linkedin: "https://www.linkedin.com/in/lyle-arcinas/",
-        instagram: "https://www.instagram.com/lel.rc/",
         github: "https://github.com/lylearcinas",
         website: "https://arcinas.info/"
     },
     {
-        name: "Mia Battad",
-        position: "Co-President",
-        image: "/img/team/mia.jpg",
-        linkedin: "https://www.linkedin.com/in/mia-battad/",
+        name: "Okiki Fasanmi",
+        position: "Vice President",
+        image: "/img/team/okiki.png",
+        linkedin: "https://www.linkedin.com/in/okikiola-fasanmi-b264a6203/"
     },
     {
-        name: "Isham Behl",
-        position: "Co-President",
-        image: "/img/team/isham.png",
-        instagram: "https://www.instagram.com/isham7920/",
-        linkedin: "https://www.linkedin.com/in/behli/",
-        github: "https://github.com/marshmallows7920"
-    },
-    {
-        name: "Noah Curoe",
-        position: "Director of Events",
-        image: "/img/team/noah.jpg",
-        linkedin: "https://linkedin.com/in/noahcuroe",
-        github: "https://github.com/noahc3"
-    },
-    {
-        name: "Ethan Ducharme",
+        name: "Caway Xiong",
         position: "Director of Lounge Affairs",
-        image: "/img/team/ethan.jpg",
-        linkedin: "https://www.linkedin.com/in/ethanducharme/"
+        image: "/img/team/caway.jpg",
+        linkedin: "https://www.linkedin.com/in/caway-xiong-465316230/",
+        github: "https://github.com/2Lazy2BeOriginal"
     },
     {
-        name: "Mark Lysack",
+        name: "Peter Vu",
         position: "Director of Student Affairs",
-        image: "/img/team/mark.jpg",
-        linkedin: "https://www.linkedin.com/in/mark-lysack/",
-        github: "https://github.com/lysackm"
+        image: "/img/team/peter.jpg",
+        linkedin: "https://linkedin.com/in/petervu298/",
+        github: "https://github.com/pieberrykinnie",
+        discord: "https://discord.com/users/363279137768734720"
     },
     {
-        name: "Ayesha Qadir",
+        name: "Tofunmi Layi-Babatunde",
         position: "Director of Advocacy",
-        image: "/img/team/ayesha.jpg"
-    }
+        image: "/img/team/tofunmi.jpg",
+        linkedin: "https://www.linkedin.com/in/tofunmi-layi-babatunde-3477ab30a/"
+    },
+    {
+        name: "Edwin Duong",
+        position: "Director of Internal Affairs",
+        image: "/img/team/edwin.jpg",
+        linkedin: "https://www.linkedin.com/in/edwin-duong/"
+    },
+    {
+        name: "Travis Friesen",
+        position: "Director of Promotions",
+        image: "/img/team/travis.jpg",
+        linkedin: "https://www.linkedin.com/in/travisfriesen/",
+        github: "https://github.com/travisfriesen",
+        website: "https://travisfriesen.ca"
+    },
+    // {
+    //     name: "Vacant",
+    //     position: "Director of Events",
+    //     image: "/img/team/vacant.png"
+    // },
+    // {
+    //     name: "Vacant",
+    //     position: "Director of Finance",
+    //     image: "/img/team/vacant.png"
+    // },
 ]
