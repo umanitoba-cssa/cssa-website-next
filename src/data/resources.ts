@@ -35,6 +35,19 @@ export const ResourceLinks: IResourceLink[] = [
     }
 ]
 
+export const CSSALinks: IResourceLink[] = [
+    {
+        title: "CS Discord TOU",
+        description: "The terms of use of the Computer Science Lounge Discord.",
+        href: "https://github.com/umanitoba-cssa/CS-Discord-TOU/blob/master/CSDiscord-TermsOfUse.md"
+    },
+    {
+        title: "CSSA Branding Guidelines",
+        description: "The Branding guidelines for all CSSA resources.",
+        href: "https://umanitobacssa.ca/docs/internalDesignDocument.pdf"
+    }
+]
+
 interface IPlaylistCollection {
     category: string
     playlists: IPlaylist[]

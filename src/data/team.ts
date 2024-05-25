@@ -14,7 +14,6 @@ export const ExecProfiles = [
         position: "President",
         image: "/img/team/lyle.jpg",
         linkedin: "https://www.linkedin.com/in/lyle-arcinas/",
-        instagram: "https://www.instagram.com/lel.rc/",
         github: "https://github.com/lylearcinas",
         website: "https://arcinas.info/"
     },
@@ -59,14 +58,14 @@ export const ExecProfiles = [
         github: "https://github.com/travisfriesen",
         website: "https://travisfriesen.ca"
     },
-    {
-        name: "Vacant",
-        position: "Director of Events",
-        image: "/img/team/vacant.png"
-    },
-    {
-        name: "Vacant",
-        position: "Director of Finance",
-        image: "/img/team/vacant.png"
-    },
+    // {
+    //     name: "Vacant",
+    //     position: "Director of Events",
+    //     image: "/img/team/vacant.png"
+    // },
+    // {
+    //     name: "Vacant",
+    //     position: "Director of Finance",
+    //     image: "/img/team/vacant.png"
+    // },
 ]

@@ -11,7 +11,6 @@ export default function Team() {
             position={profile.position}
             image={profile.image}
             linkedin={profile.linkedin}
-            instagram={profile.instagram}
             github={profile.github}
             website={profile.website}
             discord={profile.discord}
