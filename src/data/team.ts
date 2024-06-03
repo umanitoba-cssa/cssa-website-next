@@ -58,14 +58,18 @@ export const ExecProfiles = [
         github: "https://github.com/travisfriesen",
         website: "https://travisfriesen.ca"
     },
-    // {
-    //     name: "Vacant",
-    //     position: "Director of Events",
-    //     image: "/img/team/vacant.png"
-    // },
-    // {
-    //     name: "Vacant",
-    //     position: "Director of Finance",
-    //     image: "/img/team/vacant.png"
-    // },
+    {
+        name: "Chinu Chandaria",
+        position: "Director of Events",
+        image: "/img/team/chinu.png",
+        linkedin: "https://www.linkedin.com/in/chaahna-c-5781b9263"
+
+    },
+    {
+        name: "Ginelle Temull",
+        position: "Director of Finance",
+        image: "/img/team/ginelle.png",
+        linkedin: "https://www.linkedin.com/in/ginelle-temull"
+
+    },
 ]
