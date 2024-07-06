@@ -37,6 +37,11 @@ export const ResourceLinks: IResourceLink[] = [
 
 export const CSSALinks: IResourceLink[] = [
     {
+        title: "First Year Guide",
+        description: "The Guide to your first year at the UofM as a First Year",
+        href: "docs/firstYearGuideV1-0.pdf"
+    },
+    {
         title: "CS Discord TOU",
         description: "The terms of use of the Computer Science Lounge Discord.",
         href: "https://github.com/umanitoba-cssa/CS-Discord-TOU/blob/master/CSDiscord-TermsOfUse.md"
