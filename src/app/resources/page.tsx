@@ -128,48 +128,48 @@ export default async function Resources() {
             <PageHeader title="Resources" image="/img/backgrounds/resources.png" />
             <div className="flex flex-col container py-12 gap-12">
                 <div className="flex flex-col gap-8">
-                    <BlockHeader title="Degree Resources" />
-                    <p>
-                        Questions about courses, programs, or Computer Science Co-op? Take a look at these
-                        links!
-                    </p>
-                    <Carousel className="py-1" opts={{ align: "center" }}>
-                        <CarouselContent>{resourceCards}</CarouselContent>
-                        <CarouselNext />
-                        <CarouselPrevious />
+                    <BlockHeader title="CSSA Resources"/>
+                    <p>All the internal materials provided by the CSSA.</p>
+
+                    <Carousel className="py-1" opts={{align: "center"}}>
+                        <CarouselContent>{cssaCards}</CarouselContent>
+                        <CarouselNext/>
+                        <CarouselPrevious/>
                     </Carousel>
                 </div>
 
                 <div className="flex flex-col gap-8">
-                    <BlockHeader title="Course Help" />
+                    <BlockHeader title="Degree Resources"/>
+                    <p>
+                        Questions about courses, programs, or Computer Science Co-op? Take a look at these
+                        links!
+                    </p>
+                    <Carousel className="py-1" opts={{align: "center"}}>
+                        <CarouselContent>{resourceCards}</CarouselContent>
+                        <CarouselNext/>
+                        <CarouselPrevious/>
+                    </Carousel>
+                </div>
+
+                <div className="flex flex-col gap-8">
+                    <BlockHeader title="Course Help"/>
                     <p>Lectures and course resources on YouTube made by our instructors.</p>
 
-                    <Tabs defaultValue={PlaylistCollections[0].category} className="w-full" >
+                    <Tabs defaultValue={PlaylistCollections[0].category} className="w-full">
                         <TabsList className="w-full">{collectionTabs}</TabsList>
                         {collectionContent}
                     </Tabs>
                 </div>
 
                 <div className="flex flex-col gap-8">
-                    <BlockHeader title="CSSA Resources" />
-                    <p>All the internal materials provided by the CSSA.</p>
-
-                    <Carousel className="py-1" opts={{ align: "center" }}>
-                        <CarouselContent>{cssaCards}</CarouselContent>
-                        <CarouselNext />
-                        <CarouselPrevious />
-                    </Carousel>
-                </div>
-
-                <div className="flex flex-col gap-8">
-                    <BlockHeader title="CSSA Meeting Archives" />
+                    <BlockHeader title="CSSA Meeting Archives"/>
                     <p>Recordings of our general meetings.</p>
-                    <Carousel className="py-1" opts={{ align: "center" }}>
+                    <Carousel className="py-1" opts={{align: "center"}}>
                         <CarouselContent>
                             {MakePlaylistCards(await GetPlaylistData(MeetingArchivesID))}
                         </CarouselContent>
-                        <CarouselNext />
-                        <CarouselPrevious />
+                        <CarouselNext/>
+                        <CarouselPrevious/>
                     </Carousel>
                 </div>
             </div>

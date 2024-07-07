@@ -39,7 +39,7 @@ export const CSSALinks: IResourceLink[] = [
     {
         title: "First Year Guide",
         description: "The Guide to your first year at the UofM as a First Year",
-        href: "docs/firstYearGuideV1-0.pdf"
+        href: "docs/firstYearGuide.pdf"
     },
     {
         title: "CS Discord TOU",
