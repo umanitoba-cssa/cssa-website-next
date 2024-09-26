@@ -7,7 +7,7 @@ export default function Footer() {
             <div className="flex flex-row flex-wrap gap-4 place-items-center justify-evenly">
                 <div className="flex flex-row gap-2 place-items-center">
                     <FaDiscord className="w-8 h-8"/>
-                    <a className="hover:underline" href="https://discord.umaitobacssa.ca/">Join us on Discord</a>
+                    <a className="hover:underline" href="https://discord.umanitobacssa.ca/">Join us on Discord</a>
                 </div>
                 <div className="flex flex-row gap-2 place-items-center">
                     <FaInstagram className="w-8 h-8"/>
