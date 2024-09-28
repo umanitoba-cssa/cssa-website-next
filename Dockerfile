@@ -5,7 +5,7 @@ COPY bun.lockb .
 COPY package.json .
 
 # Install dependencies
-RUN bun install --frozen-lockfile
+RUN bun install
 
 # Copy your source code
 # If only files in the src folder changed, this is the only step that gets executed!
