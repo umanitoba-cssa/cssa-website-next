@@ -14,7 +14,7 @@ RUN bun install --frozen-lockfile
 
 COPY ./ ./
 
-#RUN bun run build
+RUN bun run build
 
 #COPY index.ts build/index.ts
 
