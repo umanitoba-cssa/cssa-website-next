@@ -76,3 +76,7 @@ h4 {
 p {
     @apply text-2xl font-sans;
 }
+
+li {
+    @apply text-2xl font-sans;
+}
