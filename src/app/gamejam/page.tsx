@@ -29,9 +29,16 @@ export default function GameJam() {
                 *<p>- TBD</p>
                 */}
                 <h4>Silver Sponsors</h4>
+                <div className="flex gap-5">
                 <SponsorCard name="Niche" image="/img/gamejam/niche-logo.svg" website="https://nicherms.com"/>
+                <SponsorCard name="Pollard Banknote" image="/img/gamejam/pollard.svg" website="https://www.pollardbanknote.com"/>
+                </div>
                 <h4>Bronze Sponsors</h4>
+                <div className="flex gap-5">
                 <SponsorCard name="G3" image="/img/gamejam/g3-logo.svg" website="https://g3.ca"/>
+                <SponsorCard name="New Media Manitoba" image="/img/gamejam/NMM.svg" website="https://newmediamanitoba.com"/>
+                <SponsorCard name="Department of Computer Science" image="/img/gamejam/UMDeptCS.svg" website="https://umanitoba.ca/science/computer-science"/>
+                </div>
                 <BlockHeader title="Resources" />
                 <ul>
                     <li>- <a className="underline" href="https://itch.io/game-development/engines/most-projects">Most used game engines</a> - This resource is there to help you see what other projects are being developed in.</li>
