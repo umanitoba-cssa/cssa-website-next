@@ -26,7 +26,7 @@ export const ExecProfiles = [
     {
         name: "Caway Xiong",
         position: "Director of Lounge Affairs",
-        image: "/img/team/caway.jpg",
+        image: "/img/team/caway.png",
         linkedin: "https://www.linkedin.com/in/caway-xiong-465316230/",
         github: "https://github.com/2Lazy2BeOriginal"
     },
@@ -61,7 +61,7 @@ export const ExecProfiles = [
     {
         name: "Chinu Chandaria",
         position: "Director of Events",
-        image: "/img/team/chinu.png",
+        image: "/img/team/chinu.jpg",
         linkedin: "https://www.linkedin.com/in/chaahna-c-5781b9263"
 
     },
