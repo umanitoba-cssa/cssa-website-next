@@ -12,7 +12,7 @@ export const ExecProfiles = [
     {
         name: "Lyle Arcinas",
         position: "President",
-        image: "/img/team/lyle.jpg",
+        image: "/img/team/lyle.png",
         linkedin: "https://www.linkedin.com/in/lyle-arcinas/",
         github: "https://github.com/lylearcinas",
         website: "https://arcinas.info/"
@@ -61,7 +61,7 @@ export const ExecProfiles = [
     {
         name: "Chinu Chandaria",
         position: "Director of Events",
-        image: "/img/team/chinu.jpg",
+        image: "/img/team/chinu.png",
         linkedin: "https://www.linkedin.com/in/chaahna-c-5781b9263"
 
     },
