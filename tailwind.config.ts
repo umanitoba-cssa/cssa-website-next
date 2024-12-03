@@ -21,6 +21,7 @@ const config = {
       colors: {
         "cssa-navy": "#030d1f",
         "cssa-blue": "#2066b8",
+        "cssa-light-blue": "#3465b2",
         "cssa-gold": "#fab416",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
