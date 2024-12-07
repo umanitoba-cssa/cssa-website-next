@@ -1,6 +1,6 @@
 {
   //"extends": "next/core-web-vitals",
   "rules": {
-    "indent": "4"
+    "indent-legacy": "4"
   }
 }
