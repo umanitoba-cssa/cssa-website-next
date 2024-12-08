@@ -29,7 +29,7 @@ ENV GOOGLE_SERVICE_ACCOUNT_EMAIL=${GOOGLE_SERVICE_ACCOUNT_EMAIL}
 
 RUN bun run build
 
-COPY index.ts build/index.ts
+#COPY index.ts build/index.ts
 
 
 CMD ["bun", "run", "start"]
