@@ -47,9 +47,14 @@ export const CSSALinks: IResourceLink[] = [
         href: "/docs/discordTOU.pdf"
     },
     {
-        title: "CS Moderator Handbook",
+        title: "CS Discord Moderator Handbook",
         description: "The moderator handbook of the Computer Science Lounge Discord.",
         href: "/docs/discordModHandbook.pdf"
+    },
+    {
+        title: "CS Discord Copyright Policy",
+        description: "The policy on sharing copyrighted materials in the Computer Science Lounge Discord",
+        href: "/docs/discordCopyrightPolicy.pdf"
     },
     {
         title: "CSSA Branding Guidelines",
