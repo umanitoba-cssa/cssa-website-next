@@ -47,13 +47,13 @@ export const ExecProfiles = [
   {
     name: "Edwin Duong",
     position: "Director of Internal Affairs",
-    image: "/img/team/edwin.jpg",
+    image: "/img/team/edwin.png",
     linkedin: "https://www.linkedin.com/in/edwin-duong/",
   },
   {
     name: "Travis Friesen",
     position: "Director of Promotions",
-    image: "/img/team/travis.jpg",
+    image: "/img/team/travis.png",
     linkedin: "https://www.linkedin.com/in/travisfriesen/",
     github: "https://github.com/travisfriesen",
     website: "https://travisfriesen.ca",
@@ -69,5 +69,11 @@ export const ExecProfiles = [
     position: "Director of Finance",
     image: "/img/team/ginelle.png",
     linkedin: "https://www.linkedin.com/in/ginelle-temull",
+  },
+  {
+    name: "KC del Moro",
+    position: "Assistant Director of Promotions",
+    image: "/img/team/kc.png",
+    linkedin: "https://www.linkedin.com/in/kriza-del-moro-950378301/",
   },
 ];
