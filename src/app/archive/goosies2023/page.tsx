@@ -10,7 +10,7 @@ export default function Goosies() {
 
     return (
         <main className="flex flex-col">
-            <PageHeader title="The Goosies 2023" image="/img/backgrounds/home.jpg" />
+            <PageHeader title="The Goosies 2023-24" image="/img/backgrounds/home.jpg" />
             <div className="desktop-only container py-8 flex flex-row gap-8">
                 <div className="">
                     <Image
