@@ -62,11 +62,12 @@
 
 /* Add styling for code blocks */
 .markdown-content pre {
-  background-color: rgba(0, 0, 0, 0.3) !important;
+  background-color: #282c34 !important; /* Match the prism-atom-dark theme */
   border-radius: 0.5rem;
   padding: 1rem;
   overflow-x: auto;
   border: 1px solid rgba(255, 255, 255, 0.1);
+  margin: 1.5rem 0;
 }
 
 .markdown-content code {
@@ -80,7 +81,31 @@
 
 .markdown-content pre code {
   padding: 0;
-  background-color: transparent;
+  background-color: transparent !important;
+  border-radius: 0;
+  color: inherit;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  tab-size: 2;
+}
+
+/* Prism.js line numbers */
+.markdown-content pre.line-numbers {
+  position: relative;
+  padding-left: 3.5rem;
+  counter-reset: linenumber;
+}
+
+.markdown-content pre.line-numbers > code {
+  position: relative;
+}
+
+/* Additional styling for inline code */
+.markdown-content p code, 
+.markdown-content li code, 
+.markdown-content td code {
+  color: #e6edf3;
+  background-color: rgba(99, 110, 123, 0.4);
 }
 
 /* Add styling for blockquotes */
@@ -188,4 +213,30 @@ html {
   background-color: rgba(255, 255, 255, 0.1);
   border: none;
   margin: 2rem 0;
+}
+
+/* Add styling for callouts/notes */
+.markdown-content .callout {
+  border-left: 4px solid;
+  border-radius: 0.25rem;
+  padding: 1rem;
+  margin: 1.5rem 0;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.markdown-content .callout.info {
+  border-color: rgb(52, 101, 178); /* cssa-light-blue */
+}
+
+.markdown-content .callout.warning {
+  border-color: rgb(250, 180, 22); /* cssa-gold */
+}
+
+.markdown-content .callout.error {
+  border-color: #f85149; /* danger-fg */
+}
+
+.markdown-content .callout .callout-title {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
 } 
