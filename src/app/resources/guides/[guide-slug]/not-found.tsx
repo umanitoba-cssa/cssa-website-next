@@ -12,12 +12,19 @@ export default function GuideNotFound() {
           The guide you are looking for might have been removed, had its name changed, or is temporarily unavailable.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 mt-4">
-          <Button variant="default" className="bg-cssa-blue hover:bg-cssa-light-blue" asChild>
+          <Button 
+            className="bg-cssa-blue hover:bg-cssa-light-blue transition-colors text-white" 
+            asChild
+          >
             <Link href="/resources/guides">
               Browse All Guides
             </Link>
           </Button>
-          <Button variant="outline" className="border-cssa-blue text-cssa-blue hover:bg-cssa-blue hover:text-white" asChild>
+          <Button 
+            variant="outline" 
+            className="border-cssa-blue text-white hover:bg-cssa-blue/20 transition-colors" 
+            asChild
+          >
             <Link href="/resources">
               Back to Resources
             </Link>

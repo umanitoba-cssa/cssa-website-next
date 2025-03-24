@@ -1,28 +1,81 @@
 /* Improve link styling in markdown content */
 .markdown-content a {
-  color: var(--primary);
+  color: rgb(32, 102, 184) !important; /* cssa-blue */
   text-decoration: underline;
   transition: color 0.2s ease;
 }
 
 .markdown-content a:hover {
-  color: var(--primary-hover);
+  color: rgb(52, 101, 178) !important; /* cssa-light-blue */
+}
+
+/* Override the github-markdown-light.css theme for dark mode */
+.markdown-body {
+  color: rgb(var(--foreground-rgb)) !important;
+  background-color: transparent !important;
+  font-family: var(--font-sans) !important;
+}
+
+/* Add darkmode override class */
+.markdown-dark {
+  --color-prettylights-syntax-comment: #8b949e;
+  --color-prettylights-syntax-constant: #79c0ff;
+  --color-prettylights-syntax-entity: #d2a8ff;
+  --color-prettylights-syntax-storage-modifier-import: #c9d1d9;
+  --color-prettylights-syntax-entity-tag: #7ee787;
+  --color-prettylights-syntax-keyword: #ff7b72;
+  --color-prettylights-syntax-string: #a5d6ff;
+  --color-prettylights-syntax-variable: #ffa657;
+  --color-prettylights-syntax-brackethighlighter-unmatched: #f85149;
+  --color-prettylights-syntax-invalid-illegal-text: #f0f6fc;
+  --color-prettylights-syntax-invalid-illegal-bg: #8e1519;
+  --color-prettylights-syntax-carriage-return-text: #f0f6fc;
+  --color-prettylights-syntax-carriage-return-bg: #b62324;
+  --color-prettylights-syntax-string-regexp: #7ee787;
+  --color-prettylights-syntax-markup-heading: #1f6feb;
+  --color-prettylights-syntax-markup-italic: #c9d1d9;
+  --color-prettylights-syntax-markup-bold: #c9d1d9;
+  --color-prettylights-syntax-markup-deleted-text: #ffdcd7;
+  --color-prettylights-syntax-markup-deleted-bg: #67060c;
+  --color-prettylights-syntax-markup-inserted-text: #aff5b4;
+  --color-prettylights-syntax-markup-inserted-bg: #033a16;
+  --color-prettylights-syntax-markup-changed-text: #ffdfb6;
+  --color-prettylights-syntax-markup-changed-bg: #5a1e02;
+  --color-prettylights-syntax-markup-ignored-text: #c9d1d9;
+  --color-prettylights-syntax-markup-ignored-bg: #1158c7;
+  --color-prettylights-syntax-meta-diff-range: #d2a8ff;
+  --color-prettylights-syntax-brackethighlighter-angle: #8b949e;
+  --color-prettylights-syntax-sublimelinter-gutter-mark: #484f58;
+  --color-prettylights-syntax-constant-other-reference-link: #a5d6ff;
+  --color-fg-default: #e6edf3;
+  --color-fg-muted: #848d97;
+  --color-fg-subtle: #636e7b;
+  --color-canvas-default: transparent;
+  --color-canvas-subtle: #161b22;
+  --color-border-default: #30363d;
+  --color-border-muted: #21262d;
+  --color-neutral-muted: rgba(110, 118, 129, 0.4);
+  --color-accent-fg: #2f81f7;
+  --color-accent-emphasis: #1f6feb;
+  --color-danger-fg: #f85149;
 }
 
 /* Add styling for code blocks */
 .markdown-content pre {
-  background-color: var(--muted);
+  background-color: rgba(0, 0, 0, 0.3) !important;
   border-radius: 0.5rem;
   padding: 1rem;
   overflow-x: auto;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .markdown-content code {
   font-family: var(--font-mono);
   font-size: 0.9em;
   padding: 0.2em 0.4em;
-  background-color: var(--muted);
+  background-color: rgba(0, 0, 0, 0.3);
   border-radius: 0.25rem;
+  color: rgb(var(--foreground-rgb));
 }
 
 .markdown-content pre code {
@@ -32,10 +85,13 @@
 
 /* Add styling for blockquotes */
 .markdown-content blockquote {
-  border-left: 4px solid var(--primary);
+  border-left: 4px solid rgb(32, 102, 184); /* cssa-blue */
   padding-left: 1rem;
   margin-left: 0;
-  color: var(--muted-foreground);
+  color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
 }
 
 /* Add styling for tables */
@@ -43,16 +99,17 @@
   width: 100%;
   border-collapse: collapse;
   margin: 1rem 0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .markdown-content th,
 .markdown-content td {
   padding: 0.5rem;
-  border: 1px solid var(--border);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .markdown-content th {
-  background-color: var(--muted);
+  background-color: rgba(0, 0, 0, 0.3);
   text-align: left;
 }
 
@@ -63,11 +120,12 @@ html {
 
 /* Content background container */
 .guide-content-container {
-  background-color: hsl(var(--background));
-  color: hsl(var(--foreground));
+  background-color: rgba(3, 13, 31, 0.6); /* cssa-navy with transparency */
+  color: rgb(var(--foreground-rgb));
   border-radius: 0.5rem;
   padding: 1.5rem;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 /* Improve headings */
@@ -81,7 +139,23 @@ html {
   line-height: 1.3;
   margin-top: 1.5em;
   margin-bottom: 0.5em;
-  color: hsl(var(--foreground));
+  color: rgb(var(--foreground-rgb));
+}
+
+.markdown-content h1 {
+  font-size: 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 0.3em;
+}
+
+.markdown-content h2 {
+  font-size: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 0.3em;
+}
+
+.markdown-content h3 {
+  font-size: 1.25rem;
 }
 
 .markdown-content h1:first-child,
@@ -99,4 +173,19 @@ html {
 
 .markdown-content li {
   margin-bottom: 0.5rem;
+}
+
+/* Image styling */
+.markdown-content img {
+  max-width: 100%;
+  border-radius: 0.25rem;
+  margin: 1rem 0;
+}
+
+/* Horizontal rule */
+.markdown-content hr {
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: none;
+  margin: 2rem 0;
 } 

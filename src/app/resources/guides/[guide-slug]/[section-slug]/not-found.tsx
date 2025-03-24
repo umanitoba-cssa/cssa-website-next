@@ -26,12 +26,19 @@ export default function SectionNotFound({
           The section "{params['section-slug']}" in the guide "{guide.title}" could not be found. It might have been removed or had its name changed.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 mt-4">
-          <Button variant="default" className="bg-cssa-blue hover:bg-cssa-light-blue" asChild>
+          <Button 
+            className="bg-cssa-blue hover:bg-cssa-light-blue transition-colors text-white" 
+            asChild
+          >
             <Link href={`/resources/guides/${params['guide-slug']}`}>
               View Guide
             </Link>
           </Button>
-          <Button variant="outline" className="border-cssa-blue text-cssa-blue hover:bg-cssa-blue hover:text-white" asChild>
+          <Button 
+            variant="outline" 
+            className="border-cssa-blue text-white hover:bg-cssa-blue/20 transition-colors" 
+            asChild
+          >
             <Link href="/resources/guides">
               Browse All Guides
             </Link>

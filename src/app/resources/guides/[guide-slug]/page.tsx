@@ -57,14 +57,14 @@ export default async function GuidePage({ params }: GuidePageProps) {
           </div>
           
           {/* Main Content */}
-          <div className="lg:col-span-2 bg-background text-foreground p-6 rounded-lg">
+          <div className="lg:col-span-2 guide-content-container">
             <article className="prose dark:prose-invert max-w-none">
               <MarkdownContent content={htmlContent} />
             </article>
             
             {/* Metadata */}
             {(guide.author || guide.date) && (
-              <div className="mt-12 pt-4 border-t text-sm text-muted-foreground">
+              <div className="mt-12 pt-4 border-t border-gray-700 text-sm text-gray-400">
                 {guide.author && <p>Written by: {guide.author}</p>}
                 {guide.date && (
                   <p>
