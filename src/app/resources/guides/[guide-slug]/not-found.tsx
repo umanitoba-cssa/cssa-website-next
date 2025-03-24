@@ -22,7 +22,7 @@ export default function GuideNotFound() {
           </Button>
           <Button 
             variant="outline" 
-            className="border-cssa-blue text-white hover:bg-cssa-blue/20 transition-colors" 
+            className="border-cssa-blue text-white bg-cssa-blue/20 transition-colors" 
             asChild
           >
             <Link href="/resources">
