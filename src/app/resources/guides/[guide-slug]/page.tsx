@@ -4,6 +4,7 @@ import { getGuideBySlug, getGuidesSlugs, markdownToHtml, extractHeadings } from 
 import PageHeader from '@/components/page-header';
 import GuideSidebar from '@/components/guides/guide-sidebar';
 import MarkdownContent from '@/components/guides/markdown-content';
+import Breadcrumbs from '@/components/guides/breadcrumbs';
 
 interface GuidePageProps {
   params: {
@@ -45,11 +46,21 @@ export default async function GuidePage({ params }: GuidePageProps) {
   // Process markdown content
   const htmlContent = await markdownToHtml(guide.content);
   
+  // Breadcrumb items
+  const breadcrumbItems = [
+    { label: 'Resources', href: '/resources' },
+    { label: 'Guides', href: '/resources/guides' },
+    { label: guide.title, href: `/resources/guides/${params['guide-slug']}`, active: true },
+  ];
+  
   return (
     <main className="flex flex-col">
       <PageHeader title={guide.title} image="/img/backgrounds/resources.png" />
       
       <div className="container py-8">
+        {/* Breadcrumbs */}
+        <Breadcrumbs items={breadcrumbItems} className="mb-6" />
+        
         <div className="lg:grid lg:grid-cols-3 gap-8">
           {/* Sidebar Navigation */}
           <div className="lg:col-span-1">
