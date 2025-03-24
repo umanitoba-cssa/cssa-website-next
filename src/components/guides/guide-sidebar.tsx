@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { cn } from '@/lib/utils';
@@ -14,26 +14,74 @@ interface GuideSidebarProps {
 
 const GuideSidebar: React.FC<GuideSidebarProps> = ({ guide, className }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState<string>('');
   const pathname = usePathname();
   const router = useRouter();
   const isRootPath = pathname === `/resources/guides/${guide.slug}`;
+
+  // Detect active section from hash or scroll position
+  useEffect(() => {
+    const handleHashChange = () => {
+      if (window.location.hash) {
+        setActiveSection(window.location.hash.substring(1));
+      }
+    };
+
+    // Initialize active section
+    handleHashChange();
+
+    // Listen for hash changes
+    window.addEventListener('hashchange', handleHashChange);
+
+    // Set up intersection observer for scroll-based detection
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      { rootMargin: '0px 0px -80% 0px', threshold: 0.1 }
+    );
+
+    // Observe all section headings
+    const headingElements = document.querySelectorAll('h1[id], h2[id], h3[id]');
+    headingElements.forEach((element) => {
+      observer.observe(element);
+    });
+
+    return () => {
+      window.removeEventListener('hashchange', handleHashChange);
+      headingElements.forEach((element) => {
+        observer.unobserve(element);
+      });
+    };
+  }, [pathname]);
 
   // Function to handle section navigation
   const navigateToSection = (e: React.MouseEvent, sectionSlug: string) => {
     e.preventDefault();
     
-    // Navigate to the guide page first to ensure the content is loaded
+    // Navigate to the guide page first if we're not already on it
     if (!pathname.includes(guide.slug)) {
       router.push(`/resources/guides/${guide.slug}`);
+      
+      // Save the section to navigate to after page load
+      sessionStorage.setItem('pendingScrollTarget', sectionSlug);
+      return;
     }
     
-    // Wait for page to load before scrolling
-    setTimeout(() => {
-      const element = document.getElementById(sectionSlug);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
-    }, 100);
+    // Handle direct navigation when already on the guide page
+    const element = document.getElementById(sectionSlug);
+    if (element) {
+      // Update hash without triggering a page reload
+      window.history.pushState(null, '', `#${sectionSlug}`);
+      
+      // Smooth scroll to element
+      element.scrollIntoView({ behavior: 'smooth' });
+      setActiveSection(sectionSlug);
+    }
   };
 
   return (
@@ -58,7 +106,7 @@ const GuideSidebar: React.FC<GuideSidebarProps> = ({ guide, className }) => {
                   href={`/resources/guides/${guide.slug}`}
                   className={cn(
                     "block py-1 hover:text-primary transition-colors",
-                    isRootPath ? "text-primary font-medium" : "text-muted-foreground"
+                    isRootPath && !activeSection ? "text-primary font-medium" : "text-muted-foreground"
                   )}
                 >
                   Overview
@@ -71,7 +119,7 @@ const GuideSidebar: React.FC<GuideSidebarProps> = ({ guide, className }) => {
                     onClick={(e) => navigateToSection(e, section.slug)}
                     className={cn(
                       "block py-1 hover:text-primary transition-colors",
-                      pathname.includes(section.slug) 
+                      activeSection === section.slug 
                         ? "text-primary font-medium" 
                         : "text-muted-foreground"
                     )}
@@ -94,7 +142,7 @@ const GuideSidebar: React.FC<GuideSidebarProps> = ({ guide, className }) => {
               href={`/resources/guides/${guide.slug}`}
               className={cn(
                 "block py-1 hover:text-primary transition-colors",
-                isRootPath ? "text-primary font-medium" : "text-muted-foreground"
+                isRootPath && !activeSection ? "text-primary font-medium" : "text-muted-foreground"
               )}
             >
               Overview
@@ -107,7 +155,7 @@ const GuideSidebar: React.FC<GuideSidebarProps> = ({ guide, className }) => {
                 onClick={(e) => navigateToSection(e, section.slug)}
                 className={cn(
                   "block py-1 hover:text-primary transition-colors",
-                  pathname.includes(section.slug) 
+                  activeSection === section.slug 
                     ? "text-primary font-medium" 
                     : "text-muted-foreground"
                 )}

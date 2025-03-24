@@ -18,6 +18,11 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({
     const articleElement = document.querySelector('.markdown-content');
     if (!articleElement) return;
 
+    // Apply dark theme classes
+    document.querySelectorAll('.markdown-body').forEach(el => {
+      el.classList.add('markdown-dark');
+    });
+
     const headings = articleElement.querySelectorAll('h1, h2, h3, h4, h5, h6');
     headings.forEach(heading => {
       const text = heading.textContent || '';
@@ -36,7 +41,7 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({
       link.style.marginLeft = '0.5rem';
       link.style.opacity = '0';
       link.style.transition = 'opacity 0.2s';
-      link.style.color = 'var(--primary)';
+      link.style.color = 'rgb(32, 102, 184)'; // cssa-blue
       
       heading.appendChild(link);
       
@@ -49,22 +54,33 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({
       });
     });
 
-    // If there's a hash in the URL, scroll to the element after a short delay
-    if (window.location.hash) {
+    // Check for both hash and session storage target
+    const pendingTarget = sessionStorage.getItem('pendingScrollTarget');
+    if (pendingTarget) {
+      setTimeout(() => {
+        const element = document.getElementById(pendingTarget);
+        if (element) {
+          // Update hash without triggering a page reload
+          window.history.pushState(null, '', `#${pendingTarget}`);
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+        sessionStorage.removeItem('pendingScrollTarget');
+      }, 300);
+    } else if (window.location.hash) {
       const hash = window.location.hash.substring(1);
       setTimeout(() => {
         const element = document.getElementById(hash);
         if (element) {
           element.scrollIntoView({ behavior: 'smooth' });
         }
-      }, 100);
+      }, 300);
     }
   }, [content]);
 
   return (
     <article 
       className={cn(
-        'markdown-content markdown-body prose prose-headings:scroll-mt-20 max-w-none prose-pre:p-0 prose-pre:bg-transparent',
+        'markdown-content markdown-body prose prose-headings:scroll-mt-20 max-w-none',
         className
       )}
       dangerouslySetInnerHTML={{ __html: content }} 
