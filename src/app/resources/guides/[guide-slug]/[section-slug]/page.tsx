@@ -125,7 +125,7 @@ export default async function SectionPage({ params }: SectionPageProps) {
               ) : (
                 <Button 
                   variant="outline" 
-                  className="border-cssa-blue text-white hover:bg-cssa-blue/20 transition-colors flex items-center gap-2" 
+                  className="border-cssa-blue text-white bg-cssa-blue/20 transition-colors flex items-center gap-2" 
                   asChild
                 >
                   <Link href={`/resources/guides/${params['guide-slug']}`}>
@@ -138,7 +138,7 @@ export default async function SectionPage({ params }: SectionPageProps) {
               {nextSection && (
                 <Button 
                   variant="outline" 
-                  className="border-cssa-blue text-white hover:bg-cssa-blue/20 transition-colors flex items-center gap-2" 
+                  className="border-cssa-blue text-white bg-cssa-blue/20 transition-colors flex items-center gap-2" 
                   asChild
                 >
                   <Link href={`/resources/guides/${params['guide-slug']}/${nextSection.slug}`}>
