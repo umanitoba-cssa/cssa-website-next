@@ -1,0 +1,54 @@
+/* Improve link styling in markdown content */
+.markdown-content a {
+  color: var(--primary);
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+.markdown-content a:hover {
+  color: var(--primary-hover);
+}
+
+/* Add styling for code blocks */
+.markdown-content pre {
+  background-color: var(--muted);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  overflow-x: auto;
+}
+
+.markdown-content code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+}
+
+/* Add styling for blockquotes */
+.markdown-content blockquote {
+  border-left: 4px solid var(--primary);
+  padding-left: 1rem;
+  margin-left: 0;
+  color: var(--muted-foreground);
+}
+
+/* Add styling for tables */
+.markdown-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+}
+
+.markdown-content th,
+.markdown-content td {
+  padding: 0.5rem;
+  border: 1px solid var(--border);
+}
+
+.markdown-content th {
+  background-color: var(--muted);
+  text-align: left;
+}
+
+/* Smooth scrolling for anchor links */
+html {
+  scroll-behavior: smooth;
+} 
