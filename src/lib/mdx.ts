@@ -36,6 +36,8 @@ export interface Section extends GuideMetadata {
 
 // Constants
 const GUIDES_DIRECTORY = path.join(process.cwd(), 'content/guides');
+const PUBLIC_DIRECTORY = path.join(process.cwd(), 'public');
+const GUIDE_IMAGES_DIRECTORY = path.join(PUBLIC_DIRECTORY, 'img/guides');
 
 /**
  * Get slugs for all guides
@@ -183,7 +185,31 @@ export async function markdownToHtml(markdown: string): Promise<string> {
     .use(remarkGfm)
     .process(markdown);
   
-  return result.toString();
+  let htmlContent = result.toString();
+  
+  // Process images in markdown to use absolute paths with public directory
+  htmlContent = processImages(htmlContent);
+  
+  return htmlContent;
+}
+
+/**
+ * Process images in HTML content
+ */
+function processImages(htmlContent: string): string {
+  // Replace relative image paths with absolute paths
+  return htmlContent.replace(
+    /<img([^>]+)src=["'](?!https?:\/\/)([^"']+)["']/g,
+    (match, attributes, url) => {
+      // If it's already an absolute path starting with /, keep it
+      if (url.startsWith('/')) {
+        return `<img${attributes}src="${url}"`;
+      }
+      
+      // Otherwise, make it absolute
+      return `<img${attributes}src="/img/guides/${url}"`;
+    }
+  );
 }
 
 /**
@@ -226,4 +252,21 @@ export function processLinks(content: string, guideSlug: string): string {
       return `[${text}](/resources/guides/${guideSlug}/${url})`;
     }
   );
-} 
+}
+
+/**
+ * Ensure guide image directory exists
+ */
+export function ensureGuideImageDirectory(guideSlug: string): string {
+  const guideImageDir = path.join(GUIDE_IMAGES_DIRECTORY, guideSlug);
+  
+  if (!fs.existsSync(GUIDE_IMAGES_DIRECTORY)) {
+    fs.mkdirSync(GUIDE_IMAGES_DIRECTORY, { recursive: true });
+  }
+  
+  if (!fs.existsSync(guideImageDir)) {
+    fs.mkdirSync(guideImageDir, { recursive: true });
+  }
+  
+  return guideImageDir;
+}
