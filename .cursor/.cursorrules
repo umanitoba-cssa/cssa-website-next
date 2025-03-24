@@ -1,0 +1,75 @@
+// Project Structure
+- This is a Next.js 14 project with TypeScript and Tailwind CSS
+- Uses the 'app' router directory structure
+- Pages are organized under src/app with a standard layout.tsx and page.tsx pattern
+- Components are organized under src/components with specialized UI components in src/components/ui
+- Common utilities and types are in src/lib
+- Data and constants are in src/data
+
+// Coding Standards
+- Use TypeScript for all files with proper type definitions
+- Use functional React components with arrow function syntax
+- Use "use client" directive only when necessary (for components using hooks or browser APIs)
+- Use named exports for components with PascalCase naming
+- Organize imports with React/Next imports first, followed by external libraries, then internal imports
+
+// Component Structure
+- Use function components with arrow syntax: `export const ComponentName = () => {}`
+- Keep components focused on a single responsibility
+- Place reusable UI components in src/components/ui
+- Place page-specific components directly in src/components
+- Use proper TypeScript typing for component props
+- Use destructuring for props when appropriate
+
+// Styling
+- Use Tailwind CSS for styling with consistent class naming
+- Follow mobile-first responsive design with responsive prefixes (sm:, md:, lg:, etc.)
+- Use CSS variables for theme colors via the Tailwind config
+- Use the 'cn' utility for conditional className merging
+- Use design tokens for spacing, colors, and typography
+- Follow the custom color scheme with cssa-navy, cssa-blue, cssa-light-blue, and cssa-gold
+
+// State Management
+- Use React hooks for state management (useState, useEffect, etc.)
+- Keep state as close to where it's used as possible
+- Use context when state needs to be shared across components
+- Avoid prop drilling by using composition
+
+// Naming Conventions
+- Use PascalCase for React components and their filenames
+- Use kebab-case for other filenames
+- Use camelCase for variables, functions, and methods
+- Use clear, descriptive names that explain the purpose
+
+// UI Component Patterns
+- Use the Radix UI library for accessible UI primitives
+- Follow the shadcn/ui pattern for UI components
+- Use the cva utility for creating component variants
+- Implement appropriate accessibility attributes in UI components
+
+// File Organization
+- One component per file
+- Group related components in appropriate directories
+- Keep logic, markup, and styling together in component files
+- Use index files for cleaner imports when appropriate
+
+// Performance
+- Implement code-splitting and lazy loading for large components
+- Use Next.js Image component for optimized images
+- Minimize re-renders with proper React patterns
+- Use memoization when appropriate
+
+// Documentation
+- Include JSDoc comments for complex functions and components
+- Document prop types with clear descriptions
+- Keep code self-documenting with clear variable names
+
+// Testing
+- Write tests for components and utilities
+- Use appropriate test utilities for React components
+- Focus on testing user behavior rather than implementation details
+
+// Routing
+- Follow Next.js 14 app router conventions
+- Organize routes logically under src/app directory
+- Use proper route and layout nesting for shared UI
