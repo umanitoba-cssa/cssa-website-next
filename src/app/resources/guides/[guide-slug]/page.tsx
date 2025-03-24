@@ -4,7 +4,6 @@ import { getGuideBySlug, getGuidesSlugs, markdownToHtml, extractHeadings } from 
 import PageHeader from '@/components/page-header';
 import GuideSidebar from '@/components/guides/guide-sidebar';
 import MarkdownContent from '@/components/guides/markdown-content';
-import TableOfContents from '@/components/guides/table-of-contents';
 
 interface GuidePageProps {
   params: {
@@ -46,23 +45,20 @@ export default async function GuidePage({ params }: GuidePageProps) {
   // Process markdown content
   const htmlContent = await markdownToHtml(guide.content);
   
-  // Extract headings for table of contents
-  const headings = extractHeadings(guide.content);
-  
   return (
     <main className="flex flex-col">
       <PageHeader title={guide.title} image="/img/backgrounds/resources.png" />
       
       <div className="container py-8">
-        <div className="lg:grid lg:grid-cols-4 gap-12">
+        <div className="lg:grid lg:grid-cols-3 gap-8">
           {/* Sidebar Navigation */}
           <div className="lg:col-span-1">
             <GuideSidebar guide={guide} />
           </div>
           
           {/* Main Content */}
-          <div className="lg:col-span-2">
-            <article className="prose max-w-none">
+          <div className="lg:col-span-2 bg-background text-foreground p-6 rounded-lg">
+            <article className="prose dark:prose-invert max-w-none">
               <MarkdownContent content={htmlContent} />
             </article>
             
@@ -82,13 +78,6 @@ export default async function GuidePage({ params }: GuidePageProps) {
                 )}
               </div>
             )}
-          </div>
-          
-          {/* Table of Contents */}
-          <div className="hidden lg:block lg:col-span-1">
-            <div className="sticky top-6">
-              <TableOfContents headings={headings} />
-            </div>
           </div>
         </div>
       </div>

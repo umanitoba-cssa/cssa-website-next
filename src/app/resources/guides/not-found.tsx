@@ -12,12 +12,12 @@ export default function GuidesNotFound() {
           The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 mt-4">
-          <Button asChild>
+          <Button variant="default" className="bg-cssa-blue hover:bg-cssa-light-blue" asChild>
             <Link href="/resources">
               Back to Resources
             </Link>
           </Button>
-          <Button variant="outline" asChild>
+          <Button variant="outline" className="border-cssa-blue text-cssa-blue hover:bg-cssa-blue hover:text-white" asChild>
             <Link href="/">
               Back to Home
             </Link>

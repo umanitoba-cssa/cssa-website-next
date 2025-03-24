@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import { Guide, Section } from '@/lib/mdx';
 import { ChevronDown } from 'lucide-react';
@@ -15,7 +15,26 @@ interface GuideSidebarProps {
 const GuideSidebar: React.FC<GuideSidebarProps> = ({ guide, className }) => {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
   const isRootPath = pathname === `/resources/guides/${guide.slug}`;
+
+  // Function to handle section navigation
+  const navigateToSection = (e: React.MouseEvent, sectionSlug: string) => {
+    e.preventDefault();
+    
+    // Navigate to the guide page first to ensure the content is loaded
+    if (!pathname.includes(guide.slug)) {
+      router.push(`/resources/guides/${guide.slug}`);
+    }
+    
+    // Wait for page to load before scrolling
+    setTimeout(() => {
+      const element = document.getElementById(sectionSlug);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100);
+  };
 
   return (
     <>
@@ -32,7 +51,7 @@ const GuideSidebar: React.FC<GuideSidebarProps> = ({ guide, className }) => {
           />
         </button>
         {isOpen && (
-          <nav className="mt-2 border rounded-md p-4">
+          <nav className="mt-2 border rounded-md p-4 bg-background">
             <ul className="space-y-3">
               <li>
                 <Link
@@ -47,8 +66,9 @@ const GuideSidebar: React.FC<GuideSidebarProps> = ({ guide, className }) => {
               </li>
               {guide.sections.map((section) => (
                 <li key={section.slug}>
-                  <Link
-                    href={`/resources/guides/${guide.slug}#${section.slug}`}
+                  <a
+                    href={`#${section.slug}`}
+                    onClick={(e) => navigateToSection(e, section.slug)}
                     className={cn(
                       "block py-1 hover:text-primary transition-colors",
                       pathname.includes(section.slug) 
@@ -57,7 +77,7 @@ const GuideSidebar: React.FC<GuideSidebarProps> = ({ guide, className }) => {
                     )}
                   >
                     {section.title}
-                  </Link>
+                  </a>
                 </li>
               ))}
             </ul>
@@ -82,8 +102,9 @@ const GuideSidebar: React.FC<GuideSidebarProps> = ({ guide, className }) => {
           </li>
           {guide.sections.map((section) => (
             <li key={section.slug}>
-              <Link
-                href={`/resources/guides/${guide.slug}#${section.slug}`}
+              <a
+                href={`#${section.slug}`}
+                onClick={(e) => navigateToSection(e, section.slug)}
                 className={cn(
                   "block py-1 hover:text-primary transition-colors",
                   pathname.includes(section.slug) 
@@ -92,7 +113,7 @@ const GuideSidebar: React.FC<GuideSidebarProps> = ({ guide, className }) => {
                 )}
               >
                 {section.title}
-              </Link>
+              </a>
             </li>
           ))}
         </ul>
