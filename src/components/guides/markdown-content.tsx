@@ -18,17 +18,18 @@ import 'prismjs/components/prism-c';
 import 'prismjs/components/prism-cpp';
 import 'prismjs/components/prism-csharp';
 import 'prism-themes/themes/prism-atom-dark.css';
+import { useState } from 'react';
 
 interface MarkdownContentProps {
-  content: string;
+  source: string;
   className?: string;
 }
 
 const MarkdownContent: React.FC<MarkdownContentProps> = ({ 
-  content,
+  source,
   className 
 }) => {
-  // Add anchor links to headings, prepare code blocks, and handle navigation
+  // Setup code highlighting and anchors after render
   useEffect(() => {
     const articleElement = document.querySelector('.markdown-content');
     if (!articleElement) return;
@@ -70,20 +71,13 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({
       });
     });
 
-    // Process code blocks
-    const codeBlocks = articleElement.querySelectorAll('pre code');
-    codeBlocks.forEach(codeBlock => {
-      // Try to identify language from class
-      const classes = codeBlock.className.split(' ');
-      const languageClass = classes.find(cls => cls.startsWith('language-'));
-      
-      if (languageClass) {
-        // Already has a language class, ensure Prism applies highlighting
-        codeBlock.parentElement?.classList.add('line-numbers');
-      } else {
-        // No language specified, add a default
-        codeBlock.classList.add('language-plaintext');
-      }
+    // Process images to add responsive behavior
+    const images = articleElement.querySelectorAll('img');
+    images.forEach(img => {
+      // Add standard responsive classes
+      img.classList.add('max-w-full', 'h-auto');
+      // Add lazy loading attribute
+      img.setAttribute('loading', 'lazy');
     });
 
     // Apply syntax highlighting
@@ -110,7 +104,7 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({
         }
       }, 300);
     }
-  }, [content]);
+  }, [source]);
 
   return (
     <article 
@@ -118,7 +112,7 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({
         'markdown-content markdown-body prose prose-headings:scroll-mt-20 max-w-none',
         className
       )}
-      dangerouslySetInnerHTML={{ __html: content }} 
+      dangerouslySetInnerHTML={{ __html: source }} 
     />
   );
 };
