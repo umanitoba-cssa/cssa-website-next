@@ -124,7 +124,6 @@
   width: 100%;
   border-collapse: collapse;
   margin: 1rem 0;
-  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .markdown-content th,
@@ -239,4 +238,92 @@ html {
 .markdown-content .callout .callout-title {
   font-weight: 600;
   margin-bottom: 0.5rem;
+}
+
+/* Custom table styling for markdown content */
+.markdown-body table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1rem 0;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.markdown-body table th,
+.markdown-body table td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border: 1px solid #374151;
+}
+
+.markdown-body table th {
+  background-color: #2066B8; /* CSSA blue */
+  color: white;
+  font-weight: 600;
+}
+
+.markdown-body table tr {
+  background-color: #1e293b; /* Dark blue-gray */
+  color: #e2e8f0;
+  border-bottom: 1px solid #374151;
+}
+
+.markdown-body table tr:nth-child(even) {
+  background-color: #1a2234; /* Slightly darker for alternating rows */
+}
+
+.markdown-body table tr:hover {
+  background-color: #2d3748;
+  transition: background-color 0.2s ease;
+}
+
+/* Ensure these styles take precedence over github-markdown-css */
+.markdown-dark.markdown-body table,
+.markdown-dark.markdown-body tr,
+.markdown-dark.markdown-body th,
+.markdown-dark.markdown-body td {
+  border-color: #374151 !important;
+}
+
+.markdown-dark.markdown-body th {
+  background-color: #2066B8 !important;
+  color: white !important;
+}
+
+.markdown-dark.markdown-body tr {
+  background-color: #1e293b !important;
+  color: #e2e8f0 !important;
+}
+
+.markdown-dark.markdown-body tr:nth-child(even) {
+  background-color: #1a2234 !important;
+}
+
+.markdown-dark.markdown-body tr:hover {
+  background-color: #2d3748 !important;
+}
+
+/* Table wrapper for better mobile responsiveness */
+.table-wrapper {
+  overflow-x: auto;
+  margin: 1rem 0;
+  border-radius: 8px;
+}
+
+/* Ensure code blocks inside table cells don't break layout */
+.markdown-body td code {
+  white-space: nowrap;
+}
+
+/* Fix for potential border-radius issues with tables */
+.markdown-body table {
+  border-radius: 6px;
+}
+
+/* Ensure table captions are styled properly */
+.markdown-body table caption {
+  padding: 0.5rem;
+  color: #e2e8f0;
+  font-style: italic;
 } 

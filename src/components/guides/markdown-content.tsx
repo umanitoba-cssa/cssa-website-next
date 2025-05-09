@@ -3,6 +3,7 @@
 import React, { useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import 'github-markdown-css/github-markdown-light.css';
+import '@/app/resources/guides/guides.css'; // Import custom guides styles
 import Prism from 'prismjs';
 import 'prismjs/components/prism-bash';
 import 'prismjs/components/prism-javascript';
@@ -85,6 +86,22 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({
         codeBlock.classList.add('language-plaintext');
       }
     });
+    
+    // Process tables for enhanced styling
+    const tables = articleElement.querySelectorAll('table');
+    tables.forEach(table => {
+      // Ensure tables have proper classes
+      table.classList.add('custom-styled-table');
+      
+      // Add wrapper for responsive tables if needed
+      if (!table.parentElement?.classList.contains('table-wrapper')) {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'table-wrapper';
+        wrapper.style.overflowX = 'auto';
+        table.parentNode?.insertBefore(wrapper, table);
+        wrapper.appendChild(table);
+      }
+    });
 
     // Apply syntax highlighting
     Prism.highlightAll();
@@ -116,6 +133,7 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({
     <article 
       className={cn(
         'markdown-content markdown-body prose prose-headings:scroll-mt-20 max-w-none',
+        'prose-table:overflow-hidden prose-table:border-collapse prose-th:bg-cssa-blue prose-th:text-white',
         className
       )}
       dangerouslySetInnerHTML={{ __html: content }} 
