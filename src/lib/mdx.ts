@@ -1,10 +1,10 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
+import readingTime from 'reading-time';
 import { remark } from 'remark';
 import html from 'remark-html';
 import remarkGfm from 'remark-gfm';
-import readingTime from 'reading-time';
 
 // Types for our guides and sections
 export interface GuideMetadata {
@@ -180,14 +180,17 @@ export function getSectionBySlug(guideSlug: string, sectionSlug: string): Sectio
  * Convert markdown to HTML
  */
 export async function markdownToHtml(markdown: string): Promise<string> {
+  // Pre-process Markdown content
+  const processedMarkdown = sanitizeHtmlInMarkdown(markdown);
+  
   const result = await remark()
     .use(html, { sanitize: false })
     .use(remarkGfm)
-    .process(markdown);
+    .process(processedMarkdown);
   
   let htmlContent = result.toString();
   
-  // Process images in markdown to use absolute paths with public directory
+  // Process images in the generated HTML
   htmlContent = processImages(htmlContent);
   
   return htmlContent;
@@ -208,6 +211,19 @@ function processImages(htmlContent: string): string {
       
       // Otherwise, make it absolute
       return `<img${attributes}src="/img/guides/${url}"`;
+    }
+  );
+}
+
+/**
+ * Sanitize HTML content in markdown to prevent React issues
+ */
+function sanitizeHtmlInMarkdown(markdown: string): string {
+  // Remove style attributes from HTML in markdown
+  return markdown.replace(
+    /<([a-z][a-z0-9]*)\s+style=(['"])([^'"]*)\2/gi,
+    (match, tag, quote, styles) => {
+      return `<${tag}`;
     }
   );
 }
@@ -252,6 +268,50 @@ export function processLinks(content: string, guideSlug: string): string {
       return `[${text}](/resources/guides/${guideSlug}/${url})`;
     }
   );
+}
+
+/**
+ * Process image paths in markdown content
+ */
+export function processImagePaths(content: string): string {
+  // Replace relative image paths with absolute paths
+  return content.replace(
+    /!\[(.*?)\]\((?!https?:\/\/)([^)]+)\)/g,
+    (match, alt, url) => {
+      // If it's already an absolute path starting with /, keep it
+      if (url.startsWith('/')) {
+        return `![${alt}](${url})`;
+      }
+      
+      // Otherwise, make it absolute
+      return `![${alt}](/img/guides/${url})`;
+    }
+  );
+}
+
+/**
+ * Prepare markdown content for rendering with MDX
+ */
+export function prepareMarkdownForMDX(content: string, guideSlug?: string): string {
+  // Process image paths to absolute
+  let processedContent = processImagePaths(content);
+  
+  // Process links if guideSlug is provided
+  if (guideSlug) {
+    processedContent = processLinks(processedContent, guideSlug);
+  }
+  
+  // Sanitize HTML within markdown to avoid React issues
+  // Replace style attributes in HTML tags
+  processedContent = processedContent.replace(
+    /<div\s+style=['"](.*?)['"]>/g,
+    (match, styleContent) => {
+      // Convert to a CSS class or remove style attribute
+      return `<div>`;
+    }
+  );
+  
+  return processedContent;
 }
 
 /**

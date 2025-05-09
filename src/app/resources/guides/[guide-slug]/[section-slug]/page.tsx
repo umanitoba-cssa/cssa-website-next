@@ -73,7 +73,7 @@ export default async function SectionPage({ params }: SectionPageProps) {
     notFound();
   }
   
-  // Process markdown content
+  // Process markdown content to HTML
   const htmlContent = await markdownToHtml(section.content);
   
   // Find the current section index for prev/next navigation
@@ -106,7 +106,7 @@ export default async function SectionPage({ params }: SectionPageProps) {
           {/* Main Content */}
           <div className="lg:col-span-2 guide-content-container">
             <article className="prose dark:prose-invert max-w-none">
-              <MarkdownContent content={htmlContent} />
+              <MarkdownContent source={htmlContent} />
             </article>
             
             {/* Section Navigation */}

@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
-import { getGuideBySlug, getGuidesSlugs, markdownToHtml, extractHeadings } from '@/lib/mdx';
+import { getGuideBySlug, getGuidesSlugs, extractHeadings, markdownToHtml } from '@/lib/mdx';
 import PageHeader from '@/components/page-header';
 import GuideSidebar from '@/components/guides/guide-sidebar';
 import MarkdownContent from '@/components/guides/markdown-content';
@@ -43,7 +43,7 @@ export default async function GuidePage({ params }: GuidePageProps) {
     notFound();
   }
   
-  // Process markdown content
+  // Process markdown content to HTML
   const htmlContent = await markdownToHtml(guide.content);
   
   // Breadcrumb items
@@ -70,7 +70,7 @@ export default async function GuidePage({ params }: GuidePageProps) {
           {/* Main Content */}
           <div className="lg:col-span-2 guide-content-container">
             <article className="prose dark:prose-invert max-w-none">
-              <MarkdownContent content={htmlContent} />
+              <MarkdownContent source={htmlContent} />
             </article>
             
             {/* Metadata */}
