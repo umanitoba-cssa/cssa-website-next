@@ -97,6 +97,37 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({
       }
     });
 
+    // Process code blocks
+    const codeBlocks = articleElement.querySelectorAll('pre code');
+    codeBlocks.forEach(codeBlock => {
+      // Try to identify language from class
+      const classes = codeBlock.className.split(' ');
+      const languageClass = classes.find(cls => cls.startsWith('language-'));
+      
+      if (languageClass) {
+        // Extract the language name from the class
+        const language = languageClass.replace('language-', '');
+        
+        // Already has a language class, ensure Prism applies highlighting
+        const preElement = codeBlock.parentElement;
+        if (preElement) {
+          // Add line numbers for all code blocks
+          preElement.classList.add('line-numbers');
+          
+          // Ensure parent also has the language class for Prism
+          if (!preElement.classList.contains(`language-${language}`)) {
+            preElement.classList.add(`language-${language}`);
+          }
+        }
+      } else {
+        // No language specified, add a default
+        codeBlock.classList.add('language-plaintext');
+        if (codeBlock.parentElement) {
+          codeBlock.parentElement.classList.add('language-plaintext');
+        }
+      }
+    });
+
     // Apply syntax highlighting
     Prism.highlightAll();
 

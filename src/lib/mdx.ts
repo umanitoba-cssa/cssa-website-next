@@ -193,6 +193,15 @@ export async function markdownToHtml(markdown: string): Promise<string> {
   // Process images in the generated HTML
   htmlContent = processImages(htmlContent);
   
+  // Ensure code blocks have proper language classes for Prism.js
+  htmlContent = htmlContent.replace(
+    /<pre><code class="language-(\w+)">/g,
+    (match, language) => {
+      // Apply the language class to both pre and code tags for better Prism.js detection
+      return `<pre class="language-${language}"><code class="language-${language}">`;
+    }
+  );
+  
   return htmlContent;
 }
 
