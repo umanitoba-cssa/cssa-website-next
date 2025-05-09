@@ -9,6 +9,11 @@ export default function SectionNotFound({
 }: { 
   params: { 'guide-slug': string; 'section-slug': string } 
 }) {
+  // If params or guide-slug is missing, delegate to a higher not-found boundary
+  if (!params || !params['guide-slug']) {
+    notFound();
+  }
+
   // Check if the guide exists
   const guide = getGuideBySlug(params['guide-slug']);
   
