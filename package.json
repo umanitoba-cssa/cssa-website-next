@@ -20,7 +20,7 @@
     "embla-carousel-wheel-gestures": "^8.0.0-rc05",
     "googleapis": "^134.0.0",
     "lucide-react": "^0.368.0",
-    "next": "14.2.1",
+    "next": "14.2.26",
     "nodemailer": "^6.10.0",
     "react": "^18",
     "react-dom": "^18",
