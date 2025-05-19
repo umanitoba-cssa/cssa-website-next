@@ -16,7 +16,6 @@
     "@types/nodemailer": "^6.4.17",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
-    "dotenv": "^16.4.7",
     "embla-carousel-react": "^8.0.2",
     "embla-carousel-wheel-gestures": "^8.0.0-rc05",
     "googleapis": "^134.0.0",
