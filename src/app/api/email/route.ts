@@ -6,19 +6,20 @@ export async function POST(request: NextRequest) {
   const { email, name, message } = await request.json();
 
   const transport = nodemailer.createTransport({
-    service: "gmail",
-
+    host: "mail.smtp2go.com",
+    port: 465,
+    secure: true, // upgrade later with STARTTLS
     auth: {
-      user: process.env.MY_EMAIL, //these are setup as enviroment varibles
-      pass: process.env.MY_PASSWORD, //add MY_EMAIL, MY_PASSWORD to the .envfile
-      // the password is an app password (authentication)
+      user: process.env.SMTP_USERNAME,
+      pass: process.env.SMTP_PASSWORD,
     },
   });
 
   const mailOptions: Mail.Options = {
-    from: process.env.MY_EMAIL,
-    to: process.env.MY_EMAIL,
-    // cc: email, (uncomment this line if you want to send a copy to the sender)
+    from: '"CSSA Website Contact Form" <website@umanitobacssa.ca>',
+    to: '"CSSA" <cssa@umanitoba.ca>',
+    replyTo: email,
+    cc: email, //(uncomment this line if you want to send a copy to the sender)
     subject: `Message from ${name} (${email})`,
     text: message,
   };
