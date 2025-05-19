@@ -39,11 +39,6 @@ const Contact: FC = () => {
         </div>
         <div className="flex flex-col gap-8">
           <BlockHeader title="Contact Form" />
-          {/* <iframe
-            title="Contact us form"
-            className="border border-solid border-gray-400 w-full min-h-[1500px]"
-            src="https://forms.office.com/Pages/ResponsePage.aspx?id=C92AT4wzTE6KFJBEaWL3uMetWVcCpo5KtSmErSAZ7GlUM1JYMFNPNURWWENLSzFONE5ZWUlURzNZOC4u&embed=true"
-          /> */}
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="mb-5">
               <p>Name</p>
