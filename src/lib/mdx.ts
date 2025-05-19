@@ -35,7 +35,7 @@ export interface Section extends GuideMetadata {
 }
 
 // Constants
-const GUIDES_DIRECTORY = path.join(process.cwd(), 'content/guides');
+const GUIDES_DIRECTORY = path.join(process.cwd(), 'src/content/guides');
 const PUBLIC_DIRECTORY = path.join(process.cwd(), 'public');
 const GUIDE_IMAGES_DIRECTORY = path.join(PUBLIC_DIRECTORY, 'img/guides');
 
