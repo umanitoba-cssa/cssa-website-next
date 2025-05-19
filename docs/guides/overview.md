@@ -10,7 +10,7 @@ The Guides system follows a file-based content management approach with the foll
 
 ### Content Storage
 
-- **Location**: All guide content is stored in the `content/guides` directory at the project root
+- **Location**: All guide content is stored in the `src/content/guides` directory at the project root
 - **Format**: Content is written in Markdown (`.md` files) with frontmatter metadata
 - **Images**: Guide images are stored in `public/img/guides`
 
@@ -39,7 +39,7 @@ The Guides system follows a file-based content management approach with the foll
 
 ### Data Flow
 
-1. The system scans the `content/guides` directory to identify guides and sections
+1. The system scans the `src/content/guides` directory to identify guides and sections
 2. When a user visits a guide or section page:
    - Content is retrieved from the corresponding Markdown file
    - Frontmatter is extracted for metadata

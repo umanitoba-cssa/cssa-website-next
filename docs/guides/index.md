@@ -31,7 +31,7 @@ The Guides system provides a structured way to create and maintain educational c
 
 ## Directory Structure
 
-- `content/guides/` - Where guide content is stored
+- `src/content/guides/` - Where guide content is stored
 - `public/img/guides/` - Images for guides
 - `src/app/resources/guides/` - Route implementation
 - `src/components/guides/` - UI components for rendering guides

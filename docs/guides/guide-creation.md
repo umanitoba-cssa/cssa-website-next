@@ -4,10 +4,10 @@ This document explains the process for creating new guides for the CSSA website.
 
 ## Guide Directory Structure
 
-All guides must be created in the `content/guides` directory at the project root. Each guide requires the following structure:
+All guides must be created in the `src/content/guides` directory at the project root. Each guide requires the following structure:
 
 ```
-content/guides/
+src/content/guides/
   └── your-guide-name/
       ├── index.md       # Main guide overview page
       ├── section-1.md   # First section of the guide
