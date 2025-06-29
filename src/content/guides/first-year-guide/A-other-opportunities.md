@@ -1,10 +1,13 @@
 ---
 title: "Other Opportunities"
-description: "Co‑op, research, part‑time jobs, and growth programs."
-date: "2025-05-09"
+description: "Co‑op, research, part‑time jobs, and growth programs"
+author: "Computer Science Students' Association"
+date: "2023-06-29"
 ---
 
 # Other Opportunities
+
+There are many opportunities for you to enrichen your experience at the University of Manitoba. More details can be found in our Second Year Guide, coming soon!
 
 ## Co‑op Program
 
@@ -33,4 +36,3 @@ Spend a summer doing **paid research** (≈ \$8 000) under a prof in AI, HCI
 Leadership roles in clubs, open‑source projects, or outreach (e.g., coding workshops for high‑schoolers) **stand out on résumés** and build soft skills.
 
 > **Bottom line:** Use your first year to _experiment_—each opportunity can clarify your interests and boost your experience.
-

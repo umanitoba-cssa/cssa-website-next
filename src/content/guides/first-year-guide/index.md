@@ -1,29 +1,44 @@
 ---
-title: "Computer Science First Year Guide (University of Manitoba)"
-description: "An introduction and roadmap for first‑year Computer Science students at the University of Manitoba."
-author: "Computer Science Students’ Association (CSSA)"
-date: "2025-05-09"
+title: "First Year Guide"
+description: "An essential guide for incoming first year Computer Science students"
+author: "Computer Science Students' Association"
+date: "2023-06-29"
 ---
 
-# Welcome!
+# First Year Guide
 
-This guide is **your springboard** into life as a Computer Science student at the **University of Manitoba**.  
-Whether you’re an experienced programmer or just exploring the field, we’ve distilled key advice from upper‑year students into bite‑sized sections you can revisit throughout your first year.
+Welcome to the First Year Guide to the Computer Science program in the University of Manitoba! As the name suggests, this guide contains information on everything you need to know before starting your Computer Science journey. Regardless of whether you’re an experienced programmer or are still on the fence about taking this huge leap, this guide contains everything you need to know to succeed in your first year of studies and beyond!
 
-## What You’ll Find
+If you feel overwhelmed and only need to read one thing, we recommend you check out the [Recommended course plans](./first-year-guide/8-recommended-course-plans) section! You can find a quick navigation to any section of your interest in the left sidebar!
 
-1. [**Is Computer Science for Me?**](/resources/guides/first-year-guide/1-is-computer-science-for-me) – reflect on your curiosity and motivations.  
-2. [**Tuitions & Scholarships**](/resources/guides/first-year-guide/2-tuitions-and-scholarships) – understand the real costs _and_ funding options.  
-3. [**Studying Tactics**](/resources/guides/first-year-guide/3-studying-tactics) – proven approaches for tackling university‑level material.  
-4. [**Self‑Care**](/resources/guides/first-year-guide/4-self-care) – staying healthy, motivated, and supported.  
-5. [**Course Registration**](/resources/guides/first-year-guide/5-course-registration) – avoid pitfalls and secure the classes you need.  
-6. [**What Courses Do I Need?**](/resources/guides/first-year-guide/6-what-courses-do-i-need) – program‑entry checklists in plain English.  
-7. [**What Degree Should I Do?**](/resources/guides/first-year-guide/7-what-degree-should-i-do) – Major vs. Honours vs. Joint vs. Data Science.  
-8. [**Recommended Course Plans**](/resources/guides/first-year-guide/8-recommended-course-plans) – sample schedules for different pacing.  
-9. [**Student Groups**](/resources/guides/first-year-guide/9-student-groups) – find your community online and on campus.  
-10. [**Other Opportunities**](/resources/guides/first-year-guide/10-other-opportunities) – co‑op, research awards, and more.
+## Overview
 
-Jump straight to any section via the sidebar or the links above.
+As of the current version (July 1st, 2025), this guide covers:
+- **Choosing Computer Science as your major**. Ever wondered if Computer Science would be the right major for you? This topic is suited for prospective students to get to know what Computer Science in University of Manitoba is all about.
+- **Tuitions and scholarships**. New to budgeting? Get an overview of what kind of funds you'll need to spend, and can earn throughout university.
+- **University preparations**. Adjusting to university can get confusing and overwhelming, especially coming from high school. Never discourage yourself and get to know what you can do to prepare yourself for university.
+- **Course registration**. Unlike high school, you would need to register for your own courses. This can be challenging to understand, as there are so many pathways you could take regarding your courses. We provide information on what courses you’ll need to take for different degrees in Computer Science and some sample pathways.
+- **Getting involved**. Make friends! There are many talented people as they are equally fun in our community of Computer Science students. The best way to level up and stand out amongst your peers is to show presence in and learn from the community.
 
-> **Tip:** Bookmark this guide—the answers to most “first‑year” questions are only one click away!
+> You can find a legacy version of this guide [here](https://www.umanitobacssa.ca/docs/firstYearGuide.pdf).
 
+## Table of Content
+
+1. [Is Computer Science for me?](./first-year-guide/1-is-computer-science-for-me)
+2. [Tuitions and Scholarships](./first-year-guide/2-tuitions-and-scholarships)
+3. [Studying Tactics](./first-year-guide/3-studying-tactics)
+4. [Self-Care](./first-year-guide/4-self-care)
+5. [Course Registration](./first-year-guide/5-course-registration)
+6. [What courses do I need?](./first-year-guide/6-what-courses-do-i-need)
+7. [What degree should I do?](./first-year-guide/7-what-degree-should-i-do)
+8. [Recommended course plans](./first-year-guide/8-recommended-course-plans)
+9. [Student Groups](./first-year-guide/9-student-groups)
+10. [Other Opportunities](./first-year-guide/A-other-opportunities)
+
+While the guide itself is as comprehensive as we could make it, it’s still highly recommended for you to do your own research about your incoming university life! This document is highly opinionated and based on the personal experiences of students who have experienced at least one year of university and understand the struggles of incoming students into Computer Science. It’s best for this guide to be used as a starting point for you to plan for university as you conduct your own information gathering to build on top of that.
+
+If you have any questions, feel free to send us an email at [cssa@umanitoba.ca](mailto:cssa@umanitoba.ca), or join our [Discord](https://discord.umanitobacssa.ca/) and we’ll be happy to help you! We hope you find the First Year Guide useful!
+
+Best regards,
+
+University of Manitoba Computer Science Students’ Association
