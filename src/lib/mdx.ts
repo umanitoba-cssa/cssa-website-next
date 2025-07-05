@@ -5,6 +5,7 @@ import readingTime from 'reading-time';
 import { remark } from 'remark';
 import html from 'remark-html';
 import remarkGfm from 'remark-gfm';
+import GuideList from '../data/guides';
 
 // Types for our guides and sections
 export interface GuideMetadata {
@@ -42,11 +43,15 @@ const GUIDE_IMAGES_DIRECTORY = path.join(PUBLIC_DIRECTORY, 'img/guides');
 /**
  * Get slugs for all guides
  */
-export function getGuidesSlugs(): string[] {
+export async function getGuidesSlugs(): Promise<string[]> {
   try {
+    // Check if guides need to be synced, but don't auto-sync
+    // Users should run manual sync or use webhooks
     if (!fs.existsSync(GUIDES_DIRECTORY)) {
+      console.warn('No guides found. Run "bun run sync-guides" to sync guides from repositories.');
       return [];
     }
+    
     return fs.readdirSync(GUIDES_DIRECTORY).filter((directory) => {
       const fullPath = path.join(GUIDES_DIRECTORY, directory);
       return fs.statSync(fullPath).isDirectory() && 
@@ -61,15 +66,27 @@ export function getGuidesSlugs(): string[] {
 /**
  * Get metadata for all guides
  */
-export function getAllGuides(): Guide[] {
-  const guidesSlugs = getGuidesSlugs();
+export async function getAllGuides(): Promise<Guide[]> {
+  const guidesSlugs = await getGuidesSlugs();
   const guides = guidesSlugs.map((slug) => getGuideBySlug(slug));
   
-  // Sort guides by date (newest first) if available
+  // Sort guides based on their order in GuideList configuration
+  const guideOrder = GuideList.map(g => g.slug);
+  
   return guides.sort((a, b) => {
-    if (a.date && b.date) {
-      return new Date(b.date).getTime() - new Date(a.date).getTime();
+    const aIndex = guideOrder.indexOf(a.slug);
+    const bIndex = guideOrder.indexOf(b.slug);
+    
+    // If both guides are in the GuideList, sort by their position
+    if (aIndex !== -1 && bIndex !== -1) {
+      return aIndex - bIndex;
     }
+    
+    // If only one guide is in the GuideList, prioritize it
+    if (aIndex !== -1) return -1;
+    if (bIndex !== -1) return 1;
+    
+    // If neither guide is in the GuideList, fall back to alphabetical sort
     return a.title.localeCompare(b.title);
   });
 }
@@ -179,9 +196,9 @@ export function getSectionBySlug(guideSlug: string, sectionSlug: string): Sectio
 /**
  * Convert markdown to HTML
  */
-export async function markdownToHtml(markdown: string): Promise<string> {
-  // Pre-process Markdown content
-  const processedMarkdown = sanitizeHtmlInMarkdown(markdown);
+export async function markdownToHtml(markdown: string, guideSlug?: string): Promise<string> {
+  // Pre-process Markdown content with guide slug
+  const processedMarkdown = prepareMarkdownForMDX(markdown, guideSlug);
   
   const result = await remark()
     .use(html, { sanitize: false })
@@ -191,7 +208,7 @@ export async function markdownToHtml(markdown: string): Promise<string> {
   let htmlContent = result.toString();
   
   // Process images in the generated HTML
-  htmlContent = processImages(htmlContent);
+  htmlContent = processImages(htmlContent, guideSlug);
   
   // Ensure code blocks have proper language classes for Prism.js
   htmlContent = htmlContent.replace(
@@ -208,7 +225,7 @@ export async function markdownToHtml(markdown: string): Promise<string> {
 /**
  * Process images in HTML content
  */
-function processImages(htmlContent: string): string {
+function processImages(htmlContent: string, guideSlug?: string): string {
   // Replace relative image paths with absolute paths
   return htmlContent.replace(
     /<img([^>]+)src=["'](?!https?:\/\/)([^"']+)["']/g,
@@ -218,8 +235,12 @@ function processImages(htmlContent: string): string {
         return `<img${attributes}src="${url}"`;
       }
       
-      // Otherwise, make it absolute
-      return `<img${attributes}src="/img/guides/${url}"`;
+      // Otherwise, make it absolute using the guide slug
+      if (guideSlug) {
+        return `<img${attributes}src="/img/guides/${guideSlug}/${url}"`;
+      } else {
+        return `<img${attributes}src="/img/guides/${url}"`;
+      }
     }
   );
 }
@@ -282,7 +303,7 @@ export function processLinks(content: string, guideSlug: string): string {
 /**
  * Process image paths in markdown content
  */
-export function processImagePaths(content: string): string {
+export function processImagePaths(content: string, guideSlug?: string): string {
   // Replace relative image paths with absolute paths
   return content.replace(
     /!\[(.*?)\]\((?!https?:\/\/)([^)]+)\)/g,
@@ -292,8 +313,12 @@ export function processImagePaths(content: string): string {
         return `![${alt}](${url})`;
       }
       
-      // Otherwise, make it absolute
-      return `![${alt}](/img/guides/${url})`;
+      // Otherwise, make it absolute using the guide slug
+      if (guideSlug) {
+        return `![${alt}](/img/guides/${guideSlug}/${url})`;
+      } else {
+        return `![${alt}](/img/guides/${url})`;
+      }
     }
   );
 }
@@ -303,7 +328,7 @@ export function processImagePaths(content: string): string {
  */
 export function prepareMarkdownForMDX(content: string, guideSlug?: string): string {
   // Process image paths to absolute
-  let processedContent = processImagePaths(content);
+  let processedContent = processImagePaths(content, guideSlug);
   
   // Process links if guideSlug is provided
   if (guideSlug) {
