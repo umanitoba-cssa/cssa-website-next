@@ -1,0 +1,64 @@
+name: Sync Guides (Webhook & Manual)
+
+on:
+  repository_dispatch:
+    types: [guide-updated]
+  workflow_dispatch: # Allow manual triggering
+
+jobs:
+  sync-guides:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Setup Bun
+      uses: oven-sh/setup-bun@v1
+      with:
+        bun-version: latest
+        
+    - name: Install dependencies
+      run: bun install
+      
+    - name: Sync specific guide (if triggered by repository)
+      if: github.event_name == 'repository_dispatch'
+      run: |
+        if [ -n "${{ github.event.client_payload.guide_repo }}" ]; then
+          echo "Syncing specific guide from ${{ github.event.client_payload.guide_repo }}"
+          bun run scripts/sync-specific-guide.js "${{ github.event.client_payload.guide_repo }}"
+        else
+          echo "No specific guide specified, syncing all guides"
+          bun run sync-guides
+        fi
+        
+    - name: Sync all guides (if scheduled or manual)
+      if: github.event_name != 'repository_dispatch'
+      run: bun run sync-guides
+      
+    - name: Commit changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add -A
+        if ! git diff --staged --quiet; then
+          if [ "${{ github.event_name }}" == "repository_dispatch" ]; then
+            git commit -m "Sync guide from ${{ github.event.client_payload.guide_repo }}"
+          else
+            git commit -m "Manual sync guides from repositories"
+          fi
+        fi
+        
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: ${{ github.ref }}
+        
+    - name: Deploy to production
+      if: github.ref == 'refs/heads/main'
+      run: |
+        # Add your deployment command here
+        # For example, if using Vercel:
+        # npx vercel --prod --token ${{ secrets.VERCEL_TOKEN }}
+        echo "Deploying to production..."

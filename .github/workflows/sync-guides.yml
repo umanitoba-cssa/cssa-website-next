@@ -1,0 +1,39 @@
+name: Sync Guides
+
+on:
+  schedule:
+    # Run every day at 6 AM UTC
+    - cron: '0 6 * * *'
+  workflow_dispatch: # Allow manual triggering
+
+jobs:
+  sync-guides:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Setup Bun
+      uses: oven-sh/setup-bun@v1
+      with:
+        bun-version: latest
+        
+    - name: Install dependencies
+      run: bun install
+      
+    - name: Sync guides
+      run: bun run sync-guides
+      
+    - name: Commit changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add -A
+        git diff --staged --quiet || git commit -m "Auto-sync guides from repositories"
+        
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: ${{ github.ref }}
