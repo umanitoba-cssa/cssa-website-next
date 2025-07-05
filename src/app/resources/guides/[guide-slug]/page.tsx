@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: GuidePageProps): Promise<Meta
 }
 
 export async function generateStaticParams() {
-  const guides = getGuidesSlugs();
+  const guides = await getGuidesSlugs();
   return guides.map((slug) => ({
     'guide-slug': slug,
   }));
@@ -43,8 +43,8 @@ export default async function GuidePage({ params }: GuidePageProps) {
     notFound();
   }
   
-  // Process markdown content to HTML
-  const htmlContent = await markdownToHtml(guide.content);
+  // Process markdown content to HTML with guide slug for proper image processing
+  const htmlContent = await markdownToHtml(guide.content, params['guide-slug']);
   
   // Breadcrumb items
   const breadcrumbItems = [

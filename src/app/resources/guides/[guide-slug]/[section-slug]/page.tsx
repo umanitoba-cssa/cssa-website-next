@@ -42,7 +42,7 @@ export async function generateMetadata({ params }: SectionPageProps): Promise<Me
 }
 
 export async function generateStaticParams() {
-  const guides = getGuidesSlugs();
+  const guides = await getGuidesSlugs();
   const params: { 'guide-slug': string; 'section-slug': string }[] = [];
   
   for (const guideSlug of guides) {
@@ -73,8 +73,8 @@ export default async function SectionPage({ params }: SectionPageProps) {
     notFound();
   }
   
-  // Process markdown content to HTML
-  const htmlContent = await markdownToHtml(section.content);
+  // Process markdown content to HTML with guide slug for proper image processing
+  const htmlContent = await markdownToHtml(section.content, params['guide-slug']);
   
   // Find the current section index for prev/next navigation
   const currentSectionIndex = guide.sections.findIndex(s => s.slug === params['section-slug']);
