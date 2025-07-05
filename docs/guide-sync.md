@@ -149,6 +149,26 @@ The system will automatically convert relative image paths to the correct absolu
 - **Relative Path Processing**: Converts relative image paths to absolute paths automatically
 - **Webhook Support**: Instant sync when guide repositories are updated
 
+## Branching Strategy
+
+The sync system uses a two-branch workflow for controlled deployments:
+
+### Main Branch (Development)
+- **Automatic Sync**: Guide updates are automatically committed and pushed to `main`
+- **Immediate Integration**: Latest guide content is available for development/testing
+- **No Manual Intervention**: Sync happens automatically via webhooks or manual triggers
+
+### Release Branch (Production)
+- **PR Creation**: After syncing to `main`, a PR is automatically created from `main` to `release`
+- **Manual Review**: PRs require review and approval before merging
+- **Controlled Deployment**: Only reviewed changes make it to production
+
+### Workflow Process
+1. Guide repository is updated → Webhook triggers sync
+2. Sync commits new content directly to `main` branch
+3. PR is automatically created from `main` to `release`
+4. Review and merge PR when ready to deploy changes
+
 ## File Structure
 
 ```
