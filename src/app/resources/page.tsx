@@ -51,7 +51,7 @@ export default async function Resources() {
     }
     
     // Get guides count
-    const guides = getAllGuides();
+    const guides = await getAllGuides();
     const guidesCount = guides.length;
 
     const resourceCards = ResourceLinks.map((link, index) => {

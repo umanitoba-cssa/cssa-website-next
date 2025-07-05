@@ -8,8 +8,8 @@ export const metadata = {
   description: 'Comprehensive guides for computer science students',
 };
 
-export default function GuidesPage() {
-  const guides = getAllGuides();
+export default async function GuidesPage() {
+  const guides = await getAllGuides();
 
   return (
     <main className="flex flex-col">
