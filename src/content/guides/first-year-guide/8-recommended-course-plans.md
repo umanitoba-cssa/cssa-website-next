@@ -6,7 +6,7 @@ date: "2023-06-29"
 ---
 
 # Recommended Course Plans
-*This is a highly opinionated guide based on the CSSA executive team's personal experience and years of observations from our Discord community. Never finalize your schedule before consulting an [academic advisor](https://sci.umanitoba.ca/advising/#current-students).*
+*This is a highly opinionated guide based on the CSSA executive team's personal experience and years of observations from our [Discord community](https://discord.umanitobacssa.ca/). Never finalize your schedule before consulting an [academic advisor](https://sci.umanitoba.ca/advising/#current-students).*
 
 We have prepared some scheduling ideas for hopefully every kind of student. If a schedule doesn't apply to you, scroll down!
 

@@ -13,7 +13,7 @@ Transitioning to university means more than just tougher classes. The whole rhyt
 
 ## 1. **Sleep**
 
-When deadlines pile up, it's tempting to cut back on sleep. But those extra hours awake often backfire. Getting consistent 7-9 hours makes a real difference in how well your brain functions. You'll notice lectures make more sense, programming problems feel less frustrating, and your mood stays steadier during stressful weeks. Think of it as nightly maintenance for your most important processor - your brain. As [that one Sonic image](https://x.com/EliteSonicFan/status/1515801952831029248) says, don't trust your brain after 9 p.m.!
+When deadlines pile up, it's tempting to cut back on sleep. But those extra hours awake often backfire. Getting consistent 7-9 hours makes a real difference in how well your brain functions. You'll notice lectures make more sense, programming problems feel less frustrating, and your mood stays steadier during stressful weeks. Think of it as nightly maintenance for your most important processor - your brain. As [that one Sonic image](./sonicimage.jpeg) says, don't trust your brain after 9 p.m.!
 
 ## 2. **Eat Healthy**
 
@@ -29,11 +29,11 @@ When you're stuck on a problem or overwhelmed, pushing harder often makes it wor
 
 ## 5. **Stay Connected**
 
-Computer Science work can feel isolating when you're debugging alone at midnight. Make conscious effort to maintain connections. Join classmates for meals instead of eating at your desk. Participate in the Discord community for both academic support and casual conversation. Don't underestimate the value of telling family how you're really doing, especially if you're an international student living away from home: they may provide a grounding feeling you otherwise wouldn't experience during your time in Winnipeg. These connections become crucial support during tough stretches.
+Computer Science work can feel isolating when you're debugging alone at midnight. Make conscious effort to maintain connections. Join classmates for meals instead of eating at your desk. Participate in the [Discord community](https://discord.umanitobacssa.ca/) for both academic support and casual conversation. Don't underestimate the value of telling family how you're really doing, especially if you're an international student living away from home: they may provide a grounding feeling you otherwise wouldn't experience during your time in Winnipeg. These connections become crucial support during tough stretches.
 
 ## 6. **Protect Your Time**
 
-Learning to set boundaries is a survival skill in university. Block dedicated time for both work and recovery in your schedule. Get comfortable saying "Let me check my schedule" instead of automatic yeses to every request. Treat your downtime like critical system maintenance - without it, everything else starts malfunctioning. This gets easier with practice, especially when you see how it prevents last-minute crunches.
+Learning to set boundaries is a survival skill in university. Block dedicated time for both work and recovery in your schedule. Get comfortable saying "Let me check my schedule" instead of automatically saying yes to every request. Treat your downtime like critical system maintenance - without it, everything else starts malfunctioning. This gets easier with practice, especially when you see how it prevents last-minute crunches.
 
 ## 7. **Seek Professional Help**
 

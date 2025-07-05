@@ -8,19 +8,19 @@ date: "2023-06-29"
 # Student Groups
 Perhaps against expectations, the Computer Science students in the University of Manitoba are quite as lively and sociable as they are smart and hardworking! The [Computer Science Lounge Discord](https://discord.umanitobacssa.ca/) is the biggest hub for Computer Science students in the university, and is currently maintained by the following three groups:
 
-1. **University of Manitoba Computer Science Students’ Association** (ours!): [Website](https://www.umanitobacssa.ca/), [Instagram](https://www.instagram.com/umanitobacssa/)
+1. **University of Manitoba Computer Science Students’ Association** (ours!): [Website](https://www.umanitobacssa.ca/), [Linktree](https://linktr.ee/umcssa)
 - The main governing body of current and incoming Computer Science students
 - Represent the undergraduate student body in conversation with the Department
 - Host social and educational events, and wrote this document (with more to come!)
 - Also has a Lounge at EITC E1-586 - come by anytime!
 
-2. **University of Manitoba Women in Computer Science**: [Website](https://umwics.vercel.app/), [Instagram](https://www.instagram.com/umwics/)
+2. **University of Manitoba Women in Computer Science**: [Website](https://umwics.vercel.app/), [Linktree](https://linktr.ee/umwics)
 - Student group supporting women and gender minorities in Computer Science
 - Host social events and workshops to create a safe space for women to connect
 - Collaborated with big companies like Bold, IQmetrix, Ubisoft, Amazon,...
 - **NEW**: Has a Lounge for *women and gender minorities* at EITC E2-599!
 
-3. **.devClub**: [Website](https://devclub.ca/), [Instagram](https://www.instagram.com/umdevclub/)
+3. **.devClub**: [Website](https://devclub.ca/), [Linktree](https://linktr.ee/umdev)
 - Environment for students to connect and explore a variety of areas in tech
 - Host workshops to develop technical skills and socials to simply hang out
 - Annual hackathon .devHacks that invites students of all skill levels to be creative
