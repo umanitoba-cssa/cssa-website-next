@@ -1,0 +1,6 @@
+[submodule "src/content/guides/first-year-guide"]
+	path = src/content/guides/first-year-guide
+	url = https://github.com/umanitoba-cssa/first-year-guide
+[submodule "src/content/guides/second-year-guide"]
+	path = src/content/guides/second-year-guide
+	url = https://github.com/umanitoba-cssa/second-year-guide
