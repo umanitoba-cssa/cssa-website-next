@@ -37,8 +37,8 @@ export const ResourceLinks: IResourceLink[] = [
 
 export const CSSALinks: IResourceLink[] = [
     {
-        title: "First Year Guide",
-        description: "The Guide to your first year at the UofM as a First Year",
+        title: "First Year Guide (2024)",
+        description: "The old guide to your first year at the UofM as a First Year. See Guides for the updated version.",
         href: "docs/firstYearGuide.pdf"
     },
     {
