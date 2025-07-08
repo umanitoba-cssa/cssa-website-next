@@ -292,9 +292,15 @@ export function processLinks(content: string, guideSlug: string): string {
   return content.replace(
     /\[(.*?)\]\((?!https?:\/\/)([^)]+)\)/g,
     (match, text, url) => {
+      // Keep anchor links as-is
+      if (url.startsWith('#')) {
+        return `[${text}](${url})`;
+      }
+      // Keep absolute paths as-is
       if (url.startsWith('/')) {
         return `[${text}](${url})`;
       }
+      // Convert relative file paths to absolute
       return `[${text}](/resources/guides/${guideSlug}/${url})`;
     }
   );
