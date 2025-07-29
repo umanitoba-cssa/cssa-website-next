@@ -47,7 +47,7 @@ export const ExecProfiles = [
   {
     name: "Edwin Duong",
     position: "Director of Internal Affairs",
-    image: "/img/team/edwin.png",
+    image: "/img/team/vacant.png",
     linkedin: "https://www.linkedin.com/in/edwin-duong/",
   },
   {
