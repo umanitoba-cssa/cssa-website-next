@@ -60,7 +60,8 @@ export const ExecProfiles = [
     },
     {
         name: "KC del Moro",
-        position: "Assistant Director of Promotions",
+        position: "Director of Promotions",
         image: "/img/team/vacant.png",
+        linkedin: "https://www.linkedin.com/in/kriza-del-moro-950378301/",
     },
 ];
