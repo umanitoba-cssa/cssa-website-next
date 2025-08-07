@@ -64,6 +64,7 @@ jobs:
         uses: travisfriesen/workflows/build_and_upload_docker_container@v1.1
         with:
           IMAGE_NAME: ${{ needs.set-port.outputs.IMAGE_NAME }}
+          ARCHITECTURE: linux/amd64
           BUILD_ARGS: |
             YOUTUBE_API_KEY=${{ secrets.YOUTUBE_API_KEY }}
             SMTP_USERNAME=${{ secrets.SMTP_USERNAME }}
