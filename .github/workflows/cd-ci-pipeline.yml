@@ -90,6 +90,6 @@ jobs:
           ENVIRONMENT: ${{ needs.set-port.outputs.ENVIRONMENT }}
           EXTRA_VARS: "port=${{ needs.set-port.outputs.PORT }} container_name=cssa-${{ needs.set-port.outputs.ENVIRONMENT }} image_name=${{ needs.set-port.outputs.IMAGE_NAME }}:${{ github.run_number }}-${{ github.run_attempt }} artifact_path=/tmp/${{ needs.set-port.outputs.ENVIRONMENT }}/${{ needs.set-port.outputs.IMAGE_NAME }}.tar"
           ARTIFACT_NAME: ${{ needs.set-port.outputs.IMAGE_NAME }}
-          USER: "ubuntu"
+          USER: "root-main-web"
           PLAYBOOK_PATH: ".ansible/playbook/ansible_deploy_container.yml"
           HOST: "localhost"
