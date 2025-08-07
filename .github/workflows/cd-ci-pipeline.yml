@@ -60,23 +60,18 @@ jobs:
     runs-on: ubuntu-latest
     needs: set-port
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: build .env file
-        run: |
-          echo "YOUTUBE_API_KEY=${{ secrets.YOUTUBE_API_KEY }}" >> .env
-          echo "SMTP_USERNAME=${{ secrets.SMTP_USERNAME }}" >> .env
-          echo "SMTP_PASSWORD=${{ secrets.SMTP_PASSWORD }}" >> .env
-          echo "GOOGLE_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }}" >> .env
-          echo "GOOGLE_SERVICE_ACCOUNT_EMAIL=${{ secrets.GOOGLE_SERVICE_ACCOUNT_EMAIL }}" >> .env
-          echo "GOOGLE_PRIVATE_KEY=${{ secrets.GOOGLE_PRIVATE_KEY }}" >> .env
-          echo "CANTEEN_SHEEET_ID=${{ secrets.CANTEEN_SHEEET_ID }}" >> .env
-
       - name: Build Container
-        uses: travisfriesen/workflows/build_and_upload_docker_container@v1.0.1
+        uses: travisfriesen/workflows/build_and_upload_docker_container@v1.1
         with:
           IMAGE_NAME: ${{ needs.set-port.outputs.IMAGE_NAME }}
+          BUILD_ARGS: |
+            YOUTUBE_API_KEY=${{ secrets.YOUTUBE_API_KEY }}
+            SMTP_USERNAME=${{ secrets.SMTP_USERNAME }}
+            SMTP_PASSWORD=${{ secrets.SMTP_PASSWORD }}
+            GOOGLE_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }}
+            GOOGLE_SERVICE_ACCOUNT_EMAIL=${{ secrets.GOOGLE_SERVICE_ACCOUNT_EMAIL }}
+            GOOGLE_PRIVATE_KEY=${{ secrets.GOOGLE_PRIVATE_KEY }}
+            CANTEEN_SHEEET_ID=${{ secrets.CANTEEN_SHEEET_ID }}
 
   deploy:
     runs-on: webhost
@@ -89,7 +84,18 @@ jobs:
         uses: travisfriesen/workflows/download_docker_container_and_run_ansible_playbook@v1
         with:
           ENVIRONMENT: ${{ needs.set-port.outputs.ENVIRONMENT }}
-          EXTRA_VARS: "port=${{ needs.set-port.outputs.PORT }} container_name=cssa-${{ needs.set-port.outputs.ENVIRONMENT }} image_name=${{ needs.set-port.outputs.IMAGE_NAME }}:${{ github.run_number }}-${{ github.run_attempt }} artifact_path=/tmp/${{ needs.set-port.outputs.ENVIRONMENT }}/${{ needs.set-port.outputs.IMAGE_NAME }}.tar"
+          EXTRA_VARS: >-
+            port=${{ needs.set-port.outputs.PORT }}
+            container_name=cssa-${{ needs.set-port.outputs.ENVIRONMENT }}
+            image_name=${{ needs.set-port.outputs.IMAGE_NAME }}:${{ github.run_number }}-${{ github.run_attempt }}
+            artifact_path=/tmp/${{ needs.set-port.outputs.ENVIRONMENT }}/${{ needs.set-port.outputs.IMAGE_NAME }}.tar
+            youtube_api_key=${{ secrets.YOUTUBE_API_KEY }}
+            smtp_username=${{ secrets.SMTP_USERNAME }}
+            smtp_password=${{ secrets.SMTP_PASSWORD }}
+            google_client_id=${{ secrets.GOOGLE_CLIENT_ID }}
+            google_service_account_email=${{ secrets.GOOGLE_SERVICE_ACCOUNT_EMAIL }}
+            google_private_key=${{ secrets.GOOGLE_PRIVATE_KEY }}
+            canteen_sheet_id=${{ secrets.CANTEEN_SHEEET_ID }}
           ARTIFACT_NAME: ${{ needs.set-port.outputs.IMAGE_NAME }}
           USER: "root-main-web"
           PLAYBOOK_PATH: ".ansible/playbook/ansible_deploy_container.yml"
