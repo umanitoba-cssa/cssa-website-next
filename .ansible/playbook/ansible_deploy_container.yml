@@ -2,9 +2,9 @@
 - name: Deploy Docker container on Oracle Cloud Server
   hosts: localhost
   connection: local
-  become: true
-  become_method: sudo
-  become_flags: "-E"
+#  become: true
+#  become_method: sudo
+#  become_flags: "-E"
 
   tasks:
     - name: Stop and remove existing container if it exists
