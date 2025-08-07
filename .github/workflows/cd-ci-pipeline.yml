@@ -74,7 +74,7 @@ jobs:
             CANTEEN_SHEEET_ID=${{ secrets.CANTEEN_SHEEET_ID }}
 
   deploy:
-    runs-on: webhost
+    runs-on: [self-hosted, webhost]
     needs: [set-port, build]
     environment:
       name: ${{ needs.set-port.outputs.ENVIRONMENT }}
