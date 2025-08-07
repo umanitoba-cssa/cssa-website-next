@@ -1,0 +1,39 @@
+---
+- name: Deploy Docker container on Oracle Cloud Server
+  hosts: localhost
+  connection: local
+  become: true
+  become_method: sudo
+  become_flags: "-E"
+
+  tasks:
+    - name: Stop and remove existing container if it exists
+      docker_container:
+        name: "{{ container_name }}"
+        state: absent
+        force_kill: yes
+      ignore_errors: yes
+
+    - name: Remove existing image if it exists
+      docker_image:
+        name: "{{ image_name }}"
+        state: absent
+        force: yes
+      ignore_errors: yes
+
+    - name: Load Docker image from tar file
+      docker_image:
+        name: "{{ image_name }}"
+        source: load
+        load_path: "{{ artifact_path }}"
+        state: present
+
+    - name: Run Docker container
+      docker_container:
+        name: "{{ container_name }}"
+        image: "{{ image_name }}"
+        state: started
+        restart_policy: always
+        ports:
+          - "{{ port }}:3000"
+        container_default_behavior: compatibility
