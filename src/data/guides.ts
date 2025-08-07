@@ -10,7 +10,7 @@ const GuideList: IGuideList[] = [
     },
     {
         slug: 'second-year-guide',
-        repoURL: 'https://github.com/pieberrykinnie/second-year-guide'
+        repoURL: 'https://github.com/umanitoba-cssa/second-year-guide'
     },
 ]
 

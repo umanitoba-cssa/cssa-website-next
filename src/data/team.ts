@@ -6,6 +6,7 @@ interface IProfile {
     instagram?: string;
     github?: string;
     website?: string;
+    discord?: string;
 }
 
 export const ExecProfiles = [
