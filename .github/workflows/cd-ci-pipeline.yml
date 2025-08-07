@@ -74,7 +74,7 @@ jobs:
           echo "CANTEEN_SHEEET_ID=${{ secrets.CANTEEN_SHEEET_ID }}" >> .env
 
       - name: Build Container
-        uses: travisfriesen/workflows/build_and_upload_docker_container@v1
+        uses: travisfriesen/workflows/build_and_upload_docker_container@v1.0.1
         with:
           IMAGE_NAME: ${{ needs.set-port.outputs.IMAGE_NAME }}
 
