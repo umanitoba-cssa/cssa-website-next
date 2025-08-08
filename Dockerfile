@@ -81,6 +81,9 @@ COPY --from=builder /usr/src/app/.next ./.next
 COPY --from=builder /usr/src/app/public ./public
 COPY --from=builder /usr/src/app/next.config.mjs ./
 
+RUN mkdir -p /usr/src/app/.next/cache/images \
+    && chown -R bun:bun /usr/src/app/.next
+
 # Expose port and run
 EXPOSE 3000
 USER bun
