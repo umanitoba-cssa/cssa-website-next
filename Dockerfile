@@ -1,5 +1,5 @@
 # Build stage
-FROM oven/bun:1 AS builder
+FROM oven/bun:1.2.19 AS builder
 WORKDIR /usr/src/app
 
 # Define build arguments
@@ -29,9 +29,11 @@ COPY tsconfig.json next.config.mjs ./
 COPY scripts ./scripts/
 COPY src/ ./src/
 COPY public/ ./public/
+COPY tailwind.config.ts postcss.config.mjs ./
 
 # Set environment to production and build
 ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
 RUN YOUTUBE_API_KEY="${YOUTUBE_API_KEY}" \
     SMTP_USERNAME="${SMTP_USERNAME}" \
     SMTP_PASSWORD="${SMTP_PASSWORD}" \
@@ -50,7 +52,7 @@ RUN YOUTUBE_API_KEY="${YOUTUBE_API_KEY}" \
     bun run build
 
 # Production stage
-FROM oven/bun:1-slim AS production
+FROM oven/bun:1.2.19-slim AS production
 WORKDIR /usr/src/app
 
 # Define runtime arguments (these need to be passed when running the container)
@@ -80,6 +82,8 @@ COPY --from=builder /usr/src/app/scripts ./scripts
 COPY --from=builder /usr/src/app/.next ./.next
 COPY --from=builder /usr/src/app/public ./public
 COPY --from=builder /usr/src/app/next.config.mjs ./
+COPY --from=builder /usr/src/app/tailwind.config.ts ./
+COPY --from=builder /usr/src/app/postcss.config.mjs ./
 
 RUN mkdir -p /usr/src/app/.next/cache/images \
     && chown -R bun:bun /usr/src/app/.next
@@ -88,4 +92,5 @@ RUN mkdir -p /usr/src/app/.next/cache/images \
 EXPOSE 3000
 USER bun
 ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
 ENTRYPOINT ["bun", "run", "start"]
