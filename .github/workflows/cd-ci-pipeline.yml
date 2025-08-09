@@ -10,7 +10,6 @@ on:
     branches:
       - main
       - release
-      - migration
   pull_request:
     branches:
       - release
