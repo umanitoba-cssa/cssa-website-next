@@ -1,0 +1,48 @@
+---
+- name: Deploy Docker container on Oracle Cloud Server
+  hosts: localhost
+  connection: local
+#  become: true
+#  become_method: sudo
+#  become_flags: "-E"
+
+  tasks:
+    - name: Stop and remove existing container if it exists
+      docker_container:
+        name: "{{ container_name }}"
+        state: absent
+        force_kill: yes
+      ignore_errors: yes
+
+    - name: Remove existing image if it exists
+      docker_image:
+        name: "{{ image_name }}"
+        state: absent
+        force: yes
+      ignore_errors: yes
+
+    - name: Load Docker image from tar file
+      docker_image:
+        name: "{{ image_name }}"
+        source: load
+        load_path: "{{ artifact_path }}"
+        state: present
+        timeout: 300  # Increased timeout to 5 minutes
+
+    - name: Run Docker container
+      docker_container:
+        name: "{{ container_name }}"
+        image: "{{ image_name }}"
+        state: started
+        restart_policy: always
+        ports:
+          - "{{ port }}:3000"
+        env:
+          YOUTUBE_API_KEY: "{{ youtube_api_key }}"
+          SMTP_USERNAME: "{{ smtp_username }}"
+          SMTP_PASSWORD: "{{ smtp_password }}"
+          GOOGLE_CLIENT_ID: "{{ google_client_id }}"
+          GOOGLE_SERVICE_ACCOUNT_EMAIL: "{{ google_service_account_email }}"
+          GOOGLE_PRIVATE_KEY: "{{ google_private_key }}"
+          CANTEEN_SHEEET_ID: "{{ canteen_sheet_id }}"
+        container_default_behavior: compatibility

@@ -13,7 +13,7 @@ export default function Team() {
             linkedin={profile.linkedin}
             github={profile.github}
             website={profile.website}
-            discord={profile.discord}
+            // discord={profile.discord}
         />
     ));
 

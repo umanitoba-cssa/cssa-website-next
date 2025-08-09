@@ -13,7 +13,7 @@ export async function getSheetsCells(sheetId: string, range: string) {
         credentials: {
             client_id: process.env.GOOGLE_CLIENT_ID,
             client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
-            private_key: process.env.GOOGLE_PRIVATE_KEY,
+            private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
         }
     });
 
