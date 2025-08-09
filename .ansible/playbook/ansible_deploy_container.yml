@@ -27,6 +27,7 @@
         source: load
         load_path: "{{ artifact_path }}"
         state: present
+        timeout: 300  # Increased timeout to 5 minutes
 
     - name: Run Docker container
       docker_container:

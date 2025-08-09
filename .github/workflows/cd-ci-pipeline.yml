@@ -16,11 +16,6 @@ on:
       - release
   workflow_dispatch:
 
-env:
-  SSH_HOST: ${{ secrets.SSH_HOST }}
-  SSH_USER: ${{ secrets.SSH_USER }}
-  SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-
 jobs:
   set-port:
     runs-on: ubuntu-latest
