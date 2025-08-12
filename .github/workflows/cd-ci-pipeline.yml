@@ -1,0 +1,97 @@
+name: CI/CD Pipeline
+
+permissions:
+  contents: read
+  packages: write
+  id-token: write
+
+on:
+  push:
+    branches:
+      - main
+      - release
+  pull_request:
+    branches:
+      - release
+  workflow_dispatch:
+
+jobs:
+  set-port:
+    runs-on: ubuntu-latest
+    outputs:
+      PORT: ${{ steps.set-port.outputs.PORT }}
+      ENVIRONMENT: ${{ steps.set-port.outputs.ENVIRONMENT }}
+      ENV_URL: ${{ steps.set-port.outputs.ENV_URL }}
+      IMAGE_NAME: ${{ steps.set-port.outputs.IMAGE_NAME }}
+    steps:
+      - name: Set port based on branch
+        id: set-port
+        run: |
+          if [[ "${GITHUB_REF##*/}" == "release" ]]; then
+            echo "PORT=80" >> $GITHUB_OUTPUT
+            echo "ENVIRONMENT=production" >> $GITHUB_OUTPUT
+            echo "ENV_URL=https://umanitobacssa.ca" >> $GITHUB_OUTPUT
+            echo "IMAGE_NAME=cssa-production" >> $GITHUB_OUTPUT
+          elif [[ "${{ github.event_name }}" == "pull_request" && "${{ github.base_ref }}" == "release" ]]; then
+            echo "PORT=4000" >> $GITHUB_OUTPUT
+            echo "ENVIRONMENT=staging" >> $GITHUB_OUTPUT
+            echo "ENV_URL=https://staging.umanitobacssa.ca" >> $GITHUB_OUTPUT
+            echo "IMAGE_NAME=cssa-staging" >> $GITHUB_OUTPUT
+          else
+            echo "PORT=3000" >> $GITHUB_OUTPUT
+            echo "ENVIRONMENT=preview" >> $GITHUB_OUTPUT
+            echo "ENV_URL=https://preview.umanitobacssa.ca" >> $GITHUB_OUTPUT
+            echo "IMAGE_NAME=cssa-preview" >> $GITHUB_OUTPUT
+          fi
+      - name: Debug outputs
+        run: |
+          echo "PORT: ${{ steps.set-port.outputs.PORT }}"
+          echo "ENVIRONMENT: ${{ steps.set-port.outputs.ENVIRONMENT }}"
+          echo "ENV_URL: ${{ steps.set-port.outputs.ENV_URL }}"
+          echo "IMAGE_NAME: ${{ steps.set-port.outputs.IMAGE_NAME }}"
+
+  build:
+    runs-on: ubuntu-latest
+    needs: set-port
+    steps:
+      - name: Build Container
+        uses: travisfriesen/workflows/build_and_upload_docker_container@v1.1
+        with:
+          IMAGE_NAME: ${{ needs.set-port.outputs.IMAGE_NAME }}
+          ARCHITECTURE: linux/amd64
+          BUILD_ARGS: |
+            YOUTUBE_API_KEY=${{ secrets.YOUTUBE_API_KEY }}
+            SMTP_USERNAME=${{ secrets.SMTP_USERNAME }}
+            SMTP_PASSWORD=${{ secrets.SMTP_PASSWORD }}
+            GOOGLE_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }}
+            GOOGLE_SERVICE_ACCOUNT_EMAIL=${{ secrets.GOOGLE_SERVICE_ACCOUNT_EMAIL }}
+            GOOGLE_PRIVATE_KEY=${{ secrets.GOOGLE_PRIVATE_KEY }}
+            CANTEEN_SHEEET_ID=${{ secrets.CANTEEN_SHEEET_ID }}
+
+  deploy:
+    runs-on: [self-hosted, webhost]
+    needs: [set-port, build]
+    environment:
+      name: ${{ needs.set-port.outputs.ENVIRONMENT }}
+      url: ${{ needs.set-port.outputs.ENV_URL }}
+    steps:
+      - name: Deploy using Ansible Playbook
+        uses: travisfriesen/workflows/download_docker_container_and_run_ansible_playbook@v1
+        with:
+          ENVIRONMENT: ${{ needs.set-port.outputs.ENVIRONMENT }}
+          EXTRA_VARS: >-
+            port=${{ needs.set-port.outputs.PORT }}
+            container_name=cssa-${{ needs.set-port.outputs.ENVIRONMENT }}
+            image_name=${{ needs.set-port.outputs.IMAGE_NAME }}:${{ github.run_number }}-${{ github.run_attempt }}
+            artifact_path=/tmp/${{ needs.set-port.outputs.ENVIRONMENT }}/${{ needs.set-port.outputs.IMAGE_NAME }}.tar
+            youtube_api_key=${{ secrets.YOUTUBE_API_KEY }}
+            smtp_username=${{ secrets.SMTP_USERNAME }}
+            smtp_password=${{ secrets.SMTP_PASSWORD }}
+            google_client_id=${{ secrets.GOOGLE_CLIENT_ID }}
+            google_service_account_email=${{ secrets.GOOGLE_SERVICE_ACCOUNT_EMAIL }}
+            google_private_key=${{ secrets.GOOGLE_PRIVATE_KEY }}
+            canteen_sheet_id=${{ secrets.CANTEEN_SHEEET_ID }}
+          ARTIFACT_NAME: ${{ needs.set-port.outputs.IMAGE_NAME }}
+          USER: "root-main-web"
+          PLAYBOOK_PATH: ".ansible/playbook/ansible_deploy_container.yml"
+          HOST: "localhost"
