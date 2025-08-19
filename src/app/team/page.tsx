@@ -1,22 +1,15 @@
+"use client";
+
 import BlockHeader from "@/components/block-header";
 import PageHeader from "@/components/page-header";
 import ProfileCard from "@/components/profile-card";
-import { ExecProfiles } from "@/data/team";
+import ProfileModal from "@/components/profile-modal";
+import { ExecProfiles, IProfile } from "@/data/team";
+import { useState } from "react";
+import { AnimatePresence } from "framer-motion";
 
 export default function Team() {
-    const execCards = ExecProfiles.map((profile) => (
-        <ProfileCard
-            key={profile.name}
-            name={profile.name}
-            position={profile.position}
-            image={profile.image}
-            linkedin={profile.linkedin}
-            github={profile.github}
-            website={profile.website}
-            description={profile.description}
-            // discord={profile.discord}
-        />
-    ));
+    const [selectedProfile, setSelectedProfile] = useState<IProfile | null>(null);
 
     return (
         <main className="flex flex-col">
@@ -24,9 +17,26 @@ export default function Team() {
             <div className="container py-12 flex flex-col gap-8">
                 <BlockHeader title="Executive Team" />
                 <div className="flex flex-row gap-4 flex-wrap justify-center">
-                    {execCards}
+                    {ExecProfiles.map((profile) => (
+                        <ProfileCard
+                            key={profile.name}
+                            profile={profile}
+                            onClick={() => {
+                                setSelectedProfile(profile);
+                            }}
+                        />
+                    ))}
                 </div>
             </div>
+
+            <AnimatePresence>
+                {selectedProfile && (
+                    <ProfileModal
+                    profile={selectedProfile}
+                    onClose={() => setSelectedProfile(null)}
+                    />
+                )}
+            </AnimatePresence>
         </main>
     );
 }
