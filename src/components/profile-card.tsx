@@ -56,7 +56,10 @@ export default function ProfileCard({
                 </div>
             }
 
-            <div className="text-sm text-gray-500 italic mt-auto">(Show more)</div>
+            <div className="mt-auto text-sm text-gray-500 font-medium text-center flex items-center justify-center gap-1">
+                <span>View profile</span>
+                <span>→</span>
+            </div>
         </motion.div>
     );
 }
