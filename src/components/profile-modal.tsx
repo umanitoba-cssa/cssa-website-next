@@ -64,7 +64,7 @@ export default function ProfileModal({
                 ease: [0.25, 0.1, 0.25, 1],
               },
             }}
-            className="bg-gray-900 border-solid border border-gray-400 text-white p-6 rounded-xl max-w-lg w-full relative z-50 overflow-hidden"
+            className="bg-gray-900 border border-gray-400 text-white p-6 rounded-xl w-full max-w-lg relative z-50 overflow-hidden mx-4 sm:mx-6"
             onClick={(e) => e.stopPropagation()}
           >
             <button
@@ -74,7 +74,6 @@ export default function ProfileModal({
               <FaTimes />
             </button>
 
-            {/* Content fade */}
             <motion.div
               key="modal-content"
               initial={{ opacity: 0, y: 10 }}
@@ -91,10 +90,8 @@ export default function ProfileModal({
                 <p className="text-lg text-gray-300">{profile.position}</p>
               </div>
 
-              {/* Description */}
               <p className="text-sm mb-4">{profile.description}</p>
 
-              {/* Socials */}
               <div className="flex justify-center gap-4 text-2xl">
                 {profile?.linkedin && <a className="text-3xl" href={profile.linkedin} target="_blank" rel="noreferrer">
                     <FaLinkedin />

@@ -36,25 +36,27 @@ export default function ProfileCard({
                 <h3 className="text-xl font-bold pb-0">{profile?.name}</h3>
                 <p className="my-0 text-xl">{profile?.position}</p>
             </div>
-            <div className="flex flex-row gap-4">
+            {(profile?.linkedin || profile?.instagram || profile?.github || profile?.website || profile?.discord) &&
+                <div className="flex flex-row gap-4">
+                    {profile?.linkedin && <a className="text-3xl" href={profile.linkedin} target="_blank" rel="noreferrer">
+                        <FaLinkedin />
+                    </a>}
+                    {profile?.instagram && <a className="text-3xl" href={profile.instagram} target="_blank" rel="noreferrer">
+                        <FaInstagram />
+                    </a>}
+                    {profile?.github && <a className="text-3xl" href={profile.github} target="_blank" rel="noreferrer">
+                        <FaGithub />
+                    </a>}
+                    {profile?.website && <a className="text-3xl" href={profile.website} target="_blank" rel="noreferrer">
+                        <FaGlobeAmericas />
+                    </a>}  
+                    {profile?.discord && <a className="text-3xl" href={profile.website} target="_blank" rel="noreferrer">
+                        <FaDiscord />
+                    </a>}  
+                </div>
+            }
 
-                {profile?.linkedin && <a className="text-3xl" href={profile.linkedin} target="_blank" rel="noreferrer">
-                    <FaLinkedin />
-                </a>}
-                {profile?.instagram && <a className="text-3xl" href={profile.instagram} target="_blank" rel="noreferrer">
-                    <FaInstagram />
-                </a>}
-                {profile?.github && <a className="text-3xl" href={profile.github} target="_blank" rel="noreferrer">
-                    <FaGithub />
-                </a>}
-                {profile?.website && <a className="text-3xl" href={profile.website} target="_blank" rel="noreferrer">
-                    <FaGlobeAmericas />
-                </a>}  
-                {profile?.discord && <a className="text-3xl" href={profile.website} target="_blank" rel="noreferrer">
-                    <FaDiscord />
-                </a>}  
-            </div>
-            <div className="text-sm text-gray-500 italic">(Show more)</div>
+            <div className="text-sm text-gray-500 italic mt-auto">(Show more)</div>
         </motion.div>
     );
 }
