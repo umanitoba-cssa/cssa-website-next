@@ -17,6 +17,7 @@ export const ExecProfiles = [
         linkedin: "https://www.linkedin.com/in/travisfriesen/",
         github: "https://github.com/travisfriesen",
         website: "https://travisfriesen.ca",
+        discord: "",
     },
     {
         name: "Okiki Fasanmi",
