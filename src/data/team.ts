@@ -8,7 +8,10 @@ interface IProfile {
     website?: string;
     discord?: string;
 }
-
+/** Each property must be present in at least one of the members, otherwise, this will cause an error. 
+*   You can assign an empty string to the property, if no team member has that property.
+*   There's code that ensures that such a property doesn't be rendered visually.
+**/
 export const ExecProfiles = [
     {
         name: "Travis Friesen",
@@ -17,6 +20,7 @@ export const ExecProfiles = [
         linkedin: "https://www.linkedin.com/in/travisfriesen/",
         github: "https://github.com/travisfriesen",
         website: "https://travisfriesen.ca",
+        discord: "",
     },
     {
         name: "Okiki Fasanmi",
