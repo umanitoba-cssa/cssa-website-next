@@ -50,7 +50,7 @@ export default function ProfileCard({
                     {profile?.website && <a className="text-3xl" href={profile.website} target="_blank" rel="noreferrer">
                         <FaGlobeAmericas />
                     </a>}  
-                    {profile?.discord && <a className="text-3xl" href={profile.website} target="_blank" rel="noreferrer">
+                    {profile?.discord && <a className="text-3xl" href={profile.discord} target="_blank" rel="noreferrer">
                         <FaDiscord />
                     </a>}  
                 </div>
