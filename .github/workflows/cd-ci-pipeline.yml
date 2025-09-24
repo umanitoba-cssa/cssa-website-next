@@ -35,12 +35,12 @@ jobs:
           elif [[ "${{ github.event_name }}" == "pull_request" && "${{ github.base_ref }}" == "release" ]]; then
             echo "PORT=4000" >> $GITHUB_OUTPUT
             echo "ENVIRONMENT=staging" >> $GITHUB_OUTPUT
-            echo "ENV_URL=https://staging.umanitobacssa.ca" >> $GITHUB_OUTPUT
+            echo "ENV_URL=https://stage.umanitobacssa.ca" >> $GITHUB_OUTPUT
             echo "IMAGE_NAME=cssa-staging" >> $GITHUB_OUTPUT
           else
             echo "PORT=3000" >> $GITHUB_OUTPUT
             echo "ENVIRONMENT=preview" >> $GITHUB_OUTPUT
-            echo "ENV_URL=https://preview.umanitobacssa.ca" >> $GITHUB_OUTPUT
+            echo "ENV_URL=https://test.umanitobacssa.ca" >> $GITHUB_OUTPUT
             echo "IMAGE_NAME=cssa-preview" >> $GITHUB_OUTPUT
           fi
       - name: Debug outputs
