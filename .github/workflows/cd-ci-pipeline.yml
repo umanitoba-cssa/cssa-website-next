@@ -56,7 +56,7 @@ jobs:
     needs: set-port
     steps:
       - name: Build Container
-        uses: travisfriesen/workflows/build_and_upload_docker_container@v1.2
+        uses: travisfriesen/workflows/build_and_upload_docker_container@v1.1
         with:
           IMAGE_NAME: ${{ needs.set-port.outputs.IMAGE_NAME }}
           ARCHITECTURE: linux/amd64
