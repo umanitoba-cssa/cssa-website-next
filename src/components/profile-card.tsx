@@ -1,9 +1,9 @@
 import {
-  FaGithub,
-  FaGlobeAmericas,
-  FaInstagram,
-  FaLinkedin,
-  FaDiscord,
+    FaGithub,
+    FaGlobeAmericas,
+    FaInstagram,
+    FaLinkedin,
+    FaDiscord,
 } from "react-icons/fa";
 import Image from "next/image";
 import React from "react";
@@ -11,11 +11,11 @@ import { motion } from "framer-motion";
 import { IProfile } from "@/data/team";
 
 export default function ProfileCard({
-  profile, 
-  onClick,
-}: { 
-    profile: IProfile, 
-    onClick?: () => void 
+    profile,
+    onClick,
+}: {
+    profile: IProfile,
+    onClick?: () => void
 }) {
     return (
         <motion.div
@@ -29,8 +29,8 @@ export default function ProfileCard({
             }}
             className="flex flex-col border-solid border border-gray-400 rounded-xl items-center p-4 gap-4 min-w-[17rem] max-w-[17rem] cursor-pointer"
         >
-            <div className="w-52 h-52 object-cover bg-contain rounded-full relative overflow-hidden">
-                <Image src={profile?.image} alt={profile?.name} fill className="" />
+            <div className="w-52 h-52 bg-contain rounded-full relative overflow-hidden">
+                <Image src={profile?.image} alt={profile?.name} fill className="object-cover" />
             </div>
             <div className="text-center">
                 <h3 className="text-xl font-bold pb-0">{profile?.name}</h3>
@@ -49,10 +49,10 @@ export default function ProfileCard({
                     </a>}
                     {profile?.website && <a className="text-3xl" href={profile.website} target="_blank" rel="noreferrer">
                         <FaGlobeAmericas />
-                    </a>}  
+                    </a>}
                     {profile?.discord && <a className="text-3xl" href={profile.discord} target="_blank" rel="noreferrer">
                         <FaDiscord />
-                    </a>}  
+                    </a>}
                 </div>
             }
 

@@ -42,7 +42,7 @@ export default function ProfileModal({
     <AnimatePresence onExitComplete={handleExitComplete}>
       {!isExiting && (
         <motion.div
-          key={profile.name}
+          key={profile.name + profile.position}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -81,8 +81,8 @@ export default function ProfileModal({
               exit={{ opacity: 0, y: 10 }}
               transition={{ duration: 0.25 }}
             >
-              <div className="w-52 h-52 object-cover rounded-full relative overflow-hidden mx-auto m-4">
-                <Image src={profile?.image} alt={profile?.name} fill className="" />
+              <div className="w-52 h-52 rounded-full relative overflow-hidden mx-auto m-4">
+                <Image src={profile?.image} alt={profile?.name} fill className="object-cover" />
               </div>
 
               <div className="text-center mb-4">
