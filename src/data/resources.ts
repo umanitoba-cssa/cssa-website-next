@@ -42,6 +42,11 @@ export const CSSALinks: IResourceLink[] = [
         href: "docs/firstYearGuide.pdf"
     },
     {
+        title: "Researchers Directory",
+        description: "Collection of UofM researchers and labs, their interests, criteria, and contact information",
+        href: "resources/researchers-directory"
+    },
+    {
         title: "CS Discord TOU",
         description: "The terms of use of the Computer Science Lounge Discord.",
         href: "/docs/discordTOU.pdf"
