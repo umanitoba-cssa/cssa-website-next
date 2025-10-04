@@ -6,6 +6,7 @@ interface IResourceLink {
     description: string
     href: string
     internal?: boolean
+    linkText?: string
 }
 
 interface IGuideList {
@@ -56,9 +57,10 @@ export const ResourceLinks: IResourceLink[] = [
 export const CSSALinks: IResourceLink[] = [
     {
         title: "Student Guides",
-        description: "Collection of comprhensive guides for computer science students",
+        description: "Collection of comprehensive guides for computer science students",
         href: "resources/guides",
-        internal: true
+        internal: true,
+        linkText: "Browse guides →"
     },
     {
         title: "First Year Guide (2024)",
@@ -69,7 +71,9 @@ export const CSSALinks: IResourceLink[] = [
         title: "Researchers",
         description: "Collection of UofM researchers and labs, their interests, criteria, and contact information",
         href: "resources/researchers",
-        internal: true
+        internal: true,
+        linkText: "Browse researchers →"
+
     },
     {
         title: "CS Discord TOU",
