@@ -20,7 +20,7 @@ import Link from "next/link";
 import { getAllGuides } from "@/lib/mdx";
 
 function MakePlaylistCards(videos: IVideoData[]) {
-    return videos.map((video, index) => {
+    return videos?.map((video, index) => {
         return (
             <CarouselItem key={index} className="basis-[90%] md:basis-[45%] lg:basis-[30%]">
                 <div className="px-2 w-full h-full">
