@@ -37,7 +37,7 @@ jobs:
             echo "PORT=4000" >> $GITHUB_OUTPUT
             echo "ENVIRONMENT=staging" >> $GITHUB_OUTPUT
             echo "IMAGE_NAME=cssa-staging" >> $GITHUB_OUTPUT
-            echo "DEPLOY_URL=https://stageing.umanitobacssa.ca" >> $GITHUB_ENV
+            echo "DEPLOY_URL=https://staging.umanitobacssa.ca" >> $GITHUB_ENV
           else
             echo "PORT=3000" >> $GITHUB_OUTPUT
             echo "ENVIRONMENT=preview" >> $GITHUB_OUTPUT
@@ -48,8 +48,8 @@ jobs:
         run: |
           echo "PORT: ${{ steps.set-port.outputs.PORT }}"
           echo "ENVIRONMENT: ${{ steps.set-port.outputs.ENVIRONMENT }}"
-          echo "ENV_URL: ${{ steps.set-port.outputs.ENV_URL }}"
           echo "IMAGE_NAME: ${{ steps.set-port.outputs.IMAGE_NAME }}"
+          echo "DEPLOY_URL=${{ env.DEPLOY_URL }}"
   build:
     runs-on: ubuntu-latest
     needs: set-port
