@@ -173,6 +173,21 @@ export const TechnologyProfiles = [
         position: "Councillor",
         image: "/img/team/vacant.png"
     },
+    {
+        name: "Iya Monterola",
+        position: "Councillor",
+        image: "/img/team/vacant.png"
+    },
+    {
+        name: "Connor Langan",
+        position: "Councillor",
+        image: "/img/team/vacant.png"
+    },
+    {
+        name: "Andre Lisandro Cruz Ibarra",
+        position: "Councillor",
+        image: "/img/team/vacant.png"
+    },
 ];
 
 export const AdvocacyProfiles = [
