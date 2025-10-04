@@ -5,7 +5,7 @@ import readingTime from 'reading-time';
 import { remark } from 'remark';
 import html from 'remark-html';
 import remarkGfm from 'remark-gfm';
-import GuideList from '../data/guides';
+import { GuideList } from '../data/resources';
 
 // Types for our guides and sections
 export interface GuideMetadata {

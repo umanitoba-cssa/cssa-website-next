@@ -7,6 +7,23 @@ interface IResourceLink {
     href: string
 }
 
+interface IGuideList {
+    slug: string;
+    repoURL: string;
+}
+
+export const GuideList: IGuideList[] = [
+    {
+        slug: 'first-year-guide',
+        repoURL: 'https://github.com/umanitoba-cssa/first-year-guide',
+    },
+    {
+        slug: 'second-year-guide',
+        repoURL: 'https://github.com/umanitoba-cssa/second-year-guide'
+    },
+]
+
+
 export const ResourceLinks: IResourceLink[] = [
     {
         title: "Science Co-op Info",
@@ -42,11 +59,6 @@ export const CSSALinks: IResourceLink[] = [
         href: "docs/firstYearGuide.pdf"
     },
     {
-        title: "Researchers Directory",
-        description: "Collection of UofM researchers and labs, their interests, criteria, and contact information",
-        href: "resources/researchers-directory"
-    },
-    {
         title: "CS Discord TOU",
         description: "The terms of use of the Computer Science Lounge Discord.",
         href: "/docs/discordTOU.pdf"
@@ -66,6 +78,19 @@ export const CSSALinks: IResourceLink[] = [
         description: "The Branding guidelines for all CSSA resources.",
         href: "docs/internalDesignDocument.pdf"
     }
+]
+
+export const CSSAPageLinks: IResourceLink[] = [
+    {
+        title: "Student Guides",
+        description: "Collection of comprhensive guides for computer science students",
+        href: "resources/guides"
+    },
+    {
+        title: "Researchers",
+        description: "Collection of UofM researchers and labs, their interests, criteria, and contact information",
+        href: "resources/researchers"
+    },
 ]
 
 interface IPlaylistCollection {

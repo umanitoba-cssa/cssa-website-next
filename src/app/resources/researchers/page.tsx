@@ -1,6 +1,6 @@
 import PageHeader from "@/components/page-header";
 
-export default async function ResearchersDirectory() {
+export default async function Researchers() {
     return (
         <main className="flex flex-col">
             <PageHeader title="Researchers Directory" image="/img/backgrounds/resources.png" />
