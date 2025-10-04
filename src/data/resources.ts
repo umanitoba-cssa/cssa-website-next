@@ -5,6 +5,7 @@ interface IResourceLink {
     title: string
     description: string
     href: string
+    internal?: boolean
 }
 
 interface IGuideList {
@@ -54,9 +55,21 @@ export const ResourceLinks: IResourceLink[] = [
 
 export const CSSALinks: IResourceLink[] = [
     {
+        title: "Student Guides",
+        description: "Collection of comprhensive guides for computer science students",
+        href: "resources/guides",
+        internal: true
+    },
+    {
         title: "First Year Guide (2024)",
         description: "The old guide to your first year at the UofM as a First Year. See Guides for the updated version.",
         href: "docs/firstYearGuide.pdf"
+    },
+    {
+        title: "Researchers",
+        description: "Collection of UofM researchers and labs, their interests, criteria, and contact information",
+        href: "resources/researchers",
+        internal: true
     },
     {
         title: "CS Discord TOU",
@@ -78,19 +91,6 @@ export const CSSALinks: IResourceLink[] = [
         description: "The Branding guidelines for all CSSA resources.",
         href: "docs/internalDesignDocument.pdf"
     }
-]
-
-export const CSSAPageLinks: IResourceLink[] = [
-    {
-        title: "Student Guides",
-        description: "Collection of comprhensive guides for computer science students",
-        href: "resources/guides"
-    },
-    {
-        title: "Researchers",
-        description: "Collection of UofM researchers and labs, their interests, criteria, and contact information",
-        href: "resources/researchers"
-    },
 ]
 
 interface IPlaylistCollection {

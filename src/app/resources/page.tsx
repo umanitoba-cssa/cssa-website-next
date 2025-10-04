@@ -8,7 +8,7 @@ import {
     CarouselNext,
     CarouselPrevious
 } from "@/components/ui/carousel";
-import { CSSALinks, CSSAPageLinks, IPlaylist, MeetingArchivesID, PlaylistCollections, ResourceLinks } from "@/data/resources";
+import { CSSALinks, IPlaylist, MeetingArchivesID, PlaylistCollections, ResourceLinks } from "@/data/resources";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
@@ -72,7 +72,7 @@ export default async function Resources() {
         return (
             <CarouselItem key={index} className="md:basis-1/2 lg:basis-[30%]" >
                 <div className="px-2 w-full h-full">
-                    <a href={link.href} target="_blank" rel="noreferrer">
+                    <a href={link.href} target={link.internal ? undefined : "_blank"} rel={link.internal ? undefined : "noreferrer"}>
                         <Card className="h-full">
                             <CardHeader>
                                 <CardTitle className="text-lg flex flex-row gap-2">
@@ -86,29 +86,6 @@ export default async function Resources() {
             </CarouselItem>
         );
     });
-
-    // Page cards are not externally linked
-    const cssaPageCards = CSSAPageLinks.map((link, index) => {
-        return (
-            <CarouselItem key={index} className="md:basis-1/2 lg:basis-[30%]" >
-                <div className="px-2 w-full h-full">
-                    <a href={link.href} rel="noreferrer">
-                        <Card className="h-full">
-                            <CardHeader>
-                                <CardTitle className="text-lg flex flex-row gap-2">
-                                    {link.title} <FaExternalLinkAlt className="my-auto" />
-                                </CardTitle>
-                                <CardDescription>{link.description}</CardDescription>
-                            </CardHeader>
-                        </Card>
-                    </a>
-                </div>
-            </CarouselItem>
-        );
-    });
-
-    // combine page cards and regular cards
-    const allCssaCards = cssaPageCards.concat(cssaCards);
 
     const collectionTabs = PlaylistCollections.map((collection, index) => {
         return (
@@ -156,7 +133,7 @@ export default async function Resources() {
                     <p>All the internal materials provided by the CSSA.</p>
 
                     <Carousel className="py-1" opts={{align: "center"}}>
-                        <CarouselContent>{allCssaCards}</CarouselContent>
+                        <CarouselContent>{cssaCards}</CarouselContent>
                         <CarouselNext/>
                         <CarouselPrevious/>
                     </Carousel>
