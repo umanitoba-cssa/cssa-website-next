@@ -23,7 +23,11 @@ export default function Sponsor() {
                         </p>
                     </div>
                     <div className="flex flex-col gap-8">
-                        <BlockHeader title="Contact Us"/>
+                        <BlockHeader title="Sponsorship Package"></BlockHeader>
+                        <p>View or download our <a className="underline" target="_blank" href="/docs/sponsorshipPackage.pdf">2025-2026 Sponsorship Package here</a>.</p>
+                    </div>
+                    <div className="flex flex-col gap-8">
+                        <BlockHeader title="Contact Us" />
                         <p>
                             To inquire about sponsorships, please email us at <a className="text-cssa-gold hover:underline" href="mailto:cssa@umanitoba.ca">cssa@umanitoba.ca</a>
                         </p>
