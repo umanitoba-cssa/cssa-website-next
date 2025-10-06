@@ -2,7 +2,6 @@
 
 import BlockHeader from "@/components/block-header";
 import PageHeader from "@/components/page-header";
-import { ExecProfiles } from "@/data/team";
 import { FC } from "react";
 import { useForm } from "react-hook-form";
 import sendEmail from "@/utils/send-email";

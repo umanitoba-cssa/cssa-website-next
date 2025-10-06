@@ -1,6 +1,5 @@
 import BlockHeader from "@/components/block-header";
 import PageHeader from "@/components/page-header";
-import { ExecProfiles } from "@/data/team";
 
 export default function Sponsor() {
 

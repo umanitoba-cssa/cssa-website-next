@@ -4,7 +4,7 @@ import BlockHeader from "@/components/block-header";
 import PageHeader from "@/components/page-header";
 import ProfileCard from "@/components/profile-card";
 import ProfileModal from "@/components/profile-modal";
-import { ExecProfiles, IProfile } from "@/data/team";
+import { ExecProfiles, LoungeProfiles, PromotionsProfiles, FinanceProfiles, MerchProfiles, EventsProfiles, TechnologyProfiles, AdvocacyProfiles, StudentResourcesProfiles, IProfile } from "@/data/team";
 import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
 
@@ -19,7 +19,85 @@ export default function Team() {
                 <div className="flex flex-row gap-4 flex-wrap justify-center">
                     {ExecProfiles.map((profile) => (
                         <ProfileCard
-                            key={profile.name}
+                            key={`${profile.name}-${profile.position}`}
+                            profile={profile}
+                            onClick={() => {
+                                setSelectedProfile(profile);
+                            }}
+                        />
+                    ))}
+                </div>
+
+                <BlockHeader title="Promotions Committee" />
+                <div className="flex flex-row gap-4 flex-wrap justify-center">
+                    {PromotionsProfiles.map((profile) => (
+                        <ProfileCard
+                            key={`${profile.name}-${profile.position}`}
+                            profile={profile}
+                            onClick={() => {
+                                setSelectedProfile(profile);
+                            }}
+                        />
+                    ))}
+                </div>
+
+                <BlockHeader title="Events Committee" />
+                <div className="flex flex-row gap-4 flex-wrap justify-center">
+                    {EventsProfiles.map((profile) => (
+                        <ProfileCard
+                            key={`${profile.name}-${profile.position}`}
+                            profile={profile}
+                            onClick={() => {
+                                setSelectedProfile(profile);
+                            }}
+                        />
+                    ))}
+                </div>
+
+                <BlockHeader title="Technology Committee" />
+                <div className="flex flex-row gap-4 flex-wrap justify-center">
+                    {TechnologyProfiles.map((profile) => (
+                        <ProfileCard
+                            key={`${profile.name}-${profile.position}`}
+                            profile={profile}
+                            onClick={() => {
+                                setSelectedProfile(profile);
+                            }}
+                        />
+                    ))}
+                </div>
+
+                <BlockHeader title="Advocacy Committee" />
+                <div className="flex flex-row gap-4 flex-wrap justify-center">
+                    {AdvocacyProfiles.map((profile) => (
+                        <ProfileCard
+                            key={`${profile.name}-${profile.position}`}
+                            profile={profile}
+                            onClick={() => {
+                                setSelectedProfile(profile);
+                            }}
+                        />
+                    ))}
+                </div>
+
+                <BlockHeader title="Student Resources Committee" />
+                <div className="flex flex-row gap-4 flex-wrap justify-center">
+                    {StudentResourcesProfiles.map((profile) => (
+                        <ProfileCard
+                            key={`${profile.name}-${profile.position}`}
+                            profile={profile}
+                            onClick={() => {
+                                setSelectedProfile(profile);
+                            }}
+                        />
+                    ))}
+                </div>
+
+                <BlockHeader title="Lounge Affairs" />
+                <div className="flex flex-row gap-4 flex-wrap justify-center">
+                    {LoungeProfiles.map((profile) => (
+                        <ProfileCard
+                            key={`${profile.name}-${profile.position}`}
                             profile={profile}
                             onClick={() => {
                                 setSelectedProfile(profile);
@@ -32,8 +110,8 @@ export default function Team() {
             <AnimatePresence>
                 {selectedProfile && (
                     <ProfileModal
-                    profile={selectedProfile}
-                    onClose={() => setSelectedProfile(null)}
+                        profile={selectedProfile}
+                        onClose={() => setSelectedProfile(null)}
                     />
                 )}
             </AnimatePresence>

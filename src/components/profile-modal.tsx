@@ -27,22 +27,22 @@ export default function ProfileModal({
   };
 
   useEffect(() => {
-  const handleKeyDown = (e: KeyboardEvent) => {
-    if (e.key === "Escape") {
-      e.preventDefault();
-      handleClose();
-    }
-  };
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        handleClose();
+      }
+    };
 
-  window.addEventListener("keydown", handleKeyDown);
-  return () => window.removeEventListener("keydown", handleKeyDown);
-}, []);
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
 
   return (
     <AnimatePresence onExitComplete={handleExitComplete}>
       {!isExiting && (
         <motion.div
-          key={profile.name}
+          key={`${profile.name}-${profile.position}`}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -50,7 +50,7 @@ export default function ProfileModal({
           onClick={handleClose}
         >
           <motion.div
-            layoutId={`card-${profile.name}`}
+            layoutId={`card-${profile.name}-${profile.position}`}
             initial={{ scale: 0.98 }}
             animate={{ scale: 1 }}
             exit={{ scale: 0.98 }}
@@ -81,8 +81,8 @@ export default function ProfileModal({
               exit={{ opacity: 0, y: 10 }}
               transition={{ duration: 0.25 }}
             >
-              <div className="w-52 h-52 object-cover rounded-full relative overflow-hidden mx-auto">
-                  <Image src={profile?.image} alt={profile?.name} fill className="" />
+              <div className="w-52 h-52 rounded-full relative overflow-hidden mx-auto m-4">
+                <Image src={profile?.image} alt={profile?.name} fill className="object-cover" />
               </div>
 
               <div className="text-center mb-4">
@@ -94,20 +94,20 @@ export default function ProfileModal({
 
               <div className="flex justify-center gap-4 text-2xl">
                 {profile?.linkedin && <a className="text-3xl" href={profile.linkedin} target="_blank" rel="noreferrer">
-                    <FaLinkedin />
+                  <FaLinkedin />
                 </a>}
                 {profile?.instagram && <a className="text-3xl" href={profile.instagram} target="_blank" rel="noreferrer">
-                    <FaInstagram />
+                  <FaInstagram />
                 </a>}
                 {profile?.github && <a className="text-3xl" href={profile.github} target="_blank" rel="noreferrer">
-                    <FaGithub />
+                  <FaGithub />
                 </a>}
                 {profile?.website && <a className="text-3xl" href={profile.website} target="_blank" rel="noreferrer">
-                    <FaGlobeAmericas />
-                </a>}  
+                  <FaGlobeAmericas />
+                </a>}
                 {profile?.discord && <a className="text-3xl" href={profile.discord} target="_blank" rel="noreferrer">
-                    <FaDiscord />
-                </a>}  
+                  <FaDiscord />
+                </a>}
               </div>
             </motion.div>
           </motion.div>
