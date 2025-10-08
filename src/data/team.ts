@@ -84,6 +84,7 @@ export const ExecProfiles = [
         position: "Director of Finance",
         image: "/img/team/execs/ethan.JPG",
         linkedin: "https://www.linkedin.com/in/ethan-ganas-7262b0248/",
+        github: "https://www.github.com/noobCode",
         description:
             "Hi! My name is Ethan, and I'm the 2025/2026 Umanitoba CSSA Finance Director. \
             I'm a second year CS student who loves reading and learning about cool new technologies. \
