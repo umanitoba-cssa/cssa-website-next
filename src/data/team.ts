@@ -26,7 +26,7 @@ export const ExecProfiles = [
             "Hi 👋, My name is Travis and I'm going into my third year at the University of Manitoba. \
             I'm super excited to see what I can accomplish as the President of the CSSA this year. \
             In the past I've been the Director of Technology and Promotions with the CSSA. \
-            In my free time I hang out with my Cats, tinker with the various computers in my closet, or watch TV Shows.",
+            In my free time I hang out with my cats, tinker with the various computers in my closet, or watch TV Shows.",
     },
     {
         name: "KC del Moro",
