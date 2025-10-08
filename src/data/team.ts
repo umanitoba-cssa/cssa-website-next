@@ -18,7 +18,7 @@ export const ExecProfiles = [
     {
         name: "Travis Friesen",
         position: "President",
-        image: "/img/team/vacant.png",
+        image: "/img/team/execs/travis.JPG",
         linkedin: "https://www.linkedin.com/in/travisfriesen/",
         github: "https://github.com/travisfriesen",
         website: "https://travisfriesen.ca",
@@ -31,7 +31,7 @@ export const ExecProfiles = [
     {
         name: "KC del Moro",
         position: "Vice President",
-        image: "/img/team/vacant.png",
+        image: "/img/team/execs/kc.JPG",
         linkedin: "https://www.linkedin.com/in/kriza-del-moro-950378301/",
         description:
             "Hii everyone! My name's KC and I'm the Vice President for this year's CSSA 2025-2026 😄 On my free time I love reading \
@@ -43,7 +43,7 @@ export const ExecProfiles = [
     {
         name: "Timmy",
         position: "Director of Internal Affairs",
-        image: "/img/team/vacant.png",
+        image: "/img/team/execs/timmy.JPG",
         description:
             "Hi! My name is Timmy! \
             I'm the director of Internal Affairs for the following school year. \
@@ -54,7 +54,9 @@ export const ExecProfiles = [
     {
         name: "Edith",
         position: "Director of Lounge Affairs",
-        image: "/img/team/vacant.png",
+        image: "/img/team/execs/edith.JPG",
+        linkedin: "https://www.linkedin.com/in/edith-hohner-300658331/",
+        github: "https://github.com/ediffs",
         description: "Hi I'm Edith, the Director of Lounge Affairs for the CSSA! \
         I'm currently in my second year of the CS-Math Joint Honours program. \
         Outside of school, my hobbies include game dev, reading, and chatting with friends. \
@@ -63,7 +65,8 @@ export const ExecProfiles = [
     {
         name: "Matthew Andico",
         position: "Director of Promotions",
-        image: "/img/team/vacant.png",
+        image: "/img/team/execs/matthew.JPG",
+        linkedin: "https://www.linkedin.com/in/matthew-andico",
         description: "Hi everyone! My name is Matthew and I’m the 2025-2026 CSSA Director of Promotions! \
         I’m currently a fourth year in Computer Science student minoring in Psychology. \
         I started being involved with the CS community in second year, participating in events held by the CSSA, \
@@ -79,7 +82,9 @@ export const ExecProfiles = [
     {
         name: "Ethan Ganas",
         position: "Director of Finance",
-        image: "/img/team/vacant.png",
+        image: "/img/team/execs/ethan.JPG",
+        linkedin: "https://www.linkedin.com/in/ethan-ganas-7262b0248/",
+        github: "https://www.github.com/noobCode",
         description:
             "Hi! My name is Ethan, and I'm the 2025/2026 Umanitoba CSSA Finance Director. \
             I'm a second year CS student who loves reading and learning about cool new technologies. \
@@ -91,9 +96,11 @@ export const ExecProfiles = [
     {
         name: "Ara Santos",
         position: "Director of Technology",
-        image: "/img/team/vacant.png",
+        image: "/img/team/execs/ara.JPG",
+        linkedin: "https://www.linkedin.com/in/ara-nicole-santos/",
+        github: "https://github.com/arasantos",
         description:
-            "Hi everyone! I'm Ara, CSSA's Director of Technology. I'm in my 4th year, majoring in CS and minoring in Psych. \
+            "Hi everyone! I'm Ara, CSSA's Director of Technology. I'm in my 5th year, majoring in CS and minoring in Psych. \
             I'm also in CO-OP, although I've already finished my last one this summer! I'm really happy to be a part of the \
             CSSA team this year, as I love getting involved in the community. Outside of university, I enjoy watching sci-fi \
             movies, playing games, and listening to music <3 Anyway, if you see me out there, feel free to say hi!! I love \
@@ -102,7 +109,7 @@ export const ExecProfiles = [
     {
         name: "Lindsay",
         position: "Director of Events",
-        image: "/img/team/vacant.png",
+        image: "/img/team/execs/linds.JPG",
         description:
             "Hi, I'm Lindsay (most people call me Linds)! \
             I'm currently taking fourth and third year CS classes; and am also getting a Stats and Math minor. \
@@ -115,7 +122,9 @@ export const ExecProfiles = [
     {
         name: "Sheikh Adeeb",
         position: "Director of Student Affairs",
-        image: "/img/team/vacant.png",
+        image: "/img/team/execs/adeeb.JPG",
+        linkedin: "https://www.linkedin.com/in/sheikh-adeeb/",
+        discord: "https://discordapp.com/users/448053433132384266",
         description:
             "Hello! I'm Adeeb, a Bangladeshi second-year Computer Science-Statistics Joint Honours student. \
             I'm also minoring in Psychology, mostly so I can psychoanalyze myself after every coding breakdown. \
@@ -129,7 +138,8 @@ export const ExecProfiles = [
     {
         name: "Richard Shalchi",
         position: "Director of Advocacy",
-        image: "/img/team/vacant.png",
+        image: "/img/team/execs/richard.JPG",
+        linkedin: "https://www.linkedin.com/in/richardshalchi",
         description:
             "Hello! My name is Richard and I am a fourth (… but really third) year student in Computer Science minoring in Political Studies! \
             After being on the advocacy committee for the past two years I found that the change made in the department has been inadequate, so I thought I would try my hand at being the CSSA Director of Advocacy! \
@@ -145,7 +155,7 @@ export const PromotionsProfiles = [
     {
         name: "Muhammad Faisal",
         position: "Councillor",
-        image: "/img/team/muhammad.jpeg"
+        image: "/img/team/promotionsCouncillors/muhammad.jpeg"
     },
 ];
 
@@ -153,12 +163,12 @@ export const EventsProfiles = [
     {
         name: "Jae Seol",
         position: "Councillor",
-        image: "/img/team/jae.jpeg"
+        image: "/img/team/eventsCouncillors/jae.jpeg"
     },
     {
         name: "Moulik Bhatia",
         position: "Councillor",
-        image: "/img/team/moulik.jpeg"
+        image: "/img/team/eventsCouncillors/moulik.jpeg"
     },
 ];
 
@@ -166,7 +176,7 @@ export const TechnologyProfiles = [
     {
         name: "Aryan Vekariya",
         position: "Councillor",
-        image: "/img/team/aryan.webp"
+        image: "/img/team/techCouncillors/aryan.webp"
     },
     {
         name: "Aidan McLeod",
@@ -194,7 +204,7 @@ export const AdvocacyProfiles = [
     {
         name: "Mohid",
         position: "Councillor",
-        image: "/img/team/mohid.jpg"
+        image: "/img/team/advocacyCouncillors/mohid.jpg"
     },
 ];
 
@@ -207,7 +217,7 @@ export const StudentResourcesProfiles = [
     {
         name: "Mohammad Mujahidul Islam ",
         position: "Councillor",
-        image: "/img/team/mohammad.jpeg"
+        image: "/img/team/studentResourcesCouncillors/mohammad.jpeg"
     },
 ];
 
