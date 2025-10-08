@@ -18,7 +18,7 @@
       docker_image:
         name: "{{ image_name }}"
         state: absent
-        force: yes
+        force_absent: yes
       ignore_errors: yes
 
     - name: Load Docker image from tar file
