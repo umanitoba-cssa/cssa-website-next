@@ -2,66 +2,73 @@ import { IResearcher } from "@/data/researchers";
 import { motion } from "framer-motion";
 import Image from "next/image";
 
-export default function ResearcherCard(
-    profile: IResearcher,
-) {
+export default function ResearcherCard({
+    profile, 
+    onClick
+}: {
+    profile: IResearcher, 
+    onClick?: () => void
+}) {
     return (
         <motion.div
             layoutId={`card-${profile.fullName}`}
             whileHover={{ scale: 1.05, boxShadow: "0px 10px 20px rgba(0,0,0,0.2)" }}
             role="button"
             tabIndex={0}
-            onClick={() => {}}
+            onClick={onClick}
             onKeyDown={(e) => {
-                // if (e.key === "Enter" || e.key === " ") onClick?.();
+                if (e.key === "Enter" || e.key === " ") onClick?.();
             }}
-            className="flex flex-row border-solid border border-amber-400 rounded-xl items-center p-4 gap-4 min-w-[25rem] max-w-[25rem] cursor-pointer"
+            className="flex w-full border-solid border border-amber-400 rounded-xl items-center p-4 gap-4 max-w-sm cursor-pointer"
         >
-            <div>
-                <Image src={profile?.image} alt={profile?.fullName} width={100} height={200} className="rounded-full" />
+            <div className="w-1/3">
+            {/* TODO: Magic numbers for dimensions */}
+                <Image src={profile?.image} alt={profile?.fullName} width={400} height={400} className="rounded-xl" />
             </div>
-            <div>
+            <div className="w-2/3">
                 <div className="text-xl font-bold">
                     {profile?.fullName}
                 </div>
-                <div className="flex flex-col gap-2 mt-1">
-                    {profile?.acceptingStudents && 
-                        <span className="inline-flex items-center rounded-md bg-green-400/10 px-2 py-1 text-xs font-medium text-green-400 inset-ring inset-ring-green-500/20">
-                            Accepting Student Researcher(s)
-                        </span>
-                    }
-                    {profile?.lab && 
-                        <span className="inline-flex items-center rounded-md bg-yellow-400/10 px-2 py-1 text-xs font-medium text-yellow-500 inset-ring inset-ring-yellow-400/20">
-                            {profile?.lab?.name}
-                        </span>
-                    }
+                <div className="flex flex-col gap-2 mt-1 w-fit">
+                {profile?.acceptingStudents && (
+                    <span className="inline-flex items-center w-fit rounded-md bg-lime-700 px-2 py-1 text-xs font-medium text-white">
+                    Accepting Student Researcher(s)
+                    </span>
+                )}
+                {profile?.lab && (
+                    <span className="inline-flex items-center w-fit rounded-md bg-yellow-900 px-2 py-1 text-xs font-medium text-white">
+                    {profile?.lab?.name}
+                    </span>
+                )}
                 </div>
                 
-                <div>
-                    <div className="font-semibold mt-2">
-                        Research Interests
-                    </div>
-                    <ul className=" list-disc list-inside">
-                        {profile?.researchInterests.map((interest, index) => (
-                            <li key={index} className="text-sm">
-                                {interest}
-                                {/* TODO: Make it disappear with ... */}
-                            </li>
-                        ))}
-                    </ul>
+                <div className="font-semibold mt-2">
+                    Research Interests
                 </div>
-                <div>
-                    <div className="font-semibold mt-2">
-                        Current Research Topic
-                        {profile?.researchTopic &&
-                        <ul className=" list-disc list-inside">
-                            <li className="text-sm">
-                                {profile?.researchTopic}
-                            </li>
-                        </ul>
-                        }
-                    </div>
-                </div>  
+                <ul className="space-y-1">
+                    {profile?.researchInterests.map((interest, index) => (
+                        <li
+                        key={index}
+                        className="relative pl-4 text-sm line-clamp-1 before:content-['•'] before:absolute before:left-0 before:text-white"
+                        >
+                        {interest}
+                        </li>
+                    ))}
+                </ul>
+                <div className="font-semibold mt-2">
+                    Current Research Topic
+                </div>
+                {profile?.researchTopic &&
+                <ul className="space-y-1">
+                    <li className="relative pl-4 text-sm line-clamp-2 before:content-['•'] before:absolute before:left-0 before:text-white">
+                        {profile?.researchTopic}
+                    </li>
+                </ul>
+                }
+                <div className="mt-1 text-sm text-gray-500 font-medium text-right gap-1">
+                    <span>View Researcher</span>
+                    <span>→</span>
+                </div> 
             </div>
         </motion.div>
     );

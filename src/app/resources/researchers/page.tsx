@@ -12,9 +12,12 @@ export default async function Researchers() {
                 <div className="container py-12 flex flex-col gap-8">
                     <BlockHeader title="Find Researchers" />
                     <div className="flex flex-row gap-4 flex-wrap justify-center">
-                        <ResearcherCard 
-                            {...ResearcherProfiles[0]}
-                        />
+                        {ResearcherProfiles.map((profile) => (
+                            <ResearcherCard
+                                profile={profile}
+                                onClick={() => {}}
+                            />
+                        ))}                        
                     </div>
                 </div>
         </main>
