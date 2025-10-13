@@ -9,6 +9,7 @@ export interface IResearcher { // researcher properties
     acceptingStudents: boolean;
     minStudentRequirements: string[];
 }
+
 export interface ILab {
   name: string;
   website?: string;
