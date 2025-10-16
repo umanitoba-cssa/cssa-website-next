@@ -14,7 +14,7 @@ export async function GetPlaylistData(playlist: string): Promise<IVideoData[]> {
     return fetch(url)
         .then(response => response.json())
         .then(data => {
-            return data.items.map((item: GoogleApiYouTubePlaylistItemResource) => {
+            return data?.items?.map((item: GoogleApiYouTubePlaylistItemResource) => {
                 return {
                     title: item.snippet.title,
                     description: item.snippet.description,

@@ -5,7 +5,26 @@ interface IResourceLink {
     title: string
     description: string
     href: string
+    internal?: boolean
+    linkText?: string
 }
+
+interface IGuideList {
+    slug: string;
+    repoURL: string;
+}
+
+export const GuideList: IGuideList[] = [
+    {
+        slug: 'first-year-guide',
+        repoURL: 'https://github.com/umanitoba-cssa/first-year-guide',
+    },
+    {
+        slug: 'second-year-guide',
+        repoURL: 'https://github.com/umanitoba-cssa/second-year-guide'
+    },
+]
+
 
 export const ResourceLinks: IResourceLink[] = [
     {
@@ -37,9 +56,24 @@ export const ResourceLinks: IResourceLink[] = [
 
 export const CSSALinks: IResourceLink[] = [
     {
+        title: "Student Guides",
+        description: "Collection of comprehensive guides for computer science students",
+        href: "resources/guides",
+        internal: true,
+        linkText: "Browse guides →"
+    },
+    {
         title: "First Year Guide (2024)",
         description: "The old guide to your first year at the UofM as a First Year. See Guides for the updated version.",
         href: "docs/firstYearGuide.pdf"
+    },
+    {
+        title: "Researchers",
+        description: "Collection of UofM researchers and labs, their interests, criteria, and contact information",
+        href: "resources/researchers",
+        internal: true,
+        linkText: "Browse researchers →"
+
     },
     {
         title: "CS Discord TOU",

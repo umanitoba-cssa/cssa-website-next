@@ -17,10 +17,9 @@ import { GetPlaylistData, IVideoData } from "@/api/youtube";
 import React from "react";
 import { FaExternalLinkAlt } from "react-icons/fa";
 import Link from "next/link";
-import { getAllGuides } from "@/lib/mdx";
 
 function MakePlaylistCards(videos: IVideoData[]) {
-    return videos.map((video, index) => {
+    return videos?.map((video, index) => {
         return (
             <CarouselItem key={index} className="basis-[90%] md:basis-[45%] lg:basis-[30%]">
                 <div className="px-2 w-full h-full">
@@ -49,10 +48,6 @@ export default async function Resources() {
             playlist.videos = videos;
         }
     }
-    
-    // Get guides count
-    const guides = await getAllGuides();
-    const guidesCount = guides.length;
 
     const resourceCards = ResourceLinks.map((link, index) => {
         return (
@@ -77,50 +72,28 @@ export default async function Resources() {
         return (
             <CarouselItem key={index} className="md:basis-1/2 lg:basis-[30%]" >
                 <div className="px-2 w-full h-full">
-                    <a href={link.href} target="_blank" rel="noreferrer">
-                        <Card className="h-full">
+                    <a href={link.href} target={link.internal ? undefined : "_blank"} rel={link.internal ? undefined : "noreferrer"}>
+                        <Card className="h-full border-primary">
                             <CardHeader>
                                 <CardTitle className="text-lg flex flex-row gap-2">
-                                    {link.title} <FaExternalLinkAlt className="my-auto" />
+                                    {link.title} 
+                                    {!link.internal && <FaExternalLinkAlt className="my-auto" />}
                                 </CardTitle>
                                 <CardDescription>{link.description}</CardDescription>
                             </CardHeader>
+                            <CardContent>
+                              <div className="flex justify-end">
+                                <span className="text-sm text-primary hover:underline">
+                                  {link.linkText}
+                                </span>
+                              </div>
+                            </CardContent>
                         </Card>
                     </a>
                 </div>
             </CarouselItem>
         );
     });
-
-    // Add guides card
-    const guidesCard = (
-        <CarouselItem className="md:basis-1/2 lg:basis-[30%]">
-            <div className="px-2 w-full h-full">
-                <Link href="/resources/guides">
-                    <Card className="h-full border-primary">
-                        <CardHeader>
-                            <CardTitle className="text-lg flex flex-row gap-2">
-                                Student Guides
-                            </CardTitle>
-                            <CardDescription>
-                                Collection of {guidesCount} comprehensive guides for computer science students
-                            </CardDescription>
-                        </CardHeader>
-                        <CardContent>
-                            <div className="flex justify-end">
-                                <span className="text-sm text-primary hover:underline">
-                                    Browse guides →
-                                </span>
-                            </div>
-                        </CardContent>
-                    </Card>
-                </Link>
-            </div>
-        </CarouselItem>
-    );
-
-    // Add guides card to CSSA resources
-    const allCssaCards = [guidesCard, ...cssaCards];
 
     const collectionTabs = PlaylistCollections.map((collection, index) => {
         return (
@@ -168,7 +141,7 @@ export default async function Resources() {
                     <p>All the internal materials provided by the CSSA.</p>
 
                     <Carousel className="py-1" opts={{align: "center"}}>
-                        <CarouselContent>{allCssaCards}</CarouselContent>
+                        <CarouselContent>{cssaCards}</CarouselContent>
                         <CarouselNext/>
                         <CarouselPrevious/>
                     </Carousel>

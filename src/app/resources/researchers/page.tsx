@@ -1,0 +1,9 @@
+import PageHeader from "@/components/page-header";
+
+export default async function Researchers() {
+    return (
+        <main className="flex flex-col">
+            <PageHeader title="Researchers" image="/img/backgrounds/resources.png" />
+        </main>
+    );
+}
