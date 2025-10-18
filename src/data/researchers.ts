@@ -7,14 +7,14 @@ export interface ILab {
 const dataScienceLab: ILab = 
 {
     name: "Data Science, Database & Data Mining Lab",
-    website: "dataScienceLab.com",
+    website: "https://sites.google.com/site/dblabuofm/",
     description: "Research within the lab focuses on data science, databases and data mining. Over the past decade, NSERC/Science USRA and UMVPRI/UMSU URA winners have conducted summer projects under academic supervision of Dr. Leung on the topics of efficient and effective management of, knowledge discovery from, as well as analysis of, various types of data."
 }
 
 const coreAILab: ILab = 
 {
     name: "CORE AI Lab",
-    website: "dataScienceLab.com",
+    website: "https://home.cs.umanitoba.ca/~coreai/",
     description: "Computer vision, Optimization, Responsibility, Artificial Intelligence"
 }
 
@@ -40,7 +40,7 @@ export const ResearchersInfo = [
     image: "/img/researchers/carson-leung.jpg",
     googleScholarLink: "https://scholar.google.ca/citations?hl=en&user=NJaW9s0AAAAJ",
     lab: dataScienceLab,
-    researchInterests: ["Generative AI, ML, computer vision, optimization"],
+    researchInterests: ["Dr. Leung's research interests are in areas of data science, databases and data mining. These include efficient and effective management and storage of a wide variety of data, big data analytics and mining (e.g., design and implementation of data mining/AI/machine learning algorithms to discover knowledge like popular patterns, anomalies, clusters, prediction), data visualization and visual analytics, as well as  real-world data science applications (e.g., bioinformatics, health informatics, environmental analytics, social network analysis, sports analytics, transportation analytics). Over the past decade, NSERC/Science USRA and UMVPRI/UMSU URA winners have conducted summer projects under academic supervision of Dr. Leung on these research topics."],
     acceptingStudents: true,
     minStudentRequirements: ["Applicants must meet the minimum requirements for NSERC/Science USRA or UMVPRI/UMSU URA.", "Good interpersonal skills.", "Curious learner with a passion for data science."],
   },
