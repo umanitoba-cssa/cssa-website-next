@@ -49,6 +49,7 @@ export const ResearchersInfo = [
     email: "sadaf.s86@gmail.com",
     image: "/img/researchers/sadaf-salehkalaibar.jpg",
     lab: coreAILab,
+    googleScholarLink: "https://scholar.google.com/citations?user=aPV4dVkAAAAJ",
     researchInterests: ["Generative AI, ML, computer vision, optimization"],
     acceptingStudents: true,
     minStudentRequirements: [noRequirements],
