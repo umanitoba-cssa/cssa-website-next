@@ -11,7 +11,7 @@ export default function ResearcherCard({
 }) {
     return (
         <motion.div
-            layoutId={`card-${profile.fullName}`}
+            layoutId={`card-${profile.id}`}
             whileHover={{ scale: 1.05, boxShadow: "0px 10px 20px rgba(0,0,0,0.2)" }}
             role="button"
             tabIndex={0}
@@ -52,18 +52,18 @@ export default function ResearcherCard({
                     {profile?.researchInterests.map((interest, index) => (
                     <li
                         key={index}
-                        className="relative pl-4 text-sm line-clamp-1 before:content-['•'] before:absolute before:left-0 before:text-white"
+                        className="relative pl-4 text-sm truncate before:content-['•'] before:absolute before:left-0 before:text-white"
                     >
                         {interest}
                     </li>
                     ))}
                 </ul>
 
-                <div className="font-semibold mt-2">Current Research Topic</div>
-                {profile?.researchTopic && (
+                <div className="font-semibold mt-2">Student Research Requirements</div>
+                {profile?.minStudentRequirements && (
                     <ul className="space-y-1">
-                    <li className="relative pl-4 text-sm line-clamp-2 before:content-['•'] before:absolute before:left-0 before:text-white">
-                        {profile?.researchTopic}
+                    <li className="relative pl-4 text-sm truncate before:content-['•'] before:absolute before:left-0 before:text-white">
+                        {profile?.minStudentRequirements}
                     </li>
                     </ul>
                 )}
