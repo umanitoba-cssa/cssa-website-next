@@ -296,7 +296,7 @@ export const ResearchersInfo = [
     {
         fullName: "Ruppa K. Thulasiram",
         email: "tulsi.thuulasiram@umanitoba.ca",
-        image: "/img/researchers/ruppa-thulasiram",
+        image: "/img/researchers/ruppa-thulasiram.jpg",
         lab: compFinanceLab,
         googleScholarLink:
             "https://scholar.google.com/citations?user=TGbbksEAAAAJ&hl=en&inst=9587710224044597276&oi=ao",
