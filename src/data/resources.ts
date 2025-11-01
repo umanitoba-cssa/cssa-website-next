@@ -35,7 +35,7 @@ export const ResourceLinks: IResourceLink[] = [
     {
         title: "Computer Science Co-op Info",
         description: "Information about applying to Computer Science Co-op program.",
-        href: "https://sci.umanitoba.ca/co-op/prospective-students/apply-to-science-co-op/computer-science-student-application-process/"
+        href: "https://umanitoba.ca/science/programs-of-study/co-op/prospective-students#how-to-apply"
     },
     {
         title: "Contact a Science Academic Advisor",
