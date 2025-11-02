@@ -290,7 +290,9 @@ export const ResearchersInfo = [
         ],
         acceptingStudents: true,
         minStudentRequirements: [
-            "Enthusiasm, design and analysis of algorithms, mathematical maturity.",
+            "Enthusiasm",
+            "Design and analysis of algorithms", 
+            "Mathematical maturity"
         ],
     },
     {

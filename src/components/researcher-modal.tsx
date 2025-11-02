@@ -83,7 +83,7 @@ export default function ResearcherModal({
                         >
                             <div className="flex flex-col lg:flex-row py-3">
                                 <div className="pb-5 lg:pb-0 lg:pr-5 border-b lg:border-b-0 lg:border-r border-solid border-amber-400">
-                                    <div className="flex flex-col md:flex-row lg:flex-col md:gap-4 md:items-start">
+                                    <div className="flex flex-col md:flex-row lg:flex-col lg:gap-1 md:gap-4 md:items-start">
                                         <div className="w-60 h-52 relative overflow-hidden rounded-lg mx-auto md:mx-0 lg:mx-auto md:flex-shrink-0">
                                             <Image src={researcher?.image} alt={researcher?.fullName} fill className="object-cover" />
                                         </div>
