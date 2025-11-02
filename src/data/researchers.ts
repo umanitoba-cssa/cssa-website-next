@@ -216,7 +216,7 @@ export const ResearchersInfo = [
         acceptingStudents: true,
         minStudentRequirements: [
             "Primary requirement is GPA and enthusiasm.",
-            "I Will post a procedure soon, check my website.",
+            "I will post a procedure soon, check my website.",
         ],
     },
     {
