@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { FaLinkedin, FaInstagram, FaGithub, FaGlobeAmericas, FaDiscord, FaTimes, FaExternalLinkAlt, FaRegEnvelope } from "react-icons/fa";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { IResearcher } from "@/data/researchers";
+import { IResearcher, noRequirements } from "@/data/researchers";
 
 export default function ResearcherModal({
     researcher,
@@ -152,7 +152,11 @@ export default function ResearcherModal({
                                                 </li>
                                             ))}
                                         </ul>
-                                        <p className="text-sm text-gray-500 italic pt-2">Meeting these requirements won't guarantee a successful application.</p>
+                                        {
+                                            researcher.minStudentRequirements.length > 0 && 
+                                            !researcher.minStudentRequirements[0].startsWith(noRequirements) && 
+                                            <p className="text-sm text-gray-500 italic pt-2">Meeting these requirements won't guarantee a successful application.</p>
+                                        }
                                     </div>
                                 </div>
                             </div>

@@ -71,7 +71,7 @@ export interface IResearcher {
 }
 
 // If the researcher doesn't have requirements, put the following under minStudentRequirements
-const noRequirements: string =
+export const noRequirements: string =
     "This prof doesn't have any explicitly stated requirements. Try sending them an email.";
 
 export const ResearchersInfo = [
