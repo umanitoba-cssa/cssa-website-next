@@ -83,7 +83,10 @@ export const ResearchersInfo = [
             "https://scholar.google.ca/citations?hl=en&user=NJaW9s0AAAAJ",
         lab: dataScienceLab,
         researchInterests: [
-            "Dr. Leung's research interests are in areas of data science, databases and data mining. These include efficient and effective management and storage of a wide variety of data, big data analytics and mining (e.g., design and implementation of data mining/AI/machine learning algorithms to discover knowledge like popular patterns, anomalies, clusters, prediction), data visualization and visual analytics, as well as  real-world data science applications (e.g., bioinformatics, health informatics, environmental analytics, social network analysis, sports analytics, transportation analytics). Over the past decade, NSERC/Science USRA and UMVPRI/UMSU URA winners have conducted summer projects under academic supervision of Dr. Leung on these research topics.",
+            "Dr. Leung's research interests are in areas of data science, databases and data mining.",
+            "These include efficient and effective management and storage of a wide variety of data, big data analytics and mining (e.g., design and implementation of data mining/AI/machine learning algorithms to discover knowledge like popular patterns, anomalies, clusters, prediction), data visualization and visual analytics.",
+            "These also include real-world data science applications (e.g., bioinformatics, health informatics, environmental analytics, social network analysis, sports analytics, transportation analytics).",
+            "Over the past decade, NSERC/Science USRA and UMVPRI/UMSU URA winners have conducted summer projects under academic supervision of Dr. Leung on these research topics.",
         ],
         acceptingStudents: true,
         minStudentRequirements: [
