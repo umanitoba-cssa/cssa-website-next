@@ -60,13 +60,14 @@ export default function ResearcherCard({
                 </ul>
 
                 <div className="font-semibold mt-2">Student Research Requirements</div>
-                {researcher?.minStudentRequirements && (
-                    <ul className="space-y-1">
-                    <li className="relative pl-4 text-sm truncate before:content-['•'] before:absolute before:left-0 before:text-white">
-                        {researcher?.minStudentRequirements}
+                {researcher.minStudentRequirements.map((requirement, index) => (
+                    <li
+                        key={index}
+                        className="relative pl-4 text-sm truncate before:content-['•'] before:absolute before:left-0 before:text-white"
+                    >
+                        {requirement}
                     </li>
-                    </ul>
-                )}
+                ))}
                 <div className="mt-auto pt-2 text-sm text-gray-500 font-medium text-right gap-1 flex justify-end">
                     <span>View Researcher</span>
                     <span>→</span>

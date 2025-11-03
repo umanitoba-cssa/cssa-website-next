@@ -22,7 +22,7 @@ const hciLab: ILab = {
     name: "Human-Computer Interaction (HCI) Lab",
     website: "https://hci.cs.umanitoba.ca/",
     description:
-        "Students and professors working in the lab are committed to exploring new and innovative research areas in human-computer interaction.  The UofM HCI Lab is a positive, supportive space dedicated to diversity and inclusion. Please see our Lab Guidelines for student expectations and our full policy.  We are currently carrying out research in a number of a different fields including:  Computer Science Education Creativity Support Human-AI Interaction Human-Computer Interaction Human-Robot Interaction Older Adults & Technology, Older Adults & Caregiver Proxy Use Online Communities Robots and Gender Social Robotics, Domestic Robotics Software Learnability Technologies for Kids Virtual Worlds & Virtual World Building The University of Manitoba HCI Laboratory is also able to provide usability testing services. If you are are currently considering putting your software through some usability testing, you should consider our testing services. Please contact us for more information.",
+        "Students and professors working in the lab are committed to exploring new and innovative research areas in human-computer interaction. The UofM HCI Lab is a positive, supportive space dedicated to diversity and inclusion. Please see our Lab Guidelines for student expectations and our full policy. \n\nWe are currently carrying out research in a number of a different fields including: Computer Science Education, Creativity Support, Human-AI Interaction, Human-Computer Interaction, Human-Robot Interaction, Older Adults & Technology, Older Adults & Caregiver Proxy Use, Online Communities Robots and Gender Social Robotics, Domestic Robotics, Software Learnability Technologies for Kids, Virtual Worlds & Virtual World Building. \n\nThe University of Manitoba HCI Laboratory is also able to provide usability testing services. If you are are currently considering putting your software through some usability testing, you should consider our testing services. Please contact us for more information.",
 };
 
 const clamLab: ILab = {
@@ -39,7 +39,7 @@ const gadaLab: ILab = {
 };
 
 const triLab: ILab = {
-    name: "Three-way Reasoning and Intelligence Lab (TriLab) Lab",
+    name: "Three-way Reasoning and Intelligence Lab (TriLab)",
     description:
         "TriLab explores intelligent reasoning and decision-making through the lens of three-way decision theory and granular computing. Our research spans data analytics, machine learning, rough sets, and conflict analysis, emphasizing models and systems that reason with uncertainty and structured granularity. At TriLab, we encourage curiosity, experimentation, and the courage to explore new ideas — guiding students and researchers to try as they navigate multiple paths of thought.",
 };
@@ -54,7 +54,7 @@ const compFinanceLab: ILab = {
     name: "Computational Finance Lab",
     website: "https://home.cs.umanitoba.ca/~tulsi/",
     description:
-        "This lab is located right next to the elevators (on either side) on 5th floor of E2-EITC, where you we do research in an area mostly foreign to CS students.",
+        "This lab is located right next to the elevators (on either side) on 5th floor of E2-EITC, where we do research in an area mostly foreign to CS students.",
 };
 
 export interface IResearcher {
@@ -127,7 +127,7 @@ export const ResearchersInfo = [
         ],
     },
     {
-        fullName: "Houda El mimouni",
+        fullName: "Houda El Mimouni",
         email: "houda.elmimouni@umanitoba.ca",
         image: "/img/researchers/houda-elmimouni.jpg",
         lab: hciLab,
@@ -286,7 +286,7 @@ export const ResearchersInfo = [
         googleScholarLink:
             "https://scholar.google.ca/citations?user=xP-JGX0AAAAJ&hl=en",
         researchInterests: [
-            "Facility location problems (where to build a factory, how to place a guard in an at gallery).",
+            "Facility location problems (where to build a factory, how to place a guard in an art gallery).",
         ],
         acceptingStudents: true,
         minStudentRequirements: [
@@ -297,7 +297,7 @@ export const ResearchersInfo = [
     },
     {
         fullName: "Ruppa K. Thulasiram",
-        email: "tulsi.thuulasiram@umanitoba.ca",
+        email: "tulsi.thulasiram@umanitoba.ca",
         image: "/img/researchers/ruppa-thulasiram.jpg",
         lab: compFinanceLab,
         googleScholarLink:

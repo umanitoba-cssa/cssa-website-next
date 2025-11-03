@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { FaLinkedin, FaInstagram, FaGithub, FaGlobeAmericas, FaDiscord, FaTimes, FaExternalLinkAlt, FaRegEnvelope } from "react-icons/fa";
+import { FaGlobeAmericas, FaTimes, FaExternalLinkAlt, FaRegEnvelope } from "react-icons/fa";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { IResearcher, noRequirements } from "@/data/researchers";
@@ -125,7 +125,7 @@ export default function ResearcherModal({
                                 <div className="flex flex-col gap-4 pt-5 lg:pt-0 lg:pl-5">
                                     <div className="pr-3 overflow-hidden">
                                         <p className="text-lg font-bold">Lab Description</p>
-                                        {researcher.lab?.description && <p className="text-sm break-words whitespace-normal">{researcher.lab?.description}</p>}
+                                        {researcher.lab?.description && <p className="text-sm break-words whitespace-pre-line">{researcher.lab?.description}</p>}
                                     </div>
                                     <div className="overflow-hidden">
                                         <p className="text-lg font-bold">Research Interests</p>
