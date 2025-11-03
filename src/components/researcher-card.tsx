@@ -3,15 +3,15 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 
 export default function ResearcherCard({
-    profile, 
+    researcher, 
     onClick
 }: {
-    profile: IResearcher, 
+    researcher: IResearcher, 
     onClick?: () => void
 }) {
     return (
         <motion.div
-            layoutId={`card-${profile.id}`}
+            layoutId={`card-${researcher.id}`}
             whileHover={{ scale: 1.05, boxShadow: "0px 10px 20px rgba(0,0,0,0.2)" }}
             role="button"
             tabIndex={0}
@@ -23,33 +23,33 @@ export default function ResearcherCard({
         >
             <div className="w-2/5 relative h-full">
             <Image
-                src={profile?.image}
-                alt={profile?.fullName}
+                src={researcher?.image}
+                alt={researcher?.fullName}
                 fill
                 className="object-cover object-center rounded-xl"
             />
             </div>
             <div className="w-3/5 flex flex-col h-full">
                 <div className="text-xl font-bold">
-                    {profile?.fullName}
+                    {researcher?.fullName}
                 </div>
 
                 <div className="flex flex-col gap-2 mt-1 w-fit">
-                    {profile?.acceptingStudents && (
+                    {researcher?.acceptingStudents && (
                     <span className="inline-flex items-center w-fit rounded-md bg-lime-700 px-2 py-1 text-xs font-medium text-white">
                         Accepting Student Researcher(s)
                     </span>
                     )}
-                    {profile?.lab && (
+                    {researcher?.lab && (
                     <span className="inline-flex items-center w-fit rounded-md bg-yellow-900 px-2 py-1 text-xs font-medium text-white">
-                        {profile?.lab?.name}
+                        {researcher?.lab?.name}
                     </span>
                     )}
                 </div>
 
                 <div className="font-semibold mt-2">Research Interests</div>
                 <ul className="space-y-1">
-                    {profile?.researchInterests.map((interest, index) => (
+                    {researcher?.researchInterests.map((interest, index) => (
                     <li
                         key={index}
                         className="relative pl-4 text-sm truncate before:content-['•'] before:absolute before:left-0 before:text-white"
@@ -60,10 +60,10 @@ export default function ResearcherCard({
                 </ul>
 
                 <div className="font-semibold mt-2">Student Research Requirements</div>
-                {profile?.minStudentRequirements && (
+                {researcher?.minStudentRequirements && (
                     <ul className="space-y-1">
                     <li className="relative pl-4 text-sm truncate before:content-['•'] before:absolute before:left-0 before:text-white">
-                        {profile?.minStudentRequirements}
+                        {researcher?.minStudentRequirements}
                     </li>
                     </ul>
                 )}

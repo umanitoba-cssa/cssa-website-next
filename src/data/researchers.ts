@@ -71,7 +71,7 @@ export interface IResearcher {
 }
 
 // If the researcher doesn't have requirements, put the following under minStudentRequirements
-const noRequirements: string =
+export const noRequirements: string =
     "This prof doesn't have any explicitly stated requirements. Try sending them an email.";
 
 export const ResearchersInfo = [
@@ -216,7 +216,7 @@ export const ResearchersInfo = [
         acceptingStudents: true,
         minStudentRequirements: [
             "Primary requirement is GPA and enthusiasm.",
-            "I Will post a procedure soon, check my website.",
+            "I will post a procedure soon, check my website.",
         ],
     },
     {
@@ -290,7 +290,9 @@ export const ResearchersInfo = [
         ],
         acceptingStudents: true,
         minStudentRequirements: [
-            "Enthusiasm, design and analysis of algorithms, mathematical maturity.",
+            "Enthusiasm",
+            "Design and analysis of algorithms", 
+            "Mathematical maturity"
         ],
     },
     {
