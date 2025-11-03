@@ -29,4 +29,9 @@ export const ExecProfiles = [
     position: "Assistant Director of Promotions",
     image: "/img/team/execs/kc.JPG",
   },
+  {
+    name: "Okiki Fasanmi",
+    position: "Vice President",
+    image: "/img/team/prevExecs/okiki.png",
+  },
 ];
