@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import GuideList from '../data/guides';
+import { GuideList } from '../data/resources';
 
 // GitHub API interfaces
 interface GitHubTreeItem {
