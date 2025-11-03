@@ -59,7 +59,7 @@ export default function ResearcherCard({
                     ))}
                 </ul>
 
-                <div className="font-semibold mt-2">Student Research Requirements</div>
+                <div className="font-semibold mt-2">Student Requirements</div>
                 {researcher.minStudentRequirements.map((requirement, index) => (
                     <li
                         key={index}

@@ -141,7 +141,7 @@ export default function ResearcherModal({
                                         </ul>
                                     </div>
                                     <div className="overflow-hidden">
-                                        <p className="text-lg font-bold">Student Research Requirements</p>
+                                        <p className="text-lg font-bold">Student Requirements</p>
                                         <ul className="space-y-1">
                                             {researcher?.minStudentRequirements.map((req, index) => (
                                                 <li
