@@ -38,19 +38,19 @@ export default function ProfileCard({
             </div>
             {(profile?.linkedin || profile?.instagram || profile?.github || profile?.website || profile?.discord) &&
                 <div className="flex flex-row gap-4">
-                    {profile?.linkedin && <a className="text-3xl" href={profile.linkedin} target="_blank" rel="noreferrer">
+                    {profile?.linkedin && <a className="text-3xl" href={profile.linkedin} target="_blank" rel="noreferrer" onClick={(e) => e.stopPropagation()}>
                         <FaLinkedin />
                     </a>}
-                    {profile?.instagram && <a className="text-3xl" href={profile.instagram} target="_blank" rel="noreferrer">
+                    {profile?.instagram && <a className="text-3xl" href={profile.instagram} target="_blank" rel="noreferrer" onClick={(e) => e.stopPropagation()}>
                         <FaInstagram />
                     </a>}
-                    {profile?.github && <a className="text-3xl" href={profile.github} target="_blank" rel="noreferrer">
+                    {profile?.github && <a className="text-3xl" href={profile.github} target="_blank" rel="noreferrer" onClick={(e) => e.stopPropagation()}>
                         <FaGithub />
                     </a>}
-                    {profile?.website && <a className="text-3xl" href={profile.website} target="_blank" rel="noreferrer">
+                    {profile?.website && <a className="text-3xl" href={profile.website} target="_blank" rel="noreferrer" onClick={(e) => e.stopPropagation()}>
                         <FaGlobeAmericas />
                     </a>}
-                    {profile?.discord && <a className="text-3xl" href={profile.discord} target="_blank" rel="noreferrer">
+                    {profile?.discord && <a className="text-3xl" href={profile.discord} target="_blank" rel="noreferrer" onClick={(e) => e.stopPropagation()}>
                         <FaDiscord />
                     </a>}
                 </div>
