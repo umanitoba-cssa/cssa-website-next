@@ -19,9 +19,9 @@ export default function ResearcherCard({
             onKeyDown={(e) => {
                 if (e.key === "Enter" || e.key === " ") onClick?.();
             }}
-            className="flex w-full border-solid border border-amber-400 rounded-xl items-start p-4 gap-4 max-w-[27rem] cursor-pointer"
+            className="flex flex-col sm:flex-row w-full border-solid border border-amber-400 rounded-xl items-start p-4 gap-4 max-w-[27rem] cursor-pointer"
         >
-            <div className="w-2/5 relative h-full">
+            <div className="w-full sm:w-2/5 relative h-80 sm:h-full">
             <Image
                 src={researcher?.image}
                 alt={researcher?.fullName}
@@ -29,7 +29,7 @@ export default function ResearcherCard({
                 className="object-cover object-center rounded-xl"
             />
             </div>
-            <div className="w-3/5 flex flex-col h-full">
+            <div className="w-full sm:w-3/5 flex flex-col sm:h-full">
                 <div className="text-xl font-bold">
                     {researcher?.fullName}
                 </div>
@@ -52,7 +52,7 @@ export default function ResearcherCard({
                     {researcher?.researchInterests.map((interest, index) => (
                     <li
                         key={index}
-                        className="relative pl-4 text-sm truncate before:content-['•'] before:absolute before:left-0 before:text-white"
+                        className={`relative pl-4 text-sm truncate before:content-['•'] before:absolute before:left-0 before:text-white sm:block ${index >= 2 ? 'hidden' : ''}`}
                     >
                         {interest}
                     </li>
@@ -60,14 +60,16 @@ export default function ResearcherCard({
                 </ul>
 
                 <div className="font-semibold mt-2">Student Requirements</div>
-                {researcher.minStudentRequirements.map((requirement, index) => (
-                    <li
-                        key={index}
-                        className="relative pl-4 text-sm truncate before:content-['•'] before:absolute before:left-0 before:text-white"
-                    >
-                        {requirement}
-                    </li>
-                ))}
+                <ul className="space-y-1">
+                    {researcher.minStudentRequirements.map((requirement, index) => (
+                        <li
+                            key={index}
+                            className={`relative pl-4 text-sm truncate before:content-['•'] before:absolute before:left-0 before:text-white sm:block ${index >= 2 ? 'hidden' : ''}`}
+                        >
+                            {requirement}
+                        </li>
+                    ))}
+                </ul>
                 <div className="mt-auto pt-2 text-sm text-gray-500 font-medium text-right gap-1 flex justify-end">
                     <span>View Researcher</span>
                     <span>→</span>
