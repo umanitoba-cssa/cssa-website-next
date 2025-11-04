@@ -66,13 +66,15 @@ export default function ResearcherModal({
                         }}
                         className="bg-gray-900 border-solid border-2 border-amber-400 text-white p-6 rounded-xl w-full max-w-4xl relative z-50 overflow-y-auto max-h-[90vh] mx-4 sm:mx-6"
                         onClick={(e) => e.stopPropagation()}
-                    >
+                    >   
+                    <div className="flex justify-end sticky top-0">
                         <button
                             onClick={handleClose}
-                            className="absolute top-4 right-4 text-gray-300 hover:text-white text-xl"
+                            className="text-gray-300 hover:text-white text-xl"
                         >
                             <FaTimes />
                         </button>
+                    </div>
 
                         <motion.div
                             key="modal-content"
