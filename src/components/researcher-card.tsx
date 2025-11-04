@@ -21,7 +21,7 @@ export default function ResearcherCard({
             }}
             className="flex flex-col sm:flex-row w-full border-solid border border-amber-400 rounded-xl items-start p-4 gap-4 max-w-[27rem] cursor-pointer"
         >
-            <div className="w-full sm:w-2/5 relative h-80 sm:h-full">
+            <div className="w-full sm:w-2/5 relative h-52 sm:h-full">
             <Image
                 src={researcher?.image}
                 alt={researcher?.fullName}
