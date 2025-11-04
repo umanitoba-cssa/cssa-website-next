@@ -52,7 +52,7 @@ export default function ResearcherCard({
                     {researcher?.researchInterests.map((interest, index) => (
                     <li
                         key={index}
-                        className={`relative pl-4 text-sm truncate before:content-['•'] before:absolute before:left-0 before:text-white sm:block ${index >= 2 ? 'hidden' : ''}`}
+                        className={`relative pl-4 text-sm truncate before:content-['•'] before:absolute before:left-0 before:text-white ${index >= 2 ? 'hidden' : ''}`}
                     >
                         {interest}
                     </li>
@@ -64,7 +64,7 @@ export default function ResearcherCard({
                     {researcher.minStudentRequirements.map((requirement, index) => (
                         <li
                             key={index}
-                            className={`relative pl-4 text-sm truncate before:content-['•'] before:absolute before:left-0 before:text-white sm:block ${index >= 2 ? 'hidden' : ''}`}
+                            className={`relative pl-4 text-sm truncate before:content-['•'] before:absolute before:left-0 before:text-white ${index >= 2 ? 'hidden' : ''}`}
                         >
                             {requirement}
                         </li>
