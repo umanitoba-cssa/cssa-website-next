@@ -75,7 +75,7 @@ export default function ResearcherModal({
                             <FaTimes />
                         </button>
                     </div>
-                    <div className="p-6">
+                    <div className="pl-6 pr-6 pb-11">
                         <motion.div
                             key="modal-content"
                             initial={{ opacity: 0, y: 10 }}
