@@ -64,16 +64,18 @@ export default function ResearcherModal({
                                 ease: [0.25, 0.1, 0.25, 1],
                             },
                         }}
-                        className="bg-gray-900 border-solid border-2 border-amber-400 text-white p-6 rounded-xl w-full max-w-4xl relative z-50 overflow-y-auto max-h-[90vh] mx-4 sm:mx-6"
+                        className="bg-gray-900 border-solid border-2 border-amber-400 text-white rounded-xl w-full max-w-4xl relative z-50 overflow-y-auto max-h-[90vh] mx-4 sm:mx-6"
                         onClick={(e) => e.stopPropagation()}
-                    >
+                    >   
+                    <div className="z-10 bg-gray-900 sticky top-0 flex justify-end items-center px-4 py-3">
                         <button
                             onClick={handleClose}
-                            className="absolute top-4 right-4 text-gray-300 hover:text-white text-xl"
+                            className="text-white text-xl hover:opacity-80 transition-opacity flex items-center justify-center"
                         >
                             <FaTimes />
                         </button>
-
+                    </div>
+                    <div className="pl-6 pr-6 pb-11">
                         <motion.div
                             key="modal-content"
                             initial={{ opacity: 0, y: 10 }}
@@ -162,6 +164,7 @@ export default function ResearcherModal({
                             </div>
                             
                         </motion.div>
+                    </div>
                     </motion.div>
                 </motion.div>
             )}
