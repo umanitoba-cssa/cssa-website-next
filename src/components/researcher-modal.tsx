@@ -125,7 +125,7 @@ export default function ResearcherModal({
                                 </div>
 
                                 <div className="flex flex-col gap-4 pt-5 lg:pt-0 lg:pl-5">
-                                    <div className="pr-3 overflow-hidden">
+                                    <div className="overflow-hidden">
                                         <p className="text-lg font-bold">Lab Description</p>
                                         {researcher.lab?.description && <p className="text-sm break-words whitespace-pre-line">{researcher.lab?.description}</p>}
                                     </div>
