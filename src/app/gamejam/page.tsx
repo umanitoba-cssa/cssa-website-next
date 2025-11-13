@@ -30,14 +30,12 @@ export default function GameJam() {
                 */}
                 <h4>Silver Sponsors</h4>
                 <div className="flex gap-5">
-                <SponsorCard name="Niche" image="/img/gamejam/niche-logo.svg" website="https://nicherms.com"/>
-                <SponsorCard name="Pollard Banknote" image="/img/gamejam/pollard.svg" website="https://www.pollardbanknote.com"/>
-                </div>
-                <h4>Bronze Sponsors</h4>
-                <div className="flex gap-5">
+                <SponsorCard name = "Ubisoft" image="/img/gamejam/ubisoft-logo.svg" website="https://winnipeg.ubisoft.com/"/>
                 <SponsorCard name="G3" image="/img/gamejam/g3-logo.svg" website="https://g3.ca"/>
-                <SponsorCard name="New Media Manitoba" image="/img/gamejam/NMM.svg" website="https://newmediamanitoba.com"/>
-                <SponsorCard name="Department of Computer Science" image="/img/gamejam/UMDeptCS.svg" website="https://umanitoba.ca/science/computer-science"/>
+                <SponsorCard name="Niche" image="/img/gamejam/niche-logo.svg" website="https://nicherms.com"/>
+                </div>
+                {/** <h4>Bronze Sponsors</h4> */}
+                <div className="flex gap-5">
                 </div>
                 <BlockHeader title="Resources" />
                 <ul>
