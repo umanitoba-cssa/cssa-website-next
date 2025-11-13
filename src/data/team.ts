@@ -10,10 +10,10 @@ export interface IProfile {
     description?: string;
 }
 
-/** Each property must be present in at least one of the members, otherwise, this will cause an error. 
-*   You can assign an empty string to the property, if no team member has that property.
-*   There's code that ensures that such a property won't be rendered visually.
-**/
+/** Each property must be present in at least one of the members, otherwise, this will cause an error.
+ *   You can assign an empty string to the property, if no team member has that property.
+ *   There's code that ensures that such a property won't be rendered visually.
+ **/
 export const ExecProfiles = [
     {
         name: "Travis Friesen",
@@ -49,7 +49,7 @@ export const ExecProfiles = [
             I'm the director of Internal Affairs for the following school year. \
             I spend most of my time with friends, or mostly playing games. \
             Many of my interests are in various research fields here at the UofM. \
-            I also enjoy participating in various events held here, such as devhacks and capture the flag competitions!"
+            I also enjoy participating in various events held here, such as devhacks and capture the flag competitions!",
     },
     {
         name: "Edith",
@@ -57,7 +57,8 @@ export const ExecProfiles = [
         image: "/img/team/execs/edith.JPG",
         linkedin: "https://www.linkedin.com/in/edith-hohner-300658331/",
         github: "https://github.com/ediffs",
-        description: "Hi I'm Edith, the Director of Lounge Affairs for the CSSA! \
+        description:
+            "Hi I'm Edith, the Director of Lounge Affairs for the CSSA! \
         I'm currently in my second year of the CS-Math Joint Honours program. \
         Outside of school, my hobbies include game dev, reading, and chatting with friends. \
         I'm excited for this opportunity to work on making the lounge more accessible and a safer space for everyone!",
@@ -67,7 +68,8 @@ export const ExecProfiles = [
         position: "Director of Promotions",
         image: "/img/team/execs/matthew.JPG",
         linkedin: "https://www.linkedin.com/in/matthew-andico",
-        description: "Hi everyone! My name is Matthew and I’m the 2025-2026 CSSA Director of Promotions! \
+        description:
+            "Hi everyone! My name is Matthew and I’m the 2025-2026 CSSA Director of Promotions! \
         I’m currently a fourth year in Computer Science student minoring in Psychology. \
         I started being involved with the CS community in second year, participating in events held by the CSSA, \
         WICS(and volunteering in their outreach workshops), and .devClub. There, I’ve met so many new people to \
@@ -77,7 +79,7 @@ export const ExecProfiles = [
         Outside of academics, I enjoy photography, listening to music, playing games and sports with friends, \
         and cooking. I also love going out to get food or matcha with friends! As for games, I'm a big fan of the \
         Pokémon, Animal Crossing, and Fire Emblem games. If you see me at our events, in the lounge, or just around \
-        campus, feel free to say hi and have a chat with me 😄"
+        campus, feel free to say hi and have a chat with me 😄",
     },
     {
         name: "Ethan Ganas",
@@ -91,7 +93,7 @@ export const ExecProfiles = [
             I spend my free time cathcing up with friends, gaming and working out. \
             I'm also a big movie fan, and enjoys cathcing movies at the theatres. \
             At the University of Manitoba, students studying CS have a lot of opportunities to learn and grow outside of the classroom and I hope the CSSA can make a big impact in that area this year. \
-            I'm excited to get started on all the interesting things the CSSA has planned this year and I am really looking forward to seeing you all there! "
+            I'm excited to get started on all the interesting things the CSSA has planned this year and I am really looking forward to seeing you all there! ",
     },
     {
         name: "Ara Santos",
@@ -104,7 +106,7 @@ export const ExecProfiles = [
             I'm also in CO-OP, although I've already finished my last one this summer! I'm really happy to be a part of the \
             CSSA team this year, as I love getting involved in the community. Outside of university, I enjoy watching sci-fi \
             movies, playing games, and listening to music <3 Anyway, if you see me out there, feel free to say hi!! I love \
-            talking to people!"
+            talking to people!",
     },
     {
         name: "Lindsay",
@@ -117,7 +119,7 @@ export const ExecProfiles = [
             I also really like horror games, especially the more unconventional ones. \
             In fact, I generally like playing small weird video games that play with the medium. \
             I also really like cooking and baking various things! \
-            I've been in the CSSA community ever since my second year, and I'd like to improve it further by getting more students involved through events."
+            I've been in the CSSA community ever since my second year, and I'd like to improve it further by getting more students involved through events.",
     },
     {
         name: "Sheikh Adeeb",
@@ -155,7 +157,13 @@ export const PromotionsProfiles = [
     {
         name: "Muhammad Faisal",
         position: "Councillor",
-        image: "/img/team/promotionsCouncillors/muhammad.jpeg"
+        image: "/img/team/promotionsCouncillors/muhammad.jpeg",
+    },
+    {
+        name: "Edrielle Mateo",
+        position: "Councillor",
+        image: "/img/team/merchCouncillors/edrielle.jpeg", //img common to merchCommitte folder
+        linkedin: "https://www.linkedin.com/in/edrielle-mateo-565029320",
     },
 ];
 
@@ -163,12 +171,20 @@ export const EventsProfiles = [
     {
         name: "Jae Seol",
         position: "Councillor",
-        image: "/img/team/eventsCouncillors/jae.jpeg"
+        image: "/img/team/eventsCouncillors/jae.jpeg",
     },
     {
         name: "Moulik Bhatia",
         position: "Councillor",
-        image: "/img/team/eventsCouncillors/moulik.jpeg"
+        image: "/img/team/eventsCouncillors/moulik.jpeg",
+    },
+    {
+        name: "Owen Preteau",
+        position: "Councillor",
+        image: "/img/team/eventsCouncillors/owen.jpeg",
+        linkedin: "https://www.linkedin.com/in/owen-preteau-a8b674276/",
+        description:
+            "Hello, my name is Owen, and I'm a second year Comp-Sci & Stats student 😎. I love listening to music, and watching TV series.  This is my first year getting involved with the CSSA, and I look forward to meeting lots of new people!",
     },
 ];
 
@@ -176,27 +192,50 @@ export const TechnologyProfiles = [
     {
         name: "Aryan Vekariya",
         position: "Councillor",
-        image: "/img/team/techCouncillors/aryan.webp"
+        image: "/img/team/techCouncillors/aryan.webp",
     },
     {
         name: "Aidan McLeod",
         position: "Councillor",
-        image: "/img/team/vacant.png"
+        image: "/img/team/vacant.png",
     },
     {
         name: "Iya Monterola",
         position: "Councillor",
-        image: "/img/team/vacant.png"
+        image: "/img/team/vacant.png",
     },
     {
         name: "Connor Langan",
         position: "Councillor",
-        image: "/img/team/vacant.png"
+        image: "/img/team/techCouncillors/connor-langan.jpg",
+        linkedin: "https://www.linkedin.com/in/connor-langan-98b84b244/",
+        github: "https://github.com/cjlangan",
+        description:
+            "Hello 👋, I'm in my 4th year of CS Honours + Co-op. I love volleyball, where I play weekly on a WMVL team as a left side hitter. In my free time, other than coding and sharing tools on GitHub and participating hackathons, I like to hang out with friends with shared interests, such as computer science, hockey, baseball, and more (Go Jets! Go Jays!). One thing about me is that I'm obsessed with terminal environments; you'll always find me coding on Linux with Neovim (btw btw). I aspire to become a skilled Software Engineer, and I believe that the CSSA is a great place to help fulfill that!",
     },
     {
         name: "Andre Lisandro Cruz Ibarra",
         position: "Councillor",
-        image: "/img/team/vacant.png"
+        image: "/img/team/vacant.png",
+    },
+    {
+        name: "Fopefoluwa Ikufisile",
+        position: "Councillor",
+        image: "/img/team/techCouncillors/fopefoluwa.jpg",
+        linkedin: "https://www.linkedin.com/in/fopefoluwa-ikufisile-0a5881296/",
+        github: "https://github.com/FopefoluwaIkufisile",
+        description:
+            "Hi! My name is Fope, and I’m a first-year Computer Science student. I’ve always loved being around computers and exploring how they work, which naturally led me to study Computer Science. I enjoy learning about new technologies, designing, and building creative projects. In my free time, I play FC 26, Call of Duty: Warzone, and hang out with friends. I’m passionate about growing as a developer and contributing to projects that make a real impact. I’m really excited about the opportunities ahead and can’t wait to keep learning, creating, and connecting with others in the tech community.",
+    },
+    {
+        name: "James Park",
+        position: "Councillor",
+        image: "/img/team/techCouncillors/james-park.jpg",
+        linkedin: "https://www.linkedin.com/in/jamespark123/",
+        github: "https://github.com/KannaKim",
+        website: "https://kannakim.blog/",
+        description:
+            "Hi, my name is James Park. I’m a fourth-year Computer Science student at the University of Manitoba. I enjoy being part of the CSSA Tech Committee, where I get to collaborate with other students and work on projects that bring our tech community together. I’m passionate about technology and even more about the people behind it.",
     },
 ];
 
@@ -204,7 +243,21 @@ export const AdvocacyProfiles = [
     {
         name: "Mohid",
         position: "Councillor",
-        image: "/img/team/advocacyCouncillors/mohid.jpg"
+        image: "/img/team/advocacyCouncillors/mohid.jpg",
+    },
+    {
+        name: "Swastik Dash",
+        position: "Councillor",
+        image: "/img/team/vacant.png",
+        linkedin: "https://www.linkedin.com/in/swastikdash2/",
+    },
+    {
+        name: "Bradley Barrientos",
+        position: "Councillor",
+        image: "/img/team/vacant.png",
+        linkedin: "https://www.linkedin.com/in/bradleybarrientos/",
+        description:
+            "Hello! My name is Bradley and I am a third year Computer Science student and this is my first year on the Advocacy Committee. I like reading manhwa, playing games, playing volleyball/badminton, and going to the gym. I dislike writing proofs and traffic. I'm excited to work with the team this year and hopefully better the CS experience for everyone!",
     },
 ];
 
@@ -212,12 +265,21 @@ export const StudentResourcesProfiles = [
     {
         name: "Anthony Campbell",
         position: "Councillor",
-        image: "/img/team/vacant.png"
+        image: "/img/team/vacant.png",
     },
     {
         name: "Mohammad Mujahidul Islam ",
         position: "Councillor",
-        image: "/img/team/studentResourcesCouncillors/mohammad.jpeg"
+        image: "/img/team/studentResourcesCouncillors/mohammad.jpeg",
+    },
+    {
+        name: "Arpan Christian",
+        position: "Councillor",
+        image: "/img/team/studentResourcesCouncillors/arpan.jpg",
+        linkedin: "https://www.linkedin.com/arpan-christian-25072005t315",
+        github: "https://github.com/Arpanchristian2507",
+        description:
+            "Hi! 👋 I’m Arpan, a Computer Science student passionate about helping my peers make the most of their university journey. As a councillor on the Student Resources Committee, I work to make academic resources, co-op information, and student support more accessible 💡. I enjoy collaborating with others, listening to student concerns, and finding creative ways to enhance our university experience 🤝. I’m always eager to learn, grow, and make a positive impact within the U of M community! 🌱",
     },
 ];
 
@@ -225,55 +287,62 @@ export const LoungeProfiles = [
     {
         name: "Jatinder Sahota",
         position: "Lounge Supervisor",
-        image: "/img/team/vacant.png"
+        image: "/img/team/vacant.png",
     },
     {
         name: "Jason Hong",
         position: "Lounge Supervisor",
-        image: "/img/team/vacant.png"
+        image: "/img/team/vacant.png",
     },
     {
         name: "Chibuikem (Daniel) Ariguzo",
         position: "Lounge Supervisor",
-        image: "/img/team/vacant.png"
+        image: "/img/team/vacant.png",
     },
     {
         name: "Dexter Sigurdson",
         position: "Lounge Supervisor",
-        image: "/img/team/vacant.png"
+        image: "/img/team/vacant.png",
     },
     {
         name: "Aidan McLeod",
         position: "Lounge Supervisor",
-        image: "/img/team/vacant.png"
+        image: "/img/team/vacant.png",
     },
     {
         name: "Oleksandr Zenkov",
         position: "Lounge Supervisor",
-        image: "/img/team/vacant.png"
+        image: "/img/team/vacant.png",
     },
     {
         name: "Ryann Pastolero",
         position: "Lounge Supervisor",
-        image: "/img/team/vacant.png"
+        image: "/img/team/vacant.png",
     },
     {
         name: "Miah Tayen",
         position: "Lounge Supervisor",
-        image: "/img/team/vacant.png"
+        image: "/img/team/vacant.png",
     },
     {
         name: "Keira Pasveer",
         position: "Lounge Supervisor",
-        image: "/img/team/vacant.png"
+        image: "/img/team/vacant.png",
     },
     {
         name: "Fawaz Bin Saleem",
         position: "Lounge Supervisor",
-        image: "/img/team/vacant.png"
+        image: "/img/team/vacant.png",
     },
 ];
 
-export const MerchProfiles = [];
+export const MerchProfiles = [
+    {
+        name: "Edrielle Mateo",
+        position: "Councillor",
+        image: "/img/team/merchCouncillors/edrielle.jpeg",
+        linkedin: "https://www.linkedin.com/in/edrielle-mateo-565029320",
+    },
+];
 
 export const FinanceProfiles = [];
