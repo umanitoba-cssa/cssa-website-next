@@ -181,7 +181,7 @@ export const EventsProfiles = [
     {
         name: "Owen Preteau",
         position: "Councillor",
-        image: "/img/team/eventsCouncillors/owen.jpeg",
+        image: "/img/team/eventsCouncillors/owen.jpg",
         linkedin: "https://www.linkedin.com/in/owen-preteau-a8b674276/",
         description:
             "Hello, my name is Owen, and I'm a second year Comp-Sci & Stats student 😎. I love listening to music, and watching TV series.  This is my first year getting involved with the CSSA, and I look forward to meeting lots of new people!",
@@ -193,6 +193,10 @@ export const TechnologyProfiles = [
         name: "Aryan Vekariya",
         position: "Councillor",
         image: "/img/team/techCouncillors/aryan.webp",
+        linkedin: "https://www.linkedin.com/in/aryan-vekariya-b66663262/",
+        github: "https://github.com/Aryan0826",
+        description:
+            "Hi! I’m Aryan, and I'm a third year Comp-Sci Student. I enjoy exploring how things work behind the scenes, whether it’s building small projects, contributing to team applications, or learning new tools and frameworks. I love problem-solving, working with others, and taking on challenges that help me grow as a developer. Outside of coding, you’ll usually find me hanging out with friends, playing games, or experimenting with tech just for fun. I’m excited to be part of the Tech Committee this year and to help support the projects that make our community stronger!",
     },
     {
         name: "Aidan McLeod",
@@ -248,7 +252,7 @@ export const AdvocacyProfiles = [
     {
         name: "Swastik Dash",
         position: "Councillor",
-        image: "/img/team/vacant.png",
+        image: "/img/team/advocacyCouncillors/swastik.jpg",
         linkedin: "https://www.linkedin.com/in/swastikdash2/",
     },
     {
@@ -276,7 +280,7 @@ export const StudentResourcesProfiles = [
         name: "Arpan Christian",
         position: "Councillor",
         image: "/img/team/studentResourcesCouncillors/arpan.jpg",
-        linkedin: "https://www.linkedin.com/arpan-christian-25072005t315",
+        linkedin: "https://www.linkedin.com/in/arpan-christian-25072005t315/",
         github: "https://github.com/Arpanchristian2507",
         description:
             "Hi! 👋 I’m Arpan, a Computer Science student passionate about helping my peers make the most of their university journey. As a councillor on the Student Resources Committee, I work to make academic resources, co-op information, and student support more accessible 💡. I enjoy collaborating with others, listening to student concerns, and finding creative ways to enhance our university experience 🤝. I’m always eager to learn, grow, and make a positive impact within the U of M community! 🌱",
