@@ -18,12 +18,12 @@ function sleep(ms: number) {
 
 function ensureConfig() {
     if (!APP_ID) throw new Error('GITHUB_APP_ID must be set');
-    if (!PRIVATE_KEY) throw new Error('GITHUB_APP_PRIVATE_KEY must be set');
+    if (!PRIVATE_KEY) throw new Error('GITHUB_PRIVATE_KEY must be set');
 }
 
 async function getAppJwt(): Promise<string> {
-    if (cachedAppJwt && Date.now() < cachedAppJwt.expiresAt - 30_000) return cachedAppJwt.token;
     ensureConfig();
+    if (cachedAppJwt && Date.now() < cachedAppJwt.expiresAt - 30_000) return cachedAppJwt.token;
     const now = Math.floor(Date.now() / 1000);
     const payload = {iat: now - 60, exp: now + 9 * 60, iss: Number(APP_ID)};
     const token = jwt.sign(payload as object, PRIVATE_KEY!, {algorithm: 'RS256'});
@@ -114,7 +114,7 @@ export async function githubFetchWithApp(input: FetchInput, init: FetchInit = {}
                 const resetMs = (parseInt(resetHeader, 10) * 1000) - Date.now();
                 const waitMs = Math.max(resetMs, 1000);
                 await sleep(waitMs + 500);
-                if (attempt <= MAX_RETRIES) return githubFetchWithApp(input, init, owner, repo, attempt + 1);
+                if (attempt < MAX_RETRIES) return githubFetchWithApp(input, init, owner, repo, 1);
             }
         }
 
