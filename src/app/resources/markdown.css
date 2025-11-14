@@ -143,7 +143,7 @@ html {
 }
 
 /* Content background container */
-.guide-content-container {
+.markdown-content-container {
   background-color: rgba(3, 13, 31, 0.6); /* cssa-navy with transparency */
   color: rgb(var(--foreground-rgb));
   border-radius: 0.5rem;

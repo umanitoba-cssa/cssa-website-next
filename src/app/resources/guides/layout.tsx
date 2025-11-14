@@ -1,4 +1,4 @@
-import './guides.css';
+import '../markdown.css';
 
 export default function GuidesLayout({
   children,

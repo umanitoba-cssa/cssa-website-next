@@ -222,7 +222,7 @@ The Guides components use Tailwind CSS for styling with a few key patterns:
 2. The `cn()` utility function is used for conditional class application
 3. Design tokens follow the CSSA website color scheme (cssa-navy, cssa-blue, etc.)
 4. Responsive breakpoints follow the Tailwind defaults (sm, md, lg, xl)
-5. A special `guides.css` file for global guide-specific styles
+5. A special `markdown.css` file for rendering markdown to html
 
 ## Extending Components
 
