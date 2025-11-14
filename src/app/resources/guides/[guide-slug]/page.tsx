@@ -68,7 +68,7 @@ export default async function GuidePage({ params }: GuidePageProps) {
           </div>
           
           {/* Main Content */}
-          <div className="lg:col-span-2 guide-content-container">
+          <div className="lg:col-span-2 markdown-content-container">
             <article className="prose dark:prose-invert max-w-none">
               <MarkdownContent source={htmlContent} />
             </article>
