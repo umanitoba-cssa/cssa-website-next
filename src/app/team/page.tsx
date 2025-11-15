@@ -7,6 +7,7 @@ import ProfileModal from "@/components/profile-modal";
 import { ExecProfiles, LoungeProfiles, PromotionsProfiles, FinanceProfiles, MerchProfiles, EventsProfiles, TechnologyProfiles, AdvocacyProfiles, StudentResourcesProfiles, IProfile } from "@/data/team";
 import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
+import Link from "next/link";
 
 export default function Team() {
     const [selectedProfile, setSelectedProfile] = useState<IProfile | null>(null);
@@ -27,6 +28,14 @@ export default function Team() {
                         />
                     ))}
                 </div>
+                <div className="flex items-center justify-center">
+              <button className="hover:shadow-form rounded-md bg-cssa-blue py-3 px-8 text-base font-semibold text-white outline-none">
+                <Link href="/team/previous-execs">
+                View Previous Execs
+                </Link>
+ 
+              </button>
+            </div>
 
                 <BlockHeader title="Promotions Committee" />
                 <div className="flex flex-row gap-4 flex-wrap justify-center">
