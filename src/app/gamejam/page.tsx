@@ -32,7 +32,7 @@ export default function GameJam() {
                 *<p>- TBD</p>
                 */}
                 {/* <h4>Sponsors</h4> */}
-                <div className="flex flex-wrap gap-5 ">
+                <div className="flex flex-wrap gap-5 justify-center md:justify-start">
                 <SponsorCard name = "Ubisoft" image="/img/gamejam/ubisoft-logo.svg" website="https://winnipeg.ubisoft.com/"/>
                 <SponsorCard name="G3" image="/img/gamejam/g3-logo.svg" website="https://g3.ca"/>
                 <SponsorCard name="Niche" image="/img/gamejam/niche-logo.svg" website="https://nicherms.com"/>
