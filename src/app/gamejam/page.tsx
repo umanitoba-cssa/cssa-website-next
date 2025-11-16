@@ -7,7 +7,7 @@ import SponsorCard from "@/components/sponsor-card";
 export default function GameJam() {
     return (
         <main className="flex flex-col bg-[#84a2ce] text-[#0C1118]">
-            <EventPageHeader title="Game Jam Logo" image="/img/gamejam/2025-gamejam-banner.png" />
+            <EventPageHeader title="Game Jam Logo" image="/img/gamejam/gj_banner.svg" />
             <div className="container py-12 flex flex-col gap-12">
                 <BlockHeader title="Theme" />
                 <p>Theme will be announced during the opening ceremony.</p>
@@ -22,7 +22,7 @@ export default function GameJam() {
                 </ul>
                 <BlockHeader title="Event Details"/>
                 <p> Location: EITC Aitrum and EITC E3-270</p>
-                <p> Date/Time: November 29th, 2025 @ 5pm to November 30th, 2025 @ 1pm</p>
+                <p> Date/Time: November 28th, 2025 @ 5pm to November 30th, 2025 @ 1pm</p>
                 <BlockHeader title="Schedule" />
                 <p>Schedule will be posted closer to the date of the Game Jam.</p>
                 <BlockHeader title="Sponsors" />
@@ -32,7 +32,7 @@ export default function GameJam() {
                 *<p>- TBD</p>
                 */}
                 {/* <h4>Sponsors</h4> */}
-                <div className="flex gap-5">
+                <div className="flex flex-wrap gap-5 ">
                 <SponsorCard name = "Ubisoft" image="/img/gamejam/ubisoft-logo.svg" website="https://winnipeg.ubisoft.com/"/>
                 <SponsorCard name="G3" image="/img/gamejam/g3-logo.svg" website="https://g3.ca"/>
                 <SponsorCard name="Niche" image="/img/gamejam/niche-logo.svg" website="https://nicherms.com"/>
