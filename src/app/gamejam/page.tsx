@@ -6,8 +6,8 @@ import SponsorCard from "@/components/sponsor-card";
 
 export default function GameJam() {
     return (
-        <main className="flex flex-col bg-cssa-light-blue">
-            <EventPageHeader title="Game Jam Logo" image="/img/gamejam/banner.svg" />
+        <main className="flex flex-col bg-[#84a2ce] text-[#0C1118]">
+            <EventPageHeader title="Game Jam Logo" image="/img/gamejam/2025-gamejam-banner.png" />
             <div className="container py-12 flex flex-col gap-12">
                 <BlockHeader title="Theme" />
                 <p>Theme will be announced during the opening ceremony.</p>
