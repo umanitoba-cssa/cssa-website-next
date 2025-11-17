@@ -12,7 +12,7 @@ export default function GameJam() {
                 <BlockHeader title="Theme" />
                 <p>Theme will be announced during the opening ceremony.</p>
                 <BlockHeader title="Rules" />
-                <p>Participants must follow our <a className="underline" href="https://umanitobacssa.ca/docs/discordTOU.pdf" target = "_blank">Discord Terms of Use</a> This includes:</p>
+                <p>Participants must follow our <a className="underline" href="https://umanitobacssa.ca/docs/discordTOU.pdf" target="_blank">Discord Terms of Use</a> This includes:</p>
                 <ul>
                     <li>- Be respectful of your fellow peers.</li>
                     <li>- No NSFW content or discussion of illegal/questionable content/activities.</li>
@@ -21,14 +21,14 @@ export default function GameJam() {
                     <li>- We ask that you follow those guidelines in person and on the discord.</li>
                 </ul>
                 <BlockHeader title="Event Details"/>
-                <p> Location: EITC Aitrum and EITC E3-270</p>
+                <p> Location: EITC Atrium and EITC E3-270</p>
                 <p> Date/Time: November 28th, 2025 @ 5pm to November 30th, 2025 @ 1pm</p>
                 <BlockHeader title="Schedule" />
                 <p>Schedule will be posted closer to the date of the Game Jam.</p>
                 <BlockHeader title="Sponsors" />
                 <p>We'd like to thank all our sponsors that allow us to put on events like this for Computer Science students!</p>
                 <div className="flex flex-wrap gap-5 justify-center md:justify-start">
-                <SponsorCard name = "Ubisoft" image="/img/gamejam/ubisoft-logo.svg" website="https://winnipeg.ubisoft.com/"/>
+                <SponsorCard name="Ubisoft" image="/img/gamejam/ubisoft-logo.svg" website="https://winnipeg.ubisoft.com/"/>
                 <SponsorCard name="G3" image="/img/gamejam/g3-logo.svg" website="https://g3.ca"/>
                 <SponsorCard name="Niche" image="/img/gamejam/niche-logo.svg" website="https://nicherms.com"/>
                 </div>
