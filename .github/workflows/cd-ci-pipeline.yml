@@ -67,6 +67,8 @@ jobs:
             GOOGLE_SERVICE_ACCOUNT_EMAIL=${{ secrets.GOOGLE_SERVICE_ACCOUNT_EMAIL }}
             GOOGLE_PRIVATE_KEY=${{ secrets.GOOGLE_PRIVATE_KEY }}
             CANTEEN_SHEEET_ID=${{ secrets.CANTEEN_SHEEET_ID }}
+            GITHUB_APP_ID=${{ secrets._GITHUB_APP_ID }}
+            GITHUB_PRIVATE_KEY=${{ secrets._GITHUB_PRIVATE_KEY }}
   deploy:
     runs-on: [self-hosted, webhost]
     needs: [set-port, build]
@@ -90,6 +92,8 @@ jobs:
             google_service_account_email=${{ secrets.GOOGLE_SERVICE_ACCOUNT_EMAIL }}
             google_private_key=${{ secrets.GOOGLE_PRIVATE_KEY }}
             canteen_sheet_id=${{ secrets.CANTEEN_SHEEET_ID }}
+            github_app_id=${{ secrets._GITHUB_APP_ID }}
+            github_private_key=${{ secrets._GITHUB_PRIVATE_KEY }}
           ARTIFACT_NAME: ${{ needs.set-port.outputs.IMAGE_NAME }}
           USER: "root-main-web"
           PLAYBOOK_PATH: ".ansible/playbook/ansible_deploy_container.yml"

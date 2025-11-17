@@ -3,7 +3,7 @@
 import React, { useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import 'github-markdown-css/github-markdown-light.css';
-import '@/app/resources/guides/guides.css'; // Import custom guides styles
+import '@/app/resources/markdown.css'; // Import custom markdown styles
 import Prism from 'prismjs';
 import 'prismjs/components/prism-bash';
 import 'prismjs/components/prism-javascript';

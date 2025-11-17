@@ -76,6 +76,13 @@ export const CSSALinks: IResourceLink[] = [
 
     },
     {
+        title: "General Meeting Archives",
+        description: "Past CSSA General Meeting notes",
+        href: "resources/general-meeting-archives",
+        internal: true,
+        linkText: "Browse archives →"
+    },
+    {
         title: "CS Discord TOU",
         description: "The terms of use of the Computer Science Lounge Discord.",
         href: "/docs/discordTOU.pdf"
