@@ -12,7 +12,7 @@ export default function GameJam() {
                 <BlockHeader title="Theme" />
                 <p>Theme will be announced during the opening ceremony.</p>
                 <BlockHeader title="Rules" />
-                <p>Participants must follow our <a className="underline" href="https://umanitobacssa.ca/docs/discordTOU.pdf">Discord Terms of Use</a> This includes:</p>
+                <p>Participants must follow our <a className="underline" href="https://umanitobacssa.ca/docs/discordTOU.pdf" target = "_blank">Discord Terms of Use</a> This includes:</p>
                 <ul>
                     <li>- Be respectful of your fellow peers.</li>
                     <li>- No NSFW content or discussion of illegal/questionable content/activities.</li>
@@ -27,17 +27,11 @@ export default function GameJam() {
                 <p>Schedule will be posted closer to the date of the Game Jam.</p>
                 <BlockHeader title="Sponsors" />
                 <p>We'd like to thank all our sponsors that allow us to put on events like this for Computer Science students!</p>
-                {/**
-                * <h4>Gold Sponsors</h4>
-                *<p>- TBD</p>
-                */}
-                {/* <h4>Sponsors</h4> */}
                 <div className="flex flex-wrap gap-5 justify-center md:justify-start">
                 <SponsorCard name = "Ubisoft" image="/img/gamejam/ubisoft-logo.svg" website="https://winnipeg.ubisoft.com/"/>
                 <SponsorCard name="G3" image="/img/gamejam/g3-logo.svg" website="https://g3.ca"/>
                 <SponsorCard name="Niche" image="/img/gamejam/niche-logo.svg" website="https://nicherms.com"/>
                 </div>
-                {/** <h4>Bronze Sponsors</h4> */}
                 <div className="flex gap-5">
                 </div>
                 <BlockHeader title="Resources" />
@@ -50,13 +44,9 @@ export default function GameJam() {
                     <br />
                     Teams are recommended to be a team of 4 participants (not everyone needs to be a coder). 5 team members maximum. All users should register on the discord. Only <b>ONE</b> user needs to submit their project to this page. You may also register solo.<br />
                     <br />
-                    {/* We are providing a Git repo for all teams that want it (it will be created automatically) and are recommending that groups use it, but it is not required. */}
                     To ensure that you are all set up for the jam we recommend that you have:</p>
                 <ul>
                     <li>- <a className="underline" href="https://itch.io">Itch.io</a> account if you are leading a team</li>
-                    {/* <li>- <a className="underline" href="https://github.com">GitHub</a> account for code management.</li>
-                    <li>- <a className="underline" href="https://git-scm.com/downloads">Git</a> installed.</li>
-                    <li>- <a className="underline" href="https://cli.github.com">GitHub CLI</a> installed (unless you are comfortable with Git and SSH key based authentication for pulling/pushing to GitHub).</li> */}
                 </ul>
                 <p>If you do not have a team, you can look for a team in the <i>#looking-for-a-team</i> channel in the server to find a team.</p>
                 <div className="grid grid-cols-2 text-center table-auto gap-8">
