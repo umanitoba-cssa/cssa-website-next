@@ -2,7 +2,7 @@
 
 import BlockHeader from "@/components/block-header";
 import PageHeader from "@/components/page-header";
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import sendEmail from "@/utils/send-email";
 
@@ -16,9 +16,21 @@ const Contact: FC = () => {
   const { register, handleSubmit } = useForm<FormData>();
 
   function onSubmit(data: FormData) {
+    console.log(data);
     sendEmail(data);
   }
+  useEffect(() => {
+    // Add reCaptcha
+    const script = document.createElement("script")
+    script.src = "https://www.google.com/recaptcha/api.js"
+    document.body.appendChild(script);
 
+    (window as any).onRecaptchaSubmit = (token: string) => {
+      console.log(token);
+      (document.getElementById("contact-form") as HTMLFormElement)?.requestSubmit();
+    };
+  }, [])
+  
   return (
     <main className="flex flex-col">
       <PageHeader title="Contact Us" image="/img/backgrounds/contact.jpg" />
@@ -37,7 +49,7 @@ const Contact: FC = () => {
         </div>
         <div className="flex flex-col gap-8">
           <BlockHeader title="Contact Form" />
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form id="contact-form" onSubmit={handleSubmit(onSubmit)}>
             <div className="mb-5">
               <p>Name</p>
               <label
@@ -78,7 +90,11 @@ const Contact: FC = () => {
               ></textarea>
             </div>
             <div>
-              <button className="hover:shadow-form rounded-md bg-cssa-blue py-3 px-8 text-base font-semibold text-white outline-none">
+              <button className="g-recaptcha hover:shadow-form rounded-md bg-cssa-blue py-3 px-8 text-base font-semibold text-white outline-none"
+                data-sitekey="6LfKxhAsAAAAAEmvQmdBqZT1QRV4C1PIXGQ2VOQi"
+                data-callback="onRecaptchaSubmit"
+                data-action="submit"
+              >
                 Submit
               </button>
             </div>
