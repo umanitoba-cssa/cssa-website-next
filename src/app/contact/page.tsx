@@ -6,6 +6,9 @@ import { FC, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import sendEmail from "@/utils/send-email";
 
+
+const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
+
 export type FormData = {
   name: string;
   email: string;
@@ -16,7 +19,6 @@ const Contact: FC = () => {
   const { register, handleSubmit } = useForm<FormData>();
 
   function onSubmit(data: FormData) {
-    console.log(data);
     sendEmail(data);
   }
   useEffect(() => {
@@ -26,7 +28,6 @@ const Contact: FC = () => {
     document.body.appendChild(script);
 
     (window as any).onRecaptchaSubmit = (token: string) => {
-      console.log(token);
       (document.getElementById("contact-form") as HTMLFormElement)?.requestSubmit();
     };
   }, [])
@@ -91,7 +92,7 @@ const Contact: FC = () => {
             </div>
             <div>
               <button className="g-recaptcha hover:shadow-form rounded-md bg-cssa-blue py-3 px-8 text-base font-semibold text-white outline-none"
-                data-sitekey="6LfKxhAsAAAAAEmvQmdBqZT1QRV4C1PIXGQ2VOQi"
+                data-sitekey={siteKey}
                 data-callback="onRecaptchaSubmit"
                 data-action="submit"
               >
