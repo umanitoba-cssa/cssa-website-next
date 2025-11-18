@@ -66,7 +66,7 @@ export default function ResearcherModal({
                         }}
                         className="bg-gray-900 border-solid border-2 border-amber-400 text-white rounded-xl w-full max-w-4xl relative z-50 overflow-y-auto max-h-[90vh] mx-4 sm:mx-6"
                         onClick={(e) => e.stopPropagation()}
-                    >   
+                    >
                     <div className="z-10 bg-gray-900 sticky top-0 flex justify-end items-center px-4 py-3">
                         <button
                             onClick={handleClose}

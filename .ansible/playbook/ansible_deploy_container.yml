@@ -45,4 +45,6 @@
           GOOGLE_SERVICE_ACCOUNT_EMAIL: "{{ google_service_account_email }}"
           GOOGLE_PRIVATE_KEY: "{{ google_private_key }}"
           CANTEEN_SHEEET_ID: "{{ canteen_sheet_id }}"
+          GITHUB_APP_ID: "{{ github_app_id }}"
+          GITHUB_PRIVATE_KEY: "{{ github_private_key }}"
         container_default_behavior: compatibility
