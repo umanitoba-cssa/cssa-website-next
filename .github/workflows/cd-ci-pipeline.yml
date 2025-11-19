@@ -85,6 +85,8 @@ jobs:
             container_name=cssa-${{ needs.set-port.outputs.ENVIRONMENT }}
             image_name=${{ needs.set-port.outputs.IMAGE_NAME }}:${{ github.run_number }}-${{ github.run_attempt }}
             artifact_path=/tmp/${{ needs.set-port.outputs.ENVIRONMENT }}/${{ needs.set-port.outputs.IMAGE_NAME }}.tar
+            next_public_recaptcha_site_key=${{ secrets.NEXT_PUBLIC_RECAPTCHA_SITE_KEY }}
+            recaptcha_secret_key=${{ secrets.RECAPTCHA_SECRET_KEY }}
             youtube_api_key=${{ secrets.YOUTUBE_API_KEY }}
             smtp_username=${{ secrets.SMTP_USERNAME }}
             smtp_password=${{ secrets.SMTP_PASSWORD }}
