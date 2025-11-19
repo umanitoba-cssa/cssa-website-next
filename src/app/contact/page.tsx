@@ -2,7 +2,7 @@
 
 import BlockHeader from "@/components/block-header";
 import PageHeader from "@/components/page-header";
-import { FC, useEffect } from "react";
+import { FC, useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 import sendEmail from "@/utils/send-email";
 
@@ -13,22 +13,38 @@ export type FormData = {
   name: string;
   email: string;
   message: string;
+  recaptchaToken?: string;
 };
 
 const Contact: FC = () => {
   const { register, handleSubmit } = useForm<FormData>();
-
+  const recaptchaTokenRef = useRef<string | null>(null);
+  
   function onSubmit(data: FormData) {
-    sendEmail(data);
+    const dataWithToken = {
+      ...data,
+      recaptchaToken: recaptchaTokenRef.current || undefined,
+    };
+    sendEmail(dataWithToken);
+    
+    recaptchaTokenRef.current = null; // reset
   }
   useEffect(() => {
-    // Add reCaptcha
     const script = document.createElement("script")
     script.src = "https://www.google.com/recaptcha/api.js"
     document.body.appendChild(script);
 
     (window as any).onRecaptchaSubmit = (token: string) => {
       (document.getElementById("contact-form") as HTMLFormElement)?.requestSubmit();
+      recaptchaTokenRef.current = token;
+      
+      // cleanup
+      return () => {
+        delete (window as any).onRecaptchaSubmit;
+        if (script.parentNode) {
+          script.parentNode.removeChild(script);
+        }
+      };
     };
   }, [])
   
