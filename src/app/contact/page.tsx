@@ -2,23 +2,52 @@
 
 import BlockHeader from "@/components/block-header";
 import PageHeader from "@/components/page-header";
-import { FC } from "react";
+import { FC, useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 import sendEmail from "@/utils/send-email";
+
+
+const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
 export type FormData = {
   name: string;
   email: string;
   message: string;
+  recaptchaToken?: string;
 };
 
 const Contact: FC = () => {
   const { register, handleSubmit } = useForm<FormData>();
-
+  const recaptchaTokenRef = useRef<string | null>(null);
+  
   function onSubmit(data: FormData) {
-    sendEmail(data);
+    const dataWithToken = {
+      ...data,
+      recaptchaToken: recaptchaTokenRef.current || undefined,
+    };
+    sendEmail(dataWithToken);
+    
+    recaptchaTokenRef.current = null; // reset
   }
+  useEffect(() => {
+    const script = document.createElement("script")
+    script.src = "https://www.google.com/recaptcha/api.js"
+    document.body.appendChild(script);
 
+    (window as any).onRecaptchaSubmit = (token: string) => {
+      (document.getElementById("contact-form") as HTMLFormElement)?.requestSubmit();
+      recaptchaTokenRef.current = token;
+      
+      // cleanup
+      return () => {
+        delete (window as any).onRecaptchaSubmit;
+        if (script.parentNode) {
+          script.parentNode.removeChild(script);
+        }
+      };
+    };
+  }, [])
+  
   return (
     <main className="flex flex-col">
       <PageHeader title="Contact Us" image="/img/backgrounds/contact.jpg" />
@@ -37,7 +66,7 @@ const Contact: FC = () => {
         </div>
         <div className="flex flex-col gap-8">
           <BlockHeader title="Contact Form" />
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form id="contact-form" onSubmit={handleSubmit(onSubmit)}>
             <div className="mb-5">
               <p>Name</p>
               <label
@@ -78,7 +107,11 @@ const Contact: FC = () => {
               ></textarea>
             </div>
             <div>
-              <button className="hover:shadow-form rounded-md bg-cssa-blue py-3 px-8 text-base font-semibold text-white outline-none">
+              <button className="g-recaptcha hover:shadow-form rounded-md bg-cssa-blue py-3 px-8 text-base font-semibold text-white outline-none"
+                data-sitekey={siteKey}
+                data-callback="onRecaptchaSubmit"
+                data-action="submit"
+              >
                 Submit
               </button>
             </div>
