@@ -3,6 +3,7 @@ import PageHeader from "@/components/page-header";
 import Image from "next/image";
 import { Teasers } from "@/data/teasers";
 import Link from "next/link";
+import { Fragment } from "react";
 
 export default function Home() {
     return (
@@ -25,7 +26,7 @@ export default function Home() {
                     <BlockHeader title="What we do" />
                     <div className="grid lg:grid-cols-[400px_auto] gap-12 lg:gap-8 items-center">
                         {Teasers.map((item)=>(
-                            <>
+                            <Fragment key={item.title}>
                             <div className="aspect-3/2 align-middle relative">
                             <Image
                                 fill
@@ -47,7 +48,7 @@ export default function Home() {
                             </Link>
                             }
                         </div>
-                        </>
+                        </Fragment>
                         ))}
                     </div>
                 </div>
