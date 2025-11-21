@@ -24,6 +24,7 @@ jobs:
       ENVIRONMENT: ${{ steps.set-port.outputs.ENVIRONMENT }}
       ENV_URL: ${{ steps.set-port.outputs.ENV_URL }}
       IMAGE_NAME: ${{ steps.set-port.outputs.IMAGE_NAME }}
+      PR_NUMBER: ${{ steps.set-port.outputs.PR_NUMBER }}
     steps:
       - name: Set port based on branch
         id: set-port
@@ -33,15 +34,26 @@ jobs:
             echo "ENVIRONMENT=production" >> $GITHUB_OUTPUT
             echo "IMAGE_NAME=cssa-production" >> $GITHUB_OUTPUT
             echo "DEPLOY_URL=https://umanitobacssa.ca" >> $GITHUB_ENV
+            echo "PR_NUMBER=" >> $GITHUB_OUTPUT
           elif [[ "${{ github.event_name }}" == "pull_request" && "${{ github.base_ref }}" == "release" ]]; then
             echo "PORT=4000" >> $GITHUB_OUTPUT
             echo "ENVIRONMENT=staging" >> $GITHUB_OUTPUT
             echo "IMAGE_NAME=cssa-staging" >> $GITHUB_OUTPUT
             echo "DEPLOY_URL=https://staging.umanitobacssa.ca" >> $GITHUB_ENV
+            echo "PR_NUMBER=" >> $GITHUB_OUTPUT
+          elif [[ "${{ github.event_name }}" == "pull_request" && "${{ github.base_ref }}" == "main" ]]; then
+            PR_NUMBER="${{ github.event.pull_request.number }}"
+            PR_PORT=$((3000 + PR_NUMBER))
+            echo "PORT=${PR_PORT}" >> $GITHUB_OUTPUT
+            echo "ENVIRONMENT=preview-pr${PR_NUMBER}" >> $GITHUB_OUTPUT
+            echo "IMAGE_NAME=cssa-preview-pr${PR_NUMBER}" >> $GITHUB_OUTPUT
+            echo "PR_NUMBER=${PR_NUMBER}" >> $GITHUB_OUTPUT
+            echo "DEPLOY_URL=https://preview-pr${PR_NUMBER}.umanitobacssa.ca" >> $GITHUB_ENV
           else
             echo "PORT=3000" >> $GITHUB_OUTPUT
             echo "ENVIRONMENT=preview" >> $GITHUB_OUTPUT
             echo "IMAGE_NAME=cssa-preview" >> $GITHUB_OUTPUT
+            echo "PR_NUMBER=" >> $GITHUB_OUTPUT
             echo "DEPLOY_URL=https://preview.umanitobacssa.ca" >> $GITHUB_ENV
           fi
       - name: Debug outputs
@@ -49,6 +61,7 @@ jobs:
           echo "PORT: ${{ steps.set-port.outputs.PORT }}"
           echo "ENVIRONMENT: ${{ steps.set-port.outputs.ENVIRONMENT }}"
           echo "IMAGE_NAME: ${{ steps.set-port.outputs.IMAGE_NAME }}"
+          echo "PR_NUMBER: ${{ steps.set-port.outputs.PR_NUMBER }}"
           echo "DEPLOY_URL=${{ env.DEPLOY_URL }}"
   build:
     runs-on: ubuntu-latest
@@ -87,6 +100,7 @@ jobs:
             container_name=cssa-${{ needs.set-port.outputs.ENVIRONMENT }}
             image_name=${{ needs.set-port.outputs.IMAGE_NAME }}:${{ github.run_number }}-${{ github.run_attempt }}
             artifact_path=/tmp/${{ needs.set-port.outputs.ENVIRONMENT }}/${{ needs.set-port.outputs.IMAGE_NAME }}.tar
+            pr_number=${{ needs.set-port.outputs.PR_NUMBER }}
             next_public_recaptcha_site_key=${{ secrets.NEXT_PUBLIC_RECAPTCHA_SITE_KEY }}
             recaptcha_secret_key=${{ secrets.RECAPTCHA_SECRET_KEY }}
             youtube_api_key=${{ secrets.YOUTUBE_API_KEY }}
