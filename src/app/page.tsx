@@ -22,10 +22,43 @@ export default function Home() {
                     </p>
                 </div>
 
+                {/* What we do */}
                 <div className="flex flex-col gap-8">
                     <BlockHeader title="What we do" />
                     <div className="grid lg:grid-cols-[400px_auto] gap-12 lg:gap-8 items-center">
-                        {Teasers.map((item)=>(
+                        {Teasers.filter(item => item.section === "What we do").map((item)=>(
+                            <Fragment key={item.title}>
+                            <div className="aspect-3/2 align-middle relative">
+                            <Image
+                                fill
+                                src={item.src}
+                                alt={item.title}
+                                className="object-cover"
+                            />
+                        </div>
+                        <div className="flex flex-col place-content-center gap-4">
+                            <h4>{item.title}</h4>
+                            <p>
+                                {item.description}
+                            </p>
+                            {item.href &&
+                            <Link href={item.href}>
+                                <div className="flex">
+                                    <span className="text-sm text-primary hover:underline"> {item.linkText} </span>
+                                </div>
+                            </Link>
+                            }
+                        </div>
+                        </Fragment>
+                        ))}
+                    </div>
+                </div>
+
+                {/* How we Support  */}
+                <div className="flex flex-col gap-8">
+                    <BlockHeader title="How we Support" />
+                    <div className="grid lg:grid-cols-[400px_auto] gap-12 lg:gap-8 items-center">
+                        {Teasers.filter(item => item.section === "How we Support").map((item)=>(
                             <Fragment key={item.title}>
                             <div className="aspect-3/2 align-middle relative">
                             <Image
