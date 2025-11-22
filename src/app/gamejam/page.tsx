@@ -12,7 +12,7 @@ export default function GameJam() {
                 <BlockHeader title="Theme" />
                 <p>Theme will be announced during the opening ceremony.</p>
                 <BlockHeader title="Rules" />
-                <p>Participants must follow our <a className="underline" href="https://umanitobacssa.ca/docs/discordTOU.pdf" target="_blank">Discord Terms of Use</a> This includes:</p>
+                <p>Participants must follow our <a className="underline" href="https://umanitobacssa.ca/docs/discordTOU.pdf" target="_blank" rel="noreferrer">Discord Terms of Use</a> This includes:</p>
                 <ul>
                     <li>- Be respectful of your fellow peers.</li>
                     <li>- No NSFW content or discussion of illegal/questionable content/activities.</li>

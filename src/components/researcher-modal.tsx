@@ -99,17 +99,17 @@ export default function ResearcherModal({
                                                     researcher.lab?.website && 
                                                     <div className="flex items-center gap-2">
                                                         <FaGlobeAmericas className="text-sm flex-shrink-0" />
-                                                        <a className="text-sm text-blue-600 visited:text-purple-600 hover:underline" href={researcher.lab?.website} target="_blank">{researcher.lab?.name}</a>
+                                                        <a className="text-sm text-blue-600 visited:text-purple-600 hover:underline" href={researcher.lab?.website} target="_blank" rel="noreferrer">{researcher.lab?.name}</a>
                                                     </div>
                                                 }
                                                 <div className="flex items-center gap-2">
                                                         <FaExternalLinkAlt className="text-sm flex-shrink-0" />
-                                                        <a className="block text-sm text-blue-600 visited:text-purple-600 hover:underline" href={researcher.googleScholarLink} target="_blank">Google Scholar</a>
+                                                        <a className="block text-sm text-blue-600 visited:text-purple-600 hover:underline" href={researcher.googleScholarLink} target="_blank" rel="noreferrer">Google Scholar</a>
                                                 </div>
                                                 
                                                 <div className="flex items-center gap-2">
                                                         <FaRegEnvelope className="text-sm flex-shrink-0" />
-                                                        <a className="block text-sm text-blue-600 visited:text-purple-600 hover:underline" href={`mailto:${researcher.email}`} target="_blank">{researcher.email}</a>
+                                                        <a className="block text-sm text-blue-600 visited:text-purple-600 hover:underline" href={`mailto:${researcher.email}`} target="_blank" rel="noreferrer">{researcher.email}</a>
                                                 </div>
                                                 <div className="pt-5">
                                                 {
