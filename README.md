@@ -22,7 +22,7 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 
 ## Linting
 
-This project is set up with `eslint` and `prettier` for code linting and formatting respectively. To run them use `npm run lint` or `npm run lint:fix` if you want safe automatic linting fixes to be applied. 
+This project is set up with `eslint` and `prettier` for code linting and formatting respectively. To run them use `npm run lint` or `npm run lint:fix` if you want safe automatic linting fixes to be applied.
 
 ## Learn More
 

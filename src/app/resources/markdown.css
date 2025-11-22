@@ -1,155 +1,155 @@
 /* Improve link styling in markdown content */
 .markdown-content a {
-  color: rgb(32, 102, 184) !important; /* cssa-blue */
-  text-decoration: underline;
-  transition: color 0.2s ease;
+    color: rgb(32, 102, 184) !important; /* cssa-blue */
+    text-decoration: underline;
+    transition: color 0.2s ease;
 }
 
 .markdown-content a:hover {
-  color: rgb(52, 101, 178) !important; /* cssa-light-blue */
+    color: rgb(52, 101, 178) !important; /* cssa-light-blue */
 }
 
 /* Override the github-markdown-light.css theme for dark mode */
 .markdown-body {
-  color: rgb(var(--foreground-rgb)) !important;
-  background-color: transparent !important;
-  font-family: var(--font-sans) !important;
+    color: rgb(var(--foreground-rgb)) !important;
+    background-color: transparent !important;
+    font-family: var(--font-sans) !important;
 }
 
 /* Add darkmode override class */
 .markdown-dark {
-  --color-prettylights-syntax-comment: #8b949e;
-  --color-prettylights-syntax-constant: #79c0ff;
-  --color-prettylights-syntax-entity: #d2a8ff;
-  --color-prettylights-syntax-storage-modifier-import: #c9d1d9;
-  --color-prettylights-syntax-entity-tag: #7ee787;
-  --color-prettylights-syntax-keyword: #ff7b72;
-  --color-prettylights-syntax-string: #a5d6ff;
-  --color-prettylights-syntax-variable: #ffa657;
-  --color-prettylights-syntax-brackethighlighter-unmatched: #f85149;
-  --color-prettylights-syntax-invalid-illegal-text: #f0f6fc;
-  --color-prettylights-syntax-invalid-illegal-bg: #8e1519;
-  --color-prettylights-syntax-carriage-return-text: #f0f6fc;
-  --color-prettylights-syntax-carriage-return-bg: #b62324;
-  --color-prettylights-syntax-string-regexp: #7ee787;
-  --color-prettylights-syntax-markup-heading: #1f6feb;
-  --color-prettylights-syntax-markup-italic: #c9d1d9;
-  --color-prettylights-syntax-markup-bold: #c9d1d9;
-  --color-prettylights-syntax-markup-deleted-text: #ffdcd7;
-  --color-prettylights-syntax-markup-deleted-bg: #67060c;
-  --color-prettylights-syntax-markup-inserted-text: #aff5b4;
-  --color-prettylights-syntax-markup-inserted-bg: #033a16;
-  --color-prettylights-syntax-markup-changed-text: #ffdfb6;
-  --color-prettylights-syntax-markup-changed-bg: #5a1e02;
-  --color-prettylights-syntax-markup-ignored-text: #c9d1d9;
-  --color-prettylights-syntax-markup-ignored-bg: #1158c7;
-  --color-prettylights-syntax-meta-diff-range: #d2a8ff;
-  --color-prettylights-syntax-brackethighlighter-angle: #8b949e;
-  --color-prettylights-syntax-sublimelinter-gutter-mark: #484f58;
-  --color-prettylights-syntax-constant-other-reference-link: #a5d6ff;
-  --color-fg-default: #e6edf3;
-  --color-fg-muted: #848d97;
-  --color-fg-subtle: #636e7b;
-  --color-canvas-default: transparent;
-  --color-canvas-subtle: #161b22;
-  --color-border-default: #30363d;
-  --color-border-muted: #21262d;
-  --color-neutral-muted: rgba(110, 118, 129, 0.4);
-  --color-accent-fg: #2f81f7;
-  --color-accent-emphasis: #1f6feb;
-  --color-danger-fg: #f85149;
+    --color-prettylights-syntax-comment: #8b949e;
+    --color-prettylights-syntax-constant: #79c0ff;
+    --color-prettylights-syntax-entity: #d2a8ff;
+    --color-prettylights-syntax-storage-modifier-import: #c9d1d9;
+    --color-prettylights-syntax-entity-tag: #7ee787;
+    --color-prettylights-syntax-keyword: #ff7b72;
+    --color-prettylights-syntax-string: #a5d6ff;
+    --color-prettylights-syntax-variable: #ffa657;
+    --color-prettylights-syntax-brackethighlighter-unmatched: #f85149;
+    --color-prettylights-syntax-invalid-illegal-text: #f0f6fc;
+    --color-prettylights-syntax-invalid-illegal-bg: #8e1519;
+    --color-prettylights-syntax-carriage-return-text: #f0f6fc;
+    --color-prettylights-syntax-carriage-return-bg: #b62324;
+    --color-prettylights-syntax-string-regexp: #7ee787;
+    --color-prettylights-syntax-markup-heading: #1f6feb;
+    --color-prettylights-syntax-markup-italic: #c9d1d9;
+    --color-prettylights-syntax-markup-bold: #c9d1d9;
+    --color-prettylights-syntax-markup-deleted-text: #ffdcd7;
+    --color-prettylights-syntax-markup-deleted-bg: #67060c;
+    --color-prettylights-syntax-markup-inserted-text: #aff5b4;
+    --color-prettylights-syntax-markup-inserted-bg: #033a16;
+    --color-prettylights-syntax-markup-changed-text: #ffdfb6;
+    --color-prettylights-syntax-markup-changed-bg: #5a1e02;
+    --color-prettylights-syntax-markup-ignored-text: #c9d1d9;
+    --color-prettylights-syntax-markup-ignored-bg: #1158c7;
+    --color-prettylights-syntax-meta-diff-range: #d2a8ff;
+    --color-prettylights-syntax-brackethighlighter-angle: #8b949e;
+    --color-prettylights-syntax-sublimelinter-gutter-mark: #484f58;
+    --color-prettylights-syntax-constant-other-reference-link: #a5d6ff;
+    --color-fg-default: #e6edf3;
+    --color-fg-muted: #848d97;
+    --color-fg-subtle: #636e7b;
+    --color-canvas-default: transparent;
+    --color-canvas-subtle: #161b22;
+    --color-border-default: #30363d;
+    --color-border-muted: #21262d;
+    --color-neutral-muted: rgba(110, 118, 129, 0.4);
+    --color-accent-fg: #2f81f7;
+    --color-accent-emphasis: #1f6feb;
+    --color-danger-fg: #f85149;
 }
 
 /* Add styling for code blocks */
 .markdown-content pre {
-  background-color: #282c34 !important; /* Match the prism-atom-dark theme */
-  border-radius: 0.5rem;
-  padding: 1rem;
-  overflow-x: auto;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  margin: 1.5rem 0;
+    background-color: #282c34 !important; /* Match the prism-atom-dark theme */
+    border-radius: 0.5rem;
+    padding: 1rem;
+    overflow-x: auto;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 1.5rem 0;
 }
 
 .markdown-content code {
-  font-family: var(--font-mono);
-  font-size: 0.9em;
-  padding: 0.2em 0.4em;
-  background-color: rgba(0, 0, 0, 0.3);
-  border-radius: 0.25rem;
-  color: rgb(var(--foreground-rgb));
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+    padding: 0.2em 0.4em;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 0.25rem;
+    color: rgb(var(--foreground-rgb));
 }
 
 .markdown-content pre code {
-  padding: 0;
-  background-color: transparent !important;
-  border-radius: 0;
-  color: inherit;
-  font-size: 0.9rem;
-  line-height: 1.5;
-  tab-size: 2;
+    padding: 0;
+    background-color: transparent !important;
+    border-radius: 0;
+    color: inherit;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    tab-size: 2;
 }
 
 /* Prism.js line numbers */
 .markdown-content pre.line-numbers {
-  position: relative;
-  padding-left: 3.5rem;
-  counter-reset: linenumber;
+    position: relative;
+    padding-left: 3.5rem;
+    counter-reset: linenumber;
 }
 
 .markdown-content pre.line-numbers > code {
-  position: relative;
+    position: relative;
 }
 
 /* Additional styling for inline code */
-.markdown-content p code, 
-.markdown-content li code, 
+.markdown-content p code,
+.markdown-content li code,
 .markdown-content td code {
-  color: #e6edf3;
-  background-color: rgba(99, 110, 123, 0.4);
+    color: #e6edf3;
+    background-color: rgba(99, 110, 123, 0.4);
 }
 
 /* Add styling for blockquotes */
 .markdown-content blockquote {
-  border-left: 4px solid rgb(32, 102, 184); /* cssa-blue */
-  padding-left: 1rem;
-  margin-left: 0;
-  color: rgba(255, 255, 255, 0.7);
-  background-color: rgba(0, 0, 0, 0.2);
-  padding: 0.5rem 1rem;
-  border-radius: 0.25rem;
+    border-left: 4px solid rgb(32, 102, 184); /* cssa-blue */
+    padding-left: 1rem;
+    margin-left: 0;
+    color: rgba(255, 255, 255, 0.7);
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
 }
 
 /* Add styling for tables */
 .markdown-content table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 1rem 0;
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
 }
 
 .markdown-content th,
 .markdown-content td {
-  padding: 0.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .markdown-content th {
-  background-color: rgba(0, 0, 0, 0.3);
-  text-align: left;
+    background-color: rgba(0, 0, 0, 0.3);
+    text-align: left;
 }
 
 /* Smooth scrolling for anchor links */
 html {
-  scroll-behavior: smooth;
+    scroll-behavior: smooth;
 }
 
 /* Content background container */
 .markdown-content-container {
-  background-color: rgba(3, 13, 31, 0.6); /* cssa-navy with transparency */
-  color: rgb(var(--foreground-rgb));
-  border-radius: 0.5rem;
-  padding: 1.5rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+    background-color: rgba(3, 13, 31, 0.6); /* cssa-navy with transparency */
+    color: rgb(var(--foreground-rgb));
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 /* Improve headings */
@@ -159,123 +159,125 @@ html {
 .markdown-content h4,
 .markdown-content h5,
 .markdown-content h6 {
-  font-weight: 600;
-  line-height: 1.3;
-  margin-top: 1.5em;
-  margin-bottom: 0.5em;
-  color: rgb(var(--foreground-rgb));
+    font-weight: 600;
+    line-height: 1.3;
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+    color: rgb(var(--foreground-rgb));
 }
 
 .markdown-content h1 {
-  font-size: 2rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  padding-bottom: 0.3em;
+    font-size: 2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 0.3em;
 }
 
 .markdown-content h2 {
-  font-size: 1.5rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  padding-bottom: 0.3em;
+    font-size: 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 0.3em;
 }
 
 .markdown-content h3 {
-  font-size: 1.25rem;
+    font-size: 1.25rem;
 }
 
 .markdown-content h1:first-child,
 .markdown-content h2:first-child,
 .markdown-content h3:first-child {
-  margin-top: 0;
+    margin-top: 0;
 }
 
 /* Lists styling */
 .markdown-content ul,
 .markdown-content ol {
-  padding-left: 1.5rem;
-  margin: 1rem 0;
+    padding-left: 1.5rem;
+    margin: 1rem 0;
 }
 
 .markdown-content li {
-  margin-bottom: 0.5rem;
+    margin-bottom: 0.5rem;
 }
 
 /* Image styling */
 .markdown-content img {
-  max-width: 100%;
-  border-radius: 0.25rem;
-  margin: 1rem 0;
+    max-width: 100%;
+    border-radius: 0.25rem;
+    margin: 1rem 0;
 }
 
 /* Horizontal rule */
 .markdown-content hr {
-  height: 1px;
-  background-color: rgba(255, 255, 255, 0.1);
-  border: none;
-  margin: 2rem 0;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: none;
+    margin: 2rem 0;
 }
 
 /* Add styling for callouts/notes */
 .markdown-content .callout {
-  border-left: 4px solid;
-  border-radius: 0.25rem;
-  padding: 1rem;
-  margin: 1.5rem 0;
-  background-color: rgba(0, 0, 0, 0.2);
+    border-left: 4px solid;
+    border-radius: 0.25rem;
+    padding: 1rem;
+    margin: 1.5rem 0;
+    background-color: rgba(0, 0, 0, 0.2);
 }
 
 .markdown-content .callout.info {
-  border-color: rgb(52, 101, 178); /* cssa-light-blue */
+    border-color: rgb(52, 101, 178); /* cssa-light-blue */
 }
 
 .markdown-content .callout.warning {
-  border-color: rgb(250, 180, 22); /* cssa-gold */
+    border-color: rgb(250, 180, 22); /* cssa-gold */
 }
 
 .markdown-content .callout.error {
-  border-color: #f85149; /* danger-fg */
+    border-color: #f85149; /* danger-fg */
 }
 
 .markdown-content .callout .callout-title {
-  font-weight: 600;
-  margin-bottom: 0.5rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
 }
 
 /* Custom table styling for markdown content */
 .markdown-body table {
-  border-collapse: collapse;
-  width: 100%;
-  margin: 1rem 0;
-  overflow: hidden;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1rem 0;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow:
+        0 4px 6px -1px rgba(0, 0, 0, 0.1),
+        0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 .markdown-body table th,
 .markdown-body table td {
-  padding: 0.75rem 1rem;
-  text-align: left;
-  border: 1px solid #374151;
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border: 1px solid #374151;
 }
 
 .markdown-body table th {
-  background-color: #2066B8; /* CSSA blue */
-  color: white;
-  font-weight: 600;
+    background-color: #2066b8; /* CSSA blue */
+    color: white;
+    font-weight: 600;
 }
 
 .markdown-body table tr {
-  background-color: #1e293b; /* Dark blue-gray */
-  color: #e2e8f0;
-  border-bottom: 1px solid #374151;
+    background-color: #1e293b; /* Dark blue-gray */
+    color: #e2e8f0;
+    border-bottom: 1px solid #374151;
 }
 
 .markdown-body table tr:nth-child(even) {
-  background-color: #1a2234; /* Slightly darker for alternating rows */
+    background-color: #1a2234; /* Slightly darker for alternating rows */
 }
 
 .markdown-body table tr:hover {
-  background-color: #2d3748;
-  transition: background-color 0.2s ease;
+    background-color: #2d3748;
+    transition: background-color 0.2s ease;
 }
 
 /* Ensure these styles take precedence over github-markdown-css */
@@ -283,47 +285,47 @@ html {
 .markdown-dark.markdown-body tr,
 .markdown-dark.markdown-body th,
 .markdown-dark.markdown-body td {
-  border-color: #374151 !important;
+    border-color: #374151 !important;
 }
 
 .markdown-dark.markdown-body th {
-  background-color: #2066B8 !important;
-  color: white !important;
+    background-color: #2066b8 !important;
+    color: white !important;
 }
 
 .markdown-dark.markdown-body tr {
-  background-color: #1e293b !important;
-  color: #e2e8f0 !important;
+    background-color: #1e293b !important;
+    color: #e2e8f0 !important;
 }
 
 .markdown-dark.markdown-body tr:nth-child(even) {
-  background-color: #1a2234 !important;
+    background-color: #1a2234 !important;
 }
 
 .markdown-dark.markdown-body tr:hover {
-  background-color: #2d3748 !important;
+    background-color: #2d3748 !important;
 }
 
 /* Table wrapper for better mobile responsiveness */
 .table-wrapper {
-  overflow-x: auto;
-  margin: 1rem 0;
-  border-radius: 8px;
+    overflow-x: auto;
+    margin: 1rem 0;
+    border-radius: 8px;
 }
 
 /* Ensure code blocks inside table cells don't break layout */
 .markdown-body td code {
-  white-space: nowrap;
+    white-space: nowrap;
 }
 
 /* Fix for potential border-radius issues with tables */
 .markdown-body table {
-  border-radius: 6px;
+    border-radius: 6px;
 }
 
 /* Ensure table captions are styled properly */
 .markdown-body table caption {
-  padding: 0.5rem;
-  color: #e2e8f0;
-  font-style: italic;
+    padding: 0.5rem;
+    color: #e2e8f0;
+    font-style: italic;
 }
