@@ -7,10 +7,26 @@ import SponsorCard from "@/components/sponsor-card";
 export default function GameJam() {
     return (
         <main className="flex flex-col bg-cssa-light-blue">
-            <EventPageHeader title="Game Jam Logo" image="/img/gamejam/banner.svg" />
+            <EventPageHeader title="Game Jam Logo" image="/img/gamejam/2024/banner.svg" />
             <div className="container py-12 flex flex-col gap-12">
                 <BlockHeader title="Theme" />
-                <p>Theme will be voted on during the opening ceremony.</p>
+                <p>The theme this year was "Under Pressure" and was voted on during the opening ceremony.</p>
+                <BlockHeader title={`Winners & Awards`}/>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {[
+                        { id:1, src: "/img/gamejam/2024/awards/art-design.png", alt: "Best Art Design" },
+                        { id:2, src: "/img/gamejam/2024/awards/sound-design.png", alt: "Best Sound Design" },
+                        { id:3, src: "/img/gamejam/2024/awards/first-time.png", alt: "Best First-Time Game Jam Submission" },
+                        { id:4, src: "/img/gamejam/2024/awards/innovative.png", alt: "Most Innovative" },
+                        { id:5, src: "/img/gamejam/2024/awards/on-theme.png", alt: "Most On Theme" },
+                        { id:6, src: "/img/gamejam/2024/awards/peoples-choice.png", alt: "People's Choice Award" },
+                        { id:7, src: "/img/gamejam/2024/awards/overall.png", alt: "Overall Best Game" },
+                    ].map(award => (
+                        <div key={award.id} className="relative w-full m-2" style={{ aspectRatio: "16/9" }}>
+                            <Image src={award.src} fill alt={award.alt} className={`object-contain`}/>
+                        </div>
+                    ))}
+                </div>
                 <BlockHeader title="Rules" />
                 <p>Participants must follow our <a className="underline" href="https://umanitobacssa.ca/docs/discordTOU.pdf">Discord Terms of Use</a> This includes:</p>
                 <ul>
@@ -21,7 +37,17 @@ export default function GameJam() {
                     <li>- We ask that you follow those guidelines in person and on the discord.</li>
                 </ul>
                 <BlockHeader title="Schedule" />
-                <p>Schedule will be posted closer to the date of the Game Jam.</p>
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+                  {[
+                    "/img/gamejam/2024/schedule/day1.png",
+                    "/img/gamejam/2024/schedule/day2.png",
+                    "/img/gamejam/2024/schedule/day3.png",
+                  ].map((src, idx) => (
+                    <div key={src} className="relative w-full mx-2" style={{ aspectRatio: "15/20" }}>
+                      <Image src={src} fill alt={`Day ${idx + 1} Schedule`} className="object-contain" />
+                    </div>
+                  ))}
+                </div>
                 <BlockHeader title="Sponsors" />
                 <p>We'd like to thank all our sponsors that allow us to put on events like this for Computer Science students!</p>
                 {/**
@@ -58,8 +84,8 @@ export default function GameJam() {
                     <li>- <a className="underline" href="https://cli.github.com">GitHub CLI</a> installed (unless you are comfortable with Git and SSH key based authentication for pulling/pushing to GitHub).</li>
                 </ul>
                 <p>If you do not have a team, you can look for a team in the <i>#looking-for-a-team</i> channel in the server to find a team.</p>
-                <div className="grid grid-cols-2 text-center table-auto gap-8">
-                <a href="https://discord.umanitobacssa.ca/gamejam"><Button className="w-full" variant="default" size="lg">Join the Discord</Button></a> <a href="https://itch.io/jam/cssa-game-jam-2024"><Button className="w-full" variant="default" size="lg">Itch.io Page</Button></a>
+                <div className="grid grid-cols-1 text-center table-auto gap-8">
+                <a href="https://itch.io/jam/cssa-game-jam-2024"><Button className="w-full" variant="default" size="lg">Itch.io Page for CSSA Game Jam 2024</Button></a>
                 </div>
             </div>
         </main>
