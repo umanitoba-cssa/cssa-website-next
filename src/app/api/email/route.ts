@@ -3,8 +3,23 @@ import nodemailer from "nodemailer";
 import Mail from "nodemailer/lib/mailer";
 
 export async function POST(request: NextRequest) {
-  const { email, name, message } = await request.json();
+  const { email, name, message, recaptchaToken } = await request.json();
 
+  const params = new URLSearchParams({
+    secret: process.env.RECAPTCHA_SECRET_KEY ?? "",
+    response: recaptchaToken ?? "",
+  });
+  const res = await fetch("https://www.google.com/recaptcha/api/siteverify",{
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body: params.toString()
+  });
+  const {success} = await res.json();
+  if (!success){
+    return NextResponse.json({ error: "reCAPTCHA failed" }, { status: 400 }); 
+  }
   const transport = nodemailer.createTransport({
     host: "mail.smtp2go.com",
     port: 465,

@@ -4,12 +4,24 @@ import BlockHeader from "@/components/block-header";
 import PageHeader from "@/components/page-header";
 import ProfileCard from "@/components/profile-card";
 import ProfileModal from "@/components/profile-modal";
-import { ExecProfiles, LoungeProfiles, PromotionsProfiles, FinanceProfiles, MerchProfiles, EventsProfiles, TechnologyProfiles, AdvocacyProfiles, StudentResourcesProfiles, IProfile } from "@/data/team";
+import {
+    ExecProfiles,
+    LoungeProfiles,
+    PromotionsProfiles,
+    MerchProfiles,
+    EventsProfiles,
+    TechnologyProfiles,
+    AdvocacyProfiles,
+    StudentResourcesProfiles,
+    IProfile,
+} from "@/data/team";
 import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
 
 export default function Team() {
-    const [selectedProfile, setSelectedProfile] = useState<IProfile | null>(null);
+    const [selectedProfile, setSelectedProfile] = useState<IProfile | null>(
+        null
+    );
 
     return (
         <main className="flex flex-col">
@@ -83,6 +95,19 @@ export default function Team() {
                 <BlockHeader title="Student Resources Committee" />
                 <div className="flex flex-row gap-4 flex-wrap justify-center">
                     {StudentResourcesProfiles.map((profile) => (
+                        <ProfileCard
+                            key={`${profile.name}-${profile.position}`}
+                            profile={profile}
+                            onClick={() => {
+                                setSelectedProfile(profile);
+                            }}
+                        />
+                    ))}
+                </div>
+
+                <BlockHeader title="Merch Committee" />
+                <div className="flex flex-row gap-4 flex-wrap justify-center">
+                    {MerchProfiles.map((profile) => (
                         <ProfileCard
                             key={`${profile.name}-${profile.position}`}
                             profile={profile}
