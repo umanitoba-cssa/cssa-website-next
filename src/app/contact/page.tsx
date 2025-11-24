@@ -35,8 +35,8 @@ const Contact: FC = () => {
     document.body.appendChild(script);
 
     (window as any).onRecaptchaSubmit = (token: string) => {
-      (document.getElementById("contact-form") as HTMLFormElement)?.requestSubmit();
       recaptchaTokenRef.current = token;
+      (document.getElementById("contact-form") as HTMLFormElement)?.requestSubmit();
       
       // cleanup
       return () => {

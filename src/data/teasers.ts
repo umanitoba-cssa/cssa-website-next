@@ -12,7 +12,7 @@ export const Teasers: ITeasers[] = [
     section: "What we do",
     title: "Advocacy",
     description:
-      "The CSSA is the official voice of computer science students at the University of Manitoba. We advocate for the interests and concerns of computer science students to the Department of Computer Science, the Faculty of Science, and the university administration. We work to ensure that computer science students havea high-quality education and a positive academic experience. We strive to improve the field by promoting diversity, inclusion, and equity in computing.",
+      "The CSSA is the official voice of computer science students at the University of Manitoba. We advocate for the interests and concerns of computer science students to the Department of Computer Science, the Faculty of Science, and the university administration. We work to ensure that computer science students have a high-quality education and a positive academic experience. We strive to improve the field by promoting diversity, inclusion, and equity in computing.",
     src: "/img/teasers/advocacy.jpg",
   },
   {
@@ -27,7 +27,7 @@ export const Teasers: ITeasers[] = [
     section: "What we do",
     title: "Support",
     description:
-      "Through representation, resources, and opportunities, the CSSA will empower the computer science student community to enhance their academic journey and theircareers in the field of computing. We help computer science students with theiracademic challenges and questions, and also help students with their careerplans and choices. We have resources and people who can assist students with their needs and interests.",
+      "Through representation, resources, and opportunities, the CSSA will empower the computer science student community to enhance their academic journey and their careers in the field of computing. We help computer science students with their academic challenges and questions, and also help students with their career plans and choices. We have resources and people who can assist students with their needs and interests.",
     src: "/img/teasers/support.jpg",
   },
   {

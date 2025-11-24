@@ -18,7 +18,7 @@ export async function POST(request: NextRequest) {
   });
   const {success} = await res.json();
   if (!success){
-    return NextResponse.json({ error: "reCAPCHA failed" }, { status: 400 }); 
+    return NextResponse.json({ error: "reCAPTCHA failed" }, { status: 400 }); 
   }
   const transport = nodemailer.createTransport({
     host: "mail.smtp2go.com",
