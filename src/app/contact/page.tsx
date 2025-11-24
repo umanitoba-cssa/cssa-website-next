@@ -37,14 +37,13 @@ const Contact: FC = () => {
     (window as any).onRecaptchaSubmit = (token: string) => {
       recaptchaTokenRef.current = token;
       (document.getElementById("contact-form") as HTMLFormElement)?.requestSubmit();
-      
-      // cleanup
-      return () => {
-        delete (window as any).onRecaptchaSubmit;
-        if (script.parentNode) {
-          script.parentNode.removeChild(script);
-        }
-      };
+    };
+    // cleanup on unmount
+    return () => {
+      delete (window as any).onRecaptchaSubmit;
+      if (script.parentNode) {
+        script.parentNode.removeChild(script);
+      }
     };
   }, [])
   
