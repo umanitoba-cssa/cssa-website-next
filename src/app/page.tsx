@@ -56,7 +56,7 @@ export default function Home() {
 
                 {/* How we support */}
                 <div className="flex flex-col gap-8">
-                    <BlockHeader title="How we Support" />
+                    <BlockHeader title="How we support" />
                     <div className="grid lg:grid-cols-[400px_auto] gap-12 lg:gap-8 items-center">
                         {Teasers.filter(item => item.section === "How we Support").map((item)=>(
                             <Fragment key={item.title}>
