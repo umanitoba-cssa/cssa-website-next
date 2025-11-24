@@ -31,7 +31,7 @@ export const Teasers: ITeasers[] = [
     src: "/img/teasers/support.jpg",
   },
   {
-    section: "How we Support",
+    section: "How we support",
     title: "Student Guides",
     description:
       "The CSSA has compiled a collection of guides to help computer science students navigate their academic journey and prepare for their careers. These guides cover a range of topics from getting started with computer science to finding internships and jobs.",
@@ -40,7 +40,7 @@ export const Teasers: ITeasers[] = [
     linkText: "Browse Guides →",
   },
   {
-    section: "How we Support",
+    section: "How we support",
     title: "Researchers",
     description:
       "We have compiled a collection of the University of Manitoba's Department of Computer Science researchers, including details on their labs, research interests, student researcher requirements, and contact information.",

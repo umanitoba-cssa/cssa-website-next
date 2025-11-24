@@ -54,7 +54,7 @@ export default function Home() {
                     </div>
                 </div>
 
-                {/* How we Support  */}
+                {/* How we support */}
                 <div className="flex flex-col gap-8">
                     <BlockHeader title="How we Support" />
                     <div className="grid lg:grid-cols-[400px_auto] gap-12 lg:gap-8 items-center">
