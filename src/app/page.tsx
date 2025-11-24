@@ -58,7 +58,7 @@ export default function Home() {
                 <div className="flex flex-col gap-8">
                     <BlockHeader title="How we support" />
                     <div className="grid lg:grid-cols-[400px_auto] gap-12 lg:gap-8 items-center">
-                        {Teasers.filter(item => item.section === "How we Support").map((item)=>(
+                        {Teasers.filter(item => item.section === "How we support").map((item)=>(
                             <Fragment key={item.title}>
                             <div className="aspect-3/2 align-middle relative">
                             <Image
