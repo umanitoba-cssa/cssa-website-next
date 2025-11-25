@@ -49,12 +49,7 @@ function parseGitHubUrl(url: string): GitHubRepoInfo {
 /**
  * Fetch file content from GitHub API
  */
-async function fetchGitHubFile(
-    owner: string,
-    repo: string,
-    filePath: string,
-    branch: string,
-): Promise<string> {
+export async function fetchGitHubFile(owner: string, repo: string, filePath: string, branch: string): Promise<string> {
     const url = `https://api.github.com/repos/${owner}/${repo}/contents/${filePath}?ref=${branch}`;
 
     try {
@@ -82,11 +77,7 @@ async function fetchGitHubFile(
 /**
  * Fetch repository tree structure from GitHub API
  */
-async function fetchGitHubTree(
-    owner: string,
-    repo: string,
-    branch: string,
-): Promise<GitHubTreeItem[]> {
+export async function fetchGitHubTree(owner: string, repo: string, branch: string): Promise<GitHubTreeItem[]> {
     const url = `https://api.github.com/repos/${owner}/${repo}/git/trees/${branch}?recursive=1`;
 
     try {

@@ -14,6 +14,8 @@ interface IGuideList {
     repoURL: string;
 }
 
+export const GITHUB_OWNER = "umanitoba-cssa";
+
 export const GuideList: IGuideList[] = [
     {
         slug: 'first-year-guide',
