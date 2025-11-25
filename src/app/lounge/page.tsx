@@ -4,9 +4,9 @@ import PageHeader from "@/components/page-header";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 export default async function Lounge() {
-    const menu = await getLoungeMenu();
+    //const menu = await getLoungeMenu();
     
-    const menuItems = Object.keys(menu).map((category) => {
+    /*const menuItems = Object.keys(menu).map((category) => {
         const rows = menu[category].map((item) => {
             return (
                 <TableRow key={item.Item}>
@@ -15,8 +15,9 @@ export default async function Lounge() {
                 </TableRow>
             )
         });
+        */
 
-        return (
+        /*return (
             <div className="flex flex-col">
                 <h4>{category}</h4>
                 <Table>
@@ -27,7 +28,8 @@ export default async function Lounge() {
             </div>
         )
     });
-
+    */
+   
     return (
         <main className="flex flex-col">
             <PageHeader title="Lounge" image="/img/backgrounds/lounge.jpg" />
@@ -47,7 +49,7 @@ export default async function Lounge() {
                 <div className="flex flex-col gap-8">
                     <BlockHeader title="Lounge Canteen Menu" />
                     <div className="flex flex-col gap-8">
-                        {menuItems}
+                        {/*menuItems*/}
                     </div>
                 </div>
             </div>
