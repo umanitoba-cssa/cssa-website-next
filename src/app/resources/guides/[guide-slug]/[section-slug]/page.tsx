@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
-import { getGuideBySlug, getSectionBySlug, getGuidesSlugs, markdownToHtml } from '@/lib/mdx';
+import { getGuiedBySlug, getGuideSection, getGuidesSlugs, markdownToHtml } from '@/lib/mdx';
 import PageHeader from '@/components/page-header';
 import GuideSidebar from '@/components/guides/guide-sidebar';
 import MarkdownContent from '@/components/guides/markdown-content';
@@ -17,7 +17,7 @@ interface SectionPageProps {
 }
 
 export async function generateMetadata({ params }: SectionPageProps): Promise<Metadata> {
-  const guide = getGuideBySlug(params['guide-slug']);
+  const guide = await getGuiedBySlug(params['guide-slug']);
   
   if (!guide.title || guide.title === 'Guide Not Found') {
     return {
@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: SectionPageProps): Promise<Me
     };
   }
   
-  const section = getSectionBySlug(params['guide-slug'], params['section-slug']);
+  const section = await getGuideSection(params['guide-slug'], params['section-slug']);
   
   if (!section.title || section.title === 'Section Not Found') {
     return {
@@ -46,8 +46,8 @@ export async function generateStaticParams() {
   const params: { 'guide-slug': string; 'section-slug': string }[] = [];
   
   for (const guideSlug of guides) {
-    const guide = getGuideBySlug(guideSlug);
-    guide.sections.forEach(section => {
+    const guide = await getGuiedBySlug(guideSlug);
+    guide.sections.forEach(async (section) => {
       params.push({
         'guide-slug': guideSlug,
         'section-slug': section.slug,
@@ -59,15 +59,13 @@ export async function generateStaticParams() {
 }
 
 export default async function SectionPage({ params }: SectionPageProps) {
-  const guide = getGuideBySlug(params['guide-slug']);
+  const guide = await getGuiedBySlug(params['guide-slug']);
   
   // Redirect to 404 if guide not found
   if (!guide.title || guide.title === 'Guide Not Found') {
     notFound();
   }
-  
-  const section = getSectionBySlug(params['guide-slug'], params['section-slug']);
-  
+  const section = await getGuideSection(params['guide-slug'], params['section-slug']);
   // Redirect to 404 if section not found
   if (!section.title || section.title === 'Section Not Found') {
     notFound();

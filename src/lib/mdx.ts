@@ -5,7 +5,8 @@ import readingTime from 'reading-time';
 import { remark } from 'remark';
 import html from 'remark-html';
 import remarkGfm from 'remark-gfm';
-import { GuideList } from '../data/resources';
+import { GITHUB_OWNER, GuideList } from '../data/resources';
+import { fetchGitHubFile, fetchGitHubTree } from './github-sync';
 
 // Types for our guides and sections
 export interface GuideMetadata {
@@ -67,8 +68,8 @@ export async function getGuidesSlugs(): Promise<string[]> {
  * Get metadata for all guides
  */
 export async function getAllGuides(): Promise<Guide[]> {
-  const guidesSlugs = await getGuidesSlugs();
-  const guides = guidesSlugs.map((slug) => getGuideBySlug(slug));
+  const guidesSlugs = GuideList.map(g => g.slug);
+  const guides = await Promise.all(guidesSlugs.map((repoName) => getGuiedBySlug(repoName)));
   
   // Sort guides based on their order in GuideList configuration
   const guideOrder = GuideList.map(g => g.slug);
@@ -90,106 +91,45 @@ export async function getAllGuides(): Promise<Guide[]> {
     return a.title.localeCompare(b.title);
   });
 }
-
 /**
  * Get a guide by its slug
  */
-export function getGuideBySlug(slug: string): Guide {
-  const fullPath = path.join(GUIDES_DIRECTORY, slug, 'index.md');
-  let fileContents: string;
-  
-  try {
-    fileContents = fs.readFileSync(fullPath, 'utf8');
-  } catch (error) {
-    console.error(`Error reading guide file ${fullPath}:`, error);
-    return {
-      title: 'Guide Not Found',
-      description: 'The requested guide could not be found.',
-      slug,
-      sections: [],
-      content: ''
-    };
-  }
-  
-  // Parse frontmatter
-  const { data, content } = matter(fileContents);
-  const frontmatter = data as GuideFrontmatter;
-  
-  // Get sections
-  const sections = getSectionsByGuideSlug(slug);
-  
-  return {
-    title: frontmatter.title || 'Untitled Guide',
-    description: frontmatter.description || '',
-    author: frontmatter.author,
-    date: frontmatter.date,
-    slug,
-    sections,
-    content
-  };
-}
+export async function getGuiedBySlug(slug: string): Promise<Guide> {
+  const indexFileContents = await fetchGitHubFile(GITHUB_OWNER, slug, 'index.md', "main");
 
-/**
- * Get all sections for a guide
- */
-export function getSectionsByGuideSlug(slug: string): Section[] {
-  const guideDirectory = path.join(GUIDES_DIRECTORY, slug);
-  
-  try {
-    if (!fs.existsSync(guideDirectory)) {
-      return [];
-    }
-    
-    const sectionFiles = fs.readdirSync(guideDirectory)
-      .filter(file => file.endsWith('.md') && file !== 'index.md');
-    
-    const sections = sectionFiles.map(file => {
-      const sectionSlug = file.replace(/\.md$/, '');
-      return getSectionBySlug(slug, sectionSlug);
-    });
-    
-    return sections;
-  } catch (error) {
-    console.error(`Error getting sections for guide ${slug}:`, error);
-    return [];
-  }
+  const tree = await fetchGitHubTree(GITHUB_OWNER, slug, "main")
+  const markdownFiles = tree.filter(file => file.type === 'blob' && file.path.endsWith('.md'));
+  const sections = await Promise.all(markdownFiles.map(file => getGuideSection(slug, file.path.split('/').pop()?.replace('.md', '') || '')));
+   // Parse frontmatter
+   const { data, content } = matter(indexFileContents);
+   const frontmatter = data as GuideFrontmatter;
+   
+   
+   return {
+     title: frontmatter.title || 'Untitled Guide',
+     description: frontmatter.description || '',
+     author: frontmatter.author,
+     date: frontmatter.date,
+     slug,
+     sections,
+     content
+   };
 }
-
 /**
- * Get a specific section by its slug
+ * Get a specific section from github
  */
-export function getSectionBySlug(guideSlug: string, sectionSlug: string): Section {
-  const fullPath = path.join(GUIDES_DIRECTORY, guideSlug, `${sectionSlug}.md`);
-  let fileContents: string;
-  
-  try {
-    fileContents = fs.readFileSync(fullPath, 'utf8');
-  } catch (error) {
-    console.error(`Error reading section file ${fullPath}:`, error);
-    return {
-      title: 'Section Not Found',
-      description: 'The requested section could not be found.',
-      slug: sectionSlug,
-      content: '',
-      readingTime: { text: '0 min read', minutes: 0, words: 0 }
-    };
-  }
-  
-  // Parse frontmatter
-  const { data, content } = matter(fileContents);
+export async function getGuideSection(guideSlug: string, sectionSlug: string):Promise<Section>{
+  const file = await fetchGitHubFile(GITHUB_OWNER, guideSlug, sectionSlug+".md", "main");
+  const { data, content } = matter(file);
   const frontmatter = data as GuideFrontmatter;
-  
-  // Calculate reading time
-  const stats = readingTime(content);
-  
   return {
     title: frontmatter.title || 'Untitled Section',
     description: frontmatter.description || '',
     author: frontmatter.author,
     date: frontmatter.date,
-    slug: sectionSlug,
+    slug:sectionSlug,
     content,
-    readingTime: stats
+    readingTime: readingTime(content)
   };
 }
 

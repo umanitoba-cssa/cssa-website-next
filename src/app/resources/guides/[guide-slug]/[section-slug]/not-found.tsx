@@ -2,9 +2,9 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import PageHeader from '@/components/page-header';
 import { notFound } from 'next/navigation';
-import { getGuideBySlug } from '@/lib/mdx';
+import { getGuiedBySlug } from '@/lib/mdx';
 
-export default function SectionNotFound({ 
+export default async function SectionNotFound({ 
   params
 }: { 
   params: { 'guide-slug': string; 'section-slug': string } 
@@ -15,7 +15,7 @@ export default function SectionNotFound({
   }
 
   // Check if the guide exists
-  const guide = getGuideBySlug(params['guide-slug']);
+  const guide = await getGuiedBySlug(params['guide-slug']);
   
   // If the guide itself doesn't exist, show the main not found page
   if (!guide || guide.title === 'Guide Not Found') {
