@@ -8,7 +8,6 @@ import {
     ExecProfiles,
     LoungeProfiles,
     PromotionsProfiles,
-    FinanceProfiles,
     MerchProfiles,
     EventsProfiles,
     TechnologyProfiles,
