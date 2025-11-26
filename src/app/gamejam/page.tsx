@@ -29,7 +29,7 @@ export default function GameJam() {
                 </div>
                 <BlockHeader title="Sponsors" />
                 <p>We'd like to thank all our sponsors that allow us to put on events like this for Computer Science students!</p>
-                <div className="flex flex-wrap gap-5 justify-center md:justify-start">
+                <div className="flex flex-wrap gap-5 justify-center">
                 <SponsorCard name="Ubisoft" image="/img/gamejam/ubisoft-logo.svg" website="https://winnipeg.ubisoft.com/"/>
                 <SponsorCard name="G3" image="/img/gamejam/g3-logo.svg" website="https://g3.ca"/>
                 <SponsorCard name="Niche" image="/img/gamejam/niche-logo.svg" website="https://nicherms.com"/>
