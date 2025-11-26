@@ -69,6 +69,7 @@ export default function GameJam() {
                     <li>
                         -{' '}
                         <a
+                            rel="noreferrer"
                             className="underline"
                             href="https://itch.io/game-development/engines/most-projects"
                         >
@@ -80,6 +81,7 @@ export default function GameJam() {
                     <li>
                         -{' '}
                         <a
+                            rel="noreferrer"
                             className="underline"
                             href="https://toolsntechniques.ca/topic03/topic-3.html"
                         >
@@ -87,6 +89,7 @@ export default function GameJam() {
                         </a>{' '}
                         and{' '}
                         <a
+                            rel="noreferrer"
                             className="underline"
                             href="https://toolsntechniques.ca/topic04/topic-2.html"
                         >
@@ -99,7 +102,7 @@ export default function GameJam() {
                 <BlockHeader title="Registration" />
                 <p>
                     Please register by joining our{' '}
-                    <a className="underline" href="https://discord.umanitobacssa.ca/gamejam">
+                    <a rel="noreferrer" className="underline" href="https://discord.umanitobacssa.ca/gamejam">
                         discord
                     </a>{' '}
                     and following the instructions in <i>#welcome</i> <br />
@@ -115,7 +118,7 @@ export default function GameJam() {
                 <ul>
                     <li>
                         -{' '}
-                        <a className="underline" href="https://itch.io">
+                        <a rel="noreferrer" className="underline" href="https://itch.io">
                             Itch.io
                         </a>{' '}
                         account if you are leading a team
@@ -125,13 +128,13 @@ export default function GameJam() {
                     If you do not have a team, you can look for a team in the{' '}
                     <i>#looking-for-a-team</i> channel in the server to find a team.
                 </p>
-                <div className="grid grid-cols-2 text-center table-auto gap-8">
+                <div rel="noreferrer" className="grid grid-cols-2 text-center table-auto gap-8">
                     <a href="https://discord.umanitobacssa.ca/gamejam">
                         <Button className="w-full" variant="default" size="lg">
                             Join the Discord
                         </Button>
                     </a>{' '}
-                    <a href="https://itch.io/jam/cssa-game-jam-2025">
+                    <a rel="noreferrer" href="https://itch.io/jam/cssa-game-jam-2025">
                         <Button className="w-full" variant="default" size="lg">
                             Itch.io Page
                         </Button>

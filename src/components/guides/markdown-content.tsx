@@ -69,6 +69,11 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({ source, className }) 
             });
         });
 
+        const links = articleElement.querySelectorAll('a');
+        links.forEach((link) => {
+            link.classList.add('visited:text-purple-600');
+        });
+
         // Process images to add responsive behavior
         const images = articleElement.querySelectorAll('img');
         images.forEach((img) => {
