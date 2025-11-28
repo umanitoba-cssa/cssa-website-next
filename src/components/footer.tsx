@@ -7,13 +7,21 @@ export default function Footer() {
             <div className="flex flex-row flex-wrap gap-4 place-items-center justify-evenly">
                 <div className="flex flex-row gap-2 place-items-center">
                     <FaDiscord className="w-8 h-8" />
-                    <a rel="noreferrer" className="hover:underline" href="https://discord.umanitobacssa.ca/">
+                    <a
+                        rel="noreferrer"
+                        className="hover:underline"
+                        href="https://discord.umanitobacssa.ca/"
+                    >
                         Join us on Discord
                     </a>
                 </div>
                 <div className="flex flex-row gap-2 place-items-center">
                     <FaInstagram className="w-8 h-8" />
-                    <a rel="noreferrer" className="hover:underline" href="https://instagram.com/umanitobacssa">
+                    <a
+                        rel="noreferrer"
+                        className="hover:underline"
+                        href="https://instagram.com/umanitobacssa"
+                    >
                         @umanitobacssa
                     </a>
                 </div>
@@ -25,7 +33,11 @@ export default function Footer() {
                 </div>
                 <div className="flex flex-row gap-2 place-items-center">
                     <FaGithub className="w-8 h-8" />
-                    <a rel="noreferrer" className="hover:underline" href="https://github.com/umanitoba-cssa/">
+                    <a
+                        rel="noreferrer"
+                        className="hover:underline"
+                        href="https://github.com/umanitoba-cssa/"
+                    >
                         @umanitoba-cssa
                     </a>
                 </div>

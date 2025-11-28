@@ -56,6 +56,13 @@ const compFinanceLab: ILab = {
         'This lab is located right next to the elevators (on either side) on 5th floor of E2-EITC, where we do research in an area mostly foreign to CS students.',
 };
 
+const sqmLab: ILab = {
+    name: 'Software Quality and Maintenance (SQM) Research Lab',
+    website: 'https://shaifulc.github.io/SQMResearchLab/SQMResearchLab.html',
+    description:
+        'SQM Research Lab is committed to assisting software practitioners in developing energy-efficient (green computing), bug-free, and maintainable software. We also create tools to push the boundaries of software engineering research. Our research is funded by the Natural Sciences and Engineering Research Council of Canada (NSERC) and the University of Manitoba.',
+};
+
 export interface IResearcher {
     // researcher properties
     id: number;
@@ -71,7 +78,7 @@ export interface IResearcher {
 
 // If the researcher doesn't have requirements, put the following under minStudentRequirements
 export const noRequirements: string =
-    "This prof doesn't have any explicitly stated requirements. Try sending them an email.";
+    "This prof doesn't have any explicitly stated requirements. Try sending them an email or seeing if their lab's website has information on student researcher requirements.";
 
 export const ResearchersInfo = [
     {
@@ -297,6 +304,35 @@ export const ResearchersInfo = [
             'Core CS 2nd year courses should have been completed along with couple of Stat & Math courses.',
             'Strong programming skills.',
             'Willing to learn challenging new topic(s) from business and finance.',
+        ],
+    },
+    {
+        fullName: 'Shaiful Chowdhury',
+        email: 'Shaiful.Chowdhury@umanitoba.ca',
+        image: '/img/researchers/shaiful-chowdhury.jpg',
+        lab: sqmLab,
+        googleScholarLink: 'https://scholar.google.ca/citations?user=DRpyER8AAAAJ&hl=en',
+        researchInterests: ['Software Quality', 'Software maintenance', 'Green computing'],
+        acceptingStudents: true,
+        minStudentRequirements: [noRequirements],
+    },
+    {
+        fullName: 'Daniel Rea',
+        email: 'daniel.rea@umanitoba.ca',
+        image: '/img/researchers/daniel-rea.jpg',
+        lab: hciLab,
+        googleScholarLink: 'https://scholar.google.com/citations?user=0wv5PIQAAAAJ&hl=en',
+        researchInterests: [
+            'We look at human-robot interaction, primarily interfaces for controlling robots, visualizations for people controlling robots, and social interaction via robots.',
+            "I'm particularly interested in how interfaces can change how people think and interpret information, and how that can lead to changes in control.",
+            'As well, we look at some social robot behaviors that may appear negative (anxiousness, rudeness, etc), and do a lot of video game-inspired research.',
+        ],
+        acceptingStudents: true,
+        minStudentRequirements: [
+            "Have strong fundamentals (B+ average or higher, but you can try to convince me if you don't hit that).",
+            'HCI background is preferred but not necessary.',
+            'No robotics background needed.',
+            'Be interested in design, how people think, and how technology can shape those things.',
         ],
     },
 ];

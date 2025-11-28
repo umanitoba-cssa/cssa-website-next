@@ -40,13 +40,21 @@ export default function GameJam() {
                 <p> Location: EITC Atrium and EITC E3-270</p>
                 <p> Date/Time: November 28th, 2025 @ 5pm to November 30th, 2025 @ 1pm</p>
                 <BlockHeader title="Schedule" />
-                <p>Schedule will be posted closer to the date of the Game Jam.</p>
+                <div className="flex justify-center">
+                    <Image
+                        src="/img/gamejam/schedule.png"
+                        alt="Game Jam 2025 Schedule"
+                        width={400}
+                        height={400}
+                        className="w-full lg:w-1/2"
+                    />
+                </div>
                 <BlockHeader title="Sponsors" />
                 <p>
                     We'd like to thank all our sponsors that allow us to put on events like this for
                     Computer Science students!
                 </p>
-                <div className="flex flex-wrap gap-5 justify-center md:justify-start">
+                <div className="flex flex-wrap gap-5 justify-center">
                     <SponsorCard
                         name="Ubisoft"
                         image="/img/gamejam/ubisoft-logo.svg"
@@ -64,6 +72,16 @@ export default function GameJam() {
                     />
                 </div>
                 <div className="flex gap-5"></div>
+                <BlockHeader title="Award Categories" />
+                <div className="flex justify-center">
+                    <Image
+                        src="/img/gamejam/award-categories.png"
+                        alt="Game Jam 2025 Award Categories"
+                        width={400}
+                        height={400}
+                        className="w-full lg:w-1/2"
+                    />
+                </div>
                 <BlockHeader title="Resources" />
                 <ul>
                     <li>
@@ -102,7 +120,11 @@ export default function GameJam() {
                 <BlockHeader title="Registration" />
                 <p>
                     Please register by joining our{' '}
-                    <a rel="noreferrer" className="underline" href="https://discord.umanitobacssa.ca/gamejam">
+                    <a
+                        rel="noreferrer"
+                        className="underline"
+                        href="https://discord.umanitobacssa.ca/gamejam"
+                    >
                         discord
                     </a>{' '}
                     and following the instructions in <i>#welcome</i> <br />

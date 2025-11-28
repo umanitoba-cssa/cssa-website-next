@@ -7,10 +7,66 @@ import SponsorCard from '@/components/sponsor-card';
 export default function GameJam() {
     return (
         <main className="flex flex-col bg-cssa-light-blue">
-            <EventPageHeader title="Game Jam Logo" image="/img/gamejam/banner.svg" />
+            <EventPageHeader title="Game Jam Logo" image="/img/gamejam/2024/banner.svg" />
             <div className="container py-12 flex flex-col gap-12">
                 <BlockHeader title="Theme" />
-                <p>Theme will be voted on during the opening ceremony.</p>
+                <p>
+                    The theme this year was "Under Pressure" and was voted on during the opening
+                    ceremony.
+                </p>
+                <BlockHeader title={`Winners & Awards`} />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {[
+                        {
+                            id: 1,
+                            src: '/img/gamejam/2024/awards/art-design.png',
+                            alt: 'Best Art Design',
+                        },
+                        {
+                            id: 2,
+                            src: '/img/gamejam/2024/awards/sound-design.png',
+                            alt: 'Best Sound Design',
+                        },
+                        {
+                            id: 3,
+                            src: '/img/gamejam/2024/awards/first-time.png',
+                            alt: 'Best First-Time Game Jam Submission',
+                        },
+                        {
+                            id: 4,
+                            src: '/img/gamejam/2024/awards/innovative.png',
+                            alt: 'Most Innovative',
+                        },
+                        {
+                            id: 5,
+                            src: '/img/gamejam/2024/awards/on-theme.png',
+                            alt: 'Most On Theme',
+                        },
+                        {
+                            id: 6,
+                            src: '/img/gamejam/2024/awards/peoples-choice.png',
+                            alt: "People's Choice Award",
+                        },
+                        {
+                            id: 7,
+                            src: '/img/gamejam/2024/awards/overall.png',
+                            alt: 'Overall Best Game',
+                        },
+                    ].map((award) => (
+                        <div
+                            key={award.id}
+                            className="relative w-full m-2"
+                            style={{ aspectRatio: '16/9' }}
+                        >
+                            <Image
+                                src={award.src}
+                                fill
+                                alt={award.alt}
+                                className={`object-contain`}
+                            />
+                        </div>
+                    ))}
+                </div>
                 <BlockHeader title="Rules" />
                 <p>
                     Participants must follow our{' '}
@@ -32,7 +88,26 @@ export default function GameJam() {
                     <li>- We ask that you follow those guidelines in person and on the discord.</li>
                 </ul>
                 <BlockHeader title="Schedule" />
-                <p>Schedule will be posted closer to the date of the Game Jam.</p>
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+                    {[
+                        '/img/gamejam/2024/schedule/day1.png',
+                        '/img/gamejam/2024/schedule/day2.png',
+                        '/img/gamejam/2024/schedule/day3.png',
+                    ].map((src, idx) => (
+                        <div
+                            key={src}
+                            className="relative w-full mx-2"
+                            style={{ aspectRatio: '15/20' }}
+                        >
+                            <Image
+                                src={src}
+                                fill
+                                alt={`Day ${idx + 1} Schedule`}
+                                className="object-contain"
+                            />
+                        </div>
+                    ))}
+                </div>
                 <BlockHeader title="Sponsors" />
                 <p>
                     We'd like to thank all our sponsors that allow us to put on events like this for
@@ -43,7 +118,7 @@ export default function GameJam() {
                  *<p>- TBD</p>
                  */}
                 <h4>Silver Sponsors</h4>
-                <div className="flex gap-5">
+                <div className="grid grid-cols-1 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
                     <SponsorCard
                         name="Niche"
                         image="/img/gamejam/niche-logo.svg"
@@ -56,7 +131,7 @@ export default function GameJam() {
                     />
                 </div>
                 <h4>Bronze Sponsors</h4>
-                <div className="flex gap-5">
+                <div className="grid grid-cols-1 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
                     <SponsorCard
                         name="G3"
                         image="/img/gamejam/g3-logo.svg"
@@ -78,7 +153,6 @@ export default function GameJam() {
                     <li>
                         -{' '}
                         <a
-                            rel="noreferrer"
                             className="underline"
                             href="https://itch.io/game-development/engines/most-projects"
                         >
@@ -90,7 +164,6 @@ export default function GameJam() {
                     <li>
                         -{' '}
                         <a
-                            rel="noreferrer"
                             className="underline"
                             href="https://toolsntechniques.ca/topic03/topic-3.html"
                         >
@@ -98,7 +171,6 @@ export default function GameJam() {
                         </a>{' '}
                         and{' '}
                         <a
-                            rel="noreferrer"
                             className="underline"
                             href="https://toolsntechniques.ca/topic04/topic-2.html"
                         >
@@ -111,7 +183,7 @@ export default function GameJam() {
                 <BlockHeader title="Registration" />
                 <p>
                     Please register by joining our{' '}
-                    <a rel="noreferrer" className="underline" href="https://discord.umanitobacssa.ca/gamejam">
+                    <a className="underline" href="https://discord.umanitobacssa.ca/gamejam">
                         discord
                     </a>{' '}
                     and following the instructions in <i>#welcome</i> <br />
@@ -129,28 +201,28 @@ export default function GameJam() {
                 <ul>
                     <li>
                         -{' '}
-                        <a rel="noreferrer" className="underline" href="https://itch.io">
+                        <a className="underline" href="https://itch.io">
                             Itch.io
                         </a>{' '}
                         account if you are leading a team
                     </li>
                     <li>
                         -{' '}
-                        <a rel="noreferrer" className="underline" href="https://github.com">
+                        <a className="underline" href="https://github.com">
                             GitHub
                         </a>{' '}
                         account for code management.
                     </li>
                     <li>
                         -{' '}
-                        <a rel="noreferrer" className="underline" href="https://git-scm.com/downloads">
+                        <a className="underline" href="https://git-scm.com/downloads">
                             Git
                         </a>{' '}
                         installed.
                     </li>
                     <li>
                         -{' '}
-                        <a rel="noreferrer" className="underline" href="https://cli.github.com">
+                        <a className="underline" href="https://cli.github.com">
                             GitHub CLI
                         </a>{' '}
                         installed (unless you are comfortable with Git and SSH key based
@@ -161,15 +233,10 @@ export default function GameJam() {
                     If you do not have a team, you can look for a team in the{' '}
                     <i>#looking-for-a-team</i> channel in the server to find a team.
                 </p>
-                <div className="grid grid-cols-2 text-center table-auto gap-8">
-                    <a rel="noreferrer" href="https://discord.umanitobacssa.ca/gamejam">
+                <div className="grid grid-cols-1 text-center table-auto gap-8">
+                    <a href="https://itch.io/jam/cssa-game-jam-2024">
                         <Button className="w-full" variant="default" size="lg">
-                            Join the Discord
-                        </Button>
-                    </a>{' '}
-                    <a rel="noreferrer" href="https://itch.io/jam/cssa-game-jam-2024">
-                        <Button className="w-full" variant="default" size="lg">
-                            Itch.io Page
+                            Itch.io Page for CSSA Game Jam 2024
                         </Button>
                     </a>
                 </div>

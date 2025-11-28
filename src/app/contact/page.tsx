@@ -34,16 +34,15 @@ const Contact: FC = () => {
         document.body.appendChild(script);
 
         (window as any).onRecaptchaSubmit = (token: string) => {
-            (document.getElementById('contact-form') as HTMLFormElement)?.requestSubmit();
             recaptchaTokenRef.current = token;
-
-            // cleanup
-            return () => {
-                delete (window as any).onRecaptchaSubmit;
-                if (script.parentNode) {
-                    script.parentNode.removeChild(script);
-                }
-            };
+            (document.getElementById('contact-form') as HTMLFormElement)?.requestSubmit();
+        };
+        // cleanup on unmount
+        return () => {
+            delete (window as any).onRecaptchaSubmit;
+            if (script.parentNode) {
+                script.parentNode.removeChild(script);
+            }
         };
     }, []);
 
