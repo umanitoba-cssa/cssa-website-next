@@ -1,9 +1,9 @@
-import BlockHeader from "@/components/block-header";
-import PageHeader from "@/components/page-header";
-import Image from "next/image";
-import { Teasers } from "@/data/teasers";
-import Link from "next/link";
-import { Fragment } from "react";
+import BlockHeader from '@/components/block-header';
+import PageHeader from '@/components/page-header';
+import Image from 'next/image';
+import { Teasers } from '@/data/teasers';
+import Link from 'next/link';
+import { Fragment } from 'react';
 
 export default function Home() {
     return (
@@ -27,7 +27,7 @@ export default function Home() {
                 <div className="flex flex-col gap-8">
                     <BlockHeader title="What we do" />
                     <div className="grid lg:grid-cols-[400px_auto] gap-12 lg:gap-8 items-center">
-                        {Teasers.filter(item => item.section === "What we do").map((item) => (
+                        {Teasers.filter((item) => item.section === 'What we do').map((item) => (
                             <Fragment key={item.title}>
                                 <div className="aspect-3/2 align-middle relative">
                                     <Image
@@ -39,16 +39,17 @@ export default function Home() {
                                 </div>
                                 <div className="flex flex-col place-content-center gap-4">
                                     <h4>{item.title}</h4>
-                                    <p>
-                                        {item.description}
-                                    </p>
-                                    {item.href &&
+                                    <p>{item.description}</p>
+                                    {item.href && (
                                         <Link href={item.href}>
                                             <div className="flex">
-                                                <span className="text-sm text-primary hover:underline"> {item.linkText} </span>
+                                                <span className="text-sm text-primary hover:underline">
+                                                    {' '}
+                                                    {item.linkText}{' '}
+                                                </span>
                                             </div>
                                         </Link>
-                                    }
+                                    )}
                                 </div>
                             </Fragment>
                         ))}
@@ -59,7 +60,7 @@ export default function Home() {
                 <div className="flex flex-col gap-8">
                     <BlockHeader title="How we support" />
                     <div className="grid lg:grid-cols-[400px_auto] gap-12 lg:gap-8 items-center">
-                        {Teasers.filter(item => item.section === "How we support").map((item) => (
+                        {Teasers.filter((item) => item.section === 'How we support').map((item) => (
                             <Fragment key={item.title}>
                                 <div className="aspect-3/2 align-middle relative">
                                     <Image
@@ -71,16 +72,17 @@ export default function Home() {
                                 </div>
                                 <div className="flex flex-col place-content-center gap-4">
                                     <h4>{item.title}</h4>
-                                    <p>
-                                        {item.description}
-                                    </p>
-                                    {item.href &&
+                                    <p>{item.description}</p>
+                                    {item.href && (
                                         <Link href={item.href}>
                                             <div className="flex">
-                                                <span className="text-sm text-primary hover:underline"> {item.linkText} </span>
+                                                <span className="text-sm text-primary hover:underline">
+                                                    {' '}
+                                                    {item.linkText}{' '}
+                                                </span>
                                             </div>
                                         </Link>
-                                    }
+                                    )}
                                 </div>
                             </Fragment>
                         ))}
