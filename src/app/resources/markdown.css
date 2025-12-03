@@ -9,6 +9,11 @@
     color: rgb(52, 101, 178) !important; /* cssa-light-blue */
 }
 
+.markdown-content a:visited {
+    color: oklch(55.8% 0.288 302.321) !important; /* tailwind purple-600 */
+}
+
+
 /* Override the github-markdown-light.css theme for dark mode */
 .markdown-body {
     color: rgb(var(--foreground-rgb)) !important;
