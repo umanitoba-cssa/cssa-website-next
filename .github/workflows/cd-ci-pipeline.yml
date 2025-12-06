@@ -65,10 +65,10 @@ jobs:
               run: bun install --ignore-scripts --frozen-lockfile
 
             - name: Run ESLint
-              run: bun run eslint . || true  # Remove the "|| true" during TECH-82
+              run: bun run eslint .
 
             - name: Run Prettier check
-              run: bun run prettier --check . || true  # Remove the "|| true" during TECH-82
+              run: bun run prettier --check .
 
 
     build:
