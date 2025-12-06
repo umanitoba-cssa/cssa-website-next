@@ -97,7 +97,7 @@ ENV RECAPTCHA_SECRET_KEY=${RECAPTCHA_SECRET_KEY}
 
 # Copy only runtime dependencies
 COPY package.json bun.lock ./
-RUN bun install --frozen-lockfile --production
+RUN bun install --frozen-lockfile --production --ignore-scripts
 
 # Copy built app from builder stage
 COPY --from=builder /usr/src/app/scripts ./scripts
