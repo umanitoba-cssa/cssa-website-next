@@ -28,12 +28,9 @@ ENV CANTEEN_SHEEET_ID=${CANTEEN_SHEEET_ID}
 ENV GITHUB_APP_ID=${GITHUB_APP_ID}
 ENV GITHUB_PRIVATE_KEY=${GITHUB_PRIVATE_KEY}
 
-# Disable husky during build
-ENV HUSKY=0
-
 # Copy only package files first to leverage caching
 COPY package.json bun.lock ./
-RUN bun install --frozen-lockfile
+RUN bun install --frozen-lockfile --ignore-scripts
 
 # Copy only necessary files for build
 COPY tsconfig.json next.config.mjs ./
@@ -98,12 +95,9 @@ ENV GITHUB_PRIVATE_KEY=${GITHUB_PRIVATE_KEY}
 ENV NEXT_PUBLIC_RECAPTCHA_SITE_KEY=${NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
 ENV RECAPTCHA_SECRET_KEY=${RECAPTCHA_SECRET_KEY}
 
-# Disable husky during build
-ENV HUSKY=0
-
 # Copy only runtime dependencies
 COPY package.json bun.lock ./
-RUN bun install --frozen-lockfile --production
+RUN bun install --frozen-lockfile --production --ignore-scripts
 
 # Copy built app from builder stage
 COPY --from=builder /usr/src/app/scripts ./scripts
