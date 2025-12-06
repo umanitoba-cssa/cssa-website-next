@@ -51,6 +51,9 @@ jobs:
                   echo "IMAGE_NAME: ${{ steps.set-port.outputs.IMAGE_NAME }}"
                   echo "DEPLOY_URL=${{ env.DEPLOY_URL }}"
     build:
+        env:
+            DOCKER_BUILDKIT: 1
+            BUILDX_NO_CACHE: 1
         runs-on: ubuntu-latest
         needs: set-port
         steps:

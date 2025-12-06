@@ -6,7 +6,7 @@
         "dev": "next dev",
         "build": "next build",
         "start": "next start",
-        "prepare": "test -d .git && husky",
+        "prepare": "test -d .git && husky || true",
         "sync-guides": "bun run scripts/sync-guides.js",
         "setup-webhook-sync": "bun run scripts/setup-webhook-sync.js",
         "lint": "prettier --write . && eslint .",
