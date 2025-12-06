@@ -98,6 +98,9 @@ ENV GITHUB_PRIVATE_KEY=${GITHUB_PRIVATE_KEY}
 ENV NEXT_PUBLIC_RECAPTCHA_SITE_KEY=${NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
 ENV RECAPTCHA_SECRET_KEY=${RECAPTCHA_SECRET_KEY}
 
+# Disable husky during build
+ENV HUSKY=0
+
 # Copy only runtime dependencies
 COPY package.json bun.lock ./
 RUN bun install --frozen-lockfile --production
