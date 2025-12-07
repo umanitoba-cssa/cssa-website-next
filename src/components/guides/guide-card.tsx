@@ -4,17 +4,17 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 interface GuideCardProps {
   title: string;
   description: string;
-  slug: string;
   author?: string;
   date?: string;
+  href: string;
 }
 
 const GuideCard: React.FC<GuideCardProps> = ({
   title,
   description,
-  slug,
   author,
-  date
+  date,
+  href
 }) => {
   // Format date if available
   const formattedDate = date ? new Date(date).toLocaleDateString('en-US', {
@@ -24,7 +24,7 @@ const GuideCard: React.FC<GuideCardProps> = ({
   }) : null;
 
   return (
-    <Link href={`/resources/guides/${slug}`} className="block h-full">
+    <Link href={href} className="block h-full">
       <Card className="h-full transition-shadow hover:shadow-md">
         <CardHeader>
           <CardTitle className="text-xl">{title}</CardTitle>
