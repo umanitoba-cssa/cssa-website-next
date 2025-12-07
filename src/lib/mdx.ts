@@ -6,27 +6,27 @@ import { remark } from 'remark';
 import html from 'remark-html';
 import remarkGfm from 'remark-gfm';
 import { GITHUB_OWNER, GuideList } from '../data/resources';
-import { fetchGitHubFile, fetchGitHubTree } from './github-sync';
+import { fetchGitHubDir, fetchGitHubFile, fetchGitHubTree, GitHubFileResponse } from './github-sync';
 
-// Types for our guides and sections
-export interface GuideMetadata {
+export interface MarkdownMetadata {
   title: string;
   description: string;
   author?: string;
   date?: string;
 }
 
-export interface GuideFrontmatter extends GuideMetadata {
+export interface GuideFrontmatter extends MarkdownMetadata {
   [key: string]: any;
 }
 
-export interface Guide extends GuideMetadata {
+export interface MarkdownGroup extends MarkdownMetadata {
   slug: string;
-  sections: Section[];
+  sections: MarkdownSection[];
   content: string;
 }
 
-export interface Section extends GuideMetadata {
+
+export interface MarkdownSection extends MarkdownMetadata {
   slug: string;
   content: string;
   readingTime: {
@@ -67,9 +67,9 @@ export async function getGuidesSlugs(): Promise<string[]> {
 /**
  * Get metadata for all guides
  */
-export async function getAllGuides(): Promise<Guide[]> {
+export async function getAllGuides(): Promise<MarkdownGroup[]> {
   const guidesSlugs = GuideList.map(g => g.slug);
-  const guides = await Promise.all(guidesSlugs.map((repoName) => getGuiedBySlug(repoName)));
+  const guides = await Promise.all(guidesSlugs.map((repoName) => getGuideBySlug(repoName)));
   
   // Sort guides based on their order in GuideList configuration
   const guideOrder = GuideList.map(g => g.slug);
@@ -91,15 +91,31 @@ export async function getAllGuides(): Promise<Guide[]> {
     return a.title.localeCompare(b.title);
   });
 }
+
+/**
+ * Get metadata for all md in one repository
+ */
+export async function getAllMarkdownGroups(repo:string, branch: string = "main"): Promise<MarkdownGroup[]> {
+  const trees = await fetchGitHubTree(GITHUB_OWNER, repo, branch);
+  const folders = trees.filter(file => file.type === 'tree');
+  const groups: MarkdownGroup[] = await Promise.all(folders.map(file => {
+    const slug = file.path.split('/').pop() || '';
+    if (slug === '') {
+      throw new Error(`could not get slug from path: ${file.path}`);
+    }
+    return getMarkdownGroupByPath(repo, file.path, slug, branch)
+  }));
+  return groups.filter(group => group !== null);
+}
 /**
  * Get a guide by its slug
  */
-export async function getGuiedBySlug(slug: string): Promise<Guide> {
+export async function getGuideBySlug(slug: string): Promise<MarkdownGroup> {
   const indexFileContents = await fetchGitHubFile(GITHUB_OWNER, slug, 'index.md', "main");
 
   const tree = await fetchGitHubTree(GITHUB_OWNER, slug, "main")
-  const markdownFiles = tree.filter(file => file.type === 'blob' && file.path.endsWith('.md'));
-  const sections = await Promise.all(markdownFiles.map(file => getGuideSection(slug, file.path.split('/').pop()?.replace('.md', '') || '')));
+  const MarkdownSections = tree.filter(file => file.type === 'blob' && file.path.endsWith('.md'));
+  const sections = await Promise.all(MarkdownSections.map(file => getMarkdownSectionBySlug(slug, file.path,file.path.split('/').pop()?.replace('.md', '') || '')));
    // Parse frontmatter
    const { data, content } = matter(indexFileContents);
    const frontmatter = data as GuideFrontmatter;
@@ -115,11 +131,32 @@ export async function getGuiedBySlug(slug: string): Promise<Guide> {
      content
    };
 }
+
+export async function getMarkdownGroupByPath(repo:string, filePath:string, slug:string,  branch: string = "main"): Promise<MarkdownGroup> {
+  let dir = await fetchGitHubDir(GITHUB_OWNER, repo, filePath, branch);
+  dir = dir.filter(file => file.type === 'file' && file.path.endsWith('.md'));
+  const indexFileContents = await fetchGitHubFile(GITHUB_OWNER, repo, path.join(filePath, 'index.md'), branch);
+
+  const sections = await Promise.all(dir.map(file => getMarkdownSectionByPath(repo, file.path,file.path.split('/').pop()?.replace('.md', '') || '', branch)));
+   // Parse frontmatter
+   const { data, content } = matter(indexFileContents);
+   const frontmatter = data as GuideFrontmatter;
+   
+   return {
+     title: frontmatter.title || 'Untitled Guide',
+     description: frontmatter.description || '',
+     author: frontmatter.author,
+     date: frontmatter.date,
+     slug,
+     sections,
+     content
+   };
+}
 /**
  * Get a specific section from github
  */
-export async function getGuideSection(guideSlug: string, sectionSlug: string):Promise<Section>{
-  const file = await fetchGitHubFile(GITHUB_OWNER, guideSlug, sectionSlug+".md", "main");
+export async function getMarkdownSectionBySlug(repo:string, filePath:string, sectionSlug: string, branch: string = "main"):Promise<MarkdownSection>{
+  const file = await fetchGitHubFile(GITHUB_OWNER, repo, filePath, branch);
   const { data, content } = matter(file);
   const frontmatter = data as GuideFrontmatter;
   return {
@@ -128,6 +165,21 @@ export async function getGuideSection(guideSlug: string, sectionSlug: string):Pr
     author: frontmatter.author,
     date: frontmatter.date,
     slug:sectionSlug,
+    content,
+    readingTime: readingTime(content)
+  };
+}
+
+export async function getMarkdownSectionByPath( repo:string, filePath:string, slug:string,branch: string = "main"):Promise<MarkdownSection>{
+  const file = await fetchGitHubFile(GITHUB_OWNER, repo, filePath, branch);
+  const { data, content } = matter(file);
+  const frontmatter = data as GuideFrontmatter;
+  return {
+    title: frontmatter.title || 'Untitled Section',
+    description: frontmatter.description || '',
+    author: frontmatter.author,
+    date: frontmatter.date,
+    slug,
     content,
     readingTime: readingTime(content)
   };
