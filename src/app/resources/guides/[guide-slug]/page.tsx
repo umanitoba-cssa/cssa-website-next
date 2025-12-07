@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
-import { getGuiedBySlug, getGuidesSlugs, extractHeadings, markdownToHtml } from '@/lib/mdx';
+import { getGuideBySlug, getGuidesSlugs, extractHeadings, markdownToHtml } from '@/lib/mdx';
 import PageHeader from '@/components/page-header';
 import GuideSidebar from '@/components/guides/guide-sidebar';
 import MarkdownContent from '@/components/guides/markdown-content';
@@ -13,7 +13,7 @@ interface GuidePageProps {
 }
 
 export async function generateMetadata({ params }: GuidePageProps): Promise<Metadata> {
-  const guide = await getGuiedBySlug(params['guide-slug']);
+  const guide = await getGuideBySlug(params['guide-slug']);
   
   if (!guide.title || guide.title === 'Guide Not Found') {
     return {
@@ -36,7 +36,7 @@ export async function generateStaticParams() {
 }
 
 export default async function GuidePage({ params }: GuidePageProps) {
-  const guide = await getGuiedBySlug(params['guide-slug']);
+  const guide = await getGuideBySlug(params['guide-slug']);
   
   // Redirect to 404 if guide not found
   if (!guide.title || guide.title === 'Guide Not Found') {
@@ -64,7 +64,7 @@ export default async function GuidePage({ params }: GuidePageProps) {
         <div className="lg:grid lg:grid-cols-3 gap-8">
           {/* Sidebar Navigation */}
           <div className="lg:col-span-1">
-            <GuideSidebar guide={guide} />
+            <GuideSidebar guide={guide} rootPath={"/resources/guides"} />
           </div>
           
           {/* Main Content */}

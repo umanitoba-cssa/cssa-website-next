@@ -25,7 +25,7 @@ export default async function GuidesPage() {
           </p>
         </div>
 
-        <GuidesList guides={guides} />
+        <GuidesList guides={guides} href="/resources/guides" />
       </div>
     </main>
   );
