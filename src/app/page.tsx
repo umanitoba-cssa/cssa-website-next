@@ -44,8 +44,7 @@ export default function Home() {
                                         <Link href={item.href}>
                                             <div className="flex">
                                                 <span className="text-sm text-primary hover:underline">
-                                                    {' '}
-                                                    {item.linkText}{' '}
+                                                    {item.linkText}
                                                 </span>
                                             </div>
                                         </Link>
@@ -77,8 +76,7 @@ export default function Home() {
                                         <Link href={item.href}>
                                             <div className="flex">
                                                 <span className="text-sm text-primary hover:underline">
-                                                    {' '}
-                                                    {item.linkText}{' '}
+                                                    {item.linkText}
                                                 </span>
                                             </div>
                                         </Link>
