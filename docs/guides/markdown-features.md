@@ -23,9 +23,9 @@ This document outlines the Markdown features supported by the Guides system. The
 ### Text Formatting
 
 ```markdown
-_Italic text_ or _Italic text_
-**Bold text** or **Bold text**
-**_Bold and italic text_** or **_Bold and italic text_**
+*Italic text* or _Italic text_
+**Bold text** or __Bold text__
+***Bold and italic text*** or **_Bold and italic text_**
 ~~Strikethrough text~~
 ```
 
