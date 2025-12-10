@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
-import { getGuiedBySlug, getGuideSection, getGuidesSlugs, markdownToHtml } from '@/lib/mdx';
+import { getGuideBySlug, getMarkdownSectionBySlug, getGuidesSlugs, markdownToHtml } from '@/lib/mdx';
 import PageHeader from '@/components/page-header';
 import GuideSidebar from '@/components/guides/guide-sidebar';
 import MarkdownContent from '@/components/guides/markdown-content';
@@ -17,7 +17,7 @@ interface SectionPageProps {
 }
 
 export async function generateMetadata({ params }: SectionPageProps): Promise<Metadata> {
-  const guide = await getGuiedBySlug(params['guide-slug']);
+  const guide = await getGuideBySlug(params['guide-slug']);
   
   if (!guide.title || guide.title === 'Guide Not Found') {
     return {
@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: SectionPageProps): Promise<Me
     };
   }
   
-  const section = await getGuideSection(params['guide-slug'], params['section-slug']);
+  const section = await getMarkdownSectionBySlug(params['guide-slug'], params['section-slug']+".md", params['section-slug']);
   
   if (!section.title || section.title === 'Section Not Found') {
     return {
@@ -46,11 +46,11 @@ export async function generateStaticParams() {
   const params: { 'guide-slug': string; 'section-slug': string }[] = [];
   
   for (const guideSlug of guides) {
-    const guide = await getGuiedBySlug(guideSlug);
-    guide.sections.forEach(async (section) => {
+    const guide = await getGuideBySlug(guideSlug);
+    guide.sections.forEach(async (sections) => {
       params.push({
         'guide-slug': guideSlug,
-        'section-slug': section.slug,
+        'section-slug': sections.slug,
       });
     });
   }
@@ -59,13 +59,13 @@ export async function generateStaticParams() {
 }
 
 export default async function SectionPage({ params }: SectionPageProps) {
-  const guide = await getGuiedBySlug(params['guide-slug']);
+  const guide = await getGuideBySlug(params['guide-slug']);
   
   // Redirect to 404 if guide not found
   if (!guide.title || guide.title === 'Guide Not Found') {
     notFound();
   }
-  const section = await getGuideSection(params['guide-slug'], params['section-slug']);
+  const section = await getMarkdownSectionBySlug(params['guide-slug'], params['section-slug']+".md", params['section-slug']);
   // Redirect to 404 if section not found
   if (!section.title || section.title === 'Section Not Found') {
     notFound();
@@ -98,7 +98,7 @@ export default async function SectionPage({ params }: SectionPageProps) {
         <div className="lg:grid lg:grid-cols-3 gap-8">
           {/* Sidebar Navigation */}
           <div className="lg:col-span-1">
-            <GuideSidebar guide={guide} />
+            <GuideSidebar guide={guide} rootPath={"/resources/guides"} />
           </div>
           
           {/* Main Content */}
