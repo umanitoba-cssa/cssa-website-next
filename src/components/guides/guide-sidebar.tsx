@@ -4,20 +4,23 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
-import { Guide, Section } from '@/lib/mdx';
+import { MarkdownGroup, MarkdownSection } from '@/lib/mdx';
 import { ChevronDown } from 'lucide-react';
+import path from 'path';
 
 interface GuideSidebarProps {
-  guide: Guide;
+  guide: MarkdownGroup;
+  rootPath: string;
   className?: string;
 }
 
-const GuideSidebar: React.FC<GuideSidebarProps> = ({ guide, className }) => {
+const GuideSidebar: React.FC<GuideSidebarProps> = ({ guide, rootPath, className }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<string>('');
   const pathname = usePathname();
-  const isRootPath = pathname === `/resources/guides/${guide.slug}`;
+  const isRootPath = pathname === path.join(rootPath, guide.slug);
 
+  
   // Detect active section from pathname
   useEffect(() => {
     const pathParts = pathname.split('/');
@@ -54,7 +57,7 @@ const GuideSidebar: React.FC<GuideSidebarProps> = ({ guide, className }) => {
             <ul className="space-y-3">
               <li>
                 <Link
-                  href={`/resources/guides/${guide.slug}`}
+                  href={path.join(rootPath, guide.slug)}
                   className={cn(
                     "block py-1 hover:text-primary transition-colors",
                     isRootPath && activeSection === '' ? "text-primary font-medium" : "text-muted-foreground"
@@ -67,7 +70,7 @@ const GuideSidebar: React.FC<GuideSidebarProps> = ({ guide, className }) => {
               {guide.sections.map((section) => (
                 <li key={section.slug}>
                   <Link
-                    href={`/resources/guides/${guide.slug}/${section.slug}`}
+                    href={path.join(rootPath, guide.slug, section.slug)}
                     className={cn(
                       "block py-1 hover:text-primary transition-colors",
                       activeSection === section.slug 
@@ -91,7 +94,7 @@ const GuideSidebar: React.FC<GuideSidebarProps> = ({ guide, className }) => {
         <ul className="space-y-3">
           <li>
             <Link
-              href={`/resources/guides/${guide.slug}`}
+              href={path.join(rootPath, guide.slug)}
               className={cn(
                 "block py-1 hover:text-primary transition-colors",
                 isRootPath && activeSection === '' ? "text-primary font-medium" : "text-muted-foreground"
@@ -103,7 +106,7 @@ const GuideSidebar: React.FC<GuideSidebarProps> = ({ guide, className }) => {
           {guide.sections.map((section) => (
             <li key={section.slug}>
               <Link
-                href={`/resources/guides/${guide.slug}/${section.slug}`}
+                href={path.join(rootPath, guide.slug, section.slug)}
                 className={cn(
                   "block py-1 hover:text-primary transition-colors",
                   activeSection === section.slug 

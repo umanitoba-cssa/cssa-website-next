@@ -1,11 +1,13 @@
-import { Guide } from "@/lib/mdx";
+import { MarkdownGroup } from "@/lib/mdx";
 import GuideCard from "./guide-card";
+import path from "path";
 
 interface GuidesListProps {
-  guides: Guide[];
+  guides: MarkdownGroup[];
+  href: string;
 }
 
-const GuidesList: React.FC<GuidesListProps> = ({ guides }) => {
+const GuidesList: React.FC<GuidesListProps> = ({ guides, href }) => {
   if (guides.length === 0) {
     return (
       <div className="text-center p-8">
@@ -14,7 +16,6 @@ const GuidesList: React.FC<GuidesListProps> = ({ guides }) => {
       </div>
     );
   }
-
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {guides.map((guide) => (
@@ -22,7 +23,7 @@ const GuidesList: React.FC<GuidesListProps> = ({ guides }) => {
           key={guide.slug}
           title={guide.title}
           description={guide.description}
-          slug={guide.slug}
+          href={path.join(href, guide.slug)}
           author={guide.author}
           date={guide.date}
         />
