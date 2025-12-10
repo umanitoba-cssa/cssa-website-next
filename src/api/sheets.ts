@@ -28,7 +28,7 @@ export async function getSheetsCells(sheetId: string, range: string) {
 }
 
 export async function getLoungeMenu() {
-    /*if (!process.env.CANTEEN_SHEEET_ID) {
+    if (!process.env.CANTEEN_SHEEET_ID) {
         throw new Error("Missing environment variable CANTEEN_SHEEET_ID");
     }
 
@@ -47,5 +47,5 @@ export async function getLoungeMenu() {
     const grouped = groupBy(objects, (item) => item.Category);
 
     return grouped
-    */
+    
 }
