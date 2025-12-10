@@ -4,27 +4,29 @@ import { GuideList } from '../data/resources';
 import { githubFetchWithApp } from './github-app';
 
 // GitHub API interfaces
-interface GitHubTreeItem {
+export interface GitHubTreeItem {
     path: string;
     type: 'blob' | 'tree';
     sha: string;
     url: string;
 }
 
-interface GitHubTreeResponse {
+export interface GitHubTreeResponse {
     tree: GitHubTreeItem[];
     sha: string;
     url: string;
 }
 
-interface GitHubFileResponse {
-    content: string;
+export interface GitHubFileResponse {
+    content?: string;
+    name: string;
     encoding: string;
     path: string;
     sha: string;
+    type: string;
 }
 
-interface GitHubRepoInfo {
+export interface GitHubRepoInfo {
     owner: string;
     repo: string;
     branch: string;
@@ -45,6 +47,29 @@ function parseGitHubUrl(url: string): GitHubRepoInfo {
         branch: match[3] || 'main', // Default to main branch
     };
 }
+/**
+ * Fetch directory content from GitHub API
+ */
+export async function fetchGitHubDir(owner: string, repo: string, filePath: string, branch: string): Promise<GitHubFileResponse[]> {
+    const url = `https://api.github.com/repos/${owner}/${repo}/contents/${filePath}?ref=${branch}`;
+
+    try {
+        const response = await githubFetchWithApp(url, {}, owner, repo);
+        if (!response.ok) {
+            if (response.status === 404) {
+                throw new Error(`File not found: ${filePath}`);
+            }
+            throw new Error(`GitHub API error: ${response.status} ${response.statusText}`);
+        }
+
+        const data: GitHubFileResponse[] = await response.json();
+        return data;
+    } catch (error) {
+        console.error(`Error fetching directory ${filePath} from ${owner}/${repo}:`, error);
+        throw error;
+    }
+}
+
 
 /**
  * Fetch file content from GitHub API
@@ -60,9 +85,10 @@ export async function fetchGitHubFile(owner: string, repo: string, filePath: str
             }
             throw new Error(`GitHub API error: ${response.status} ${response.statusText}`);
         }
-
         const data: GitHubFileResponse = await response.json();
-
+        if (!data.content) {
+            throw new Error(`File content not found: ${filePath}`);
+        }
         if (data.encoding === 'base64') {
             return Buffer.from(data.content, 'base64').toString('utf-8');
         }
@@ -77,8 +103,8 @@ export async function fetchGitHubFile(owner: string, repo: string, filePath: str
 /**
  * Fetch repository tree structure from GitHub API
  */
-export async function fetchGitHubTree(owner: string, repo: string, branch: string): Promise<GitHubTreeItem[]> {
-    const url = `https://api.github.com/repos/${owner}/${repo}/git/trees/${branch}?recursive=1`;
+export async function fetchGitHubTree(owner: string, repo: string, branch: string, recursive: boolean = true): Promise<GitHubTreeItem[]> {
+    const url = `https://api.github.com/repos/${owner}/${repo}/git/trees/${branch}?${recursive ? 'recursive=1' : ''}`;
 
     try {
         const response = await githubFetchWithApp(url, {}, owner, repo);
@@ -97,9 +123,10 @@ export async function fetchGitHubTree(owner: string, repo: string, branch: strin
 /**
  * Get markdown files from repository
  */
-function getMarkdownFiles(tree: GitHubTreeItem[]): GitHubTreeItem[] {
-    return tree.filter(
-        (item) => item.type === 'blob' && (item.path.endsWith('.md') || item.path.endsWith('.mdx')),
+function getMarkdownSections(tree: GitHubTreeItem[]): GitHubTreeItem[] {
+    return tree.filter(item =>
+        item.type === 'blob' &&
+        (item.path.endsWith('.md') || item.path.endsWith('.mdx'))
     );
 }
 
@@ -137,7 +164,9 @@ async function fetchGitHubBinaryFile(
         }
 
         const data: GitHubFileResponse = await response.json();
-
+        if (!data.content) {
+            throw new Error(`File content not found: ${filePath}`);
+        }
         if (data.encoding === 'base64') {
             return new Uint8Array(Buffer.from(data.content, 'base64'));
         }
@@ -166,15 +195,13 @@ async function syncGuideFromRepo(slug: string, repoURL: string): Promise<void> {
 
         // Fetch repository tree
         const tree = await fetchGitHubTree(owner, repo, branch);
-        const markdownFiles = getMarkdownFiles(tree);
+        const MarkdownSections = getMarkdownSections(tree);
         const imageFiles = getImageFiles(tree);
 
-        console.log(
-            `Found ${markdownFiles.length} markdown files and ${imageFiles.length} image files in ${owner}/${repo}`,
-        );
+        console.log(`Found ${MarkdownSections.length} markdown files and ${imageFiles.length} image files in ${owner}/${repo}`);
 
         // Process each markdown file
-        for (const file of markdownFiles) {
+        for (const file of MarkdownSections) {
             const content = await fetchGitHubFile(owner, repo, file.path, branch);
 
             // Determine local file path
@@ -220,7 +247,7 @@ async function syncGuideFromRepo(slug: string, repoURL: string): Promise<void> {
         // If no index.md was found, create one from README.md if it exists
         const indexPath = path.join(guideDir, 'index.md');
         if (!fs.existsSync(indexPath)) {
-            const readmeFile = markdownFiles.find((f) => f.path.toLowerCase() === 'readme.md');
+            const readmeFile = MarkdownSections.find(f => f.path.toLowerCase() === 'readme.md');
             if (readmeFile) {
                 const readmeContent = await fetchGitHubFile(owner, repo, readmeFile.path, branch);
                 fs.writeFileSync(indexPath, readmeContent, 'utf-8');
