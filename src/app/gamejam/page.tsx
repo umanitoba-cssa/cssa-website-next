@@ -10,7 +10,7 @@ export default function GameJam() {
             <EventPageHeader title="Game Jam Logo" image="/img/gamejam/gj_banner.svg" />
             <div className="container py-12 flex flex-col gap-12">
                 <BlockHeader title="Theme" />
-                <p>Theme will be announced during the opening ceremony.</p>
+                <p>This years theme is "Evolution"!</p>
                 <BlockHeader title="Rules" />
                 <p>
                     Participants must follow our{' '}
