@@ -8,8 +8,10 @@ import { ExecProfiles, LoungeProfiles, PromotionsProfiles, FinanceProfiles, Merc
 import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 
-export default function Team() {
+
+export default function PreviousTeam() {
     const [selectedProfile, setSelectedProfile] = useState<IProfile | null>(null);
 
     return (
@@ -28,14 +30,7 @@ export default function Team() {
                         />
                     ))}
                 </div>
-                <div className="flex items-center justify-center">
-              <button className="hover:shadow-form rounded-md bg-cssa-blue py-3 px-8 text-base font-semibold text-white outline-none">
-                <Link href="/team/previous-execs">
-                View Previous Execs
-                </Link>
- 
-              </button>
-            </div>
+   
 
                 <BlockHeader title="Promotions Committee" />
                 <div className="flex flex-row gap-4 flex-wrap justify-center">
@@ -113,6 +108,29 @@ export default function Team() {
                             }}
                         />
                     ))}
+                </div>
+
+                <BlockHeader title="Previous Team" />
+                <div className="flex items-center justify-center">
+                <div className="px-2 w-full md:w-2/5 h-full">
+                    <Link href={"/team/previous-team"}>
+                <Card className="h-full border-primary">
+                            <CardHeader>
+                                <CardTitle className="text-lg flex flex-row gap-2">
+                                    Previous Team
+                                </CardTitle>
+                                <CardDescription>View the Previous Team Page</CardDescription>
+                            </CardHeader>
+                            <CardContent>
+                              <div className="flex justify-end">
+                                <span className="text-sm text-primary hover:underline">
+                                  View Previous Team →
+                                </span>
+                              </div>
+                            </CardContent>
+                        </Card>
+                        </Link>
+                        </div>
                 </div>
             </div>
 
