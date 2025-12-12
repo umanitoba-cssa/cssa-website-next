@@ -50,9 +50,29 @@ jobs:
           echo "ENVIRONMENT: ${{ steps.set-port.outputs.ENVIRONMENT }}"
           echo "IMAGE_NAME: ${{ steps.set-port.outputs.IMAGE_NAME }}"
           echo "DEPLOY_URL=${{ env.DEPLOY_URL }}"
-  build:
+  lint:
     runs-on: ubuntu-latest
     needs: set-port
+    continue-on-error: true # Remove this line during TECH-82
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Bun
+        uses: oven-sh/setup-bun@v1
+
+      - name: Install dependencies
+        run: bun install --ignore-scripts --frozen-lockfile
+
+      - name: Run ESLint
+        run: bun run eslint .
+
+      - name: Run Prettier check
+        run: bun run prettier --check .
+
+  build:
+    runs-on: ubuntu-latest
+    needs: [set-port, lint]
     steps:
       - name: Build Container
         uses: travisfriesen/workflows/build_and_upload_docker_container@v1.2.1
@@ -60,6 +80,8 @@ jobs:
           IMAGE_NAME: ${{ needs.set-port.outputs.IMAGE_NAME }}
           ARCHITECTURE: linux/amd64
           BUILD_ARGS: |
+            NEXT_PUBLIC_RECAPTCHA_SITE_KEY=${{ secrets.NEXT_PUBLIC_RECAPTCHA_SITE_KEY }}
+            RECAPTCHA_SECRET_KEY=${{ secrets.RECAPTCHA_SECRET_KEY }}
             YOUTUBE_API_KEY=${{ secrets.YOUTUBE_API_KEY }}
             SMTP_USERNAME=${{ secrets.SMTP_USERNAME }}
             SMTP_PASSWORD=${{ secrets.SMTP_PASSWORD }}
@@ -67,9 +89,11 @@ jobs:
             GOOGLE_SERVICE_ACCOUNT_EMAIL=${{ secrets.GOOGLE_SERVICE_ACCOUNT_EMAIL }}
             GOOGLE_PRIVATE_KEY=${{ secrets.GOOGLE_PRIVATE_KEY }}
             CANTEEN_SHEEET_ID=${{ secrets.CANTEEN_SHEEET_ID }}
+            GITHUB_APP_ID=${{ secrets._GITHUB_APP_ID }}
+            GITHUB_PRIVATE_KEY=${{ secrets._GITHUB_PRIVATE_KEY }}
   deploy:
     runs-on: [self-hosted, webhost]
-    needs: [set-port, build]
+    needs: [set-port, lint, build]
     environment:
       name: ${{ needs.set-port.outputs.ENVIRONMENT }}
       url: ${{ env.DEPLOY_URL }}
@@ -83,6 +107,8 @@ jobs:
             container_name=cssa-${{ needs.set-port.outputs.ENVIRONMENT }}
             image_name=${{ needs.set-port.outputs.IMAGE_NAME }}:${{ github.run_number }}-${{ github.run_attempt }}
             artifact_path=/tmp/${{ needs.set-port.outputs.ENVIRONMENT }}/${{ needs.set-port.outputs.IMAGE_NAME }}.tar
+            next_public_recaptcha_site_key=${{ secrets.NEXT_PUBLIC_RECAPTCHA_SITE_KEY }}
+            recaptcha_secret_key=${{ secrets.RECAPTCHA_SECRET_KEY }}
             youtube_api_key=${{ secrets.YOUTUBE_API_KEY }}
             smtp_username=${{ secrets.SMTP_USERNAME }}
             smtp_password=${{ secrets.SMTP_PASSWORD }}
@@ -90,7 +116,9 @@ jobs:
             google_service_account_email=${{ secrets.GOOGLE_SERVICE_ACCOUNT_EMAIL }}
             google_private_key=${{ secrets.GOOGLE_PRIVATE_KEY }}
             canteen_sheet_id=${{ secrets.CANTEEN_SHEEET_ID }}
+            github_app_id=${{ secrets._GITHUB_APP_ID }}
+            github_private_key=${{ secrets._GITHUB_PRIVATE_KEY }}
           ARTIFACT_NAME: ${{ needs.set-port.outputs.IMAGE_NAME }}
-          USER: "root-main-web"
-          PLAYBOOK_PATH: ".ansible/playbook/ansible_deploy_container.yml"
-          HOST: "localhost"
+          USER: 'root-main-web'
+          PLAYBOOK_PATH: '.ansible/playbook/ansible_deploy_container.yml'
+          HOST: 'localhost'

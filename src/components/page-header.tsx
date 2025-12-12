@@ -1,10 +1,10 @@
-import Image from "next/image";
+import Image from 'next/image';
 
 export default function PageHeader({ title, image }: { title: string; image: string }) {
     return (
         <>
             <div className="desktop-only">
-                <div className="w-screen h-[500px] overflow-hidden relative">
+                <div className="w-full h-[500px] overflow-hidden relative">
                     <Image className="relative object-cover" fill src={image} alt={title} />
                     <div className="w-full h-full bg-opacity-30 bg-black p-12 relative">
                         <div className="container z-10">

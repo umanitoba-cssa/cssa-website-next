@@ -1,22 +1,40 @@
-import "./resources.css";
-import BlockHeader from "@/components/block-header";
-import PageHeader from "@/components/page-header";
+import './resources.css';
+import BlockHeader from '@/components/block-header';
+import PageHeader from '@/components/page-header';
 import {
     Carousel,
     CarouselContent,
     CarouselItem,
     CarouselNext,
-    CarouselPrevious
-} from "@/components/ui/carousel";
-import { CSSALinks, IPlaylist, MeetingArchivesID, PlaylistCollections, ResourceLinks } from "@/data/resources";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+    CarouselPrevious,
+} from '@/components/ui/carousel';
+import {
+    CSSALinks,
+    IPlaylist,
+    MeetingArchivesID,
+    PlaylistCollections,
+    ResourceLinks,
+} from '@/data/resources';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import {
+    Accordion,
+    AccordionContent,
+    AccordionItem,
+    AccordionTrigger,
+} from '@/components/ui/accordion';
 
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { GetPlaylistData, IVideoData } from "@/api/youtube";
-import React from "react";
-import { FaExternalLinkAlt } from "react-icons/fa";
-import Link from "next/link";
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardFooter,
+    CardHeader,
+    CardTitle,
+} from '@/components/ui/card';
+import { GetPlaylistData, IVideoData } from '@/api/youtube';
+import React from 'react';
+import { FaExternalLinkAlt } from 'react-icons/fa';
+import Link from 'next/link';
 
 function MakePlaylistCards(videos: IVideoData[]) {
     return videos?.map((video, index) => {
@@ -51,7 +69,7 @@ export default async function Resources() {
 
     const resourceCards = ResourceLinks.map((link, index) => {
         return (
-            <CarouselItem key={index} className="md:basis-1/2 lg:basis-[30%]" >
+            <CarouselItem key={index} className="md:basis-1/2 lg:basis-[30%]">
                 <div className="px-2 w-full h-full">
                     <a href={link.href} target="_blank" rel="noreferrer">
                         <Card className="h-full">
@@ -70,23 +88,27 @@ export default async function Resources() {
 
     const cssaCards = CSSALinks.map((link, index) => {
         return (
-            <CarouselItem key={index} className="md:basis-1/2 lg:basis-[30%]" >
+            <CarouselItem key={index} className="md:basis-1/2 lg:basis-[30%]">
                 <div className="px-2 w-full h-full">
-                    <a href={link.href} target={link.internal ? undefined : "_blank"} rel={link.internal ? undefined : "noreferrer"}>
+                    <a
+                        href={link.href}
+                        target={link.internal ? undefined : '_blank'}
+                        rel={link.internal ? undefined : 'noreferrer'}
+                    >
                         <Card className="h-full border-primary">
                             <CardHeader>
                                 <CardTitle className="text-lg flex flex-row gap-2">
-                                    {link.title} 
+                                    {link.title}
                                     {!link.internal && <FaExternalLinkAlt className="my-auto" />}
                                 </CardTitle>
                                 <CardDescription>{link.description}</CardDescription>
                             </CardHeader>
                             <CardContent>
-                              <div className="flex justify-end">
-                                <span className="text-sm text-primary hover:underline">
-                                  {link.linkText}
-                                </span>
-                              </div>
+                                <div className="flex justify-end">
+                                    <span className="text-sm text-primary hover:underline">
+                                        {link.linkText}
+                                    </span>
+                                </div>
                             </CardContent>
                         </Card>
                     </a>
@@ -111,11 +133,13 @@ export default async function Resources() {
                     <AccordionTrigger>
                         <span>
                             <span className="flex text-lg">{playlist.title}</span>
-                            <span className="flex text-sm text-gray-400">(by {playlist.author})</span>
+                            <span className="flex text-sm text-gray-400">
+                                (by {playlist.author})
+                            </span>
                         </span>
                     </AccordionTrigger>
                     <AccordionContent>
-                        <Carousel className="py-1" opts={{ align: "center" }}>
+                        <Carousel className="py-1" opts={{ align: 'center' }}>
                             <CarouselContent>{videoCards}</CarouselContent>
                             <CarouselNext />
                             <CarouselPrevious />
@@ -137,31 +161,31 @@ export default async function Resources() {
             <PageHeader title="Resources" image="/img/backgrounds/resources.png" />
             <div className="flex flex-col container py-12 gap-12">
                 <div className="flex flex-col gap-8">
-                    <BlockHeader title="CSSA Resources"/>
+                    <BlockHeader title="CSSA Resources" />
                     <p>All the internal materials provided by the CSSA.</p>
 
-                    <Carousel className="py-1" opts={{align: "center"}}>
+                    <Carousel className="py-1" opts={{ align: 'center' }}>
                         <CarouselContent>{cssaCards}</CarouselContent>
-                        <CarouselNext/>
-                        <CarouselPrevious/>
+                        <CarouselNext />
+                        <CarouselPrevious />
                     </Carousel>
                 </div>
 
                 <div className="flex flex-col gap-8">
-                    <BlockHeader title="Degree Resources"/>
+                    <BlockHeader title="Degree Resources" />
                     <p>
-                        Questions about courses, programs, or Computer Science Co-op? Take a look at these
-                        links!
+                        Questions about courses, programs, or Computer Science Co-op? Take a look at
+                        these links!
                     </p>
-                    <Carousel className="py-1" opts={{align: "center"}}>
+                    <Carousel className="py-1" opts={{ align: 'center' }}>
                         <CarouselContent>{resourceCards}</CarouselContent>
-                        <CarouselNext/>
-                        <CarouselPrevious/>
+                        <CarouselNext />
+                        <CarouselPrevious />
                     </Carousel>
                 </div>
 
                 <div className="flex flex-col gap-8">
-                    <BlockHeader title="Course Help"/>
+                    <BlockHeader title="Course Help" />
                     <p>Lectures and course resources on YouTube made by our instructors.</p>
 
                     <Tabs defaultValue={PlaylistCollections[0].category} className="w-full">
@@ -171,14 +195,14 @@ export default async function Resources() {
                 </div>
 
                 <div className="flex flex-col gap-8">
-                    <BlockHeader title="CSSA Meeting Archives"/>
+                    <BlockHeader title="CSSA Meeting Archives" />
                     <p>Recordings of our general meetings.</p>
-                    <Carousel className="py-1" opts={{align: "center"}}>
+                    <Carousel className="py-1" opts={{ align: 'center' }}>
                         <CarouselContent>
                             {MakePlaylistCards(await GetPlaylistData(MeetingArchivesID))}
                         </CarouselContent>
-                        <CarouselNext/>
-                        <CarouselPrevious/>
+                        <CarouselNext />
+                        <CarouselPrevious />
                     </Carousel>
                 </div>
             </div>

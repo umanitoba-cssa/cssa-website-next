@@ -17,35 +17,35 @@ The Guides system follows a file-based content management approach with the foll
 ### Core Components
 
 1. **MDX Utilities** (`src/lib/mdx.ts`):
-   - Core logic for scanning guide directories
-   - Parsing frontmatter and Markdown content
-   - Converting Markdown to HTML
-   - Extracting headings for navigation
-   - Processing links and images
+    - Core logic for scanning guide directories
+    - Parsing frontmatter and Markdown content
+    - Converting Markdown to HTML
+    - Extracting headings for navigation
+    - Processing links and images
 
 2. **Route Implementation**:
-   - Main listing: `src/app/resources/guides/page.tsx`
-   - Guide page: `src/app/resources/guides/[guide-slug]/page.tsx`
-   - Section page: `src/app/resources/guides/[guide-slug]/[section-slug]/page.tsx`
+    - Main listing: `src/app/resources/guides/page.tsx`
+    - Guide page: `src/app/resources/guides/[guide-slug]/page.tsx`
+    - Section page: `src/app/resources/guides/[guide-slug]/[section-slug]/page.tsx`
 
 3. **UI Components** (in `src/components/guides/`):
-   - `markdown-content.tsx`: Renders processed Markdown as HTML
-   - `guide-sidebar.tsx`: Navigation for guide sections
-   - `table-of-contents.tsx`: In-page navigation based on headings
-   - `breadcrumbs.tsx`: Breadcrumb navigation
-   - `guides-list.tsx`: Displays available guides in a grid
-   - `guide-card.tsx`: Card component for each guide in the listing
-   - `code-block.tsx`: Renders syntax-highlighted code blocks
+    - `markdown-content.tsx`: Renders processed Markdown as HTML
+    - `guide-sidebar.tsx`: Navigation for guide sections
+    - `table-of-contents.tsx`: In-page navigation based on headings
+    - `breadcrumbs.tsx`: Breadcrumb navigation
+    - `guides-list.tsx`: Displays available guides in a grid
+    - `guide-card.tsx`: Card component for each guide in the listing
+    - `code-block.tsx`: Renders syntax-highlighted code blocks
 
 ### Data Flow
 
 1. The system scans the `src/content/guides` directory to identify guides and sections
 2. When a user visits a guide or section page:
-   - Content is retrieved from the corresponding Markdown file
-   - Frontmatter is extracted for metadata
-   - Markdown content is processed into HTML
-   - Component tree is rendered with the processed content
-   - Table of contents is generated from headings
+    - Content is retrieved from the corresponding Markdown file
+    - Frontmatter is extracted for metadata
+    - Markdown content is processed into HTML
+    - Component tree is rendered with the processed content
+    - Table of contents is generated from headings
 
 ### Routing Structure
 
@@ -73,4 +73,4 @@ The Guides system relies on the following libraries:
 - `remark` and related plugins: For processing Markdown and converting to HTML
 - `reading-time`: For calculating estimated reading time
 - Tailwind CSS: For styling components
-- Next.js App Router: For routing and server components 
+- Next.js App Router: For routing and server components

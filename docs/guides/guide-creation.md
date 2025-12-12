@@ -16,6 +16,7 @@ src/content/guides/
 ```
 
 Requirements:
+
 - The guide directory name (`your-guide-name`) will be used as the URL slug
 - Each guide must have an `index.md` file as the main entry point
 - Section files should use descriptive names that will become URL slugs
@@ -27,22 +28,24 @@ All Markdown files (both `index.md` and section files) must include frontmatter 
 ### Required Frontmatter Fields
 
 For `index.md`:
+
 ```yaml
 ---
-title: "Your Guide Title"
-description: "A brief description of what the guide covers"
-author: "Your Name" # Optional
-date: "2023-05-01" # Optional, format: YYYY-MM-DD
+title: 'Your Guide Title'
+description: 'A brief description of what the guide covers'
+author: 'Your Name' # Optional
+date: '2023-05-01' # Optional, format: YYYY-MM-DD
 ---
 ```
 
 For section files:
+
 ```yaml
 ---
-title: "Section Title"
-description: "Brief description of this section"
-author: "Your Name" # Optional
-date: "2023-05-01" # Optional, format: YYYY-MM-DD
+title: 'Section Title'
+description: 'Brief description of this section'
+author: 'Your Name' # Optional
+date: '2023-05-01' # Optional, format: YYYY-MM-DD
 ---
 ```
 
@@ -57,10 +60,10 @@ date: "2023-05-01" # Optional, format: YYYY-MM-DD
 - Avoid spaces, underscores, or special characters
 - Make names descriptive but concise
 - Examples:
-  - ✅ `getting-started`
-  - ✅ `how-to-create-a-resume`
-  - ❌ `Guide 1` (contains spaces)
-  - ❌ `Resume_Guide` (contains uppercase and underscore)
+    - ✅ `getting-started`
+    - ✅ `how-to-create-a-resume`
+    - ❌ `Guide 1` (contains spaces)
+    - ❌ `Resume_Guide` (contains uppercase and underscore)
 
 ## Guide Content
 
@@ -69,18 +72,20 @@ After the frontmatter, add your Markdown content. The system supports standard M
 ### Main Guide (`index.md`)
 
 The `index.md` file should contain:
+
 1. A comprehensive introduction to the guide topic
 2. An overview of what will be covered in each section
 3. Any prerequisites or requirements
 4. A concise but informative body
 
 Example:
+
 ```markdown
 ---
-title: "Getting Started with Computer Science"
+title: 'Getting Started with Computer Science'
 description: "A beginner's guide to studying computer science at the university"
-author: "CSSA Team"
-date: "2023-05-20"
+author: 'CSSA Team'
+date: '2023-05-20'
 ---
 
 # Getting Started with Computer Science
@@ -100,6 +105,7 @@ This guide will help new computer science students navigate their first year at 
 ### Section Files
 
 Each section file should be focused on a specific topic, with:
+
 1. A clear introduction to the section topic
 2. Well-structured content with appropriate headings
 3. Visuals (images, diagrams) where helpful
@@ -113,16 +119,19 @@ Images for guides should be stored in the `public/img/guides` directory. You can
 ### Image Path Examples
 
 Using absolute path (recommended):
+
 ```markdown
 ![Description of image](/img/guides/my-image.png)
 ```
 
 Using relative path (automatically converted to absolute):
+
 ```markdown
 ![Description of image](my-image.png)
 ```
 
 For guide-specific images, it's recommended to create a subdirectory with the same name as your guide:
+
 ```
 public/img/guides/
   └── your-guide-name/
@@ -132,6 +141,7 @@ public/img/guides/
 ```
 
 Then reference the images as:
+
 ```markdown
 ![Description](/img/guides/your-guide-name/image1.png)
 ```
@@ -141,14 +151,14 @@ Then reference the images as:
 Section files are displayed in alphabetical order based on their filenames. To control the order:
 
 1. Use numeric prefixes:
-   - `01-introduction.md`
-   - `02-setup.md`
-   - `03-advanced-topics.md`
+    - `01-introduction.md`
+    - `02-setup.md`
+    - `03-advanced-topics.md`
 
 2. Or use priority-based naming:
-   - `a-introduction.md`
-   - `b-setup.md`
-   - `c-advanced-topics.md`
+    - `a-introduction.md`
+    - `b-setup.md`
+    - `c-advanced-topics.md`
 
 ## Cross-Linking Between Guides and Sections
 
@@ -157,16 +167,19 @@ You can link to other guides or sections using relative or absolute paths.
 ### Linking Examples
 
 Link to another guide:
+
 ```markdown
 [See our Resume Guide](/resources/guides/resume-guide)
 ```
 
 Link to a section within the same guide:
+
 ```markdown
 [Check out the setup instructions](setup)
 ```
 
 Link to a section in another guide:
+
 ```markdown
 [Learn about interviews](/resources/guides/job-hunting/interviews)
 ```
@@ -179,4 +192,4 @@ To publish a new guide:
 2. Add all required files with proper frontmatter
 3. Add any images to `public/img/guides/`
 4. Commit the changes to the repository
-5. The guide will be automatically available on the website after deployment 
+5. The guide will be automatically available on the website after deployment

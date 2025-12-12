@@ -58,4 +58,4 @@ For developers maintaining or extending the Guides system:
 
 ---
 
-This documentation is maintained by the CSSA Website development team. For questions or assistance, please contact the team through the appropriate channels. 
+This documentation is maintained by the CSSA Website development team. For questions or assistance, please contact the team through the appropriate channels.

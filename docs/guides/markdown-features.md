@@ -8,10 +8,15 @@ This document outlines the Markdown features supported by the Guides system. The
 
 ```markdown
 # Heading 1
+
 ## Heading 2
+
 ### Heading 3
+
 #### Heading 4
+
 ##### Heading 5
+
 ###### Heading 6
 ```
 
@@ -20,27 +25,29 @@ This document outlines the Markdown features supported by the Guides system. The
 ```markdown
 *Italic text* or _Italic text_
 **Bold text** or __Bold text__
-***Bold and italic text*** or ___Bold and italic text___
+***Bold and italic text*** or **_Bold and italic text_**
 ~~Strikethrough text~~
 ```
 
 ### Lists
 
 Unordered lists:
+
 ```markdown
 - Item 1
 - Item 2
-  - Nested item 2.1
-  - Nested item 2.2
+    - Nested item 2.1
+    - Nested item 2.2
 - Item 3
 ```
 
 Ordered lists:
+
 ```markdown
 1. First item
 2. Second item
-   1. Nested item 2.1
-   2. Nested item 2.2
+    1. Nested item 2.1
+    2. Nested item 2.2
 3. Third item
 ```
 
@@ -65,7 +72,7 @@ Ordered lists:
 
 ```markdown
 [Link text](https://example.com)
-[Link with title](https://example.com "Title text")
+[Link with title](https://example.com 'Title text')
 ```
 
 ### Reference Links
@@ -73,7 +80,7 @@ Ordered lists:
 ```markdown
 [Reference link][ref]
 
-[ref]: https://example.com "Optional title"
+[ref]: https://example.com 'Optional title'
 ```
 
 ### Internal Links
@@ -98,13 +105,15 @@ Use the `console.log()` function to log messages.
 
 Fenced code blocks with syntax highlighting:
 
-```markdown
+````markdown
 ```javascript
 function example() {
-  console.log("Hello, world!");
+    console.log('Hello, world!');
 }
 ```
-```
+````
+
+````
 
 Supported languages for syntax highlighting include:
 - javascript/js
@@ -132,7 +141,7 @@ Supported languages for syntax highlighting include:
 ```markdown
 ![Alt text](/img/guides/image.png)
 ![Alt text with title](/img/guides/image.png "Image title")
-```
+````
 
 ### Image Sizing
 
@@ -144,7 +153,7 @@ GitHub Flavored Markdown (GFM) table syntax is supported:
 
 ```markdown
 | Header 1 | Header 2 | Header 3 |
-|----------|----------|----------|
+| -------- | -------- | -------- |
 | Row 1    | Data     | Data     |
 | Row 2    | Data     | Data     |
 ```
@@ -153,9 +162,9 @@ Alignment can be specified:
 
 ```markdown
 | Left-aligned | Center-aligned | Right-aligned |
-|:-------------|:--------------:|--------------:|
-| Left         | Center         | Right         |
-| Left         | Center         | Right         |
+| :----------- | :------------: | ------------: |
+| Left         |     Center     |         Right |
+| Left         |     Center     |         Right |
 ```
 
 ## Other GFM Features
@@ -219,4 +228,4 @@ The following features are not currently supported:
 4. **Regular Testing**: Verify your Markdown renders correctly after adding new content
 5. **Code Highlighting**: Always specify the language for code blocks for proper syntax highlighting
 6. **Limit HTML Usage**: Use HTML only when Markdown syntax is insufficient
-7. **Document Structure**: Use headings to create a logical structure for automatic table of contents generation 
+7. **Document Structure**: Use headings to create a logical structure for automatic table of contents generation

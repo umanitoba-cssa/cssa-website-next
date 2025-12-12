@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import BlockHeader from "@/components/block-header";
 import PageHeader from "@/components/page-header";
@@ -87,6 +87,19 @@ export default function PreviousTeam() {
                 <BlockHeader title="Student Resources Committee" />
                 <div className="flex flex-row gap-4 flex-wrap justify-center">
                     {StudentResourcesProfiles.map((profile) => (
+                        <ProfileCard
+                            key={`${profile.name}-${profile.position}`}
+                            profile={profile}
+                            onClick={() => {
+                                setSelectedProfile(profile);
+                            }}
+                        />
+                    ))}
+                </div>
+
+                <BlockHeader title="Merch Committee" />
+                <div className="flex flex-row gap-4 flex-wrap justify-center">
+                    {MerchProfiles.map((profile) => (
                         <ProfileCard
                             key={`${profile.name}-${profile.position}`}
                             profile={profile}
