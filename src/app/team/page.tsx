@@ -33,7 +33,7 @@ import {
 
 export default function Team() {
     const [selectedProfile, setSelectedProfile] = useState<IProfile | null>(null);
-    const [year, setYear] = useState('2025/2026');
+    const [year, setYear] = useState('2025 - 2026');
 
     return (
         <main className="flex flex-col">
