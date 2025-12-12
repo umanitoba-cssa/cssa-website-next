@@ -15,21 +15,25 @@ import {
     AdvocacyProfiles,
     StudentResourcesProfiles,
     IProfile,
+    filterByYear,
+    years,
 } from '@/data/team';
 import { useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardFooter,
-    CardHeader,
-    CardTitle,
-} from '@/components/ui/card';
+    Select,
+    SelectContent,
+    SelectGroup,
+    SelectItem,
+    SelectLabel,
+    SelectTrigger,
+    SelectValue,
+} from '@/components/ui/select';
 
 export default function Team() {
     const [selectedProfile, setSelectedProfile] = useState<IProfile | null>(null);
+    const [year, setYear] = useState('2025/2026');
 
     return (
         <main className="flex flex-col">
@@ -38,132 +42,160 @@ export default function Team() {
                 image="/img/backgrounds/team.png"
             />
             <div className="container py-12 flex flex-col gap-8">
-                <BlockHeader title="Executive Team" />
-                <div className="flex flex-row gap-4 flex-wrap justify-center">
-                    {ExecProfiles.map((profile) => (
-                        <ProfileCard
-                            key={`${profile.name}-${profile.position}`}
-                            profile={profile}
-                            onClick={() => {
-                                setSelectedProfile(profile);
-                            }}
-                        />
-                    ))}
-                </div>
+                <Select
+                    value={year}
+                    onValueChange={setYear}>
+                    <SelectTrigger className="w-[180px] focus:outline-none">
+                        <SelectValue placeholder="Select a Year" />
+                    </SelectTrigger>
+                    <SelectContent>
+                        <SelectGroup>
+                            {years.map((year: string) => (
+                                <SelectItem
+                                    key={year}
+                                    value={year}>
+                                    {year}
+                                </SelectItem>
+                            ))}
+                        </SelectGroup>
+                    </SelectContent>
+                </Select>
 
-                <BlockHeader title="Promotions Committee" />
-                <div className="flex flex-row gap-4 flex-wrap justify-center">
-                    {PromotionsProfiles.map((profile) => (
-                        <ProfileCard
-                            key={`${profile.name}-${profile.position}`}
-                            profile={profile}
-                            onClick={() => {
-                                setSelectedProfile(profile);
-                            }}
-                        />
-                    ))}
-                </div>
+                {filterByYear(ExecProfiles, year).length > 0 && (
+                    <>
+                        <BlockHeader title="Executive Team" />
+                        <div className="flex flex-row gap-4 flex-wrap justify-center">
+                            {filterByYear(ExecProfiles, year).map((profile) => (
+                                <ProfileCard
+                                    key={`${profile.name}-${profile.position}`}
+                                    profile={profile}
+                                    onClick={() => {
+                                        setSelectedProfile(profile);
+                                    }}
+                                />
+                            ))}
+                        </div>
+                    </>
+                )}
 
-                <BlockHeader title="Events Committee" />
-                <div className="flex flex-row gap-4 flex-wrap justify-center">
-                    {EventsProfiles.map((profile) => (
-                        <ProfileCard
-                            key={`${profile.name}-${profile.position}`}
-                            profile={profile}
-                            onClick={() => {
-                                setSelectedProfile(profile);
-                            }}
-                        />
-                    ))}
-                </div>
+                {filterByYear(PromotionsProfiles, year).length > 0 && (
+                    <>
+                        <BlockHeader title="Promotions Committee" />
+                        <div className="flex flex-row gap-4 flex-wrap justify-center">
+                            {filterByYear(PromotionsProfiles, year).map((profile) => (
+                                <ProfileCard
+                                    key={`${profile.name}-${profile.position}`}
+                                    profile={profile}
+                                    onClick={() => {
+                                        setSelectedProfile(profile);
+                                    }}
+                                />
+                            ))}
+                        </div>
+                    </>
+                )}
 
-                <BlockHeader title="Technology Committee" />
-                <div className="flex flex-row gap-4 flex-wrap justify-center">
-                    {TechnologyProfiles.map((profile) => (
-                        <ProfileCard
-                            key={`${profile.name}-${profile.position}`}
-                            profile={profile}
-                            onClick={() => {
-                                setSelectedProfile(profile);
-                            }}
-                        />
-                    ))}
-                </div>
+                {filterByYear(EventsProfiles, year).length > 0 && (
+                    <>
+                        <BlockHeader title="Events Committee" />
+                        <div className="flex flex-row gap-4 flex-wrap justify-center">
+                            {filterByYear(EventsProfiles, year).map((profile) => (
+                                <ProfileCard
+                                    key={`${profile.name}-${profile.position}`}
+                                    profile={profile}
+                                    onClick={() => {
+                                        setSelectedProfile(profile);
+                                    }}
+                                />
+                            ))}
+                        </div>
+                    </>
+                )}
 
-                <BlockHeader title="Advocacy Committee" />
-                <div className="flex flex-row gap-4 flex-wrap justify-center">
-                    {AdvocacyProfiles.map((profile) => (
-                        <ProfileCard
-                            key={`${profile.name}-${profile.position}`}
-                            profile={profile}
-                            onClick={() => {
-                                setSelectedProfile(profile);
-                            }}
-                        />
-                    ))}
-                </div>
+                {filterByYear(TechnologyProfiles, year).length > 0 && (
+                    <>
+                        <BlockHeader title="Technology Committee" />
+                        <div className="flex flex-row gap-4 flex-wrap justify-center">
+                            {filterByYear(TechnologyProfiles, year).map((profile) => (
+                                <ProfileCard
+                                    key={`${profile.name}-${profile.position}`}
+                                    profile={profile}
+                                    onClick={() => {
+                                        setSelectedProfile(profile);
+                                    }}
+                                />
+                            ))}
+                        </div>
+                    </>
+                )}
 
-                <BlockHeader title="Student Resources Committee" />
-                <div className="flex flex-row gap-4 flex-wrap justify-center">
-                    {StudentResourcesProfiles.map((profile) => (
-                        <ProfileCard
-                            key={`${profile.name}-${profile.position}`}
-                            profile={profile}
-                            onClick={() => {
-                                setSelectedProfile(profile);
-                            }}
-                        />
-                    ))}
-                </div>
+                {filterByYear(AdvocacyProfiles, year).length > 0 && (
+                    <>
+                        <BlockHeader title="Advocacy Committee" />
+                        <div className="flex flex-row gap-4 flex-wrap justify-center">
+                            {filterByYear(AdvocacyProfiles, year).map((profile) => (
+                                <ProfileCard
+                                    key={`${profile.name}-${profile.position}`}
+                                    profile={profile}
+                                    onClick={() => {
+                                        setSelectedProfile(profile);
+                                    }}
+                                />
+                            ))}
+                        </div>
+                    </>
+                )}
 
-                <BlockHeader title="Merch Committee" />
-                <div className="flex flex-row gap-4 flex-wrap justify-center">
-                    {MerchProfiles.map((profile) => (
-                        <ProfileCard
-                            key={`${profile.name}-${profile.position}`}
-                            profile={profile}
-                            onClick={() => {
-                                setSelectedProfile(profile);
-                            }}
-                        />
-                    ))}
-                </div>
+                {filterByYear(StudentResourcesProfiles, year).length > 0 && (
+                    <>
+                        <BlockHeader title="Student Resources Committee" />
+                        <div className="flex flex-row gap-4 flex-wrap justify-center">
+                            {filterByYear(StudentResourcesProfiles, year).map((profile) => (
+                                <ProfileCard
+                                    key={`${profile.name}-${profile.position}`}
+                                    profile={profile}
+                                    onClick={() => {
+                                        setSelectedProfile(profile);
+                                    }}
+                                />
+                            ))}
+                        </div>
+                    </>
+                )}
 
-                <BlockHeader title="Lounge Affairs" />
-                <div className="flex flex-row gap-4 flex-wrap justify-center">
-                    {LoungeProfiles.map((profile) => (
-                        <ProfileCard
-                            key={`${profile.name}-${profile.position}`}
-                            profile={profile}
-                            onClick={() => {
-                                setSelectedProfile(profile);
-                            }}
-                        />
-                    ))}
-                </div>
+                {filterByYear(MerchProfiles, year).length > 0 && (
+                    <>
+                        <BlockHeader title="Merch Committee" />
+                        <div className="flex flex-row gap-4 flex-wrap justify-center">
+                            {filterByYear(MerchProfiles, year).map((profile) => (
+                                <ProfileCard
+                                    key={`${profile.name}-${profile.position}`}
+                                    profile={profile}
+                                    onClick={() => {
+                                        setSelectedProfile(profile);
+                                    }}
+                                />
+                            ))}
+                        </div>
+                    </>
+                )}
 
-                <BlockHeader title="Previous Team" />
-                <div className="flex items-center justify-center">
-                    <div className="px-2 w-[270px] h-full">
-                        <Link href={'/team/previous-team'}>
-                            <Card className="h-full border-primary">
-                                <CardHeader>
-                                    <CardTitle className="text-lg flex flex-row gap-2">
-                                        Previous Team
-                                    </CardTitle>
-                                    <CardDescription>View the Previous Team Page</CardDescription>
-                                </CardHeader>
-                                <CardContent>
-                                    <div className="flex justify-end">
-                                        <span className="text-sm text-primary hover:underline">
-                                            View Previous Team →
-                                        </span>
-                                    </div>
-                                </CardContent>
-                            </Card>
-                        </Link>
-                    </div>
-                </div>
+                {filterByYear(LoungeProfiles, year).length > 0 && (
+                    <>
+                        <BlockHeader title="Lounge Affairs" />
+                        <div className="flex flex-row gap-4 flex-wrap justify-center">
+                            {filterByYear(LoungeProfiles, year).map((profile) => (
+                                <ProfileCard
+                                    key={`${profile.name}-${profile.position}`}
+                                    profile={profile}
+                                    onClick={() => {
+                                        setSelectedProfile(profile);
+                                    }}
+                                />
+                            ))}
+                        </div>
+                    </>
+                )}
             </div>
 
             <AnimatePresence>
