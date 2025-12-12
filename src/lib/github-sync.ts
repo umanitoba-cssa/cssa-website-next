@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
-import {GuideList} from '../data/resources';
-import {githubFetchWithApp} from './github-app';
+import { GuideList } from '../data/resources';
+import { githubFetchWithApp } from './github-app';
 
 // GitHub API interfaces
 interface GitHubTreeItem {
@@ -42,14 +42,19 @@ function parseGitHubUrl(url: string): GitHubRepoInfo {
     return {
         owner: match[1],
         repo: match[2],
-        branch: match[3] || 'main' // Default to main branch
+        branch: match[3] || 'main', // Default to main branch
     };
 }
 
 /**
  * Fetch file content from GitHub API
  */
-async function fetchGitHubFile(owner: string, repo: string, filePath: string, branch: string): Promise<string> {
+async function fetchGitHubFile(
+    owner: string,
+    repo: string,
+    filePath: string,
+    branch: string,
+): Promise<string> {
     const url = `https://api.github.com/repos/${owner}/${repo}/contents/${filePath}?ref=${branch}`;
 
     try {
@@ -77,7 +82,11 @@ async function fetchGitHubFile(owner: string, repo: string, filePath: string, br
 /**
  * Fetch repository tree structure from GitHub API
  */
-async function fetchGitHubTree(owner: string, repo: string, branch: string): Promise<GitHubTreeItem[]> {
+async function fetchGitHubTree(
+    owner: string,
+    repo: string,
+    branch: string,
+): Promise<GitHubTreeItem[]> {
     const url = `https://api.github.com/repos/${owner}/${repo}/git/trees/${branch}?recursive=1`;
 
     try {
@@ -98,9 +107,8 @@ async function fetchGitHubTree(owner: string, repo: string, branch: string): Pro
  * Get markdown files from repository
  */
 function getMarkdownFiles(tree: GitHubTreeItem[]): GitHubTreeItem[] {
-    return tree.filter(item =>
-        item.type === 'blob' &&
-        (item.path.endsWith('.md') || item.path.endsWith('.mdx'))
+    return tree.filter(
+        (item) => item.type === 'blob' && (item.path.endsWith('.md') || item.path.endsWith('.mdx')),
     );
 }
 
@@ -109,16 +117,22 @@ function getMarkdownFiles(tree: GitHubTreeItem[]): GitHubTreeItem[] {
  */
 function getImageFiles(tree: GitHubTreeItem[]): GitHubTreeItem[] {
     const imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.svg', '.webp', '.bmp'];
-    return tree.filter(item =>
-        item.type === 'blob' &&
-        imageExtensions.some(ext => item.path.toLowerCase().endsWith(ext))
+    return tree.filter(
+        (item) =>
+            item.type === 'blob' &&
+            imageExtensions.some((ext) => item.path.toLowerCase().endsWith(ext)),
     );
 }
 
 /**
  * Fetch binary file content from GitHub API
  */
-async function fetchGitHubBinaryFile(owner: string, repo: string, filePath: string, branch: string): Promise<Uint8Array> {
+async function fetchGitHubBinaryFile(
+    owner: string,
+    repo: string,
+    filePath: string,
+    branch: string,
+): Promise<Uint8Array> {
     const url = `https://api.github.com/repos/${owner}/${repo}/contents/${filePath}?ref=${branch}`;
 
     try {
@@ -151,12 +165,12 @@ async function syncGuideFromRepo(slug: string, repoURL: string): Promise<void> {
     console.log(`Syncing guide: ${slug} from ${repoURL}`);
 
     try {
-        const {owner, repo, branch} = parseGitHubUrl(repoURL);
+        const { owner, repo, branch } = parseGitHubUrl(repoURL);
 
         // Create the guide directory
         const guideDir = path.join(process.cwd(), 'src/content/guides', slug);
         if (!fs.existsSync(guideDir)) {
-            fs.mkdirSync(guideDir, {recursive: true});
+            fs.mkdirSync(guideDir, { recursive: true });
         }
 
         // Fetch repository tree
@@ -164,7 +178,9 @@ async function syncGuideFromRepo(slug: string, repoURL: string): Promise<void> {
         const markdownFiles = getMarkdownFiles(tree);
         const imageFiles = getImageFiles(tree);
 
-        console.log(`Found ${markdownFiles.length} markdown files and ${imageFiles.length} image files in ${owner}/${repo}`);
+        console.log(
+            `Found ${markdownFiles.length} markdown files and ${imageFiles.length} image files in ${owner}/${repo}`,
+        );
 
         // Process each markdown file
         for (const file of markdownFiles) {
@@ -192,7 +208,7 @@ async function syncGuideFromRepo(slug: string, repoURL: string): Promise<void> {
             // Create images directory if it doesn't exist
             const imagesDir = path.join(process.cwd(), 'public/img/guides', slug);
             if (!fs.existsSync(imagesDir)) {
-                fs.mkdirSync(imagesDir, {recursive: true});
+                fs.mkdirSync(imagesDir, { recursive: true });
             }
 
             // Determine local file path - preserve directory structure
@@ -202,7 +218,7 @@ async function syncGuideFromRepo(slug: string, repoURL: string): Promise<void> {
             // Create subdirectories if needed
             const dir = path.dirname(localPath);
             if (!fs.existsSync(dir)) {
-                fs.mkdirSync(dir, {recursive: true});
+                fs.mkdirSync(dir, { recursive: true });
             }
 
             // Write the file
@@ -213,14 +229,13 @@ async function syncGuideFromRepo(slug: string, repoURL: string): Promise<void> {
         // If no index.md was found, create one from README.md if it exists
         const indexPath = path.join(guideDir, 'index.md');
         if (!fs.existsSync(indexPath)) {
-            const readmeFile = markdownFiles.find(f => f.path.toLowerCase() === 'readme.md');
+            const readmeFile = markdownFiles.find((f) => f.path.toLowerCase() === 'readme.md');
             if (readmeFile) {
                 const readmeContent = await fetchGitHubFile(owner, repo, readmeFile.path, branch);
                 fs.writeFileSync(indexPath, readmeContent, 'utf-8');
                 console.log(`Created index.md from README.md for ${slug}`);
             }
         }
-
     } catch (error) {
         console.error(`Error syncing guide ${slug}:`, error);
         throw error;
@@ -234,11 +249,11 @@ export async function syncAllGuides(): Promise<void> {
     console.log('Starting guide synchronization...');
 
     const results = await Promise.allSettled(
-        GuideList.map(guide => syncGuideFromRepo(guide.slug, guide.repoURL))
+        GuideList.map((guide) => syncGuideFromRepo(guide.slug, guide.repoURL)),
     );
 
-    const successes = results.filter(r => r.status === 'fulfilled').length;
-    const failures = results.filter(r => r.status === 'rejected').length;
+    const successes = results.filter((r) => r.status === 'fulfilled').length;
+    const failures = results.filter((r) => r.status === 'rejected').length;
 
     console.log(`Guide sync completed: ${successes} succeeded, ${failures} failed`);
 
@@ -256,7 +271,7 @@ export async function syncAllGuides(): Promise<void> {
  * Sync a specific guide by slug
  */
 export async function syncGuide(slug: string): Promise<void> {
-    const guide = GuideList.find(g => g.slug === slug);
+    const guide = GuideList.find((g) => g.slug === slug);
     if (!guide) {
         throw new Error(`Guide not found: ${slug}`);
     }
@@ -268,7 +283,7 @@ export async function syncGuide(slug: string): Promise<void> {
  * Sync a specific guide by repository URL
  */
 export async function syncGuideByRepoUrl(repoUrl: string): Promise<void> {
-    const guide = GuideList.find(g => g.repoURL === repoUrl);
+    const guide = GuideList.find((g) => g.repoURL === repoUrl);
     if (!guide) {
         throw new Error(`Guide not found for repository: ${repoUrl}`);
     }

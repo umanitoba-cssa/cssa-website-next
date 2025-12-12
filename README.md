@@ -20,6 +20,14 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
+## Linting
+
+This project is set up with `eslint` and `prettier` for code linting and formatting respectively. They can be run manually with `bun run lint` or `bun run lint:fix` (or equivalently with `npm`). They will also be automatically run **on every commit** using a pre-commit Husky hook, meaning your files may change after you commit them. If you are using the git UI in editors like VSCode, you may notice that when linting fails, you get an unclear error message, in this case you will have to use the `git commit` command (in a terminal) to see what caused the failure.
+
+The `fix` option in `bun run lint:fix` signifies that safe linting changes will be applied to your code, whereas without `fix` they will just be reported, and not fixed.
+
+**Important:**
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

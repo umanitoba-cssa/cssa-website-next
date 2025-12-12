@@ -1,19 +1,19 @@
-"use client";
+'use client';
 
-import PageHeader from "@/components/page-header";
-import ResearcherCard from "@/components/researcher-card";
-import ResearcherModal from "@/components/researcher-modal";
-import { IResearcher, ResearchersInfo } from "@/data/researchers";
-import { useState } from "react";
-import { AnimatePresence } from "framer-motion";
+import PageHeader from '@/components/page-header';
+import ResearcherCard from '@/components/researcher-card';
+import ResearcherModal from '@/components/researcher-modal';
+import { IResearcher, ResearchersInfo } from '@/data/researchers';
+import { useState } from 'react';
+import { AnimatePresence } from 'framer-motion';
 
 export default function Researchers() {
     const [selectedResearcher, setSelectedResearcher] = useState<IResearcher | null>(null);
-    
+
     // add ids to each researcher
     const researcherProfiles: IResearcher[] = ResearchersInfo.map((researcher, i) => ({
         id: i + 1,
-        ...researcher
+        ...researcher,
     }));
 
     return (
