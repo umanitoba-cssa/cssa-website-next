@@ -31,31 +31,33 @@
     --border: 0 0% 14.9%;
     --input: 0 0% 14.9%;
     --ring: 0 0% 83.1%;
-    
+
     --radius: 0.5rem;
 }
 
-
-
 body {
-  color: rgb(var(--foreground-rgb));
-  @apply bg-cssa-navy;
-  @apply font-sans;
+    color: rgb(var(--foreground-rgb));
+    @apply bg-cssa-navy;
+    @apply font-sans;
 }
 
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+    .text-balance {
+        text-wrap: balance;
+    }
 }
 
 @media only screen and (max-width: 901px) {
-    .desktop-only { display: none !important; }
- }
+    .desktop-only {
+        display: none !important;
+    }
+}
 
- @media only screen and (min-width: 902px) {
-    .mobile-only { display: none !important; }
- }
+@media only screen and (min-width: 902px) {
+    .mobile-only {
+        display: none !important;
+    }
+}
 
 h1 {
     @apply text-4xl font-bold font-sans;

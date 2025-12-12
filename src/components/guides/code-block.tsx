@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React, { useEffect } from 'react';
 import Prism from 'prismjs';
@@ -18,20 +18,20 @@ import 'prismjs/components/prism-csharp';
 import 'prism-themes/themes/prism-atom-dark.css';
 
 interface CodeBlockProps {
-  content: string;
-  language?: string;
+    content: string;
+    language?: string;
 }
 
 const CodeBlock: React.FC<CodeBlockProps> = ({ content, language = 'javascript' }) => {
-  useEffect(() => {
-    Prism.highlightAll();
-  }, [content, language]);
+    useEffect(() => {
+        Prism.highlightAll();
+    }, [content, language]);
 
-  return (
-    <pre className="rounded-md overflow-x-auto">
-      <code className={`language-${language}`}>{content.trim()}</code>
-    </pre>
-  );
+    return (
+        <pre className="rounded-md overflow-x-auto">
+            <code className={`language-${language}`}>{content.trim()}</code>
+        </pre>
+    );
 };
 
-export default CodeBlock; 
+export default CodeBlock;

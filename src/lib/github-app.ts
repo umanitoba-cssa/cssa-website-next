@@ -13,7 +13,7 @@ const installationIdCache = new Map<string, number>(); // key: `${owner}/${repo}
 const installationTokenCache = new Map<number, TokenCache>(); // key: installation id
 
 function sleep(ms: number) {
-    return new Promise(r => setTimeout(r, ms));
+    return new Promise((r) => setTimeout(r, ms));
 }
 
 function ensureConfig() {
@@ -25,9 +25,9 @@ async function getAppJwt(): Promise<string> {
     ensureConfig();
     if (cachedAppJwt && Date.now() < cachedAppJwt.expiresAt - 30_000) return cachedAppJwt.token;
     const now = Math.floor(Date.now() / 1000);
-    const payload = {iat: now - 60, exp: now + 9 * 60, iss: Number(APP_ID)};
-    const token = jwt.sign(payload as object, PRIVATE_KEY!, {algorithm: 'RS256'});
-    cachedAppJwt = {token, expiresAt: (now + 9 * 60) * 1000};
+    const payload = { iat: now - 60, exp: now + 9 * 60, iss: Number(APP_ID) };
+    const token = jwt.sign(payload as object, PRIVATE_KEY!, { algorithm: 'RS256' });
+    cachedAppJwt = { token, expiresAt: (now + 9 * 60) * 1000 };
     return token;
 }
 
@@ -43,8 +43,8 @@ async function getInstallationId(owner: string, repo: string): Promise<number> {
         headers: {
             Authorization: `Bearer ${appJwt}`,
             Accept: 'application/vnd.github.v3+json',
-            'User-Agent': 'cssa-website'
-        }
+            'User-Agent': 'cssa-website',
+        },
     });
 
     if (res.status === 404) {
@@ -52,7 +52,9 @@ async function getInstallationId(owner: string, repo: string): Promise<number> {
     }
     if (!res.ok) {
         const body = await res.text().catch(() => '');
-        throw new Error(`Failed to get installation id for ${owner}/${repo}: ${res.status} ${res.statusText}${body ? ` - ${body}` : ''}`);
+        throw new Error(
+            `Failed to get installation id for ${owner}/${repo}: ${res.status} ${res.statusText}${body ? ` - ${body}` : ''}`,
+        );
     }
 
     const data = await res.json();
@@ -68,15 +70,17 @@ async function createInstallationToken(installationId: number): Promise<TokenCac
         headers: {
             Authorization: `Bearer ${appJwt}`,
             Accept: 'application/vnd.github.v3+json',
-            'User-Agent': 'cssa-website'
-        }
+            'User-Agent': 'cssa-website',
+        },
     });
     if (!res.ok) {
         const body = await res.text().catch(() => '');
-        throw new Error(`Failed to create installation token: ${res.status} ${res.statusText}${body ? ` - ${body}` : ''}`);
+        throw new Error(
+            `Failed to create installation token: ${res.status} ${res.statusText}${body ? ` - ${body}` : ''}`,
+        );
     }
     const data = await res.json();
-    return {token: data.token, expiresAt: new Date(data.expires_at).getTime()};
+    return { token: data.token, expiresAt: new Date(data.expires_at).getTime() };
 }
 
 export async function getInstallationTokenForRepo(owner: string, repo: string): Promise<string> {
@@ -91,11 +95,17 @@ export async function getInstallationTokenForRepo(owner: string, repo: string): 
 type FetchInput = Parameters<typeof fetch>[0];
 type FetchInit = Parameters<typeof fetch>[1];
 
-export async function githubFetchWithApp(input: FetchInput, init: FetchInit = {}, owner?: string, repo?: string, attempt = 1): Promise<Response> {
+export async function githubFetchWithApp(
+    input: FetchInput,
+    init: FetchInit = {},
+    owner?: string,
+    repo?: string,
+    attempt = 1,
+): Promise<Response> {
     const headers: Record<string, string> = {
         Accept: 'application/vnd.github.v3+json',
         'User-Agent': 'cssa-website',
-        ...(init?.headers as Record<string, string> || {})
+        ...((init?.headers as Record<string, string>) || {}),
     };
 
     try {
@@ -105,13 +115,13 @@ export async function githubFetchWithApp(input: FetchInput, init: FetchInit = {}
             headers.Authorization = `token ${process.env.GITHUB_TOKEN}`;
         }
 
-        const response = await fetch(input, {...init, headers});
+        const response = await fetch(input, { ...init, headers });
 
         if (response.status === 403) {
             const remaining = response.headers.get('x-ratelimit-remaining');
             const resetHeader = response.headers.get('x-ratelimit-reset');
             if (remaining === '0' && resetHeader) {
-                const resetMs = (parseInt(resetHeader, 10) * 1000) - Date.now();
+                const resetMs = parseInt(resetHeader, 10) * 1000 - Date.now();
                 const waitMs = Math.max(resetMs, 1000);
                 await sleep(waitMs + 500);
                 if (attempt < MAX_RETRIES) return githubFetchWithApp(input, init, owner, repo, 1);
@@ -119,7 +129,7 @@ export async function githubFetchWithApp(input: FetchInput, init: FetchInit = {}
         }
 
         if ((response.status === 429 || response.status >= 500) && attempt < MAX_RETRIES) {
-            const delay = BASE_DELAY_MS * (2 ** (attempt - 1));
+            const delay = BASE_DELAY_MS * 2 ** (attempt - 1);
             await sleep(delay);
             return githubFetchWithApp(input, init, owner, repo, attempt + 1);
         }
@@ -127,7 +137,7 @@ export async function githubFetchWithApp(input: FetchInput, init: FetchInit = {}
         return response;
     } catch (err) {
         if (attempt < MAX_RETRIES) {
-            const delay = BASE_DELAY_MS * (2 ** (attempt - 1));
+            const delay = BASE_DELAY_MS * 2 ** (attempt - 1);
             await sleep(delay);
             return githubFetchWithApp(input, init, owner, repo, attempt + 1);
         }

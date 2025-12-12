@@ -21,6 +21,7 @@
 *.pem
 /.idea
 .dist
+package-lock.json
 
 # debug
 npm-debug.log*

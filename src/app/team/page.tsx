@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import BlockHeader from "@/components/block-header";
-import PageHeader from "@/components/page-header";
-import ProfileCard from "@/components/profile-card";
-import ProfileModal from "@/components/profile-modal";
+import BlockHeader from '@/components/block-header';
+import PageHeader from '@/components/page-header';
+import ProfileCard from '@/components/profile-card';
+import ProfileModal from '@/components/profile-modal';
 import {
     ExecProfiles,
     LoungeProfiles,
@@ -14,14 +14,12 @@ import {
     AdvocacyProfiles,
     StudentResourcesProfiles,
     IProfile,
-} from "@/data/team";
-import { useState } from "react";
-import { AnimatePresence } from "framer-motion";
+} from '@/data/team';
+import { useState } from 'react';
+import { AnimatePresence } from 'framer-motion';
 
 export default function Team() {
-    const [selectedProfile, setSelectedProfile] = useState<IProfile | null>(
-        null
-    );
+    const [selectedProfile, setSelectedProfile] = useState<IProfile | null>(null);
 
     return (
         <main className="flex flex-col">
