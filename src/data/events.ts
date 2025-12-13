@@ -11,7 +11,7 @@ export const RecentEvents: IEventLink[] = [
         title: 'Game Jam 2025',
         description:
             'Compete to build a game with the theme "Evolution"',
-        href: 'gamejam',
+        href: 'events/gamejam2025',
         internal: true,
         linkText: 'See Page →'
     },

@@ -1,6 +1,3 @@
-// TODO:
-// - Get image background to replace resources.png
-
 import './events.css';
 import BlockHeader from '@/components/block-header';
 import PageHeader from '@/components/page-header';
@@ -93,11 +90,11 @@ export default async function Events() {
 
     return (
         <main className="flex flex-col">
-            <PageHeader title="Events" image="/img/backgrounds/resources.png" /> 
+            <PageHeader title="Events" image="/img/backgrounds/team.png" /> 
             <div className="flex flex-col container py-12 gap-12">
                 <div className="flex flex-col gap-8">
                     <BlockHeader title="Recent Events" />
-                    <p>All latest past events ran by the CSSA.</p>
+                    <p>All latest events ran by the CSSA.</p>
 
                     <Carousel className="py-1" opts={{ align: 'center' }}>
                         <CarouselContent>{recentEvents}</CarouselContent>
