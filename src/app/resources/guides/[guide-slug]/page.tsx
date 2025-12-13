@@ -7,9 +7,9 @@ import MarkdownContent from '@/components/guides/markdown-content';
 import Breadcrumbs from '@/components/guides/breadcrumbs';
 
 interface GuidePageProps {
-    params: {
+    params: Promise<{
         'guide-slug': string;
-    };
+    }>;
 }
 
 export async function generateMetadata({ params }: GuidePageProps): Promise<Metadata> {

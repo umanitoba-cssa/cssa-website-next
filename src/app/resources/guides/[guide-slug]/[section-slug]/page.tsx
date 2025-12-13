@@ -10,10 +10,10 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 import Breadcrumbs from '@/components/guides/breadcrumbs';
 
 interface SectionPageProps {
-    params: {
+    params: Promise<{
         'guide-slug': string;
         'section-slug': string;
-    };
+    }>;
 }
 
 export async function generateMetadata({ params }: SectionPageProps): Promise<Metadata> {
