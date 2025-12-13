@@ -9,6 +9,7 @@
         "prepare": "husky",
         "sync-guides": "bun run scripts/sync-guides.js",
         "setup-webhook-sync": "bun run scripts/setup-webhook-sync.js",
+        "sync-external-md": "bun run scripts/sync-external-md.js",
         "lint": "prettier --write . && eslint .",
         "lint:fix": "prettier --write . && eslint . --fix"
     },
@@ -38,8 +39,8 @@
         "googleapis": "^134.0.0",
         "gray-matter": "^4.0.3",
         "jsonwebtoken": "^9.0.3",
-        "lucide-react": "^0.368.0",
-        "next": "^14.2.35",
+        "lucide-react": "^0.468.0",
+        "next": "^15.1.0",
         "next-mdx-remote": "^5.0.0",
         "node-fetch": "^3.3.2",
         "nodemailer": "^7.0.11",
