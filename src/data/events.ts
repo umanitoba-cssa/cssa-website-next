@@ -53,7 +53,7 @@ export const OlderEvents: IEventLink[] = [
     {
         title: 'Goosies  2023',
         description:
-            'Annual award show for CS Professors',
+            'Annual award show for the Department of Computer Science',
         href: 'events/goosies2023',
         internal: true,
         linkText: 'View Photos →'
