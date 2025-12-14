@@ -90,7 +90,7 @@ export default async function Events() {
 
     return (
         <main className="flex flex-col">
-            <PageHeader title="Events" image="/img/backgrounds/team.png" /> 
+            <PageHeader title="Events" image="/img/backgrounds/events.jpg" /> 
             <div className="flex flex-col container py-12 gap-12">
                 <div className="flex flex-col gap-8">
                     <BlockHeader title="Recent Events" />
