@@ -15,7 +15,6 @@ export default async function Lounge() {
                 </TableRow>
             )
         });
-        
 
         return (
             <div className="flex flex-col">
@@ -29,10 +28,9 @@ export default async function Lounge() {
         )
     });
     
-   
     return (
         <main className="flex flex-col">
-            <PageHeader title="Lounge" image="/img/backgrounds/lounge3.jpg" />
+            <PageHeader title="Lounge" image="/img/backgrounds/lounge.jpg" />
             <div className="container py-12 flex flex-col gap-12">
                 <div className="flex flex-col gap-8">
                     <BlockHeader title="Lounge Location" />

@@ -25,7 +25,7 @@ export default function Team() {
 
     return (
         <main className="flex flex-col">
-            <PageHeader title="Team" image="/img/backgrounds/team.png" />
+            <PageHeader title="Team" image="/img/backgrounds/team.jpg" />
             <div className="container py-12 flex flex-col gap-8">
                 <BlockHeader title="Executive Team" />
                 <div className="flex flex-row gap-4 flex-wrap justify-center">

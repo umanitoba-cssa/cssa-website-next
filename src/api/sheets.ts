@@ -47,5 +47,4 @@ export async function getLoungeMenu() {
     const grouped = groupBy(objects, (item) => item.Category);
 
     return grouped
-    
 }
