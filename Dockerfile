@@ -30,7 +30,7 @@ ENV GITHUB_PRIVATE_KEY=${GITHUB_PRIVATE_KEY}
 
 # Copy only package files first to leverage caching
 COPY package.json bun.lock ./
-RUN bun install --frozen-lockfile
+RUN bun install --frozen-lockfile --ignore-scripts
 
 # Copy only necessary files for build
 COPY tsconfig.json next.config.mjs ./
@@ -97,7 +97,7 @@ ENV RECAPTCHA_SECRET_KEY=${RECAPTCHA_SECRET_KEY}
 
 # Copy only runtime dependencies
 COPY package.json bun.lock ./
-RUN bun install --frozen-lockfile --production
+RUN bun install --frozen-lockfile --production --ignore-scripts
 
 # Copy built app from builder stage
 COPY --from=builder /usr/src/app/scripts ./scripts

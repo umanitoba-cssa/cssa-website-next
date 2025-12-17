@@ -1,11 +1,18 @@
-import { getLoungeMenu } from "@/api/sheets";
-import BlockHeader from "@/components/block-header";
-import PageHeader from "@/components/page-header";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { getLoungeMenu } from '@/api/sheets';
+import BlockHeader from '@/components/block-header';
+import PageHeader from '@/components/page-header';
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
+} from '@/components/ui/table';
 
 export default async function Lounge() {
     const menu = await getLoungeMenu();
-    
+
     const menuItems = Object.keys(menu).map((category) => {
         const rows = menu[category].map((item) => {
             return (
@@ -13,19 +20,17 @@ export default async function Lounge() {
                     <TableCell>{item.Item}</TableCell>
                     <TableCell className="text-right">{item.Price}</TableCell>
                 </TableRow>
-            )
+            );
         });
 
         return (
             <div className="flex flex-col">
                 <h4>{category}</h4>
                 <Table>
-                    <TableBody>
-                        {rows}
-                    </TableBody>
+                    <TableBody>{rows}</TableBody>
                 </Table>
             </div>
-        )
+        );
     });
     
     return (
@@ -46,9 +51,7 @@ export default async function Lounge() {
                 </div>
                 <div className="flex flex-col gap-8">
                     <BlockHeader title="Lounge Canteen Menu" />
-                    <div className="flex flex-col gap-8">
-                        {menuItems}
-                    </div>
+                    <div className="flex flex-col gap-8">{menuItems}</div>
                 </div>
             </div>
         </main>
