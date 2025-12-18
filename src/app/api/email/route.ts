@@ -45,7 +45,7 @@ export async function POST(request: NextRequest) {
                 if (!err) {
                     resolve('Email sent');
                 } else {
-                    reject(err.message);
+                    reject('Error sending email');
                 }
             });
         });
@@ -54,6 +54,6 @@ export async function POST(request: NextRequest) {
         await sendMailPromise();
         return NextResponse.json({ message: 'Email sent' });
     } catch (err) {
-        return NextResponse.json({ error: err }, { status: 500 });
+        return NextResponse.json({ error: 'Error sending email' }, { status: 500 });
     }
 }
