@@ -1,9 +1,45 @@
 import { type NextRequest, NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 import Mail from 'nodemailer/lib/mailer';
+import { z } from 'zod';
+
+const contactSchema = z.object({
+    email: z
+        .string()
+        .email()
+        .max(254)
+        .transform((value: string) => value.trim().toLowerCase()),
+    name: z
+        .string()
+        .min(1)
+        .max(100)
+        // remove CRLF
+        .transform((value: string) => value.trim().replace(/[\r\n]+/g, ' ')),
+    message: z
+        .string()
+        .min(1)
+        .max(5000)
+        .transform((value: string) => value.trim()),
+    recaptchaToken: z
+        .string()
+        .min(1)
+        .transform((value: string) => value.trim()),
+});
 
 export async function POST(request: NextRequest) {
-    const { email, name, message, recaptchaToken } = await request.json();
+    let body: unknown;
+    try {
+        body = await request.json();
+    } catch {
+        return NextResponse.json({ error: 'Invalid JSON body' }, { status: 400 });
+    }
+
+    const result = contactSchema.safeParse(body);
+    if (!result.success) {
+        return NextResponse.json({ error: 'Missing or invalid fields' }, { status: 400 });
+    }
+
+    const { email, name, message, recaptchaToken } = result.data;
 
     const params = new URLSearchParams({
         secret: process.env.RECAPTCHA_SECRET_KEY ?? '',
@@ -45,7 +81,7 @@ export async function POST(request: NextRequest) {
                 if (!err) {
                     resolve('Email sent');
                 } else {
-                    reject(err.message);
+                    reject('Error sending email');
                 }
             });
         });
@@ -54,6 +90,6 @@ export async function POST(request: NextRequest) {
         await sendMailPromise();
         return NextResponse.json({ message: 'Email sent' });
     } catch (err) {
-        return NextResponse.json({ error: err }, { status: 500 });
+        return NextResponse.json({ error: 'Error sending email' }, { status: 500 });
     }
 }
