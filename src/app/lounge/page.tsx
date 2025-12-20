@@ -32,7 +32,7 @@ export default async function Lounge() {
             </div>
         );
     });
-
+    
     return (
         <main className="flex flex-col">
             <PageHeader title="Lounge" image="/img/backgrounds/lounge.jpg" />
