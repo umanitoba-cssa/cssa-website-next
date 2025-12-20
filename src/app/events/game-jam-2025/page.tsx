@@ -7,7 +7,7 @@ import SponsorCard from '@/components/sponsor-card';
 export default function GameJam() {
     return (
         <main className="flex flex-col bg-[#84a2ce] text-[#0C1118]">
-            <EventPageHeader title="Game Jam Logo" image="/img/gamejam/gj_banner.svg" />
+            <EventPageHeader title="Game Jam Logo" image="/img/game-jam/gj_banner.svg" />
             <div className="container py-12 flex flex-col gap-12">
                 <BlockHeader title="Theme" />
                 <p>This years theme is "Evolution"!</p>
@@ -42,7 +42,7 @@ export default function GameJam() {
                 <BlockHeader title="Schedule" />
                 <div className="flex justify-center">
                     <Image
-                        src="/img/gamejam/schedule.png"
+                        src="/img/game-jam/schedule.png"
                         alt="Game Jam 2025 Schedule"
                         width={400}
                         height={400}
@@ -57,17 +57,17 @@ export default function GameJam() {
                 <div className="flex flex-wrap gap-5 justify-center">
                     <SponsorCard
                         name="Ubisoft"
-                        image="/img/gamejam/ubisoft-logo.svg"
+                        image="/img/game-jam/ubisoft-logo.svg"
                         website="https://winnipeg.ubisoft.com/"
                     />
                     <SponsorCard
                         name="G3"
-                        image="/img/gamejam/g3-logo.svg"
+                        image="/img/game-jam/g3-logo.svg"
                         website="https://g3.ca"
                     />
                     <SponsorCard
                         name="Niche"
-                        image="/img/gamejam/niche-logo.svg"
+                        image="/img/game-jam/niche-logo.svg"
                         website="https://nicherms.com"
                     />
                 </div>
@@ -75,7 +75,7 @@ export default function GameJam() {
                 <BlockHeader title="Award Categories" />
                 <div className="flex justify-center">
                     <Image
-                        src="/img/gamejam/award-categories.png"
+                        src="/img/game-jam/award-categories.png"
                         alt="Game Jam 2025 Award Categories"
                         width={400}
                         height={400}

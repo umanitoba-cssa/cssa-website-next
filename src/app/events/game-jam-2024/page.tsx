@@ -7,7 +7,7 @@ import SponsorCard from '@/components/sponsor-card';
 export default function GameJam() {
     return (
         <main className="flex flex-col bg-cssa-light-blue">
-            <EventPageHeader title="Game Jam Logo" image="/img/gamejam/2024/banner.svg" />
+            <EventPageHeader title="Game Jam Logo" image="/img/game-jam/2024/banner.svg" />
             <div className="container py-12 flex flex-col gap-12">
                 <BlockHeader title="Theme" />
                 <p>
@@ -19,37 +19,37 @@ export default function GameJam() {
                     {[
                         {
                             id: 1,
-                            src: '/img/gamejam/2024/awards/art-design.png',
+                            src: '/img/game-jam/2024/awards/art-design.png',
                             alt: 'Best Art Design',
                         },
                         {
                             id: 2,
-                            src: '/img/gamejam/2024/awards/sound-design.png',
+                            src: '/img/game-jam/2024/awards/sound-design.png',
                             alt: 'Best Sound Design',
                         },
                         {
                             id: 3,
-                            src: '/img/gamejam/2024/awards/first-time.png',
+                            src: '/img/game-jam/2024/awards/first-time.png',
                             alt: 'Best First-Time Game Jam Submission',
                         },
                         {
                             id: 4,
-                            src: '/img/gamejam/2024/awards/innovative.png',
+                            src: '/img/game-jam/2024/awards/innovative.png',
                             alt: 'Most Innovative',
                         },
                         {
                             id: 5,
-                            src: '/img/gamejam/2024/awards/on-theme.png',
+                            src: '/img/game-jam/2024/awards/on-theme.png',
                             alt: 'Most On Theme',
                         },
                         {
                             id: 6,
-                            src: '/img/gamejam/2024/awards/peoples-choice.png',
+                            src: '/img/game-jam/2024/awards/peoples-choice.png',
                             alt: "People's Choice Award",
                         },
                         {
                             id: 7,
-                            src: '/img/gamejam/2024/awards/overall.png',
+                            src: '/img/game-jam/2024/awards/overall.png',
                             alt: 'Overall Best Game',
                         },
                     ].map((award) => (
@@ -90,9 +90,9 @@ export default function GameJam() {
                 <BlockHeader title="Schedule" />
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
                     {[
-                        '/img/gamejam/2024/schedule/day1.png',
-                        '/img/gamejam/2024/schedule/day2.png',
-                        '/img/gamejam/2024/schedule/day3.png',
+                        '/img/game-jam/2024/schedule/day1.png',
+                        '/img/game-jam/2024/schedule/day2.png',
+                        '/img/game-jam/2024/schedule/day3.png',
                     ].map((src, idx) => (
                         <div
                             key={src}
@@ -121,12 +121,12 @@ export default function GameJam() {
                 <div className="grid grid-cols-1 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
                     <SponsorCard
                         name="Niche"
-                        image="/img/gamejam/niche-logo.svg"
+                        image="/img/game-jam/niche-logo.svg"
                         website="https://nicherms.com"
                     />
                     <SponsorCard
                         name="Pollard Banknote"
-                        image="/img/gamejam/pollard.svg"
+                        image="/img/game-jam/pollard.svg"
                         website="https://www.pollardbanknote.com"
                     />
                 </div>
@@ -134,17 +134,17 @@ export default function GameJam() {
                 <div className="grid grid-cols-1 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
                     <SponsorCard
                         name="G3"
-                        image="/img/gamejam/g3-logo.svg"
+                        image="/img/game-jam/g3-logo.svg"
                         website="https://g3.ca"
                     />
                     <SponsorCard
                         name="New Media Manitoba"
-                        image="/img/gamejam/NMM.svg"
+                        image="/img/game-jam/NMM.svg"
                         website="https://newmediamanitoba.com"
                     />
                     <SponsorCard
                         name="Department of Computer Science"
-                        image="/img/gamejam/UMDeptCS.svg"
+                        image="/img/game-jam/UMDeptCS.svg"
                         website="https://umanitoba.ca/science/computer-science"
                     />
                 </div>
@@ -183,7 +183,7 @@ export default function GameJam() {
                 <BlockHeader title="Registration" />
                 <p>
                     Please register by joining our{' '}
-                    <a className="underline" href="https://discord.umanitobacssa.ca/gamejam">
+                    <a className="underline" href="https://discord.umanitobacssa.ca/game-jam">
                         discord
                     </a>{' '}
                     and following the instructions in <i>#welcome</i> <br />

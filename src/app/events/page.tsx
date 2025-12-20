@@ -92,7 +92,7 @@ export default async function Events() {
         <main className="flex flex-col">
             <PageHeader title="Events" image="/img/backgrounds/events.jpg" /> 
             <div className="flex flex-col container py-12 gap-12">
-                <div className="flex flex-col gap-8">
+                <div className="flex flex-col gap-8 p-4">
                     <BlockHeader title="Recent Events" />
                     <p>All latest events ran by the CSSA.</p>
 
@@ -104,7 +104,7 @@ export default async function Events() {
                 </div>
 
 
-                <div className="flex flex-col gap-8">
+                <div className="flex flex-col gap-8 p-4">
                     <BlockHeader title="Older Events" />
                     <p>Some older events ran by the CSSA.</p>
 
