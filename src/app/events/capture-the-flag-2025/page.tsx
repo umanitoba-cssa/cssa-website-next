@@ -4,7 +4,7 @@ import fs from "fs";
 import path from "path";
 import React from 'react';
 
-const photDir = "/img/capturetheflag/2025photos/"
+const photDir = "/img/capture-the-flag/2025photos/"
 const dir = path.join(process.cwd(), "public" + photDir);
 const images = fs.readdirSync(dir);
 
