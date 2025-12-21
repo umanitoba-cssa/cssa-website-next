@@ -6,7 +6,7 @@ import PageHeader from '@/components/page-header';
 import { MdOutlineLocationOn } from 'react-icons/md';
 import { FaRegClock, FaTshirt } from 'react-icons/fa';
 
-export default function Goosies() {
+export default function Goosies2023() {
     return (
         <main className="flex flex-col">
             <PageHeader title="The Goosies 2023-24" image="/img/backgrounds/home.jpg" />

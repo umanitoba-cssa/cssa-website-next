@@ -26,7 +26,7 @@ import { FaExternalLinkAlt } from 'react-icons/fa';
 
 export default async function Events() {
 
-    const recentEvents = RecentEvents.map((link, index) => {
+    const recentEvents = Array.from(RecentEvents.values()).map((link, index) => {
         return (
             <CarouselItem key={index} className="md:basis-1/2 lg:basis-[30%]">
                 <div className="px-2 w-full h-full">
@@ -57,7 +57,7 @@ export default async function Events() {
         );
     });
 
-    const olderEvents = OlderEvents.map((link, index) => {
+    const olderEvents = Array.from(OlderEvents.values()).map((link, index) => {
         return (
             <CarouselItem key={index} className="md:basis-1/2 lg:basis-[30%]">
                 <div className="px-2 w-full h-full">

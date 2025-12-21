@@ -4,10 +4,10 @@ import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import SponsorCard from '@/components/sponsor-card';
 
-export default function GameJam() {
+export default function GameJam2025() {
     return (
         <main className="flex flex-col bg-[#84a2ce] text-[#0C1118]">
-            <EventPageHeader title="Game Jam Logo" image="/img/game-jam/gj_banner.svg" />
+            <EventPageHeader alt="Game Jam Logo" image="/img/game-jam/gj_banner.svg" />
             <div className="container py-12 flex flex-col gap-12">
                 <BlockHeader title="Theme" />
                 <p>This years theme is "Evolution"!</p>
