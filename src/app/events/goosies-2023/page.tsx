@@ -56,7 +56,7 @@ export default function Goosies2023() {
                         Voting and Tickets now available! This is an 18+ event, please drink
                         responsibly
                     </p>
-                    <div className="flex flex-row gap-4 gap-y-2">
+                    <div className="flex flex-row gap-4 gap-y-2 pt-6">
                         <Button size="lg">
                             <Link href="#">Registration Closed</Link>
                         </Button>

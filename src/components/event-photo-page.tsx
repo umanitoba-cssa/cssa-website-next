@@ -1,5 +1,6 @@
 import PageHeader from '@/components/page-header';
 import EventPageHeader from '@/components/event-page-header';
+import BlockHeader from '@/components/block-header';
 import { RecentEvents } from '@/data/events';
 import fs from 'fs';
 import path from 'path';
@@ -43,6 +44,7 @@ export default async function EventPhotoPage({
             />
 
             <div className="flex flex-col container py-12 gap-12">
+                <BlockHeader title="Description"></BlockHeader>
                 <p>{event.description}</p>
 
                 {galleryImages.map((img) => (
