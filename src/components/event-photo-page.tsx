@@ -10,12 +10,14 @@ interface EventPhotoPageProps {
     eventKey: string;
     photoDir: string;
     headerImageIdx?: number;
+    keepHeaderImageInBody?: boolean;
 }
 
 export default async function EventPhotoPage({
     eventKey,
     photoDir,
     headerImageIdx = 0,
+    keepHeaderImageInBody = false,
 }: EventPhotoPageProps) {
     const event = RecentEvents.get(eventKey);
 
@@ -27,14 +29,12 @@ export default async function EventPhotoPage({
     const images = fs.readdirSync(dir);
 
     if (!images[headerImageIdx]) {
-        throw new Error(
-            `Header image index ${headerImageIdx} out of bounds for ${photoDir}`
-        );
+        throw new Error(`Header image index ${headerImageIdx} out of bounds for ${photoDir}`);
     }
 
-    const galleryImages = images
-        .slice(0, headerImageIdx)
-        .concat(images.slice(headerImageIdx + 1));
+    const galleryImages = keepHeaderImageInBody
+        ? images
+        : images.slice(0, headerImageIdx).concat(images.slice(headerImageIdx + 1));
 
     return (
         <main className="flex flex-col">
