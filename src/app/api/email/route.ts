@@ -26,6 +26,8 @@ const contactSchema = z.object({
         .transform((value: string) => value.trim()),
 });
 
+export const dynamic = 'force-dynamic'; // so emails are sent every time, never cached
+
 export async function POST(request: NextRequest) {
     let body: unknown;
     try {
