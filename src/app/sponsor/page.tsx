@@ -5,7 +5,10 @@ export default function Sponsor() {
     return (
         <>
             <main className="flex flex-col">
-                <PageHeader title="Sponsor Us" image="/img/backgrounds/sponsors.jpg" />
+                <PageHeader
+                    title="Sponsor Us"
+                    image="/img/backgrounds/sponsors.jpg"
+                />
                 <div className="container py-12 flex flex-col gap-12">
                     <div className="flex flex-col gap-8">
                         <BlockHeader title="Why Sponsor Us?" />
@@ -29,8 +32,7 @@ export default function Sponsor() {
                             <a
                                 className="underline"
                                 target="_blank"
-                                href="/docs/sponsorshipPackage.pdf"
-                            >
+                                href="/docs/sponsorshipPackage.pdf">
                                 2025-2026 Sponsorship Package here
                             </a>
                             .
@@ -42,8 +44,7 @@ export default function Sponsor() {
                             To inquire about sponsorships, please email us at{' '}
                             <a
                                 className="text-cssa-gold hover:underline"
-                                href="mailto:cssa@umanitoba.ca"
-                            >
+                                href="mailto:cssa@umanitoba.ca">
                                 cssa@umanitoba.ca
                             </a>
                         </p>
