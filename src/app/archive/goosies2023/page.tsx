@@ -9,7 +9,10 @@ import { FaRegClock, FaTshirt } from 'react-icons/fa';
 export default function Goosies() {
     return (
         <main className="flex flex-col">
-            <PageHeader title="The Goosies 2023-24" image="/img/backgrounds/home.jpg" />
+            <PageHeader
+                title="The Goosies 2023-24"
+                image="/img/backgrounds/home.jpg"
+            />
             <div className="desktop-only container py-8 flex flex-row gap-8">
                 <div className="">
                     <Image
@@ -22,14 +25,14 @@ export default function Goosies() {
                 </div>
                 <div className="">
                     <p>
-                        Ready for the "BEST" AWARD show, for the Computer Science community by the
-                        Computer Science community? Come join us for this end-of-term event for lots
-                        of giggles and fun!
+                        Ready for the &quot;BEST&quot; AWARD show, for the Computer Science
+                        community by the Computer Science community? Come join us for this
+                        end-of-term event for lots of giggles and fun!
                     </p>
                     <br></br>
                     <p>
-                        It's your chance to meet lots of new people and build connections. Have fun
-                        with us before the term ends!
+                        It&apos;s your chance to meet lots of new people and build connections. Have
+                        fun with us before the term ends!
                     </p>
                     <br></br>
                     <p>
@@ -40,7 +43,7 @@ export default function Goosies() {
                     <div className="flex flex-col gap-y-4">
                         <div className="flex flex-row gap-2">
                             <MdOutlineLocationOn size="28px" />
-                            <p>VW's Social Club, University of Manitoba</p>
+                            <p>VW&apos;s Social Club, University of Manitoba</p>
                         </div>
                         <div className="flex flex-row gap-2">
                             <FaRegClock size="28px" />
@@ -79,14 +82,14 @@ export default function Goosies() {
                 </div>
                 <div className="">
                     <p>
-                        Ready for the "BEST" AWARD show, for the Computer Science community by the
-                        Computer Science community? Come join us for this end-of-term event for lots
-                        of giggles and fun!
+                        Ready for the &quot;BEST&quot; AWARD show, for the Computer Science
+                        community by the Computer Science community? Come join us for this
+                        end-of-term event for lots of giggles and fun!
                     </p>
                     <br></br>
                     <p>
-                        It's your chance to meet lots of new people and build connections. Have fun
-                        with us before the term ends!
+                        It&apos;s your chance to meet lots of new people and build connections. Have
+                        fun with us before the term ends!
                     </p>
                     <br></br>
                     <p>
@@ -97,7 +100,7 @@ export default function Goosies() {
                     <div className="flex flex-col gap-y-4">
                         <div className="flex flex-row gap-2">
                             <MdOutlineLocationOn size="28px" />
-                            <p>VW's Social Club, University of Manitoba</p>
+                            <p>VW&apos;s Social Club, University of Manitoba</p>
                         </div>
                         <div className="flex flex-row gap-2">
                             <FaRegClock size="28px" />
