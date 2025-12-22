@@ -21,10 +21,14 @@ export default function ProfileCard({
             onKeyDown={(e) => {
                 if (e.key === 'Enter' || e.key === ' ') onClick?.();
             }}
-            className="flex flex-col border-solid border border-gray-400 rounded-xl items-center p-4 gap-4 min-w-[17rem] max-w-[17rem] cursor-pointer"
-        >
+            className="flex flex-col border-solid border border-gray-400 rounded-xl items-center p-4 gap-4 min-w-[17rem] max-w-[17rem] cursor-pointer">
             <div className="w-52 h-52 bg-contain rounded-full relative overflow-hidden">
-                <Image src={profile?.image} alt={profile?.name} fill className="object-cover" />
+                <Image
+                    src={profile?.image}
+                    alt={profile?.name}
+                    fill
+                    className="object-cover"
+                />
             </div>
             <div className="text-center">
                 <h3 className="text-xl font-bold pb-0">{profile?.name}</h3>
@@ -42,8 +46,7 @@ export default function ProfileCard({
                             href={profile.linkedin}
                             target="_blank"
                             rel="noreferrer"
-                            onClick={(e) => e.stopPropagation()}
-                        >
+                            onClick={(e) => e.stopPropagation()}>
                             <FaLinkedin />
                         </a>
                     )}
@@ -53,8 +56,7 @@ export default function ProfileCard({
                             href={profile.instagram}
                             target="_blank"
                             rel="noreferrer"
-                            onClick={(e) => e.stopPropagation()}
-                        >
+                            onClick={(e) => e.stopPropagation()}>
                             <FaInstagram />
                         </a>
                     )}
@@ -64,8 +66,7 @@ export default function ProfileCard({
                             href={profile.github}
                             target="_blank"
                             rel="noreferrer"
-                            onClick={(e) => e.stopPropagation()}
-                        >
+                            onClick={(e) => e.stopPropagation()}>
                             <FaGithub />
                         </a>
                     )}
@@ -75,8 +76,7 @@ export default function ProfileCard({
                             href={profile.website}
                             target="_blank"
                             rel="noreferrer"
-                            onClick={(e) => e.stopPropagation()}
-                        >
+                            onClick={(e) => e.stopPropagation()}>
                             <FaGlobeAmericas />
                         </a>
                     )}
@@ -86,8 +86,7 @@ export default function ProfileCard({
                             href={profile.discord}
                             target="_blank"
                             rel="noreferrer"
-                            onClick={(e) => e.stopPropagation()}
-                        >
+                            onClick={(e) => e.stopPropagation()}>
                             <FaDiscord />
                         </a>
                     )}
