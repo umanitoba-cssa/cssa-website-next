@@ -59,7 +59,7 @@ export const Navbar = () => {
                         setNavOpen(false);
                     }}
                     data-open={navOpen}
-                    className="flex flex-col gap-2 items-center data-[open=false]:h-0 h-64 overflow-hidden transition-height duration-300 ease-in-out">
+                    className="flex flex-col gap-2 items-center overflow-hidden transition-[max-height] duration-300 ease-in-out data-[open=false]:h-0 data-[open=true]:max-h-screen">
                     <div className="mobile-only py-1"></div> {/*spacer*/}
                     {navbarButtons}
                 </div>

@@ -39,7 +39,7 @@ export default function Team() {
         <main className="flex flex-col">
             <PageHeader
                 title="Team"
-                image="/img/backgrounds/team.png"
+                image="/img/backgrounds/team.jpg"
             />
             <div className="container py-12 flex flex-col gap-8">
                 <Select
