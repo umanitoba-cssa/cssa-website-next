@@ -13,7 +13,10 @@ export default async function GuidesPage() {
 
     return (
         <main className="flex flex-col">
-            <PageHeader title="Guides" image="/img/backgrounds/resources.png" />
+            <PageHeader
+                title="Guides"
+                image="/img/backgrounds/resources.png"
+            />
             <div className="container py-8 flex flex-col gap-8">
                 <div className="flex flex-col gap-4">
                     <BlockHeader title="Student Guides" />

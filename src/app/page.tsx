@@ -8,7 +8,10 @@ import { Fragment } from 'react';
 export default function Home() {
     return (
         <main className="flex flex-col">
-            <PageHeader title="Home" image="/img/backgrounds/home.jpg" />
+            <PageHeader
+                title="Home"
+                image="/img/backgrounds/home.jpg"
+            />
             <div className="container py-8 flex flex-col gap-8">
                 <div className="flex flex-col gap-4">
                     <BlockHeader title="Who we are" />

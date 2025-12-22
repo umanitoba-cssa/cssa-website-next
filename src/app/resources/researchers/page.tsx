@@ -18,7 +18,10 @@ export default function Researchers() {
 
     return (
         <main className="flex flex-col">
-            <PageHeader title="Researchers" image="/img/backgrounds/resources.png" />
+            <PageHeader
+                title="Researchers"
+                image="/img/backgrounds/resources.png"
+            />
             <div className="container py-12 flex flex-col gap-8">
                 <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
                     {researcherProfiles.map((researcher) => (

@@ -10,8 +10,7 @@ export default function Footer() {
                     <a
                         rel="noreferrer"
                         className="hover:underline"
-                        href="https://discord.umanitobacssa.ca/"
-                    >
+                        href="https://discord.umanitobacssa.ca/">
                         Join us on Discord
                     </a>
                 </div>
@@ -20,14 +19,16 @@ export default function Footer() {
                     <a
                         rel="noreferrer"
                         className="hover:underline"
-                        href="https://instagram.com/umanitobacssa"
-                    >
+                        href="https://instagram.com/umanitobacssa">
                         @umanitobacssa
                     </a>
                 </div>
                 <div className="flex flex-row gap-2 place-items-center">
                     <BsFillEnvelopeFill className="w-8 h-8" />
-                    <a rel="noreferrer" className="hover:underline" href="mailto:cssa@umanitoba.ca">
+                    <a
+                        rel="noreferrer"
+                        className="hover:underline"
+                        href="mailto:cssa@umanitoba.ca">
                         cssa@umanitoba.ca
                     </a>
                 </div>
@@ -36,22 +37,20 @@ export default function Footer() {
                     <a
                         rel="noreferrer"
                         className="hover:underline"
-                        href="https://github.com/umanitoba-cssa/"
-                    >
+                        href="https://github.com/umanitoba-cssa/">
                         @umanitoba-cssa
                     </a>
                 </div>
             </div>
             <div className="flex flex-row gap-4 place-items-center text-center">
-                © Copyright 2023 - 2025 Computer Science Students' Association
+                © Copyright 2023 - 2025 Computer Science Students&apos; Association
             </div>
             <div className="text-center">
                 This work is licensed under a{' '}
                 <a
                     rel="noreferrer"
                     className="hover:underline"
-                    href="http://creativecommons.org/licenses/by-nc-sa/4.0/"
-                >
+                    href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
                     Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License
                 </a>
             </div>

@@ -47,8 +47,7 @@ export default function ResearcherModal({
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     className="fixed inset-0 z-50 flex items-center justify-center bg-black/60"
-                    onClick={handleClose}
-                >
+                    onClick={handleClose}>
                     <motion.div
                         layoutId={`card-${researcher.id}`}
                         initial={{ scale: 0.98 }}
@@ -65,13 +64,11 @@ export default function ResearcherModal({
                             },
                         }}
                         className="bg-gray-900 border-solid border-2 border-amber-400 text-white rounded-xl w-full max-w-4xl relative z-50 overflow-y-auto max-h-[90vh] mx-4 sm:mx-6"
-                        onClick={(e) => e.stopPropagation()}
-                    >
+                        onClick={(e) => e.stopPropagation()}>
                         <div className="z-10 bg-gray-900 sticky top-0 flex justify-end items-center px-4 py-3">
                             <button
                                 onClick={handleClose}
-                                className="text-white text-xl hover:opacity-80 transition-opacity flex items-center justify-center"
-                            >
+                                className="text-white text-xl hover:opacity-80 transition-opacity flex items-center justify-center">
                                 <FaTimes />
                             </button>
                         </div>
@@ -81,8 +78,7 @@ export default function ResearcherModal({
                                 initial={{ opacity: 0, y: 10 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 exit={{ opacity: 0, y: 10 }}
-                                transition={{ duration: 0.25 }}
-                            >
+                                transition={{ duration: 0.25 }}>
                                 <div className="flex flex-col lg:flex-row py-3">
                                     <div className="pb-5 lg:pb-0 lg:pr-5 border-b lg:border-b-0 lg:border-r border-solid border-amber-400">
                                         <div className="flex flex-col md:flex-row lg:flex-col lg:gap-1 md:gap-4 md:items-start">
@@ -113,8 +109,7 @@ export default function ResearcherModal({
                                                                 className="text-sm text-blue-600 visited:text-purple-600 hover:underline"
                                                                 href={researcher.lab?.website}
                                                                 target="_blank"
-                                                                rel="noreferrer"
-                                                            >
+                                                                rel="noreferrer">
                                                                 {researcher.lab?.name}
                                                             </a>
                                                         </div>
@@ -125,8 +120,7 @@ export default function ResearcherModal({
                                                             className="block text-sm text-blue-600 visited:text-purple-600 hover:underline"
                                                             href={researcher.googleScholarLink}
                                                             target="_blank"
-                                                            rel="noreferrer"
-                                                        >
+                                                            rel="noreferrer">
                                                             Google Scholar
                                                         </a>
                                                     </div>
@@ -137,8 +131,7 @@ export default function ResearcherModal({
                                                             className="block text-sm text-blue-600 visited:text-purple-600 hover:underline"
                                                             href={`mailto:${researcher.email}`}
                                                             target="_blank"
-                                                            rel="noreferrer"
-                                                        >
+                                                            rel="noreferrer">
                                                             {researcher.email}
                                                         </a>
                                                     </div>
@@ -170,8 +163,7 @@ export default function ResearcherModal({
                                                     (interest, index) => (
                                                         <li
                                                             key={index}
-                                                            className="relative pl-4 text-sm break-words whitespace-normal before:content-['•'] before:absolute before:left-0 before:text-white"
-                                                        >
+                                                            className="relative pl-4 text-sm break-words whitespace-normal before:content-['•'] before:absolute before:left-0 before:text-white">
                                                             {interest}
                                                         </li>
                                                     ),
@@ -187,8 +179,7 @@ export default function ResearcherModal({
                                                     (req, index) => (
                                                         <li
                                                             key={index}
-                                                            className="relative pl-4 text-sm break-words whitespace-normal before:content-['•'] before:absolute before:left-0 before:text-white"
-                                                        >
+                                                            className="relative pl-4 text-sm break-words whitespace-normal before:content-['•'] before:absolute before:left-0 before:text-white">
                                                             {req}
                                                         </li>
                                                     ),
@@ -199,8 +190,8 @@ export default function ResearcherModal({
                                                     noRequirements,
                                                 ) && (
                                                     <p className="text-sm text-gray-500 italic pt-2">
-                                                        Meeting these requirements won't guarantee a
-                                                        successful application.
+                                                        Meeting these requirements won&apos;t
+                                                        guarantee a successful application.
                                                     </p>
                                                 )}
                                         </div>

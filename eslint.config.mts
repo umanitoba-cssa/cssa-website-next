@@ -23,7 +23,6 @@ export default defineConfig([
         },
         ...js.configs.recommended,
         rules: {
-            // Prettier reports formatting issues, but ESLint won't try to fix them
             'prettier/prettier': 'error',
         },
     },
@@ -49,13 +48,15 @@ export default defineConfig([
             prettier: prettierPlugin,
         },
         settings: {
-            react: { version: 'detect' }, // automatically detect React version
+            react: { version: 'detect' },
         },
         rules: {
             // Recommended TS + React rules
             ...tseslint.configs.recommended.rules,
             ...reactPlugin.configs.flat.recommended.rules,
             ...reactHooks.configs.recommended.rules,
+
+            'react/prop-types': 'off',
 
             // JSX runtime: no React import needed
             'react/react-in-jsx-scope': 'off',

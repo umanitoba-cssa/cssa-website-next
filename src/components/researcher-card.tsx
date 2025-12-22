@@ -19,8 +19,7 @@ export default function ResearcherCard({
             onKeyDown={(e) => {
                 if (e.key === 'Enter' || e.key === ' ') onClick?.();
             }}
-            className="flex flex-col sm:flex-row w-full border-solid border border-amber-400 rounded-xl items-start p-4 gap-4 max-w-[27rem] cursor-pointer"
-        >
+            className="flex flex-col sm:flex-row w-full border-solid border border-amber-400 rounded-xl items-start p-4 gap-4 max-w-[27rem] cursor-pointer">
             <div className="w-full sm:w-2/5 relative h-52 sm:h-full">
                 <Image
                     src={researcher?.image}
@@ -50,8 +49,7 @@ export default function ResearcherCard({
                     {researcher?.researchInterests.map((interest, index) => (
                         <li
                             key={index}
-                            className={`relative pl-4 text-sm truncate before:content-['•'] before:absolute before:left-0 before:text-white ${index >= 2 ? 'hidden' : ''}`}
-                        >
+                            className={`relative pl-4 text-sm truncate before:content-['•'] before:absolute before:left-0 before:text-white ${index >= 2 ? 'hidden' : ''}`}>
                             {interest}
                         </li>
                     ))}
@@ -62,8 +60,7 @@ export default function ResearcherCard({
                     {researcher.minStudentRequirements.map((requirement, index) => (
                         <li
                             key={index}
-                            className={`relative pl-4 text-sm truncate before:content-['•'] before:absolute before:left-0 before:text-white ${index >= 2 ? 'hidden' : ''}`}
-                        >
+                            className={`relative pl-4 text-sm truncate before:content-['•'] before:absolute before:left-0 before:text-white ${index >= 2 ? 'hidden' : ''}`}>
                             {requirement}
                         </li>
                     ))}

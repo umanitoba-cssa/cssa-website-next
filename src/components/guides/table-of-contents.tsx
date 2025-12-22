@@ -63,8 +63,7 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({ headings, className }
                             { 'ml-8': heading.level === 4 },
                             { 'ml-12': heading.level === 5 },
                             { 'ml-16': heading.level === 6 },
-                        )}
-                    >
+                        )}>
                         <a
                             href={`#${heading.slug}`}
                             className={cn(
@@ -78,8 +77,7 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({ headings, className }
                                 document.getElementById(heading.slug)?.scrollIntoView({
                                     behavior: 'smooth',
                                 });
-                            }}
-                        >
+                            }}>
                             {heading.text}
                         </a>
                     </li>

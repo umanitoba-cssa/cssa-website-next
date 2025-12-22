@@ -98,11 +98,17 @@ export default async function SectionPage({ params }: SectionPageProps) {
 
     return (
         <main className="flex flex-col">
-            <PageHeader title={section.title} image="/img/backgrounds/resources.png" />
+            <PageHeader
+                title={section.title}
+                image="/img/backgrounds/resources.png"
+            />
 
             <div className="container py-8">
                 {/* Breadcrumbs */}
-                <Breadcrumbs items={breadcrumbItems} className="mb-6" />
+                <Breadcrumbs
+                    items={breadcrumbItems}
+                    className="mb-6"
+                />
 
                 <div className="lg:grid lg:grid-cols-3 gap-8">
                     {/* Sidebar Navigation */}
@@ -122,11 +128,9 @@ export default async function SectionPage({ params }: SectionPageProps) {
                                 <Button
                                     variant="outline"
                                     className="border-cssa-blue text-white hover:bg-cssa-blue/20 transition-colors flex items-center gap-2"
-                                    asChild
-                                >
+                                    asChild>
                                     <Link
-                                        href={`/resources/guides/${params['guide-slug']}/${prevSection.slug}`}
-                                    >
+                                        href={`/resources/guides/${params['guide-slug']}/${prevSection.slug}`}>
                                         <ChevronLeft className="h-4 w-4" />
                                         {prevSection.title}
                                     </Link>
@@ -135,8 +139,7 @@ export default async function SectionPage({ params }: SectionPageProps) {
                                 <Button
                                     variant="outline"
                                     className="border-cssa-blue text-white bg-cssa-blue/20 transition-colors flex items-center gap-2"
-                                    asChild
-                                >
+                                    asChild>
                                     <Link href={`/resources/guides/${params['guide-slug']}`}>
                                         <ChevronLeft className="h-4 w-4" />
                                         Guide Overview
@@ -148,11 +151,9 @@ export default async function SectionPage({ params }: SectionPageProps) {
                                 <Button
                                     variant="outline"
                                     className="border-cssa-blue text-white bg-cssa-blue/20 transition-colors flex items-center gap-2"
-                                    asChild
-                                >
+                                    asChild>
                                     <Link
-                                        href={`/resources/guides/${params['guide-slug']}/${nextSection.slug}`}
-                                    >
+                                        href={`/resources/guides/${params['guide-slug']}/${nextSection.slug}`}>
                                         {nextSection.title}
                                         <ChevronRight className="h-4 w-4" />
                                     </Link>

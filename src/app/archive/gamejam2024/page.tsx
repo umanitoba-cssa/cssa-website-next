@@ -7,12 +7,15 @@ import SponsorCard from '@/components/sponsor-card';
 export default function GameJam() {
     return (
         <main className="flex flex-col bg-cssa-light-blue">
-            <EventPageHeader title="Game Jam Logo" image="/img/gamejam/2024/banner.svg" />
+            <EventPageHeader
+                title="Game Jam Logo"
+                image="/img/gamejam/2024/banner.svg"
+            />
             <div className="container py-12 flex flex-col gap-12">
                 <BlockHeader title="Theme" />
                 <p>
-                    The theme this year was "Under Pressure" and was voted on during the opening
-                    ceremony.
+                    The theme this year was &quot;Under Pressure&quot; and was voted on during the
+                    opening ceremony.
                 </p>
                 <BlockHeader title={`Winners & Awards`} />
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -56,8 +59,7 @@ export default function GameJam() {
                         <div
                             key={award.id}
                             className="relative w-full m-2"
-                            style={{ aspectRatio: '16/9' }}
-                        >
+                            style={{ aspectRatio: '16/9' }}>
                             <Image
                                 src={award.src}
                                 fill
@@ -70,7 +72,9 @@ export default function GameJam() {
                 <BlockHeader title="Rules" />
                 <p>
                     Participants must follow our{' '}
-                    <a className="underline" href="https://umanitobacssa.ca/docs/discordTOU.pdf">
+                    <a
+                        className="underline"
+                        href="https://umanitobacssa.ca/docs/discordTOU.pdf">
                         Discord Terms of Use
                     </a>{' '}
                     This includes:
@@ -97,8 +101,7 @@ export default function GameJam() {
                         <div
                             key={src}
                             className="relative w-full mx-2"
-                            style={{ aspectRatio: '15/20' }}
-                        >
+                            style={{ aspectRatio: '15/20' }}>
                             <Image
                                 src={src}
                                 fill
@@ -110,8 +113,8 @@ export default function GameJam() {
                 </div>
                 <BlockHeader title="Sponsors" />
                 <p>
-                    We'd like to thank all our sponsors that allow us to put on events like this for
-                    Computer Science students!
+                    We&apos;d like to thank all our sponsors that allow us to put on events like
+                    this for Computer Science students!
                 </p>
                 {/**
                  * <h4>Gold Sponsors</h4>
@@ -154,8 +157,7 @@ export default function GameJam() {
                         -{' '}
                         <a
                             className="underline"
-                            href="https://itch.io/game-development/engines/most-projects"
-                        >
+                            href="https://itch.io/game-development/engines/most-projects">
                             Most used game engines
                         </a>{' '}
                         - This resource is there to help you see what other projects are being
@@ -165,15 +167,13 @@ export default function GameJam() {
                         -{' '}
                         <a
                             className="underline"
-                            href="https://toolsntechniques.ca/topic03/topic-3.html"
-                        >
+                            href="https://toolsntechniques.ca/topic03/topic-3.html">
                             The Comp1002 basic Git guide
                         </a>{' '}
                         and{' '}
                         <a
                             className="underline"
-                            href="https://toolsntechniques.ca/topic04/topic-2.html"
-                        >
+                            href="https://toolsntechniques.ca/topic04/topic-2.html">
                             advanced Git guide
                         </a>{' '}
                         - These were created to support Comp1002 but they could also be useful in
@@ -183,7 +183,9 @@ export default function GameJam() {
                 <BlockHeader title="Registration" />
                 <p>
                     Please register by joining our{' '}
-                    <a className="underline" href="https://discord.umanitobacssa.ca/gamejam">
+                    <a
+                        className="underline"
+                        href="https://discord.umanitobacssa.ca/gamejam">
                         discord
                     </a>{' '}
                     and following the instructions in <i>#welcome</i> <br />
@@ -201,28 +203,36 @@ export default function GameJam() {
                 <ul>
                     <li>
                         -{' '}
-                        <a className="underline" href="https://itch.io">
+                        <a
+                            className="underline"
+                            href="https://itch.io">
                             Itch.io
                         </a>{' '}
                         account if you are leading a team
                     </li>
                     <li>
                         -{' '}
-                        <a className="underline" href="https://github.com">
+                        <a
+                            className="underline"
+                            href="https://github.com">
                             GitHub
                         </a>{' '}
                         account for code management.
                     </li>
                     <li>
                         -{' '}
-                        <a className="underline" href="https://git-scm.com/downloads">
+                        <a
+                            className="underline"
+                            href="https://git-scm.com/downloads">
                             Git
                         </a>{' '}
                         installed.
                     </li>
                     <li>
                         -{' '}
-                        <a className="underline" href="https://cli.github.com">
+                        <a
+                            className="underline"
+                            href="https://cli.github.com">
                             GitHub CLI
                         </a>{' '}
                         installed (unless you are comfortable with Git and SSH key based
@@ -235,7 +245,10 @@ export default function GameJam() {
                 </p>
                 <div className="grid grid-cols-1 text-center table-auto gap-8">
                     <a href="https://itch.io/jam/cssa-game-jam-2024">
-                        <Button className="w-full" variant="default" size="lg">
+                        <Button
+                            className="w-full"
+                            variant="default"
+                            size="lg">
                             Itch.io Page for CSSA Game Jam 2024
                         </Button>
                     </a>
