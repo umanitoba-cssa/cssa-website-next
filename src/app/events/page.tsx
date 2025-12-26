@@ -8,21 +8,22 @@ import {
     CarouselNext,
     CarouselPrevious,
 } from '@/components/ui/carousel';
-import {
-    RecentEvents,
+import { 
+    RecentEvents, 
     OlderEvents,
-} from '@/data/events';
+    allEventsArray } from '@/data/events';
 
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
+import { 
+    Card, 
+    CardContent, 
+    CardDescription, 
+    CardHeader, 
     CardTitle,
 } from '@/components/ui/card';
 
 import React from 'react';
 import { FaExternalLinkAlt } from 'react-icons/fa';
+import CalendarSection from './components/CalendarSection';
 
 export default async function Events() {
 
@@ -90,7 +91,7 @@ export default async function Events() {
 
     return (
         <main className="flex flex-col">
-            <PageHeader title="Events" image="/img/backgrounds/events.jpg" /> 
+            <PageHeader title="Events" image="/img/backgrounds/events.jpg" />
             <div className="flex flex-col container py-12 gap-12">
                 <div className="flex flex-col gap-8 p-4">
                     <BlockHeader title="Recent Events" />
@@ -113,6 +114,13 @@ export default async function Events() {
                         <CarouselNext />
                         <CarouselPrevious />
                     </Carousel>
+                </div>
+
+                <div className="flex flex-col gap-8 p-4">
+                    <BlockHeader title="Calendar" />
+                    <p>Calendar View of events ran by the CSSA.</p>
+
+                    <CalendarSection events={allEventsArray}/>
                 </div>
             </div>
         </main>
