@@ -20,10 +20,8 @@ const Contact: FC = () => {
 
     const onSubmit = useCallback(
         (data: FormData) => {
-            // TEMPORARY: Going to revert once tested properly
-            console.log('Form Data:', data);
+            sendEmail(data);
             setValue('recaptchaToken', undefined);
-            // sendEmail(data);
         },
         [setValue],
     );
