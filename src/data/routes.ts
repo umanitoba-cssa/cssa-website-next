@@ -24,6 +24,12 @@ export const Routes: IRoute[] = [
         image: '/img/backgrounds/home.jpg',
         showInNavbar: true,
     },
+    {
+        title: 'Events',
+        href: '/events',
+        image: '/img/backgrounds/home.jpg',
+        showInNavbar: true,
+    },
     // {
     //     title: 'Guides',
     //     href: '/resources/guides',

@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-export default function EventPageHeader({ title, image }: { title: string; image: string }) {
+export default function EventPageHeader({ alt, image }: { alt: string; image: string }) {
     return (
         <>
             <div className="desktop-only">
@@ -9,7 +9,7 @@ export default function EventPageHeader({ title, image }: { title: string; image
                         className="relative object-cover"
                         fill
                         src={image}
-                        alt={title}
+                        alt={alt}
                     />
                     <div className="w-full h-full p-12 relative"></div>
                 </div>
@@ -20,7 +20,7 @@ export default function EventPageHeader({ title, image }: { title: string; image
                         className="relative object-cover"
                         fill
                         src={image}
-                        alt={title}
+                        alt={alt}
                     />
                 </div>
             </div>
