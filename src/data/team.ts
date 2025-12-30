@@ -1,5 +1,6 @@
 export interface IProfile {
     name: string;
+    group: string;
     position: string;
     image: string;
     linkedin?: string;
@@ -18,6 +19,7 @@ export interface IProfile {
 export const ExecProfiles = [
     {
         name: 'Travis Friesen',
+        group: 'Exec',
         position: 'President',
         image: '/img/team/execs/travis.JPG',
         linkedin: 'https://www.linkedin.com/in/travisfriesen/',
@@ -32,6 +34,7 @@ export const ExecProfiles = [
     },
     {
         name: 'KC del Moro',
+        group: 'Exec',
         position: 'Vice President',
         image: '/img/team/execs/kc.JPG',
         linkedin: 'https://www.linkedin.com/in/kriza-del-moro-950378301/',
@@ -45,6 +48,7 @@ export const ExecProfiles = [
     },
     {
         name: 'Timmy',
+        group: 'Exec',
         position: 'Director of Internal Affairs',
         image: '/img/team/execs/timmy.JPG',
         description:
@@ -57,6 +61,7 @@ export const ExecProfiles = [
     },
     {
         name: 'Edith',
+        group: 'Exec',
         position: 'Director of Lounge Affairs',
         image: '/img/team/execs/edith.JPG',
         linkedin: 'https://www.linkedin.com/in/edith-hohner-300658331/',
@@ -70,6 +75,7 @@ export const ExecProfiles = [
     },
     {
         name: 'Matthew Andico',
+        group: 'Exec',
         position: 'Director of Promotions',
         image: '/img/team/execs/matthew.JPG',
         linkedin: 'https://www.linkedin.com/in/matthew-andico',
@@ -89,6 +95,7 @@ export const ExecProfiles = [
     },
     {
         name: 'Ethan Ganas',
+        group: 'Exec',
         position: 'Director of Finance',
         image: '/img/team/execs/ethan.JPG',
         linkedin: 'https://www.linkedin.com/in/ethan-ganas-7262b0248/',
@@ -104,6 +111,7 @@ export const ExecProfiles = [
     },
     {
         name: 'Ara Santos',
+        group: 'Exec',
         position: 'Director of Technology',
         image: '/img/team/execs/ara.JPG',
         linkedin: 'https://www.linkedin.com/in/ara-nicole-santos/',
@@ -118,6 +126,7 @@ export const ExecProfiles = [
     },
     {
         name: 'Lindsay',
+        group: 'Exec',
         position: 'Director of Events',
         image: '/img/team/execs/linds.JPG',
         description:
@@ -132,6 +141,7 @@ export const ExecProfiles = [
     },
     {
         name: 'Sheikh Adeeb',
+        group: 'Exec',
         position: 'Director of Student Affairs',
         image: '/img/team/execs/adeeb.JPG',
         linkedin: 'https://www.linkedin.com/in/sheikh-adeeb/',
@@ -149,6 +159,7 @@ export const ExecProfiles = [
     },
     {
         name: 'Richard Shalchi',
+        group: 'Exec',
         position: 'Director of Advocacy',
         image: '/img/team/execs/richard.JPG',
         linkedin: 'https://www.linkedin.com/in/richardshalchi',
@@ -164,24 +175,28 @@ export const ExecProfiles = [
     },
     {
         name: 'Tofunmi Layi-Babatunde',
+        group: 'Exec',
         position: 'Director of Advocacy',
         image: '/img/team/prevExecs/tofunmi.png',
         year: '2024 - 2025',
     },
     {
         name: 'Edwin Duong',
+        group: 'Exec',
         position: 'Director of Internal Affairs',
         image: '/img/team/vacant.png',
         year: '2024 - 2025',
     },
     {
         name: 'Chinu Chandaria',
+        group: 'Exec',
         position: 'Director of Events',
         image: '/img/team/prevExecs/chinu.png',
         year: '2024 - 2025',
     },
     {
         name: 'Ginelle Temull',
+        group: 'Exec',
         position: 'Director of Finance',
         image: '/img/team/prevExecs/ginelle.png',
         year: '2024 - 2025',
@@ -191,12 +206,14 @@ export const ExecProfiles = [
 export const PromotionsProfiles = [
     {
         name: 'Muhammad Faisal',
+        group: 'Promotions',
         position: 'Councillor',
         image: '/img/team/promotionsCouncillors/muhammad.jpeg',
         year: '2025 - 2026',
     },
     {
         name: 'Edrielle Mateo',
+        group: 'Promotions',
         position: 'Councillor',
         image: '/img/team/merchCouncillors/edrielle.jpeg', //img common to merchCommitte folder
         linkedin: 'https://www.linkedin.com/in/edrielle-mateo-565029320',
@@ -207,18 +224,21 @@ export const PromotionsProfiles = [
 export const EventsProfiles = [
     {
         name: 'Jae Seol',
+        group: 'Events',
         position: 'Councillor',
         image: '/img/team/eventsCouncillors/jae.jpeg',
         year: '2025 - 2026',
     },
     {
         name: 'Moulik Bhatia',
+        group: 'Events',
         position: 'Councillor',
         image: '/img/team/eventsCouncillors/moulik.jpeg',
         year: '2025 - 2026',
     },
     {
         name: 'Owen Preteau',
+        group: 'Events',
         position: 'Councillor',
         image: '/img/team/eventsCouncillors/owen.jpg',
         linkedin: 'https://www.linkedin.com/in/owen-preteau-a8b674276/',
@@ -231,6 +251,7 @@ export const EventsProfiles = [
 export const TechnologyProfiles = [
     {
         name: 'Aryan Vekariya',
+        group: 'Technology',
         position: 'Councillor',
         image: '/img/team/techCouncillors/aryan.webp',
         linkedin: 'https://www.linkedin.com/in/aryan-vekariya-b66663262/',
@@ -241,34 +262,39 @@ export const TechnologyProfiles = [
     },
     {
         name: 'Aidan McLeod',
+        group: 'Technology',
         position: 'Councillor',
         image: '/img/team/vacant.png',
         year: '2025 - 2026',
     },
     {
         name: 'Iya Monterola',
+        group: 'Technology',
         position: 'Councillor',
         image: '/img/team/vacant.png',
         year: '2025 - 2026',
     },
     {
         name: 'Connor Langan',
+        group: 'Technology',
         position: 'Councillor',
         image: '/img/team/techCouncillors/connor-langan.jpg',
         linkedin: 'https://www.linkedin.com/in/connor-langan-98b84b244/',
         github: 'https://github.com/cjlangan',
         description:
-            "Hello 👋, I'm in my 4th year of CS Honours + Co-op. I love volleyball, where I play weekly on a WMVL team as a left side hitter. In my free time, other than coding and sharing tools on GitHub and participating hackathons, I like to hang out with friends with shared interests, such as computer science, hockey, baseball, and more (Go Jets! Go Jays!). One thing about me is that I'm obsessed with terminal environments; you'll always find me coding on Linux with Neovim (btw btw). I aspire to become a skilled Software Engineer, and I believe that the CSSA is a great place to help fulfill that!",
+            "Hello 👋, I'm in my 4th year of CS Honours + Co-op. I love volleyball, where I play weekly on a WMVL team as a left side hitter. In my free time, other than coding and sharing tools on GitHub and participating in hackathons, I like to hang out with friends with shared interests, such as computer science, hockey, baseball, and more (Go Jets! Go Jays!). One thing about me is that I'm obsessed with terminal environments; you'll always find me coding on Linux with Neovim (btw btw). I aspire to become a skilled Software Engineer, and I believe that the CSSA is a great place to help fulfill that!",
         year: '2025 - 2026',
     },
     {
         name: 'Andre Lisandro Cruz Ibarra',
+        group: 'Technology',
         position: 'Councillor',
         image: '/img/team/vacant.png',
         year: '2025 - 2026',
     },
     {
         name: 'Fopefoluwa Ikufisile',
+        group: 'Technology',
         position: 'Councillor',
         image: '/img/team/techCouncillors/fopefoluwa.jpg',
         linkedin: 'https://www.linkedin.com/in/fopefoluwa-ikufisile-0a5881296/',
@@ -279,6 +305,7 @@ export const TechnologyProfiles = [
     },
     {
         name: 'James Park',
+        group: 'Technology',
         position: 'Councillor',
         image: '/img/team/techCouncillors/james-park.jpg',
         linkedin: 'https://www.linkedin.com/in/jamespark123/',
@@ -293,12 +320,14 @@ export const TechnologyProfiles = [
 export const AdvocacyProfiles = [
     {
         name: 'Mohid',
+        group: 'Advocacy',
         position: 'Councillor',
         image: '/img/team/advocacyCouncillors/mohid.jpg',
         year: '2025 - 2026',
     },
     {
         name: 'Swastik Dash',
+        group: 'Advocacy',
         position: 'Councillor',
         image: '/img/team/advocacyCouncillors/swastik.jpg',
         linkedin: 'https://www.linkedin.com/in/swastikdash2/',
@@ -306,6 +335,7 @@ export const AdvocacyProfiles = [
     },
     {
         name: 'Bradley Barrientos',
+        group: 'Advocacy',
         position: 'Councillor',
         image: '/img/team/vacant.png',
         linkedin: 'https://www.linkedin.com/in/bradleybarrientos/',
@@ -318,18 +348,21 @@ export const AdvocacyProfiles = [
 export const StudentResourcesProfiles = [
     {
         name: 'Anthony Campbell',
+        group: 'StudentResources',
         position: 'Councillor',
         image: '/img/team/vacant.png',
         year: '2025 - 2026',
     },
     {
         name: 'Mohammad Mujahidul Islam ',
+        group: 'StudentResources',
         position: 'Councillor',
         image: '/img/team/studentResourcesCouncillors/mohammad.jpeg',
         year: '2025 - 2026',
     },
     {
         name: 'Arpan Christian',
+        group: 'StudentResources',
         position: 'Councillor',
         image: '/img/team/studentResourcesCouncillors/arpan.jpg',
         linkedin: 'https://www.linkedin.com/in/arpan-christian-25072005t315/',
@@ -343,60 +376,70 @@ export const StudentResourcesProfiles = [
 export const LoungeProfiles = [
     {
         name: 'Jatinder Sahota',
+        group: 'Lounge',
         position: 'Lounge Supervisor',
         image: '/img/team/vacant.png',
         year: '2025 - 2026',
     },
     {
         name: 'Jason Hong',
+        group: 'Lounge',
         position: 'Lounge Supervisor',
         image: '/img/team/vacant.png',
         year: '2025 - 2026',
     },
     {
         name: 'Chibuikem (Daniel) Ariguzo',
+        group: 'Lounge',
         position: 'Lounge Supervisor',
         image: '/img/team/vacant.png',
         year: '2025 - 2026',
     },
     {
         name: 'Dexter Sigurdson',
+        group: 'Lounge',
         position: 'Lounge Supervisor',
         image: '/img/team/vacant.png',
         year: '2025 - 2026',
     },
     {
         name: 'Aidan McLeod',
+        group: 'Lounge',
         position: 'Lounge Supervisor',
         image: '/img/team/vacant.png',
         year: '2025 - 2026',
     },
     {
         name: 'Oleksandr Zenkov',
+        group: 'Lounge',
         position: 'Lounge Supervisor',
         image: '/img/team/vacant.png',
         year: '2025 - 2026',
     },
     {
         name: 'Ryann Pastolero',
+        group: 'Lounge',
         position: 'Lounge Supervisor',
         image: '/img/team/vacant.png',
         year: '2025 - 2026',
     },
     {
         name: 'Miah Tayen',
+        group: 'Lounge',
         position: 'Lounge Supervisor',
         image: '/img/team/vacant.png',
         year: '2025 - 2026',
     },
     {
         name: 'Keira Pasveer',
+        group: 'Lounge',
         position: 'Lounge Supervisor',
         image: '/img/team/vacant.png',
         year: '2025 - 2026',
     },
     {
         name: 'Fawaz Bin Saleem',
+        group: 'Lounge',
         position: 'Lounge Supervisor',
         image: '/img/team/vacant.png',
         year: '2025 - 2026',
@@ -406,6 +449,7 @@ export const LoungeProfiles = [
 export const MerchProfiles = [
     {
         name: 'Edrielle Mateo',
+        group: 'Merch',
         position: 'Councillor',
         image: '/img/team/merchCouncillors/edrielle.jpeg',
         linkedin: 'https://www.linkedin.com/in/edrielle-mateo-565029320',
