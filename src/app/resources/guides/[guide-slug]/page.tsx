@@ -55,11 +55,17 @@ export default async function GuidePage({ params }: GuidePageProps) {
 
     return (
         <main className="flex flex-col">
-            <PageHeader title={guide.title} image="/img/backgrounds/resources.png" />
+            <PageHeader
+                title={guide.title}
+                image="/img/backgrounds/resources.png"
+            />
 
             <div className="container py-8">
                 {/* Breadcrumbs */}
-                <Breadcrumbs items={breadcrumbItems} className="mb-6" />
+                <Breadcrumbs
+                    items={breadcrumbItems}
+                    className="mb-6"
+                />
 
                 <div className="lg:grid lg:grid-cols-3 gap-8">
                     {/* Sidebar Navigation */}

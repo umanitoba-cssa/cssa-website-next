@@ -9,7 +9,19 @@ interface GuideCardProps {
     date?: string;
 }
 
-const GuideCard: React.FC<GuideCardProps> = ({ title, description, slug, author, date }) => {
+const GuideCard: React.FC<GuideCardProps> = ({
+    title,
+    description,
+    slug,
+    author,
+    date,
+}: {
+    title: string;
+    description: string;
+    slug: string;
+    author?: string;
+    date?: string;
+}) => {
     // Format date if available
     const formattedDate = date
         ? new Date(date).toLocaleDateString('en-US', {
@@ -20,7 +32,9 @@ const GuideCard: React.FC<GuideCardProps> = ({ title, description, slug, author,
         : null;
 
     return (
-        <Link href={`/resources/guides/${slug}`} className="block h-full">
+        <Link
+            href={`/resources/guides/${slug}`}
+            className="block h-full">
             <Card className="h-full transition-shadow hover:shadow-md">
                 <CardHeader>
                     <CardTitle className="text-xl">{title}</CardTitle>
