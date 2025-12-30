@@ -50,7 +50,8 @@ export default async function Lounge() {
                             className="w-full h-full"
                             src="https://www.youtube-nocookie.com/embed/Eek6S5fP5sg?mute=1"
                             title="YouTube video player"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        />
                     </div>
                 </div>
                 <div className="flex flex-col gap-8">

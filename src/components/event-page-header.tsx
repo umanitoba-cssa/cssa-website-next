@@ -11,7 +11,7 @@ export default function EventPageHeader({ alt, image }: { alt: string; image: st
                         src={image}
                         alt={alt}
                     />
-                    <div className="w-full h-full p-12 relative"></div>
+                    <div className="w-full h-full p-12 relative" />
                 </div>
             </div>
             <div className="mobile-only flex flex-col gap-4">

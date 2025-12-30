@@ -26,7 +26,7 @@ export default function Sponsor() {
                         </p>
                     </div>
                     <div className="flex flex-col gap-8">
-                        <BlockHeader title="Sponsorship Package"></BlockHeader>
+                        <BlockHeader title="Sponsorship Package" />
                         <p>
                             View or download our{' '}
                             <a

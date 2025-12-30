@@ -29,17 +29,17 @@ export default function Goosies2023() {
                         community by the Computer Science community? Come join us for this
                         end-of-term event for lots of giggles and fun!
                     </p>
-                    <br></br>
+                    <br />
                     <p>
                         It&apos;s your chance to meet lots of new people and build connections. Have
                         fun with us before the term ends!
                     </p>
-                    <br></br>
+                    <br />
                     <p>
                         Registration is required so we know how many people to expect and we can be
                         prepared!
                     </p>
-                    <br></br>
+                    <br />
                     <div className="flex flex-col gap-y-4">
                         <div className="flex flex-row gap-2">
                             <MdOutlineLocationOn size="28px" />
@@ -54,7 +54,7 @@ export default function Goosies2023() {
                             <p>Semi-Formal Dress</p>
                         </div>
                     </div>
-                    <br></br>
+                    <br />
                     <p>
                         Voting and Tickets now available! This is an 18+ event, please drink
                         responsibly
@@ -63,7 +63,7 @@ export default function Goosies2023() {
                         <Button size="lg">
                             <Link href="#">Registration Closed</Link>
                         </Button>
-                        <br></br>
+                        <br />
                         <Button size="lg">
                             <Link href="#">Voting Closed</Link>
                         </Button>
@@ -86,17 +86,17 @@ export default function Goosies2023() {
                         community by the Computer Science community? Come join us for this
                         end-of-term event for lots of giggles and fun!
                     </p>
-                    <br></br>
+                    <br />
                     <p>
                         It&apos;s your chance to meet lots of new people and build connections. Have
                         fun with us before the term ends!
                     </p>
-                    <br></br>
+                    <br />
                     <p>
                         Registration is required so we know how many people to expect and we can be
                         prepared!
                     </p>
-                    <br></br>
+                    <br />
                     <div className="flex flex-col gap-y-4">
                         <div className="flex flex-row gap-2">
                             <MdOutlineLocationOn size="28px" />
@@ -111,7 +111,7 @@ export default function Goosies2023() {
                             <p>Semi-Formal Dress</p>
                         </div>
                     </div>
-                    <br></br>
+                    <br />
                     <p>
                         Voting and Tickets now available! This is an 18+ event, please drink
                         responsibly
@@ -120,7 +120,7 @@ export default function Goosies2023() {
                         <Button size="lg">
                             <Link href="#">Registration Closed</Link>
                         </Button>
-                        <br></br>
+                        <br />
                         <Button size="lg">
                             <Link href="#">Voting Closed</Link>
                         </Button>

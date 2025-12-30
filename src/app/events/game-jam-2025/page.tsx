@@ -73,7 +73,7 @@ export default function GameJam2025() {
                         website="https://nicherms.com"
                     />
                 </div>
-                <div className="flex gap-5"></div>
+                <div className="flex gap-5" />
                 <BlockHeader title="Award Categories" />
                 <div className="flex justify-center">
                     <Image

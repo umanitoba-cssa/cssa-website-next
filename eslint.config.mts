@@ -63,6 +63,9 @@ export default defineConfig([
 
             // Prettier reports formatting issues but does not conflict
             'prettier/prettier': 'error',
+
+            // Enforce self-closing tags where possible
+            'react/self-closing-comp': 'error',
         },
     },
 ]);
