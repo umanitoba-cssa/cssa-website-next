@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: SectionPageProps): Promise<Me
         };
     }
 
-    const section = getSectionBySlug(params['guide-slug'], params['section-slug']);
+    const section = getSectionBySlug(guideSlug, sectionSlug);
 
     if (!section.title || section.title === 'Section Not Found') {
         return {
