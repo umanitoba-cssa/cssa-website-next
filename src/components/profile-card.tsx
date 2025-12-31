@@ -13,7 +13,7 @@ export default function ProfileCard({
 }) {
     return (
         <motion.div
-            layoutId={`card-${profile.name}-${profile.position}`}
+            layoutId={`card-${profile.name}-${profile.group}-${profile.position}`}
             whileHover={{ scale: 1.05, boxShadow: '0px 10px 20px rgba(0,0,0,0.2)' }}
             role="button"
             tabIndex={0}

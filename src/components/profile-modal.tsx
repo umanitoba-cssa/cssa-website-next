@@ -49,14 +49,14 @@ export default function ProfileModal({
         <AnimatePresence onExitComplete={handleExitComplete}>
             {!isExiting && (
                 <motion.div
-                    key={`${profile.name}-${profile.position}`}
+                    key={`${profile.name}-${profile.group}-${profile.position}`}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     className="fixed inset-0 z-50 flex items-center justify-center bg-black/60"
                     onClick={handleClose}>
                     <motion.div
-                        layoutId={`card-${profile.name}-${profile.position}`}
+                        layoutId={`card-${profile.name}-${profile.group}-${profile.position}`}
                         initial={{ scale: 0.98 }}
                         animate={{ scale: 1 }}
                         exit={{ scale: 0.98 }}
