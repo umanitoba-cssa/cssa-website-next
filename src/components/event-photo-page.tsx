@@ -44,7 +44,7 @@ export default async function EventPhotoPage({
             />
 
             <div className="flex flex-col container py-12 gap-12">
-                <BlockHeader title="Description"></BlockHeader>
+                <BlockHeader title="Description" />
                 <p>{event.description}</p>
 
                 {galleryImages.map((img) => (

@@ -36,7 +36,7 @@ export const Navbar = () => {
                     </div>
                 </div>
             </div>
-            <div className="mobile-only py-12"></div> {/*spacer*/}
+            <div className="mobile-only py-12" /> {/*spacer*/}
             <div className="flex flex-col py-4 mobile-only bg-cssa-navy container fixed top-0 z-50 overflow-hidden">
                 <div className="flex flex-row justify-between items-center">
                     <img
@@ -60,7 +60,7 @@ export const Navbar = () => {
                     }}
                     data-open={navOpen}
                     className="flex flex-col gap-2 items-center overflow-hidden transition-[max-height] duration-300 ease-in-out data-[open=false]:h-0 data-[open=true]:max-h-screen">
-                    <div className="mobile-only py-1"></div> {/*spacer*/}
+                    <div className="mobile-only py-1" /> {/*spacer*/}
                     {navbarButtons}
                 </div>
             </div>

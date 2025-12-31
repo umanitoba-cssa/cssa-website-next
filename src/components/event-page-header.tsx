@@ -5,13 +5,23 @@ export default function EventPageHeader({ alt, image }: { alt: string; image: st
         <>
             <div className="desktop-only">
                 <div className="w-full max-w-[1920px] mx-auto h-[800px] overflow-hidden relative">
-                    <Image className="relative object-cover" fill src={image} alt={alt} />
-                    <div className="w-full h-full p-12 relative"></div>
+                    <Image
+                        className="relative object-cover"
+                        fill
+                        src={image}
+                        alt={alt}
+                    />
+                    <div className="w-full h-full p-12 relative" />
                 </div>
             </div>
             <div className="mobile-only flex flex-col gap-4">
                 <div className="w-full h-48 relative">
-                    <Image className="relative object-cover" fill src={image} alt={alt} />
+                    <Image
+                        className="relative object-cover"
+                        fill
+                        src={image}
+                        alt={alt}
+                    />
                 </div>
             </div>
         </>

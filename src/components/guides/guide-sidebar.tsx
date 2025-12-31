@@ -13,28 +13,24 @@ interface GuideSidebarProps {
 }
 
 const GuideSidebar: React.FC<GuideSidebarProps> = ({ guide, className }) => {
-    const [isOpen, setIsOpen] = useState(false);
-    const [activeSection, setActiveSection] = useState<string>('');
     const pathname = usePathname();
     const isRootPath = pathname === `/resources/guides/${guide.slug}`;
+    const [openForPath, setOpenForPath] = useState<string | null>(null);
+    const isOpen = openForPath === pathname;
 
-    // Detect active section from pathname
-    useEffect(() => {
+    const activeSection = React.useMemo(() => {
         const pathParts = pathname.split('/');
-        // Expected path for section: /resources/guides/[guide-slug]/[section-slug]
-        // pathParts will be: ["", "resources", "guides", "guide-slug", "section-slug"]
+
         if (
             pathParts.length === 5 &&
             pathParts[1] === 'resources' &&
             pathParts[2] === 'guides' &&
             pathParts[3] === guide.slug
         ) {
-            setActiveSection(pathParts[4]);
-        } else if (pathname === `/resources/guides/${guide.slug}`) {
-            setActiveSection(''); // Indicates the overview page of the guide
+            return pathParts[4];
         }
-        // Reset isOpen to false when path changes (for mobile view)
-        setIsOpen(false);
+
+        return '';
     }, [pathname, guide.slug]);
 
     return (
@@ -42,10 +38,9 @@ const GuideSidebar: React.FC<GuideSidebarProps> = ({ guide, className }) => {
             {/* Mobile version with dropdown */}
             <div className="block lg:hidden mb-6">
                 <button
-                    onClick={() => setIsOpen(!isOpen)}
+                    onClick={() => setOpenForPath((prev) => (prev === pathname ? null : pathname))}
                     className="flex items-center justify-between w-full px-4 py-3 bg-muted rounded-md"
-                    aria-expanded={isOpen}
-                >
+                    aria-expanded={isOpen}>
                     <span className="font-medium">Guide Navigation</span>
                     <ChevronDown
                         className={cn('h-5 w-5 transition-transform', isOpen && 'rotate-180')}
@@ -63,7 +58,7 @@ const GuideSidebar: React.FC<GuideSidebarProps> = ({ guide, className }) => {
                                             ? 'text-primary font-medium'
                                             : 'text-muted-foreground',
                                     )}
-                                    onClick={() => setIsOpen(false)} // Close dropdown on click
+                                    onClick={() => setOpenForPath(null)} // Close dropdown on click
                                 >
                                     Overview
                                 </Link>
@@ -78,7 +73,7 @@ const GuideSidebar: React.FC<GuideSidebarProps> = ({ guide, className }) => {
                                                 ? 'text-primary font-medium'
                                                 : 'text-muted-foreground',
                                         )}
-                                        onClick={() => setIsOpen(false)} // Close dropdown on click
+                                        onClick={() => setOpenForPath(null)} // Close dropdown on click
                                     >
                                         {section.title}
                                     </Link>
@@ -101,8 +96,7 @@ const GuideSidebar: React.FC<GuideSidebarProps> = ({ guide, className }) => {
                                 isRootPath && activeSection === ''
                                     ? 'text-primary font-medium'
                                     : 'text-muted-foreground',
-                            )}
-                        >
+                            )}>
                             Overview
                         </Link>
                     </li>
@@ -115,8 +109,7 @@ const GuideSidebar: React.FC<GuideSidebarProps> = ({ guide, className }) => {
                                     activeSection === section.slug
                                         ? 'text-primary font-medium'
                                         : 'text-muted-foreground',
-                                )}
-                            >
+                                )}>
                                 {section.title}
                             </Link>
                         </li>

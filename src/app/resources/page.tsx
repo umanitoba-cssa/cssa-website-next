@@ -39,9 +39,14 @@ import Link from 'next/link';
 function MakePlaylistCards(videos: IVideoData[]) {
     return videos?.map((video, index) => {
         return (
-            <CarouselItem key={index} className="basis-[90%] md:basis-[45%] lg:basis-[30%]">
+            <CarouselItem
+                key={index}
+                className="basis-[90%] md:basis-[45%] lg:basis-[30%]">
                 <div className="px-2 w-full h-full">
-                    <a href={video.href} target="_blank" rel="noreferrer">
+                    <a
+                        href={video.href}
+                        target="_blank"
+                        rel="noreferrer">
                         <Card className="h-full">
                             <CardHeader>
                                 <img
@@ -69,9 +74,14 @@ export default async function Resources() {
 
     const resourceCards = ResourceLinks.map((link, index) => {
         return (
-            <CarouselItem key={index} className="md:basis-1/2 lg:basis-[30%]">
+            <CarouselItem
+                key={index}
+                className="md:basis-1/2 lg:basis-[30%]">
                 <div className="px-2 w-full h-full">
-                    <a href={link.href} target="_blank" rel="noreferrer">
+                    <a
+                        href={link.href}
+                        target="_blank"
+                        rel="noreferrer">
                         <Card className="h-full">
                             <CardHeader>
                                 <CardTitle className="text-lg flex flex-row gap-2">
@@ -88,13 +98,14 @@ export default async function Resources() {
 
     const cssaCards = CSSALinks.map((link, index) => {
         return (
-            <CarouselItem key={index} className="md:basis-1/2 lg:basis-[30%]">
+            <CarouselItem
+                key={index}
+                className="md:basis-1/2 lg:basis-[30%]">
                 <div className="px-2 w-full h-full">
                     <a
                         href={link.href}
                         target={link.internal ? undefined : '_blank'}
-                        rel={link.internal ? undefined : 'noreferrer'}
-                    >
+                        rel={link.internal ? undefined : 'noreferrer'}>
                         <Card className="h-full border-primary">
                             <CardHeader>
                                 <CardTitle className="text-lg flex flex-row gap-2">
@@ -119,7 +130,9 @@ export default async function Resources() {
 
     const collectionTabs = PlaylistCollections.map((collection, index) => {
         return (
-            <TabsTrigger key={index} value={collection.category}>
+            <TabsTrigger
+                key={index}
+                value={collection.category}>
                 {collection.category}
             </TabsTrigger>
         );
@@ -129,7 +142,9 @@ export default async function Resources() {
         const playlistAccordions = collection.playlists.map((playlist, index) => {
             const videoCards = MakePlaylistCards(playlist.videos ?? []);
             return (
-                <AccordionItem value={playlist.playlistId} key={index}>
+                <AccordionItem
+                    value={playlist.playlistId}
+                    key={index}>
                     <AccordionTrigger>
                         <span>
                             <span className="flex text-lg">{playlist.title}</span>
@@ -139,7 +154,9 @@ export default async function Resources() {
                         </span>
                     </AccordionTrigger>
                     <AccordionContent>
-                        <Carousel className="py-1" opts={{ align: 'center' }}>
+                        <Carousel
+                            className="py-1"
+                            opts={{ align: 'center' }}>
                             <CarouselContent>{videoCards}</CarouselContent>
                             <CarouselNext />
                             <CarouselPrevious />
@@ -150,7 +167,9 @@ export default async function Resources() {
         });
 
         return (
-            <TabsContent key={index} value={collection.category}>
+            <TabsContent
+                key={index}
+                value={collection.category}>
                 <Accordion type="multiple">{playlistAccordions}</Accordion>
             </TabsContent>
         );
@@ -158,13 +177,18 @@ export default async function Resources() {
 
     return (
         <main className="flex flex-col">
-            <PageHeader title="Resources" image="/img/backgrounds/resources.png" />
+            <PageHeader
+                title="Resources"
+                image="/img/backgrounds/resources.png"
+            />
             <div className="flex flex-col container py-12 gap-12">
                 <div className="flex flex-col gap-8">
                     <BlockHeader title="CSSA Resources" />
                     <p>All the internal materials provided by the CSSA.</p>
 
-                    <Carousel className="py-1" opts={{ align: 'center' }}>
+                    <Carousel
+                        className="py-1"
+                        opts={{ align: 'center' }}>
                         <CarouselContent>{cssaCards}</CarouselContent>
                         <CarouselNext />
                         <CarouselPrevious />
@@ -177,7 +201,9 @@ export default async function Resources() {
                         Questions about courses, programs, or Computer Science Co-op? Take a look at
                         these links!
                     </p>
-                    <Carousel className="py-1" opts={{ align: 'center' }}>
+                    <Carousel
+                        className="py-1"
+                        opts={{ align: 'center' }}>
                         <CarouselContent>{resourceCards}</CarouselContent>
                         <CarouselNext />
                         <CarouselPrevious />
@@ -188,7 +214,9 @@ export default async function Resources() {
                     <BlockHeader title="Course Help" />
                     <p>Lectures and course resources on YouTube made by our instructors.</p>
 
-                    <Tabs defaultValue={PlaylistCollections[0].category} className="w-full">
+                    <Tabs
+                        defaultValue={PlaylistCollections[0].category}
+                        className="w-full">
                         <TabsList className="w-full">{collectionTabs}</TabsList>
                         {collectionContent}
                     </Tabs>
@@ -197,7 +225,9 @@ export default async function Resources() {
                 <div className="flex flex-col gap-8">
                     <BlockHeader title="CSSA Meeting Archives" />
                     <p>Recordings of our general meetings.</p>
-                    <Carousel className="py-1" opts={{ align: 'center' }}>
+                    <Carousel
+                        className="py-1"
+                        opts={{ align: 'center' }}>
                         <CarouselContent>
                             {MakePlaylistCards(await GetPlaylistData(MeetingArchivesID))}
                         </CarouselContent>
