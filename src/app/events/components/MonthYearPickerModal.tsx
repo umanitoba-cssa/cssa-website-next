@@ -20,9 +20,10 @@ export function MonthYearPickerModal({
     currentYear,
     onSelect,
 }: MonthYearPickerModalProps) {
-    const [selectedMonth, setSelectedMonth] = useState(currentMonth);
-    const [selectedYear, setSelectedYear] = useState(currentYear);
+    const [draftMonth, setDraftMonth] = useState<number | null>(null);
+    const [draftYear, setDraftYear] = useState<number | null>(null);
     const [isExiting, setIsExiting] = useState(false);
+
     const pendingSelection = useRef<{ month: number; year: number } | null>(null);
 
     const today = new Date();
@@ -30,36 +31,33 @@ export function MonthYearPickerModal({
     const thisYear = today.getFullYear();
 
     const years = useMemo(() => {
-        const result = [];
-        for (let y = thisYear - 2; y <= thisYear + 1; y++) {
-            result.push(y);
-        }
+        const result: number[] = [];
+        for (let y = thisYear - 2; y <= thisYear + 1; y++) result.push(y);
         return result;
     }, [thisYear]);
 
-    const handleClose = () => {
-        setIsExiting(true);
-    };
+    // ✅ Derived "selected" values (no syncing effect needed)
+    const selectedMonth = draftMonth ?? currentMonth;
+    const selectedYear = draftYear ?? currentYear;
+
+    const handleClose = () => setIsExiting(true);
 
     const handleExitComplete = () => {
-        if (isExiting) {
-            setIsExiting(false);
-            // Apply pending selection after animation completes
-            if (pendingSelection.current) {
-                onSelect(pendingSelection.current.month, pendingSelection.current.year);
-                pendingSelection.current = null;
-            }
-            onClose();
-        }
-    };
+        if (!isExiting) return;
 
-    // Reset selections when modal opens with new values
-    useEffect(() => {
-        if (isOpen && !isExiting) {
-            setSelectedMonth(currentMonth);
-            setSelectedYear(currentYear);
+        setIsExiting(false);
+
+        if (pendingSelection.current) {
+            onSelect(pendingSelection.current.month, pendingSelection.current.year);
+            pendingSelection.current = null;
         }
-    }, [isOpen, currentMonth, currentYear, isExiting]);
+
+        // reset drafts for next open
+        setDraftMonth(null);
+        setDraftYear(null);
+
+        onClose();
+    };
 
     // Handle escape key
     useEffect(() => {
@@ -100,10 +98,7 @@ export function MonthYearPickerModal({
                         initial={{ scale: 0.98 }}
                         animate={{ scale: 1 }}
                         exit={{ scale: 0.98 }}
-                        transition={{
-                            duration: 0.45,
-                            ease: [0.25, 0.1, 0.25, 1],
-                        }}
+                        transition={{ duration: 0.45, ease: [0.25, 0.1, 0.25, 1] }}
                         className="bg-gray-900 border border-gray-400 text-white p-6 rounded-xl w-full max-w-sm relative z-50 overflow-hidden mx-4 sm:mx-6"
                         onClick={(e) => e.stopPropagation()}>
                         <button
@@ -118,29 +113,25 @@ export function MonthYearPickerModal({
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: 10 }}
                             transition={{ duration: 0.25 }}>
-                            {/* Header */}
                             <div className="text-center mb-6">
                                 <h2 className="text-2xl font-bold">Select Month & Year</h2>
                             </div>
 
-                            {/* Year Selector */}
                             <YearSelector
                                 selectedYear={selectedYear}
-                                setSelectedYear={setSelectedYear}
+                                setSelectedYear={setDraftYear}
                                 years={years}
                             />
 
-                            {/* Month Grid */}
                             <MonthGrid
                                 MONTHS={MONTHS}
                                 selectedMonth={selectedMonth}
-                                setSelectedMonth={setSelectedMonth}
+                                setSelectedMonth={setDraftMonth}
                                 thisMonth={thisMonth}
                                 thisYear={thisYear}
                                 selectedYear={selectedYear}
                             />
 
-                            {/* Footer Buttons */}
                             <FooterButtons
                                 handleGoToToday={handleGoToToday}
                                 handleConfirm={handleConfirm}
