@@ -5,8 +5,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { FaTimes } from 'react-icons/fa';
 import { FooterButtons, MonthGrid, YearSelector, MONTHS } from './MonthYearPickerModalComponents';
 
-
-
 type MonthYearPickerModalProps = {
     isOpen: boolean;
     onClose: () => void;

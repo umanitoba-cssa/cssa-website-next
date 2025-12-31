@@ -6,7 +6,6 @@ type DayCell = {
     iso: string;
 };
 
-
 export const WEEKDAYS = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'] as const;
 
 type CalendarCellProps = {
@@ -18,13 +17,11 @@ type CalendarCellProps = {
     onEventClick: (event: IEventLink) => void;
 };
 
-
 type ChevronButtonProps = {
     direction: 'left' | 'right';
     onClick: () => void;
     label: string;
 };
-
 
 export const getMonthGrid = (year: number, monthIndexZeroBased: number): DayCell[] => {
     const firstOfMonth = new Date(year, monthIndexZeroBased, 1);
@@ -108,7 +105,6 @@ export function CalendarCell({
     );
 }
 
-
 export function ChevronButton({ direction, onClick, label }: ChevronButtonProps) {
     const points = direction === 'left' ? '13,4 7,10 13,16' : '7,4 13,10 7,16';
 
@@ -118,7 +114,11 @@ export function ChevronButton({ direction, onClick, label }: ChevronButtonProps)
             onClick={onClick}
             className="px-1 py-0.5 rounded hover:bg-white/10 transition-colors flex items-center justify-center"
             type="button">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <svg
+                width="20"
+                height="20"
+                viewBox="0 0 20 20"
+                fill="none">
                 <polyline
                     points={points}
                     stroke="white"
@@ -131,6 +131,3 @@ export function ChevronButton({ direction, onClick, label }: ChevronButtonProps)
         </button>
     );
 }
-
-
-
