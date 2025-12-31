@@ -18,7 +18,9 @@ export const NavbarButton = ({ href, label }: INavbarButton) => {
             </div>
             <div className="mobile-only w-full">
                 <Link href={href}>
-                    <Button variant="ghost" className="font-sans text-2xl w-full text-center">
+                    <Button
+                        variant="ghost"
+                        className="font-sans text-2xl w-full text-center">
                         <div className="flex flex-col justify-center h-full w-full">{label}</div>
                     </Button>
                 </Link>

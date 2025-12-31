@@ -18,7 +18,9 @@ const Breadcrumbs = ({ items, className }: BreadcrumbsProps) => {
                 const isLast = index === items.length - 1;
 
                 return (
-                    <div key={item.href} className="flex items-center">
+                    <div
+                        key={item.href}
+                        className="flex items-center">
                         {index > 0 && (
                             <ChevronRight className="mx-1 h-4 w-4 text-muted-foreground" />
                         )}
@@ -28,8 +30,7 @@ const Breadcrumbs = ({ items, className }: BreadcrumbsProps) => {
                         ) : (
                             <Link
                                 href={item.href}
-                                className="text-muted-foreground hover:text-primary transition-colors"
-                            >
+                                className="text-muted-foreground hover:text-primary transition-colors">
                                 {item.label}
                             </Link>
                         )}

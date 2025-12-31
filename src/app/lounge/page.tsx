@@ -24,7 +24,9 @@ export default async function Lounge() {
         });
 
         return (
-            <div className="flex flex-col">
+            <div
+                className="flex flex-col"
+                key={category}>
                 <h4>{category}</h4>
                 <Table>
                     <TableBody>{rows}</TableBody>
@@ -32,10 +34,13 @@ export default async function Lounge() {
             </div>
         );
     });
-    
+
     return (
         <main className="flex flex-col">
-            <PageHeader title="Lounge" image="/img/backgrounds/lounge.jpg" />
+            <PageHeader
+                title="Lounge"
+                image="/img/backgrounds/lounge.jpg"
+            />
             <div className="container py-12 flex flex-col gap-12">
                 <div className="flex flex-col gap-8">
                     <BlockHeader title="Lounge Location" />
@@ -46,7 +51,7 @@ export default async function Lounge() {
                             src="https://www.youtube-nocookie.com/embed/Eek6S5fP5sg?mute=1"
                             title="YouTube video player"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        ></iframe>
+                        />
                     </div>
                 </div>
                 <div className="flex flex-col gap-8">
