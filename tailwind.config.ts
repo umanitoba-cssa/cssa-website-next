@@ -1,14 +1,14 @@
 import type { Config } from 'tailwindcss';
+import animatePlugin from 'tailwindcss-animate';
 
-const config = {
-    darkMode: ['class'],
+export default {
+    darkMode: 'class',
     content: [
         './pages/**/*.{ts,tsx}',
         './components/**/*.{ts,tsx}',
         './app/**/*.{ts,tsx}',
         './src/**/*.{ts,tsx}',
     ],
-    prefix: '',
     theme: {
         container: {
             center: true,
@@ -19,10 +19,10 @@ const config = {
         },
         extend: {
             colors: {
-                'cssa-navy': '#030d1f',
-                'cssa-blue': '#2066b8',
-                'cssa-light-blue': '#3465b2',
-                'cssa-gold': '#fab416',
+                'cssa-navy': 'var(--cssa-navy)',
+                'cssa-blue': 'var(--cssa-blue)',
+                'cssa-light-blue': 'var(--cssa-light-blue)',
+                'cssa-gold': 'var(--cssa-gold)',
                 border: 'hsl(var(--border))',
                 input: 'hsl(var(--input))',
                 ring: 'hsl(var(--ring))',
@@ -87,7 +87,5 @@ const config = {
             },
         },
     },
-    plugins: [require('tailwindcss-animate')],
+    plugins: [animatePlugin],
 } satisfies Config;
-
-export default config;
