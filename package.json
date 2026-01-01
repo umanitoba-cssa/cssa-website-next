@@ -9,7 +9,6 @@
         "prepare": "husky",
         "sync-guides": "bun run scripts/sync-guides.js",
         "setup-webhook-sync": "bun run scripts/setup-webhook-sync.js",
-        "sync-external-md": "bun run scripts/sync-external-md.js",
         "lint": "prettier --write . && eslint .",
         "lint:fix": "prettier --write . && eslint . --fix"
     },
