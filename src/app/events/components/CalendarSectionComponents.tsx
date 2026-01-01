@@ -1,4 +1,4 @@
-import { IEventLink } from '@/data/events';
+import { ICalendarEventLink } from '@/data/events';
 
 type DayCell = {
     date: Date;
@@ -13,8 +13,8 @@ type CalendarCellProps = {
     iso: string;
     inCurrentMonth: boolean;
     isToday: boolean;
-    events: IEventLink[];
-    onEventClick: (event: IEventLink) => void;
+    events: ICalendarEventLink[];
+    onEventClick: (event: ICalendarEventLink) => void;
 };
 
 type ChevronButtonProps = {

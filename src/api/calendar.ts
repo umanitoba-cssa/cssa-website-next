@@ -1,5 +1,5 @@
 import { Auth, google } from 'googleapis';
-import type { IEventLink } from '@/data/events';
+import type { ICalendarEventLink } from '@/data/events';
 
 const toISODate = (date?: string | null) => (date ? date.slice(0, 10) : null);
 
@@ -15,7 +15,7 @@ export async function getCalendarEvents(opts: {
     calendarId: string;
     timeMin: string;
     timeMax: string;
-}): Promise<IEventLink[]> {
+}): Promise<ICalendarEventLink[]> {
     const auth = new Auth.GoogleAuth({
         scopes: ['https://www.googleapis.com/auth/calendar.readonly'],
         credentials: {
@@ -51,16 +51,16 @@ export async function getCalendarEvents(opts: {
                 date: iso,
             };
         })
-        .filter(Boolean) as IEventLink[];
+        .filter(Boolean) as ICalendarEventLink[];
 }
 
 export async function getEvents() {
     const calendarId = process.env.GOOGLE_CALENDAR_ID;
     if (!calendarId) throw new Error('Missing env CALENDAR_ID');
 
+    const start = new Date(2022, 0, 1, 0, 0, 0);
     const now = new Date();
-    const start = new Date(2022, 0, 1, 0, 0, 0); // Jan 1, 2022
-    const end = new Date(2026, 11, 31, 23, 59, 59); // Dec 31, 2026 (for full coverage)
+    const end = new Date(now.getFullYear() + 3, 11, 31, 23, 59, 59);
 
     return getCalendarEvents({
         calendarId,

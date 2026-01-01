@@ -1,11 +1,16 @@
-export interface IEventLink {
+interface IEventLink {
     title: string;
     description: string;
     href: string;
     internal?: boolean;
     linkText?: string;
-
-    // A Mandatory  date would be needed to implement the calendar (in the format YYYY-MM-DD).
+}
+export interface ICalendarEventLink {
+    title: string;
+    description: string;
+    href: string;
+    internal?: boolean;
+    linkText?: string;
     date: string;
 }
 
@@ -20,7 +25,6 @@ export const RecentEvents: Map<string, IEventLink> = new Map([
             href: 'events/game-jam-2025',
             internal: true,
             linkText: 'See Page →',
-            date: '2025-11-12',
         },
     ],
     [
@@ -32,7 +36,6 @@ export const RecentEvents: Map<string, IEventLink> = new Map([
             href: 'events/capture-the-flag-2025',
             internal: true,
             linkText: 'View Photos →',
-            date: '2025-11-11',
         },
     ],
     [
@@ -43,7 +46,6 @@ export const RecentEvents: Map<string, IEventLink> = new Map([
             href: 'events/goosies-2024',
             internal: true,
             linkText: 'View Photos →',
-            date: '2025-11-13',
         },
     ],
     [
@@ -54,7 +56,6 @@ export const RecentEvents: Map<string, IEventLink> = new Map([
             href: 'events/bonfire-2024',
             internal: true,
             linkText: 'View Photos →',
-            date: '2025-12-26',
         },
     ],
 ]);
@@ -68,7 +69,6 @@ export const OlderEvents: Map<string, IEventLink> = new Map([
             href: 'events/game-jam-2024',
             internal: true,
             linkText: 'See Page →',
-            date: '2024-11-26',
         },
     ],
     [
@@ -83,8 +83,3 @@ export const OlderEvents: Map<string, IEventLink> = new Map([
         },
     ],
 ]);
-
-export const allEventsArray: IEventLink[] = [
-    ...Array.from(RecentEvents.entries()).map(([id, e]) => ({ ...e, id, date: e.date! })),
-    ...Array.from(OlderEvents.entries()).map(([id, e]) => ({ ...e, id, date: e.date! })),
-];

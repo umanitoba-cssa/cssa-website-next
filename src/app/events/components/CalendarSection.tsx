@@ -2,13 +2,13 @@
 
 import React, { useMemo, useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
-import { IEventLink } from '@/data/events';
+import { ICalendarEventLink } from '@/data/events';
 import { useCalendarNavigation } from '../hooks/UseCalendarNavigation';
 import { CalendarCell, ChevronButton, WEEKDAYS } from './CalendarSectionComponents';
 import { MonthYearPickerModal } from './MonthYearPickerModal';
 
 type CalendarSectionProps = {
-    events: IEventLink[];
+    events: ICalendarEventLink[];
 };
 
 export function CalendarSection({ events }: CalendarSectionProps) {
@@ -30,12 +30,12 @@ export function CalendarSection({ events }: CalendarSectionProps) {
     const eventsByIso = useMemo(() => {
         const firstDate = grid[0]?.date;
         const lastDate = grid[grid.length - 1]?.date;
-        if (!firstDate || !lastDate) return new Map<string, IEventLink[]>();
+        if (!firstDate || !lastDate) return new Map<string, ICalendarEventLink[]>();
 
         const firstISO = firstDate.toISOString().slice(0, 10);
         const lastISO = lastDate.toISOString().slice(0, 10);
 
-        const map = new Map<string, IEventLink[]>();
+        const map = new Map<string, ICalendarEventLink[]>();
         for (const evt of events) {
             if (typeof evt.date === 'string' && evt.date >= firstISO && evt.date <= lastISO) {
                 if (!map.has(evt.date)) map.set(evt.date, []);
@@ -46,7 +46,7 @@ export function CalendarSection({ events }: CalendarSectionProps) {
     }, [events, grid]);
 
     const handleEventClick = useCallback(
-        (event: IEventLink) => {
+        (event: ICalendarEventLink) => {
             if (!event.href) return;
             router.push(event.href);
         },
@@ -66,41 +66,46 @@ export function CalendarSection({ events }: CalendarSectionProps) {
             <div className="mb-6 text-white font-roboto tracking-normal">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 sm:mb-10">
                     {/* Navigation Controls */}
-                    <div className="flex items-center justify-center sm:justify-start gap-1 sm:gap-2">
-                        <ChevronButton
-                            direction="left"
-                            onClick={goToPrevMonth}
-                            label="Previous Month"
-                        />
+                    <div className="flex items-center justify-center sm:justify-start gap-1 sm:gap-2 w-70">
+                        <div className="flex-shrink-0">
+                            <ChevronButton
+                                direction="left"
+                                onClick={goToPrevMonth}
+                                label="Previous Month"
+                            />
+                        </div>
 
                         {/* Clickable Month/Year Label */}
-                        <button
-                            onClick={() => setIsPickerOpen(true)}
-                            className="group flex items-center gap-2 px-3 sm:px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 transition-all duration-200">
-                            <span className="text-lg sm:text-xl font-semibold whitespace-nowrap">
-                                {monthLabel} {year}
-                            </span>
-                            <svg
-                                className="w-4 h-4 text-gray-400 group-hover:text-white transition-colors"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth={2}
-                                    d="M19 9l-7 7-7-7"
-                                />
-                            </svg>
-                        </button>
+                        <div className="flex-1 flex justify-center">
+                            <button
+                                onClick={() => setIsPickerOpen(true)}
+                                className="group w-[200px] flex items-center justify-center gap-2 px-3 sm:px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 transition-all duration-200">
+                                <span className="text-lg sm:text-xl font-semibold whitespace-nowrap">
+                                    {monthLabel} {year}
+                                </span>
+                                <svg
+                                    className="w-4 h-4 text-gray-400 group-hover:text-white transition-colors flex-shrink-0"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={2}
+                                        d="M19 9l-7 7-7-7"
+                                    />
+                                </svg>
+                            </button>
+                        </div>
 
-                        <ChevronButton
-                            direction="right"
-                            onClick={goToNextMonth}
-                            label="Next Month"
-                        />
+                        <div className="flex-shrink-0">
+                            <ChevronButton
+                                direction="right"
+                                onClick={goToNextMonth}
+                                label="Next Month"
+                            />
+                        </div>
                     </div>
-
                     {/* Go to Today Button */}
                     {!isCurrentMonth && (
                         <button
