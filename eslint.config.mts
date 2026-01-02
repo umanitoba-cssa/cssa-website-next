@@ -8,6 +8,11 @@ import prettierPlugin from 'eslint-plugin-prettier';
 import { defineConfig } from 'eslint/config';
 
 export default defineConfig([
+    // Ignore files and folders
+    {
+        ignores: ['node_modules/**', '.next/**', 'dist/**', 'build/**', '*.md'],
+    },
+
     // -----------------------------
     // JavaScript files
     // -----------------------------

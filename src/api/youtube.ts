@@ -11,7 +11,9 @@ export async function GetPlaylistData(playlist: string): Promise<IVideoData[]> {
     const apiKey = process.env.YOUTUBE_API_KEY;
 
     const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${playlist}&key=${apiKey}&maxResults=50`;
-    return fetch(url)
+    return fetch(url, {
+        next: { revalidate: 86400 }, // Cache for 24 hours
+    })
         .then((response) => response.json())
         .then((data) => {
             return data?.items?.map((item: GoogleApiYouTubePlaylistItemResource) => {
