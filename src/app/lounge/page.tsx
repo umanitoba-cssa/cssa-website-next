@@ -11,10 +11,21 @@ import {
 } from '@/components/ui/table';
 
 export default async function Lounge() {
-    const menu = await getLoungeMenu();
-
+    // const menu = await getLoungeMenu();
+    const menu = {
+        'Sandwiches': [
+            { Item: 'Chicken & Cheese', Price: '$10' },
+            { Item: 'Ham & Cheese', Price: '$10' },
+        ],
+        'Wraps': [
+            { Item: 'Chicken & Cheese', Price: '$10' },
+        ],
+        'Salads': [
+            { Item: 'Chicken & Cheese', Price: '$10' },
+        ]
+        };
     const menuItems = Object.keys(menu).map((category) => {
-        const rows = menu[category].map((item) => {
+        const rows = menu[category as keyof typeof menu].map((item: { Item: string; Price: string }) => {
             return (
                 <TableRow key={item.Item}>
                     <TableCell>{item.Item}</TableCell>
