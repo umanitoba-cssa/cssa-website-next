@@ -72,8 +72,10 @@ export default function EventModal({ event, onClose, onViewEvent }: EventModalPr
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: 10 }}
                             transition={{ duration: 0.25 }}>
-                            <div className="text-center mb-6">
-                                <h3 className="text-2xl font-bold mb-2">{event.title}</h3>
+                            <div className={`text-center ${event.href ? 'mb-6' : ''}`}>
+                                <h3 className={`text-2xl font-bold ${event.href ? 'mb-2' : ''}`}>
+                                    {event.title}
+                                </h3>
                             </div>
 
                             {event.href && (
