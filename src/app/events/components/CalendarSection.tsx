@@ -6,6 +6,7 @@ import { ICalendarEventLink } from '@/data/events';
 import { useCalendarNavigation } from '../hooks/UseCalendarNavigation';
 import { CalendarCell, ChevronButton, WEEKDAYS } from './CalendarSectionComponents';
 import { MonthYearPickerModal } from './MonthYearPickerModal';
+import EventModal from './EventModal';
 
 type CalendarSectionProps = {
     events: ICalendarEventLink[];
@@ -26,6 +27,7 @@ export function CalendarSection({ events }: CalendarSectionProps) {
     } = useCalendarNavigation();
 
     const [isPickerOpen, setIsPickerOpen] = useState(false);
+    const [selectedEvent, setSelectedEvent] = useState<ICalendarEventLink | null>(null);
 
     const eventsByIso = useMemo(() => {
         const firstDate = grid[0]?.date;
@@ -45,13 +47,19 @@ export function CalendarSection({ events }: CalendarSectionProps) {
         return map;
     }, [events, grid]);
 
-    const handleEventClick = useCallback(
-        (event: ICalendarEventLink) => {
-            if (!event.href) return;
-            router.push(event.href);
-        },
-        [router],
-    );
+    const handleEventClick = useCallback((event: ICalendarEventLink) => {
+        setSelectedEvent(event);
+    }, []);
+
+    const handleViewEventPage = useCallback(() => {
+        if (selectedEvent?.href) {
+            router.push(selectedEvent.href);
+        }
+    }, [selectedEvent, router]);
+
+    const handleCloseModal = useCallback(() => {
+        setSelectedEvent(null);
+    }, []);
 
     const handleMonthYearSelect = useCallback(
         (newMonth: number, newYear: number) => goToMonth(newMonth, newYear),
@@ -168,6 +176,15 @@ export function CalendarSection({ events }: CalendarSectionProps) {
                 currentYear={year}
                 onSelect={handleMonthYearSelect}
             />
+
+            {/* Event Details Modal */}
+            {selectedEvent && (
+                <EventModal
+                    event={selectedEvent}
+                    onClose={handleCloseModal}
+                    onViewEvent={handleViewEventPage}
+                />
+            )}
         </div>
     );
 }
