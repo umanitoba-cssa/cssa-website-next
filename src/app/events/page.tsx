@@ -14,8 +14,12 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 
 import React from 'react';
 import { FaExternalLinkAlt } from 'react-icons/fa';
+import CalendarSection from './components/CalendarSection';
+import { getEvents } from '@/api/calendar';
 
 export default async function Events() {
+    const events = await getEvents();
+
     const recentEvents = Array.from(RecentEvents.values()).map((link, index) => {
         return (
             <CarouselItem
@@ -111,6 +115,13 @@ export default async function Events() {
                         <CarouselNext />
                         <CarouselPrevious />
                     </Carousel>
+                </div>
+
+                <div className="flex flex-col gap-8 p-4">
+                    <BlockHeader title="Calendar" />
+                    <p>Calendar View of events ran by the CSSA.</p>
+
+                    <CalendarSection events={events} />
                 </div>
             </div>
         </main>

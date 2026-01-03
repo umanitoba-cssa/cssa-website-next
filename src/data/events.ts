@@ -5,6 +5,14 @@ interface IEventLink {
     internal?: boolean;
     linkText?: string;
 }
+export interface ICalendarEventLink {
+    title: string;
+    description: string;
+    href: string;
+    internal?: boolean;
+    linkText?: string;
+    date: string;
+}
 
 const goosiesDescription = 'Annual award show for the Department of Computer Science';
 
@@ -71,6 +79,7 @@ export const OlderEvents: Map<string, IEventLink> = new Map([
             href: 'events/goosies-2023',
             internal: true,
             linkText: 'View Photos →',
+            date: '2025-12-26',
         },
     ],
 ]);
