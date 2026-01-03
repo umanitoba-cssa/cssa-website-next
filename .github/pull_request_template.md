@@ -1,6 +1,13 @@
 ## Jira Issue Reference
 - **Jira Issue:** link
 
+## Type of Change
+- Bug Fix
+- Feature
+- Update/Improvement
+- Documentation only
+- Other (explain)
+
 ## Description
 
 ### `path/to/file.txt`
