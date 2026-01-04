@@ -23,9 +23,15 @@ export default function Researchers() {
         if (!searchQuery.trim()) return researcherProfiles;
 
         const query = searchQuery.toLowerCase();
-        return researcherProfiles.filter((researcher) =>
-            researcher.fullName.toLowerCase().includes(query),
-        );
+        return researcherProfiles.filter((researcher) => {
+            const matchesName = researcher.fullName.toLowerCase().includes(query);
+            const matchesEmail = researcher.email.toLowerCase().includes(query);
+            const matchesLab = researcher.lab?.name?.toLowerCase().includes(query);
+            const matchesInterests = researcher.researchInterests.some((interest) =>
+                interest.toLowerCase().includes(query),
+            );
+            return matchesName || matchesEmail || matchesLab || matchesInterests;
+        });
     }, [searchQuery, researcherProfiles]);
 
     return (
@@ -34,11 +40,11 @@ export default function Researchers() {
                 title="Researchers"
                 image="/img/backgrounds/resources.png"
             />
-            <div className="container py-6 sm:py-8 flex justify-center">
+            <div className="container pt-6 sm:pt-8 flex justify-center">
                 <SearchBar
                     value={searchQuery}
                     onValueChange={setSearchQuery}
-                    placeholder="Search by researcher name..."
+                    placeholder="Search by researcher info or interests..."
                 />
             </div>
             <div className="container py-12 flex flex-col gap-8">
