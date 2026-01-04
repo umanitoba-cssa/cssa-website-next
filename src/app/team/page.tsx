@@ -8,7 +8,6 @@ import {
     ExecProfiles,
     LoungeProfiles,
     PromotionsProfiles,
-    FinanceProfiles,
     MerchProfiles,
     EventsProfiles,
     TechnologyProfiles,
@@ -20,13 +19,11 @@ import {
 } from '@/data/team';
 import { useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
-import Link from 'next/link';
 import {
     Select,
     SelectContent,
     SelectGroup,
     SelectItem,
-    SelectLabel,
     SelectTrigger,
     SelectValue,
 } from '@/components/ui/select';
