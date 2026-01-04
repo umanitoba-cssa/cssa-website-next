@@ -13,10 +13,10 @@ export default function Home() {
                     <BlockHeader title="What is it?" />
                     <p>
                         The Manitoba Computer Science Fund (MCSF) is a student-run non-profit
-                        organization with the goals of support initiatives, clubs, or projects that
-                        promote or support computer science, and to provide fundraising,
+                        organization with the goals of supporting initiatives, clubs, or projects
+                        that promote or support computer science, and to provide fundraising,
                         sponsorship, and financial management in support of these initiatives at the
-                        University of Manitoba .
+                        University of Manitoba.
                     </p>
                 </div>
                 <div className="flex flex-col gap-4">
