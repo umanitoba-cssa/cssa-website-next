@@ -1,9 +1,5 @@
 import BlockHeader from '@/components/block-header';
 import PageHeader from '@/components/page-header';
-import Image from 'next/image';
-import { Teasers } from '@/data/teasers';
-import Link from 'next/link';
-import { Fragment } from 'react';
 
 export default function Home() {
     return (
