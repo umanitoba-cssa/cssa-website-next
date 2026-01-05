@@ -44,7 +44,7 @@ export default function Researchers() {
                 <SearchBar
                     value={searchQuery}
                     onValueChange={setSearchQuery}
-                    placeholder="Search by researcher info or interests..."
+                    placeholder="Search by researcher information or interests..."
                 />
             </div>
             <div className="container py-12 flex flex-col gap-8">
