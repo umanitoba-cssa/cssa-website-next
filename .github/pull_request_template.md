@@ -22,8 +22,8 @@
 
 ## Testing 
 Ensure you've tested the following, if applicable. Select all that apply.
-- [ ] Mobile/Desktop View (if applicable)
-- [ ] Accessibility (if applicable)
+- [ ] Mobile/Desktop View
+- [ ] Accessibility
 - [ ] Functionality
 - [ ] Edge cases
 - [ ] Not tested
