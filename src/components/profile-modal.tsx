@@ -49,15 +49,14 @@ export default function ProfileModal({
         <AnimatePresence onExitComplete={handleExitComplete}>
             {!isExiting && (
                 <motion.div
-                    key={`${profile.name}-${profile.position}`}
+                    key={`${profile.name}-${profile.group}-${profile.position}`}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     className="fixed inset-0 z-50 flex items-center justify-center bg-black/60"
-                    onClick={handleClose}
-                >
+                    onClick={handleClose}>
                     <motion.div
-                        layoutId={`card-${profile.name}-${profile.position}`}
+                        layoutId={`card-${profile.name}-${profile.group}-${profile.position}`}
                         initial={{ scale: 0.98 }}
                         animate={{ scale: 1 }}
                         exit={{ scale: 0.98 }}
@@ -72,12 +71,10 @@ export default function ProfileModal({
                             },
                         }}
                         className="bg-gray-900 border border-gray-400 text-white p-6 rounded-xl w-full max-w-lg relative z-50 overflow-hidden mx-4 sm:mx-6"
-                        onClick={(e) => e.stopPropagation()}
-                    >
+                        onClick={(e) => e.stopPropagation()}>
                         <button
                             onClick={handleClose}
-                            className="absolute top-4 right-4 text-gray-300 hover:text-white text-xl"
-                        >
+                            className="absolute top-4 right-4 text-gray-300 hover:text-white text-xl">
                             <FaTimes />
                         </button>
 
@@ -86,8 +83,7 @@ export default function ProfileModal({
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: 10 }}
-                            transition={{ duration: 0.25 }}
-                        >
+                            transition={{ duration: 0.25 }}>
                             <div className="w-52 h-52 rounded-full relative overflow-hidden mx-auto m-4">
                                 <Image
                                     src={profile?.image}
@@ -110,8 +106,7 @@ export default function ProfileModal({
                                         className="text-3xl"
                                         href={profile.linkedin}
                                         target="_blank"
-                                        rel="noreferrer"
-                                    >
+                                        rel="noreferrer">
                                         <FaLinkedin />
                                     </a>
                                 )}
@@ -120,8 +115,7 @@ export default function ProfileModal({
                                         className="text-3xl"
                                         href={profile.instagram}
                                         target="_blank"
-                                        rel="noreferrer"
-                                    >
+                                        rel="noreferrer">
                                         <FaInstagram />
                                     </a>
                                 )}
@@ -130,8 +124,7 @@ export default function ProfileModal({
                                         className="text-3xl"
                                         href={profile.github}
                                         target="_blank"
-                                        rel="noreferrer"
-                                    >
+                                        rel="noreferrer">
                                         <FaGithub />
                                     </a>
                                 )}
@@ -140,8 +133,7 @@ export default function ProfileModal({
                                         className="text-3xl"
                                         href={profile.website}
                                         target="_blank"
-                                        rel="noreferrer"
-                                    >
+                                        rel="noreferrer">
                                         <FaGlobeAmericas />
                                     </a>
                                 )}
@@ -150,8 +142,7 @@ export default function ProfileModal({
                                         className="text-3xl"
                                         href={profile.discord}
                                         target="_blank"
-                                        rel="noreferrer"
-                                    >
+                                        rel="noreferrer">
                                         <FaDiscord />
                                     </a>
                                 )}

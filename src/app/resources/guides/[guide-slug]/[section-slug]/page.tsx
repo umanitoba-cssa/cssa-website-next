@@ -10,14 +10,15 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 import Breadcrumbs from '@/components/guides/breadcrumbs';
 
 interface SectionPageProps {
-    params: {
+    params: Promise<{
         'guide-slug': string;
         'section-slug': string;
-    };
+    }>;
 }
 
 export async function generateMetadata({ params }: SectionPageProps): Promise<Metadata> {
-    const guide = getGuideBySlug(params['guide-slug']);
+    const { 'guide-slug': guideSlug, 'section-slug': sectionSlug } = await params;
+    const guide = getGuideBySlug(guideSlug);
 
     if (!guide.title || guide.title === 'Guide Not Found') {
         return {
@@ -26,7 +27,7 @@ export async function generateMetadata({ params }: SectionPageProps): Promise<Me
         };
     }
 
-    const section = getSectionBySlug(params['guide-slug'], params['section-slug']);
+    const section = getSectionBySlug(guideSlug, sectionSlug);
 
     if (!section.title || section.title === 'Section Not Found') {
         return {
@@ -59,14 +60,15 @@ export async function generateStaticParams() {
 }
 
 export default async function SectionPage({ params }: SectionPageProps) {
-    const guide = getGuideBySlug(params['guide-slug']);
+    const { 'guide-slug': guideSlug, 'section-slug': sectionSlug } = await params;
+    const guide = getGuideBySlug(guideSlug);
 
     // Redirect to 404 if guide not found
     if (!guide.title || guide.title === 'Guide Not Found') {
         notFound();
     }
 
-    const section = getSectionBySlug(params['guide-slug'], params['section-slug']);
+    const section = getSectionBySlug(guideSlug, sectionSlug);
 
     // Redirect to 404 if section not found
     if (!section.title || section.title === 'Section Not Found') {
@@ -74,10 +76,10 @@ export default async function SectionPage({ params }: SectionPageProps) {
     }
 
     // Process markdown content to HTML with guide slug for proper image processing
-    const htmlContent = await markdownToHtml(section.content, params['guide-slug']);
+    const htmlContent = await markdownToHtml(section.content, guideSlug);
 
     // Find the current section index for prev/next navigation
-    const currentSectionIndex = guide.sections.findIndex((s) => s.slug === params['section-slug']);
+    const currentSectionIndex = guide.sections.findIndex((s) => s.slug === sectionSlug);
     const prevSection = currentSectionIndex > 0 ? guide.sections[currentSectionIndex - 1] : null;
     const nextSection =
         currentSectionIndex < guide.sections.length - 1
@@ -88,21 +90,27 @@ export default async function SectionPage({ params }: SectionPageProps) {
     const breadcrumbItems = [
         { label: 'Resources', href: '/resources' },
         { label: 'Guides', href: '/resources/guides' },
-        { label: guide.title, href: `/resources/guides/${params['guide-slug']}` },
+        { label: guide.title, href: `/resources/guides/${guideSlug}` },
         {
             label: section.title,
-            href: `/resources/guides/${params['guide-slug']}/${params['section-slug']}`,
+            href: `/resources/guides/${guideSlug}/${sectionSlug}`,
             active: true,
         },
     ];
 
     return (
         <main className="flex flex-col">
-            <PageHeader title={section.title} image="/img/backgrounds/resources.png" />
+            <PageHeader
+                title={section.title}
+                image="/img/backgrounds/resources.png"
+            />
 
             <div className="container py-8">
                 {/* Breadcrumbs */}
-                <Breadcrumbs items={breadcrumbItems} className="mb-6" />
+                <Breadcrumbs
+                    items={breadcrumbItems}
+                    className="mb-6"
+                />
 
                 <div className="lg:grid lg:grid-cols-3 gap-8">
                     {/* Sidebar Navigation */}
@@ -122,11 +130,9 @@ export default async function SectionPage({ params }: SectionPageProps) {
                                 <Button
                                     variant="outline"
                                     className="border-cssa-blue text-white hover:bg-cssa-blue/20 transition-colors flex items-center gap-2"
-                                    asChild
-                                >
+                                    asChild>
                                     <Link
-                                        href={`/resources/guides/${params['guide-slug']}/${prevSection.slug}`}
-                                    >
+                                        href={`/resources/guides/${guideSlug}/${prevSection.slug}`}>
                                         <ChevronLeft className="h-4 w-4" />
                                         {prevSection.title}
                                     </Link>
@@ -135,9 +141,8 @@ export default async function SectionPage({ params }: SectionPageProps) {
                                 <Button
                                     variant="outline"
                                     className="border-cssa-blue text-white bg-cssa-blue/20 transition-colors flex items-center gap-2"
-                                    asChild
-                                >
-                                    <Link href={`/resources/guides/${params['guide-slug']}`}>
+                                    asChild>
+                                    <Link href={`/resources/guides/${guideSlug}`}>
                                         <ChevronLeft className="h-4 w-4" />
                                         Guide Overview
                                     </Link>
@@ -148,11 +153,9 @@ export default async function SectionPage({ params }: SectionPageProps) {
                                 <Button
                                     variant="outline"
                                     className="border-cssa-blue text-white bg-cssa-blue/20 transition-colors flex items-center gap-2"
-                                    asChild
-                                >
+                                    asChild>
                                     <Link
-                                        href={`/resources/guides/${params['guide-slug']}/${nextSection.slug}`}
-                                    >
+                                        href={`/resources/guides/${guideSlug}/${nextSection.slug}`}>
                                         {nextSection.title}
                                         <ChevronRight className="h-4 w-4" />
                                     </Link>
