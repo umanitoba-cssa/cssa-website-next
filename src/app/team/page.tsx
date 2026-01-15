@@ -8,7 +8,6 @@ import {
     ExecProfiles,
     LoungeProfiles,
     PromotionsProfiles,
-    FinanceProfiles,
     MerchProfiles,
     EventsProfiles,
     TechnologyProfiles,
@@ -20,13 +19,11 @@ import {
 } from '@/data/team';
 import { useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
-import Link from 'next/link';
 import {
     Select,
     SelectContent,
     SelectGroup,
     SelectItem,
-    SelectLabel,
     SelectTrigger,
     SelectValue,
 } from '@/components/ui/select';
@@ -39,7 +36,7 @@ export default function Team() {
         <main className="flex flex-col">
             <PageHeader
                 title="Team"
-                image="/img/backgrounds/team.png"
+                image="/img/backgrounds/team.jpg"
             />
             <div className="container py-12 flex flex-col gap-8">
                 <Select
@@ -67,7 +64,7 @@ export default function Team() {
                         <div className="flex flex-row gap-4 flex-wrap justify-center">
                             {filterByYear(ExecProfiles, year).map((profile) => (
                                 <ProfileCard
-                                    key={`${profile.name}-${profile.position}`}
+                                    key={`${profile.name}-${profile.group}-${profile.position}`}
                                     profile={profile}
                                     onClick={() => {
                                         setSelectedProfile(profile);
@@ -84,7 +81,7 @@ export default function Team() {
                         <div className="flex flex-row gap-4 flex-wrap justify-center">
                             {filterByYear(PromotionsProfiles, year).map((profile) => (
                                 <ProfileCard
-                                    key={`${profile.name}-${profile.position}`}
+                                    key={`${profile.name}-${profile.group}-${profile.position}`}
                                     profile={profile}
                                     onClick={() => {
                                         setSelectedProfile(profile);
@@ -101,7 +98,7 @@ export default function Team() {
                         <div className="flex flex-row gap-4 flex-wrap justify-center">
                             {filterByYear(EventsProfiles, year).map((profile) => (
                                 <ProfileCard
-                                    key={`${profile.name}-${profile.position}`}
+                                    key={`${profile.name}-${profile.group}-${profile.position}`}
                                     profile={profile}
                                     onClick={() => {
                                         setSelectedProfile(profile);
@@ -118,7 +115,7 @@ export default function Team() {
                         <div className="flex flex-row gap-4 flex-wrap justify-center">
                             {filterByYear(TechnologyProfiles, year).map((profile) => (
                                 <ProfileCard
-                                    key={`${profile.name}-${profile.position}`}
+                                    key={`${profile.name}-${profile.group}-${profile.position}`}
                                     profile={profile}
                                     onClick={() => {
                                         setSelectedProfile(profile);
@@ -135,7 +132,7 @@ export default function Team() {
                         <div className="flex flex-row gap-4 flex-wrap justify-center">
                             {filterByYear(AdvocacyProfiles, year).map((profile) => (
                                 <ProfileCard
-                                    key={`${profile.name}-${profile.position}`}
+                                    key={`${profile.name}-${profile.group}-${profile.position}`}
                                     profile={profile}
                                     onClick={() => {
                                         setSelectedProfile(profile);
@@ -152,7 +149,7 @@ export default function Team() {
                         <div className="flex flex-row gap-4 flex-wrap justify-center">
                             {filterByYear(StudentResourcesProfiles, year).map((profile) => (
                                 <ProfileCard
-                                    key={`${profile.name}-${profile.position}`}
+                                    key={`${profile.name}-${profile.group}-${profile.position}`}
                                     profile={profile}
                                     onClick={() => {
                                         setSelectedProfile(profile);
@@ -169,7 +166,7 @@ export default function Team() {
                         <div className="flex flex-row gap-4 flex-wrap justify-center">
                             {filterByYear(MerchProfiles, year).map((profile) => (
                                 <ProfileCard
-                                    key={`${profile.name}-${profile.position}`}
+                                    key={`${profile.name}-${profile.group}-${profile.position}`}
                                     profile={profile}
                                     onClick={() => {
                                         setSelectedProfile(profile);
@@ -186,7 +183,7 @@ export default function Team() {
                         <div className="flex flex-row gap-4 flex-wrap justify-center">
                             {filterByYear(LoungeProfiles, year).map((profile) => (
                                 <ProfileCard
-                                    key={`${profile.name}-${profile.position}`}
+                                    key={`${profile.name}-${profile.group}-${profile.position}`}
                                     profile={profile}
                                     onClick={() => {
                                         setSelectedProfile(profile);

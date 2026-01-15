@@ -8,6 +8,11 @@ import prettierPlugin from 'eslint-plugin-prettier';
 import { defineConfig } from 'eslint/config';
 
 export default defineConfig([
+    // Ignore files and folders
+    {
+        ignores: ['node_modules/**', '.next/**', 'dist/**', 'build/**', '*.md'],
+    },
+
     // -----------------------------
     // JavaScript files
     // -----------------------------
@@ -23,7 +28,6 @@ export default defineConfig([
         },
         ...js.configs.recommended,
         rules: {
-            // Prettier reports formatting issues, but ESLint won't try to fix them
             'prettier/prettier': 'error',
         },
     },
@@ -49,7 +53,7 @@ export default defineConfig([
             prettier: prettierPlugin,
         },
         settings: {
-            react: { version: 'detect' }, // automatically detect React version
+            react: { version: 'detect' },
         },
         rules: {
             // Recommended TS + React rules
@@ -57,11 +61,16 @@ export default defineConfig([
             ...reactPlugin.configs.flat.recommended.rules,
             ...reactHooks.configs.recommended.rules,
 
+            'react/prop-types': 'off',
+
             // JSX runtime: no React import needed
             'react/react-in-jsx-scope': 'off',
 
             // Prettier reports formatting issues but does not conflict
             'prettier/prettier': 'error',
+
+            // Enforce self-closing tags where possible
+            'react/self-closing-comp': 'error',
         },
     },
 ]);

@@ -7,13 +7,14 @@ import MarkdownContent from '@/components/guides/markdown-content';
 import Breadcrumbs from '@/components/guides/breadcrumbs';
 
 interface GuidePageProps {
-    params: {
+    params: Promise<{
         'guide-slug': string;
-    };
+    }>;
 }
 
 export async function generateMetadata({ params }: GuidePageProps): Promise<Metadata> {
-    const guide = getGuideBySlug(params['guide-slug']);
+    const { 'guide-slug': guideSlug } = await params;
+    const guide = getGuideBySlug(guideSlug);
 
     if (!guide.title || guide.title === 'Guide Not Found') {
         return {
@@ -36,7 +37,8 @@ export async function generateStaticParams() {
 }
 
 export default async function GuidePage({ params }: GuidePageProps) {
-    const guide = getGuideBySlug(params['guide-slug']);
+    const { 'guide-slug': guideSlug } = await params;
+    const guide = getGuideBySlug(guideSlug);
 
     // Redirect to 404 if guide not found
     if (!guide.title || guide.title === 'Guide Not Found') {
@@ -44,22 +46,28 @@ export default async function GuidePage({ params }: GuidePageProps) {
     }
 
     // Process markdown content to HTML with guide slug for proper image processing
-    const htmlContent = await markdownToHtml(guide.content, params['guide-slug']);
+    const htmlContent = await markdownToHtml(guide.content, guideSlug);
 
     // Breadcrumb items
     const breadcrumbItems = [
         { label: 'Resources', href: '/resources' },
         { label: 'Guides', href: '/resources/guides' },
-        { label: guide.title, href: `/resources/guides/${params['guide-slug']}`, active: true },
+        { label: guide.title, href: `/resources/guides/${guideSlug}`, active: true },
     ];
 
     return (
         <main className="flex flex-col">
-            <PageHeader title={guide.title} image="/img/backgrounds/resources.png" />
+            <PageHeader
+                title={guide.title}
+                image="/img/backgrounds/resources.png"
+            />
 
             <div className="container py-8">
                 {/* Breadcrumbs */}
-                <Breadcrumbs items={breadcrumbItems} className="mb-6" />
+                <Breadcrumbs
+                    items={breadcrumbItems}
+                    className="mb-6"
+                />
 
                 <div className="lg:grid lg:grid-cols-3 gap-8">
                     {/* Sidebar Navigation */}
