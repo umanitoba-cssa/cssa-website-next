@@ -1,11 +1,7 @@
 import BlockHeader from '@/components/block-header';
 import PageHeader from '@/components/page-header';
-import EventPageHeader from '@/components/event-page-header';
-import { Button } from '@/components/ui/button';
-import Image from 'next/image';
 import SponsorCard from '@/components/sponsor-card';
 
-import EventPhotoPage from '@/components/event-photo-page';
 
 export default function CTF2026() {
     return (
