@@ -33,7 +33,7 @@ export default function CTF2026() {
                 </div>
 
                 <BlockHeader title="Event Details" />
-                <p>🕒 February 7, 2026, 8:00PM-5:30PM</p>
+                <p>🕒 February 7, 2026, 8:00AM-5:30PM</p>
                 <p>📍 E3-270, E2-150, University of Manitoba</p>
 
                 <BlockHeader title="What is Capture The Flag Competition?" />
