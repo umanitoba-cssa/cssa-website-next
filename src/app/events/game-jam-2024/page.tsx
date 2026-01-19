@@ -124,12 +124,12 @@ export default function GameJam2024() {
                 <div className="grid grid-cols-1 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
                     <SponsorCard
                         name="Niche"
-                        image="/img/game-jam/niche-logo.svg"
+                        image="/img/sponsors/niche-logo.svg"
                         website="https://nicherms.com"
                     />
                     <SponsorCard
                         name="Pollard Banknote"
-                        image="/img/game-jam/pollard.svg"
+                        image="/img/sponsors/pollard.svg"
                         website="https://www.pollardbanknote.com"
                     />
                 </div>
@@ -137,17 +137,17 @@ export default function GameJam2024() {
                 <div className="grid grid-cols-1 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
                     <SponsorCard
                         name="G3"
-                        image="/img/game-jam/g3-logo.svg"
+                        image="/img/sponsors/g3-logo.svg"
                         website="https://g3.ca"
                     />
                     <SponsorCard
                         name="New Media Manitoba"
-                        image="/img/game-jam/NMM.svg"
+                        image="/img/sponsors/NMM.svg"
                         website="https://newmediamanitoba.com"
                     />
                     <SponsorCard
                         name="Department of Computer Science"
-                        image="/img/game-jam/UMDeptCS.svg"
+                        image="/img/sponsors/UMDeptCS.svg"
                         website="https://umanitoba.ca/science/computer-science"
                     />
                 </div>

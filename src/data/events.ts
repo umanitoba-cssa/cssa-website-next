@@ -18,6 +18,16 @@ const goosiesDescription = 'Annual award show for the Department of Computer Sci
 
 export const RecentEvents: Map<string, IEventLink> = new Map([
     [
+        'capture-the-flag-2026',
+        {
+            title: 'Capture The Flag 2026',
+            description: 'Compete with a team in cybersecurity challenges',
+            href: 'events/capture-the-flag-2026',
+            internal: true,
+            linkText: 'See Page →',
+        },
+    ],
+    [
         'game-jam-2025',
         {
             title: 'Game Jam 2025',
