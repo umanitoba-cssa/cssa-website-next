@@ -38,17 +38,6 @@ export const RecentEvents: Map<string, IEventLink> = new Map([
         },
     ],
     [
-        'capture-the-flag-2025',
-        {
-            title: 'Capture The Flag 2025',
-            description:
-                'Compete with a team in cybersecurity challenges with the theme "Murder Mystery"',
-            href: 'events/capture-the-flag-2025',
-            internal: true,
-            linkText: 'View Photos →',
-        },
-    ],
-    [
         'goosies-2024',
         {
             title: 'Goosies 2024',
@@ -71,6 +60,17 @@ export const RecentEvents: Map<string, IEventLink> = new Map([
 ]);
 
 export const OlderEvents: Map<string, IEventLink> = new Map([
+    [
+        'capture-the-flag-2025',
+        {
+            title: 'Capture The Flag 2025',
+            description:
+                'Compete with a team in cybersecurity challenges with the theme "Murder Mystery"',
+            href: 'events/capture-the-flag-2025',
+            internal: true,
+            linkText: 'View Photos →',
+        },
+    ],
     [
         'game-jam-2024',
         {
