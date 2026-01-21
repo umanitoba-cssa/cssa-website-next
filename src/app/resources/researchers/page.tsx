@@ -12,14 +12,13 @@ export default function Researchers() {
     const [selectedResearcher, setSelectedResearcher] = useState<IResearcher | null>(null);
     const [searchQuery, setSearchQuery] = useState('');
 
-    // add ids to each researcher
-    const researcherProfiles: IResearcher[] = ResearchersInfo.map((researcher, i) => ({
-        id: i + 1,
-        ...researcher,
-    }));
-
-    // filter researchers based on search query
+    // add ids to each researcher and filter based on search query
     const filteredResearchers = useMemo(() => {
+        const researcherProfiles: IResearcher[] = ResearchersInfo.map((researcher, i) => ({
+            id: i + 1,
+            ...researcher,
+        }));
+
         if (!searchQuery.trim()) return researcherProfiles;
 
         const query = searchQuery.toLowerCase();
@@ -32,7 +31,7 @@ export default function Researchers() {
             );
             return matchesName || matchesEmail || matchesLab || matchesInterests;
         });
-    }, [searchQuery, researcherProfiles]);
+    }, [searchQuery]);
 
     return (
         <main className="flex flex-col">
