@@ -18,6 +18,16 @@ const goosiesDescription = 'Annual award show for the Department of Computer Sci
 
 export const RecentEvents: Map<string, IEventLink> = new Map([
     [
+        'capture-the-flag-2026',
+        {
+            title: 'Capture The Flag 2026',
+            description: 'Compete with a team in cybersecurity challenges',
+            href: 'events/capture-the-flag-2026',
+            internal: true,
+            linkText: 'See Page →',
+        },
+    ],
+    [
         'game-jam-2025',
         {
             title: 'Game Jam 2025',
@@ -25,17 +35,6 @@ export const RecentEvents: Map<string, IEventLink> = new Map([
             href: 'events/game-jam-2025',
             internal: true,
             linkText: 'See Page →',
-        },
-    ],
-    [
-        'capture-the-flag-2025',
-        {
-            title: 'Capture The Flag 2025',
-            description:
-                'Compete with a team in cybersecurity challenges with the theme "Murder Mystery"',
-            href: 'events/capture-the-flag-2025',
-            internal: true,
-            linkText: 'View Photos →',
         },
     ],
     [
@@ -61,6 +60,17 @@ export const RecentEvents: Map<string, IEventLink> = new Map([
 ]);
 
 export const OlderEvents: Map<string, IEventLink> = new Map([
+    [
+        'capture-the-flag-2025',
+        {
+            title: 'Capture The Flag 2025',
+            description:
+                'Compete with a team in cybersecurity challenges with the theme "Murder Mystery"',
+            href: 'events/capture-the-flag-2025',
+            internal: true,
+            linkText: 'View Photos →',
+        },
+    ],
     [
         'game-jam-2024',
         {

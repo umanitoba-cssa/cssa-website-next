@@ -1,7 +1,7 @@
 import PageHeader from '@/components/page-header';
 import EventPageHeader from '@/components/event-page-header';
 import BlockHeader from '@/components/block-header';
-import { RecentEvents } from '@/data/events';
+import { RecentEvents, OlderEvents } from '@/data/events';
 import fs from 'fs';
 import path from 'path';
 import React from 'react';
@@ -19,7 +19,7 @@ export default async function EventPhotoPage({
     headerImageIdx = 0,
     keepHeaderImageInBody = false,
 }: EventPhotoPageProps) {
-    const event = RecentEvents.get(eventKey);
+    const event = RecentEvents.get(eventKey) || OlderEvents.get(eventKey);
 
     if (!event) {
         throw new Error(`Event not found: ${eventKey}`);

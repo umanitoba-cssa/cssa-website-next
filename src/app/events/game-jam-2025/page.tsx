@@ -59,17 +59,17 @@ export default function GameJam2025() {
                 <div className="flex flex-wrap gap-5 justify-center">
                     <SponsorCard
                         name="Ubisoft"
-                        image="/img/game-jam/ubisoft-logo.svg"
+                        image="/img/sponsors/ubisoft-logo.svg"
                         website="https://winnipeg.ubisoft.com/"
                     />
                     <SponsorCard
                         name="G3"
-                        image="/img/game-jam/g3-logo.svg"
+                        image="/img/sponsors/g3-logo.svg"
                         website="https://g3.ca"
                     />
                     <SponsorCard
                         name="Niche"
-                        image="/img/game-jam/niche-logo.svg"
+                        image="/img/sponsors/niche-logo.svg"
                         website="https://nicherms.com"
                     />
                 </div>
