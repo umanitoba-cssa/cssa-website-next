@@ -16,6 +16,7 @@ function SearchBar({ value, onValueChange, placeholder = 'Search...', className 
             <div className="relative">
                 <FaSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 text-sm" />
                 <input
+                    aria-label="Search"
                     type="text"
                     placeholder={placeholder}
                     value={value}
