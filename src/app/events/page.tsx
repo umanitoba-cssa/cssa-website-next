@@ -1,3 +1,5 @@
+export const revalidate = 86400;
+
 import './events.css';
 import BlockHeader from '@/components/block-header';
 import PageHeader from '@/components/page-header';
