@@ -14,7 +14,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 
 import React from 'react';
 import { FaExternalLinkAlt } from 'react-icons/fa';
-import CalendarSection from './components/CalendarSection';
+import CalendarSection from '../../components/calendar/CalendarSection';
 import { getEvents } from '@/api/calendar';
 
 export default async function Events() {

@@ -1,5 +1,5 @@
 import { useState, useMemo, useCallback } from 'react';
-import { getMonthGrid } from '../components/CalendarSectionComponents';
+import { getMonthGrid } from '../../components/calendar/CalendarSectionComponents';
 
 const MONTH_NAMES = [
     'January',
