@@ -1,3 +1,6 @@
+export const revalidate = 86400;
+// 86400 seconds = 60 * 60 * 24 , which is 1 day
+
 import './events.css';
 import BlockHeader from '@/components/block-header';
 import PageHeader from '@/components/page-header';
