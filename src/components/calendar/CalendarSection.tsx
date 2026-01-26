@@ -3,7 +3,7 @@
 import React, { useMemo, useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { ICalendarEventLink } from '@/data/events';
-import { useCalendarNavigation } from '../hooks/UseCalendarNavigation';
+import { useCalendarNavigation } from '../../hooks/calendar/UseCalendarNavigation';
 import { CalendarCell, ChevronButton, WEEKDAYS } from './CalendarSectionComponents';
 import { MonthYearPickerModal } from './MonthYearPickerModal';
 import EventModal from './EventModal';
