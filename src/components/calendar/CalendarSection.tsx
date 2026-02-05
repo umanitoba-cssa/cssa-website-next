@@ -2,14 +2,14 @@
 
 import React, { useMemo, useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
-import { ICalendarEventLink } from '@/data/events';
+import { IEventLink } from '@/data/events';
 import { useCalendarNavigation } from '../../hooks/calendar/UseCalendarNavigation';
 import { CalendarCell, ChevronButton, WEEKDAYS } from './CalendarSectionComponents';
 import { MonthYearPickerModal } from './MonthYearPickerModal';
 import EventModal from './EventModal';
 
 type CalendarSectionProps = {
-    events: ICalendarEventLink[];
+    events: IEventLink[];
 };
 
 export function CalendarSection({ events }: CalendarSectionProps) {
@@ -27,17 +27,17 @@ export function CalendarSection({ events }: CalendarSectionProps) {
     } = useCalendarNavigation();
 
     const [isPickerOpen, setIsPickerOpen] = useState(false);
-    const [selectedEvent, setSelectedEvent] = useState<ICalendarEventLink | null>(null);
+    const [selectedEvent, setSelectedEvent] = useState<IEventLink | null>(null);
 
     const eventsByIso = useMemo(() => {
         const firstDate = grid[0]?.date;
         const lastDate = grid[grid.length - 1]?.date;
-        if (!firstDate || !lastDate) return new Map<string, ICalendarEventLink[]>();
+        if (!firstDate || !lastDate) return new Map<string, IEventLink[]>();
 
         const firstISO = firstDate.toISOString().slice(0, 10);
         const lastISO = lastDate.toISOString().slice(0, 10);
 
-        const map = new Map<string, ICalendarEventLink[]>();
+        const map = new Map<string, IEventLink[]>();
         for (const evt of events) {
             if (typeof evt.date === 'string' && evt.date >= firstISO && evt.date <= lastISO) {
                 if (!map.has(evt.date)) map.set(evt.date, []);
@@ -47,7 +47,9 @@ export function CalendarSection({ events }: CalendarSectionProps) {
         return map;
     }, [events, grid]);
 
-    const handleEventClick = useCallback((event: ICalendarEventLink) => {
+    const currentMonthDays = useMemo(() => grid.filter((cell) => cell.inCurrentMonth), [grid]);
+
+    const handleEventClick = useCallback((event: IEventLink) => {
         setSelectedEvent(event);
     }, []);
 
@@ -137,8 +139,55 @@ export function CalendarSection({ events }: CalendarSectionProps) {
                 </div>
             </div>
 
-            {/* Scrollable container for small screens */}
-            <div className="overflow-x-auto pb-4 -mx-2 px-2">
+            {/* Mobile list view */}
+            <div className="space-y-3 sm:hidden">
+                {currentMonthDays.map((cell) => {
+                    const dayEvents = eventsByIso.get(cell.iso) || [];
+                    const weekday = cell.date
+                        .toLocaleDateString('en-US', { weekday: 'short' })
+                        .toUpperCase();
+                    const isToday = cell.date.toDateString() === today.toDateString();
+                    return (
+                        <div
+                            key={cell.iso}
+                            className="flex gap-3 rounded-2xl bg-white/5 border border-white/10 p-3 shadow-sm">
+                            <div className="flex flex-col items-center w-14 text-white">
+                                <span className="text-[11px] font-semibold tracking-wide text-white/70">
+                                    {weekday}
+                                </span>
+                                <span
+                                    className={`text-2xl font-bold ${isToday ? 'text-blue-300' : ''}`}>
+                                    {cell.date.getDate()}
+                                </span>
+                            </div>
+                            <div className="flex-1 space-y-2">
+                                {dayEvents.length === 0 ? (
+                                    <div className="text-sm text-white/50">No events</div>
+                                ) : (
+                                    dayEvents.map((evt) => (
+                                        <button
+                                            key={evt.title}
+                                            onClick={() => handleEventClick(evt)}
+                                            className="w-full text-left rounded-xl bg-[#D4D4D4]/10 hover:bg-white/10 transition-colors px-3 py-2">
+                                            <div className="text-sm font-semibold text-white leading-snug">
+                                                {evt.title}
+                                            </div>
+                                            {evt.description && (
+                                                <div className="text-xs text-white/70 mt-0.5 line-clamp-2">
+                                                    {evt.description}
+                                                </div>
+                                            )}
+                                        </button>
+                                    ))
+                                )}
+                            </div>
+                        </div>
+                    );
+                })}
+            </div>
+
+            {/* Desktop grid view */}
+            <div className="overflow-x-auto pb-4 -mx-2 px-2 hidden sm:block">
                 <div className="min-w-[600px]">
                     {/* Weekday labels */}
                     <div className="grid grid-cols-7 gap-1  text-white mb-4 sm:mb-6 font-roboto text-xs font-medium uppercase opacity-60">
@@ -170,6 +219,7 @@ export function CalendarSection({ events }: CalendarSectionProps) {
 
             {/* Month/Year Picker Modal */}
             <MonthYearPickerModal
+                key={`${month}-${year}`}
                 isOpen={isPickerOpen}
                 onClose={() => setIsPickerOpen(false)}
                 currentMonth={month}
