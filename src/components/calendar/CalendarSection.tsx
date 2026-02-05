@@ -140,7 +140,7 @@ export function CalendarSection({ events }: CalendarSectionProps) {
             </div>
 
             {/* Mobile list view */}
-            <div className="space-y-3 sm:hidden">
+            <div className="space-y-3 min-[715px]:hidden">
                 {currentMonthDays.map((cell) => {
                     const dayEvents = eventsByIso.get(cell.iso) || [];
                     const weekday = cell.date
