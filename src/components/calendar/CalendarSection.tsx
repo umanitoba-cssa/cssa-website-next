@@ -170,6 +170,7 @@ export function CalendarSection({ events }: CalendarSectionProps) {
 
             {/* Month/Year Picker Modal */}
             <MonthYearPickerModal
+                key={`${month}-${year}`}
                 isOpen={isPickerOpen}
                 onClose={() => setIsPickerOpen(false)}
                 currentMonth={month}
