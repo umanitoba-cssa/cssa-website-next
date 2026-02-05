@@ -1,17 +1,10 @@
-interface IEventLink {
+export interface IEventLink {
     title: string;
     description: string;
     href: string;
     internal?: boolean;
     linkText?: string;
-}
-export interface ICalendarEventLink {
-    title: string;
-    description: string;
-    href: string;
-    internal?: boolean;
-    linkText?: string;
-    date: string;
+    date?: string;
 }
 
 const goosiesDescription = 'Annual award show for the Department of Computer Science';
