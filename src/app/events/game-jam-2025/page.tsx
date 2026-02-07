@@ -9,7 +9,7 @@ export default function GameJam2025() {
         <main className="flex flex-col bg-[#84a2ce] text-[#0C1118]">
             <EventPageHeader
                 alt="Game Jam Logo"
-                image="/img/game-jam/gj_banner.svg"
+                image="/img/game-jam/2025/gj_banner.svg"
             />
             <div className="container py-12 flex flex-col gap-12">
                 <BlockHeader title="Theme" />
@@ -44,7 +44,7 @@ export default function GameJam2025() {
                 <BlockHeader title="Schedule" />
                 <div className="flex justify-center">
                     <Image
-                        src="/img/game-jam/schedule.png"
+                        src="/img/game-jam/2025/schedule.png"
                         alt="Game Jam 2025 Schedule"
                         width={400}
                         height={400}
@@ -77,12 +77,59 @@ export default function GameJam2025() {
                 <BlockHeader title="Award Categories" />
                 <div className="flex justify-center">
                     <Image
-                        src="/img/game-jam/award-categories.png"
+                        src="/img/game-jam/2025/award-categories.png"
                         alt="Game Jam 2025 Award Categories"
                         width={400}
                         height={400}
                         className="w-full lg:w-1/2"
                     />
+                </div>
+                <BlockHeader title="Award Winners" />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {[
+                        {
+                            id: 1,
+                            src: '/img/game-jam/2025/awards/audience-choice.png',
+                            alt: 'Audience Choice',
+                        },
+                        {
+                            id: 2,
+                            src: '/img/game-jam/2025/awards/best-by-minority.png',
+                            alt: 'Best By Minority',
+                        },
+                        {
+                            id: 3,
+                            src: '/img/game-jam/2025/awards/best-game-environment.png',
+                            alt: 'Best Game Environment',
+                        },
+                        {
+                            id: 4,
+                            src: '/img/game-jam/2025/awards/best-overall.png',
+                            alt: 'Best Overall',
+                        },
+                        {
+                            id: 5,
+                            src: '/img/game-jam/2025/awards/best-solo-game.png',
+                            alt: 'Best Solo Game',
+                        },
+                        {
+                            id: 6,
+                            src: '/img/game-jam/2025/awards/most-promising-game.png',
+                            alt: 'Most Promising Game',
+                        },
+                    ].map((award) => (
+                        <div
+                            key={award.id}
+                            className="relative w-full m-2"
+                            style={{ aspectRatio: '16/9' }}>
+                            <Image
+                                src={award.src}
+                                fill
+                                alt={award.alt}
+                                className={`object-contain`}
+                            />
+                        </div>
+                    ))}
                 </div>
                 <BlockHeader title="Resources" />
                 <ul>

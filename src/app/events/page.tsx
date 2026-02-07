@@ -1,3 +1,6 @@
+export const revalidate = 86400;
+// 86400 seconds = 60 * 60 * 24 , which is 1 day
+
 import './events.css';
 import BlockHeader from '@/components/block-header';
 import PageHeader from '@/components/page-header';
@@ -14,7 +17,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 
 import React from 'react';
 import { FaExternalLinkAlt } from 'react-icons/fa';
-import CalendarSection from './components/CalendarSection';
+import CalendarSection from '../../components/calendar/CalendarSection';
 import { getEvents } from '@/api/calendar';
 
 export default async function Events() {

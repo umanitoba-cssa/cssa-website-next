@@ -60,7 +60,7 @@ export default function CTF2026() {
                     {' '}
                     <a
                         className="underline"
-                        href="https://discord.gg/8Cwwu97dpA"
+                        href="https://discord.gg/aQphKK9EyE"
                         target="_blank"
                         rel="noreferrer">
                         Join our Discord
