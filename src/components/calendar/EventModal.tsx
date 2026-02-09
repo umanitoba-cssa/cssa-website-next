@@ -2,11 +2,11 @@
 
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaTimes } from 'react-icons/fa';
-import { ICalendarEventLink } from '@/data/events';
+import { IEventLink } from '@/data/events';
 import { useEffect, useState } from 'react';
 
 interface EventModalProps {
-    event: ICalendarEventLink;
+    event: IEventLink;
     onClose: () => void;
     onViewEvent: () => void;
 }

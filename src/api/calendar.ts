@@ -1,5 +1,5 @@
 import { Auth, google } from 'googleapis';
-import type { ICalendarEventLink } from '@/data/events';
+import type { IEventLink } from '@/data/events';
 
 const toISODate = (date?: string | null) => (date ? date.slice(0, 10) : null);
 
@@ -15,7 +15,7 @@ export async function getCalendarEvents(opts: {
     calendarId: string;
     timeMin: string;
     timeMax: string;
-}): Promise<ICalendarEventLink[]> {
+}): Promise<IEventLink[]> {
     const auth = new Auth.GoogleAuth({
         scopes: ['https://www.googleapis.com/auth/calendar.readonly'],
         credentials: {
@@ -51,7 +51,7 @@ export async function getCalendarEvents(opts: {
                 date: iso,
             };
         })
-        .filter(Boolean) as ICalendarEventLink[];
+        .filter(Boolean) as IEventLink[];
 }
 
 export async function getEvents() {
