@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useMemo, useState, useCallback, useEffect } from 'react';
+import React, { useMemo, useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { IEventLink } from '@/data/events';
 import { useCalendarNavigation } from '../../hooks/calendar/UseCalendarNavigation';
@@ -28,7 +28,10 @@ export function CalendarSection({ events }: CalendarSectionProps) {
 
     const [isPickerOpen, setIsPickerOpen] = useState(false);
     const [selectedEvent, setSelectedEvent] = useState<IEventLink | null>(null);
-    const [mobileWeekIndex, setMobileWeekIndex] = useState(0);
+    const today = new Date();
+    const [mobileWeekIndex, setMobileWeekIndex] = useState(() =>
+        Math.floor((today.getDate() - 1) / 7),
+    );
 
     const eventsByIso = useMemo(() => {
         const firstDate = grid[0]?.date;
@@ -46,20 +49,33 @@ export function CalendarSection({ events }: CalendarSectionProps) {
         return map;
     }, [events, grid]);
 
-    const today = new Date();
     const currentMonthDays = useMemo(() => grid.filter((cell) => cell.inCurrentMonth), [grid]);
     const maxWeekIndex = Math.max(0, Math.ceil(currentMonthDays.length / 7) - 1);
     const displayedDays = currentMonthDays.slice(mobileWeekIndex * 7, (mobileWeekIndex + 1) * 7);
     const todayIso = today.toISOString().slice(0, 10);
     const isCurrentWeek = isCurrentMonth && displayedDays.some((cell) => cell.iso === todayIso);
-    useEffect(() => {
-        const weekIndex =
-            year === today.getFullYear() && month === today.getMonth()
-                ? Math.floor((today.getDate() - 1) / 7)
-                : 0;
-        const id = setTimeout(() => setMobileWeekIndex(weekIndex), 0);
-        return () => clearTimeout(id);
-    }, [year, month]);
+
+    const handlePrevWeek = useCallback(() => {
+        if (mobileWeekIndex <= 0) {
+            const prevMonth = month === 0 ? 11 : month - 1;
+            const prevYear = month === 0 ? year - 1 : year;
+            const daysInPrevMonth = new Date(prevYear, prevMonth + 1, 0).getDate();
+            const lastWeekPrev = Math.max(0, Math.ceil(daysInPrevMonth / 7) - 1);
+            goToPrevMonth();
+            setMobileWeekIndex(lastWeekPrev);
+        } else {
+            setMobileWeekIndex((i) => i - 1);
+        }
+    }, [mobileWeekIndex, month, year, goToPrevMonth]);
+
+    const handleNextWeek = useCallback(() => {
+        if (mobileWeekIndex >= maxWeekIndex) {
+            goToNextMonth();
+            setMobileWeekIndex(0);
+        } else {
+            setMobileWeekIndex((i) => i + 1);
+        }
+    }, [mobileWeekIndex, maxWeekIndex, goToNextMonth]);
 
     const handleEventClick = useCallback((event: IEventLink) => {
         setSelectedEvent(event);
@@ -90,10 +106,7 @@ export function CalendarSection({ events }: CalendarSectionProps) {
                         <div className="flex-shrink-0">
                             <ChevronButton
                                 direction="left"
-                                onClick={() => {
-                                    if (mobileWeekIndex <= 0) goToPrevMonth();
-                                    else setMobileWeekIndex((i) => i - 1);
-                                }}
+                                onClick={handlePrevWeek}
                                 label="Previous Week"
                             />
                         </div>
@@ -142,10 +155,7 @@ export function CalendarSection({ events }: CalendarSectionProps) {
                         <div className="flex-shrink-0">
                             <ChevronButton
                                 direction="right"
-                                onClick={() => {
-                                    if (mobileWeekIndex >= maxWeekIndex) goToNextMonth();
-                                    else setMobileWeekIndex((i) => i + 1);
-                                }}
+                                onClick={handleNextWeek}
                                 label="Next Week"
                             />
                         </div>
@@ -236,30 +246,55 @@ export function CalendarSection({ events }: CalendarSectionProps) {
 
             {/* Mobile: one week at a time */}
             <div className="space-y-3 min-[715px]:hidden">
-                {displayedDays.map((cell) => {
-                    const dayEvents = eventsByIso.get(cell.iso) || [];
-                    const weekday = cell.date
-                        .toLocaleDateString('en-US', { weekday: 'short' })
-                        .toUpperCase();
-                    const isToday = cell.date.toDateString() === today.toDateString();
-                    return (
-                        <div
-                            key={cell.iso}
-                            className="flex gap-3 rounded-2xl bg-white/5 border border-white/10 p-3 shadow-sm">
-                            <div className="flex flex-col items-center w-14 text-white">
-                                <span className="text-[11px] font-semibold tracking-wide text-white/70">
-                                    {weekday}
-                                </span>
-                                <span
-                                    className={`text-2xl font-bold ${isToday ? 'text-blue-300' : ''}`}>
-                                    {cell.date.getDate()}
-                                </span>
+                {(() => {
+                    const daysWithEvents = displayedDays.filter((cell) => {
+                        const dayEvents = eventsByIso.get(cell.iso) || [];
+                        return dayEvents.length > 0;
+                    });
+
+                    if (daysWithEvents.length === 0) {
+                        return (
+                            <div className="flex items-center justify-center rounded-2xl bg-white/5 border border-white/10 p-6 shadow-sm">
+                                <div className="text-center text-white/70">
+                                    <svg
+                                        className="w-8 h-8 mx-auto mb-2 text-white/50"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth={2}
+                                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                                        />
+                                    </svg>
+                                    <div className="text-sm font-medium">No events this week</div>
+                                </div>
                             </div>
-                            <div className="flex-1 space-y-2">
-                                {dayEvents.length === 0 ? (
-                                    <div className="text-sm text-white/50">No events</div>
-                                ) : (
-                                    dayEvents.map((evt) => (
+                        );
+                    }
+
+                    return daysWithEvents.map((cell) => {
+                        const dayEvents = eventsByIso.get(cell.iso) || [];
+                        const weekday = cell.date
+                            .toLocaleDateString('en-US', { weekday: 'short' })
+                            .toUpperCase();
+                        const isToday = cell.date.toDateString() === today.toDateString();
+                        return (
+                            <div
+                                key={cell.iso}
+                                className="flex gap-3 rounded-2xl bg-white/5 border border-white/10 p-3 shadow-sm">
+                                <div className="flex flex-col items-center w-14 text-white">
+                                    <span className="text-[11px] font-semibold tracking-wide text-white/70">
+                                        {weekday}
+                                    </span>
+                                    <span
+                                        className={`text-2xl font-bold ${isToday ? 'text-blue-300' : ''}`}>
+                                        {cell.date.getDate()}
+                                    </span>
+                                </div>
+                                <div className="flex-1 space-y-2">
+                                    {dayEvents.map((evt) => (
                                         <button
                                             key={evt.title}
                                             onClick={() => handleEventClick(evt)}
@@ -267,18 +302,13 @@ export function CalendarSection({ events }: CalendarSectionProps) {
                                             <div className="text-sm font-semibold text-white leading-snug">
                                                 {evt.title}
                                             </div>
-                                            {evt.description && (
-                                                <div className="text-xs text-white/70 mt-0.5 line-clamp-2">
-                                                    {evt.description}
-                                                </div>
-                                            )}
                                         </button>
-                                    ))
-                                )}
+                                    ))}
+                                </div>
                             </div>
-                        </div>
-                    );
-                })}
+                        );
+                    });
+                })()}
             </div>
 
             {/* Desktop grid view */}
