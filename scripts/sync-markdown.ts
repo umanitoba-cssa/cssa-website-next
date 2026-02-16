@@ -1,6 +1,8 @@
 #!/usr/bin/env bun
 
 import { spawn, execSync } from "child_process";
+import fs from "fs";
+import path from "path";
 import { GuideList, MeetingList } from '../src/data/resources.ts';
 
 function run(cmd: string[], cwd = process.cwd()) {
@@ -19,14 +21,12 @@ function run(cmd: string[], cwd = process.cwd()) {
 }
 
 /**
- * Check if a submodule exists (i.e., already added)
+ * Check if a submodule exists
  */
 function gitSubmoduleExists(path: string): boolean {
   try {
     const output = execSync("git submodule status", { encoding: "utf-8" });
-    return output
-      .split("\n")
-      .some(line => line.includes(path));
+    return output.split("\n").some(line => line.includes(path));
   } catch {
     return false;
   }
@@ -57,11 +57,42 @@ async function updateSubmodule(slug: string, folder?: string) {
   console.log(`Submodule ${slug} updated.`);
 }
 
+/**
+ * Recursively copy images from source to destination
+ */
+function copyImages(srcDir: string, destDir: string) {
+  if (!fs.existsSync(srcDir)) return;
+
+  const files = fs.readdirSync(srcDir, { withFileTypes: true });
+  for (const file of files) {
+    const srcPath = path.join(srcDir, file.name);
+    const destPath = path.join(destDir, file.name);
+
+    if (file.isDirectory()) {
+      copyImages(srcPath, destPath); // recurse
+    } else if (/\.(png|jpg|jpeg|gif|svg|webp|bmp)$/i.test(file.name)) {
+      // Ensure destination folder exists
+      fs.mkdirSync(path.dirname(destPath), { recursive: true });
+      fs.copyFileSync(srcPath, destPath);
+      console.log(`Copied image: ${destPath}`);
+    }
+  }
+}
+
+/**
+ * Copy all images from a submodule to /public/img
+ */
+function syncImages(slug: string, folder?: string) {
+  const contentPath = folder ? `src/content/${folder}/${slug}` : `src/content/${slug}`;
+  const publicPath = folder
+    ? `public/img/${folder}/${slug}`
+    : `public/img/${slug}`;
+
+  copyImages(contentPath, publicPath);
+}
+
 async function main() {
   const args = process.argv.slice(2);
-
-  // Combine both lists if you want to handle guides + meetings together
-  const markdownLists = [...GuideList, ...MeetingList];
 
   if (args.length === 0) {
     console.log("Ensuring all submodules exist and updating them...");
@@ -69,10 +100,13 @@ async function main() {
     for (const item of MeetingList) {
       await ensureSubmodule(item.slug, item.repoURL);
       await updateSubmodule(item.slug);
+      syncImages(item.slug); // copy images to public
     }
+
     for (const item of GuideList) {
       await ensureSubmodule(item.slug, item.repoURL, "guides");
       await updateSubmodule(item.slug, "guides");
+      syncImages(item.slug, "guides"); // copy images to public
     }
 
   } else if (args.length === 1) {
@@ -85,11 +119,13 @@ async function main() {
     }
 
     if (item_m) {
-      await ensureSubmodule(item.slug, item.repoURL);
-      await updateSubmodule(item.slug);
+      await ensureSubmodule(item_m.slug, item_m.repoURL);
+      await updateSubmodule(item_m.slug);
+      syncImages(item_m.slug);
     } else {
-      await ensureSubmodule(item.slug, item.repoURL, "guides");
-      await updateSubmodule(item.slug, "guides");
+      await ensureSubmodule(item_g.slug, item_g.repoURL, "guides");
+      await updateSubmodule(item_g.slug, "guides");
+      syncImages(item_g.slug, "guides");
     }
 
   } else {
