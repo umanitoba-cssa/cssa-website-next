@@ -97,27 +97,48 @@ export function CalendarSection({ events }: CalendarSectionProps) {
                                 label="Previous Week"
                             />
                         </div>
-                        <div className="flex-1 flex justify-center">
-                            <button
-                                onClick={() => setIsPickerOpen(true)}
-                                className="group w-[200px] flex items-center justify-center gap-2 px-3 sm:px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 transition-all duration-200">
-                                <span className="text-lg sm:text-xl font-semibold whitespace-nowrap">
-                                    {monthLabel} {year}
-                                </span>
-                                <svg
-                                    className="w-4 h-4 text-gray-400 group-hover:text-white transition-colors flex-shrink-0"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    viewBox="0 0 24 24">
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth={2}
-                                        d="M19 9l-7 7-7-7"
+                        <div className="flex flex-col gap-1.5 items-center">
+                            <div className="flex-1 flex justify-center">
+                                <button
+                                    onClick={() => setIsPickerOpen(true)}
+                                    className="group w-[200px] flex items-center justify-center gap-2 px-3 sm:px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 transition-all duration-200">
+                                    <span className="text-lg sm:text-xl font-semibold whitespace-nowrap">
+                                        {monthLabel} {year}
+                                    </span>
+                                    <svg
+                                        className="w-4 h-4 text-gray-400 group-hover:text-white transition-colors flex-shrink-0"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth={2}
+                                            d="M19 9l-7 7-7-7"
+                                        />
+                                    </svg>
+                                </button>
+                            </div>
+                            <div
+                                className="flex items-center gap-1.5"
+                                aria-label="Week in month">
+                                {Array.from({ length: maxWeekIndex + 1 }, (_, i) => (
+                                    <button
+                                        key={i}
+                                        type="button"
+                                        onClick={() => setMobileWeekIndex(i)}
+                                        aria-label={`Week ${i + 1}`}
+                                        aria-current={mobileWeekIndex === i ? 'true' : undefined}
+                                        className={`h-2 rounded-full transition-all ${
+                                            mobileWeekIndex === i
+                                                ? 'w-5 bg-blue-400'
+                                                : 'w-2 bg-white/30 hover:bg-white/50'
+                                        }`}
                                     />
-                                </svg>
-                            </button>
+                                ))}
+                            </div>
                         </div>
+
                         <div className="flex-shrink-0">
                             <ChevronButton
                                 direction="right"
