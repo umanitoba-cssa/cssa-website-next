@@ -204,14 +204,20 @@ async function syncGuideFromRepo(slug: string, repoURL: string, contentPath: str
         for (const file of MarkdownSections) {
             const content = await fetchGitHubFile(owner, repo, file.path, branch);
 
-            // Determine local file path
-            let localPath: string;
-            if (file.path === 'README.md' || file.path === 'index.md') {
-                localPath = path.join(guideDir, 'index.md');
-            } else {
-                // Use the original filename, but place it in the guide directory
-                const filename = path.basename(file.path);
-                localPath = path.join(guideDir, filename);
+            // Create content directory if it doesn't exist
+            const contentDir = path.join(process.cwd(), contentPath, slug);
+            if (!fs.existsSync(contentDir)) {
+                fs.mkdirSync(contentDir, {recursive: true});
+            }
+
+            // Determine local file path - preserve directory structure
+            const relativePath = file.path.includes('/') ? file.path : path.basename(file.path);
+            const localPath = path.join(contentDir, relativePath);
+
+            // Create subdirectories if needed
+            const dir = path.dirname(localPath);
+            if (!fs.existsSync(dir)) {
+                fs.mkdirSync(dir, {recursive: true});
             }
 
             // Write the file
