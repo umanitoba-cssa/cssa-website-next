@@ -1,7 +1,7 @@
 import { getAllGuides } from '@/lib/mdx';
 import PageHeader from '@/components/page-header';
 import BlockHeader from '@/components/block-header';
-import MarkdownList from '@/components/guides/markdown-list';
+import MarkdownList from '@/components/markdown/markdown-list';
 
 export const metadata = {
     title: 'Guides | CSSA Resources',

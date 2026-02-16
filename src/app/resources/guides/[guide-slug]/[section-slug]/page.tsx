@@ -1,12 +1,12 @@
-import MarkdownNotFound from '@/components/guides/markdown-not-found';
+import MarkdownNotFound from '@/components/markdown/markdown-not-found';
 import { getMarkdownBySlug, getMarkdownSectionBySlug, markdownToHtml } from '@/lib/mdx';
 import PageHeader from '@/components/page-header';
-import MarkdownSidebar from '@/components/guides/markdown-sidebar';
-import MarkdownContent from '@/components/guides/markdown-content';
+import MarkdownSidebar from '@/components/markdown/markdown-sidebar';
+import MarkdownContent from '@/components/markdown/markdown-content';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import Breadcrumbs from '@/components/guides/breadcrumbs';
+import Breadcrumbs from '@/components/markdown/breadcrumbs';
 
 const contentDir = 'guides';
 

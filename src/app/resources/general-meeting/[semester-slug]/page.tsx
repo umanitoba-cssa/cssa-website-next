@@ -1,9 +1,9 @@
-import MarkdownNotFound from '@/components/guides/markdown-not-found'
+import MarkdownNotFound from '@/components/markdown/markdown-not-found'
 import { getMarkdownBySlug, markdownToHtml } from '@/lib/mdx';
 import PageHeader from '@/components/page-header';
-import MarkdownSidebar from '@/components/guides/markdown-sidebar';
-import MarkdownContent from '@/components/guides/markdown-content';
-import Breadcrumbs from '@/components/guides/breadcrumbs';
+import MarkdownSidebar from '@/components/markdown/markdown-sidebar';
+import MarkdownContent from '@/components/markdown/markdown-content';
+import Breadcrumbs from '@/components/markdown/breadcrumbs';
 
 const contentDir = 'general-meeting';
 

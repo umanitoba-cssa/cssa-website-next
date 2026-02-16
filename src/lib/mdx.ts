@@ -5,7 +5,7 @@ import readingTime from 'reading-time';
 import { remark } from 'remark';
 import html from 'remark-html';
 import remarkGfm from 'remark-gfm';
-import { GITHUB_OWNER, GuideList, MeetingList } from '../data/resources';
+import { GuideList } from '../data/resources';
 
 export interface MarkdownMetadata {
   title: string;

@@ -1,12 +1,12 @@
-# Guide Components
+# Markdown Components
 
-This document provides detailed information about the UI components used to render guide content. Understanding these components is essential for maintenance and future development of the Guides system.
+This document provides detailed information about the UI components used to render markdown content. Understanding these components is essential for maintenance and future development of the Guides system.
 
 ## Core Rendering Components
 
 ### `MarkdownContent`
 
-**File:** `src/components/guides/markdown-content.tsx`
+**File:** `src/components/markdown/markdown-content.tsx`
 
 This component renders processed Markdown HTML content with proper styling and handling of special elements.
 
@@ -30,7 +30,7 @@ This component renders processed Markdown HTML content with proper styling and h
 
 ### `MarkdownImage`
 
-**File:** `src/components/guides/markdown-image.tsx`
+**File:** `src/components/markdown/markdown-image.tsx`
 
 A specialized component for rendering images within Markdown content with proper optimization.
 
@@ -52,12 +52,17 @@ A specialized component for rendering images within Markdown content with proper
 **Usage Example:**
 
 ```tsx
-<MarkdownImage src="/img/guides/example.png" alt="Example image" width={800} height={600} />
+<MarkdownImage 
+  src="/img/contentDir/example.png" 
+  alt="Example image" 
+  width={800} 
+  height={600} 
+/>
 ```
 
 ### `CodeBlock`
 
-**File:** `src/components/guides/code-block.tsx`
+**File:** `src/components/markdown/code-block.tsx`
 
 Renders syntax-highlighted code blocks for various programming languages.
 
@@ -86,33 +91,32 @@ Renders syntax-highlighted code blocks for various programming languages.
 
 ## Navigation Components
 
-### `GuideSidebar`
+### `MarkdownSidebar`
 
-**File:** `src/components/guides/guide-sidebar.tsx`
+**File:** `src/components/markdown/markdown-sidebar.tsx`
 
-Provides navigation for guides and their sections.
+Provides navigation for markdown docs and their sections.
 
 **Props:**
-
-- `guide`: Guide object containing metadata and sections information
+- `markdown`: Markdown object containing metadata and sections information
 - `className`: Optional additional CSS classes
 
 **Features:**
 
 - Collapsible mobile navigation
 - Active state highlighting for current section
-- Links to guide overview and all sections
+- Links to markdown doc overview and all sections
 - Auto-collapsing on mobile when link is clicked
 
 **Usage Example:**
 
 ```tsx
-<GuideSidebar guide={guideData} />
+<MarkdownSidebar markdown={markdownData} />
 ```
 
 ### `TableOfContents`
 
-**File:** `src/components/guides/table-of-contents.tsx`
+**File:** `src/components/markdown/table-of-contents.tsx`
 
 Generates an in-page navigation based on headings extracted from the Markdown content.
 
@@ -136,9 +140,9 @@ Generates an in-page navigation based on headings extracted from the Markdown co
 
 ### `Breadcrumbs`
 
-**File:** `src/components/guides/breadcrumbs.tsx`
+**File:** `src/components/markdown/breadcrumbs.tsx`
 
-Displays navigational breadcrumbs for the current guide/section.
+Displays navigational breadcrumbs for the current markdown/section.
 
 **Props:**
 
@@ -166,38 +170,36 @@ Displays navigational breadcrumbs for the current guide/section.
 
 ## Listing Components
 
-### `GuidesList`
+### `MarkdownList`
 
-**File:** `src/components/guides/guides-list.tsx`
+**File:** `src/components/markdown/markdown-list.tsx`
 
-Displays a grid of guide cards on the main guides listing page.
+Displays a grid of markdown cards on the main markdown listing page.
 
 **Props:**
-
-- `guides`: Array of Guide objects to display
+- `markdown`: Array of Markdown objects to display
 - `className`: Optional additional CSS classes
 
 **Features:**
 
 - Responsive grid layout
 - Empty state handling
-- Sorting guides by date (newest first)
+- Sorting markdown docs by date (newest first)
 
 **Usage Example:**
 
 ```tsx
-<GuidesList guides={allGuides} />
+<MarkdownList markdown={allMarkdown} />
 ```
 
-### `GuideCard`
+### `MarkdownCard`
 
-**File:** `src/components/guides/guide-card.tsx`
+**File:** `src/components/markdown/markdown-card.tsx`
 
-Card component displaying a guide preview with title, description, and link.
+Card component displaying a markdown doc preview with title, description, and link.
 
 **Props:**
-
-- `guide`: Guide object with title, description, and slug
+- `markdown`: Markdown object with title, description, and slug
 - `className`: Optional additional CSS classes
 
 **Features:**
@@ -210,56 +212,15 @@ Card component displaying a guide preview with title, description, and link.
 **Usage Example:**
 
 ```tsx
-<GuideCard guide={guideData} />
+<MarkdownCard markdown={markdownData} />
 ```
-
-## Component Relationships
-
-The components are organized in a hierarchical structure:
-
-1. **Page Level**
-    - `GuidesPage` (main listing)
-    - `GuidePage` (individual guide)
-    - `SectionPage` (individual section)
-
-2. **Layout Components**
-    - `GuideSidebar` provides side navigation
-    - `Breadcrumbs` shows page context
-
-3. **Content Rendering**
-    - `MarkdownContent` handles main content display
-    - `CodeBlock` for code syntax highlighting
-    - `MarkdownImage` for optimized images
-
-4. **Navigation Elements**
-    - `TableOfContents` for in-page navigation
-    - `GuidesList` and `GuideCard` for guide browsing
 
 ## Styling Approach
 
-The Guides components use Tailwind CSS for styling with a few key patterns:
+The Markdown components use Tailwind CSS for styling with a few key patterns:
 
 1. Base styles are defined in the component files
 2. The `cn()` utility function is used for conditional class application
 3. Design tokens follow the CSSA website color scheme (cssa-navy, cssa-blue, etc.)
 4. Responsive breakpoints follow the Tailwind defaults (sm, md, lg, xl)
 5. A special `markdown.css` file for rendering markdown to html
-
-## Extending Components
-
-When extending or modifying guide components:
-
-1. Maintain the component interface (props)
-2. Follow the established styling patterns
-3. Keep components focused on a single responsibility
-4. Ensure responsive behavior works on all screen sizes
-5. Maintain accessibility features
-
-## Troubleshooting Component Issues
-
-Common component issues and solutions:
-
-1. **Missing Styles**: Ensure Tailwind classes are properly defined and the component is correctly imported
-2. **Rendering Issues**: Check the Markdown HTML structure for unexpected elements
-3. **Navigation Problems**: Verify that guide and section slugs are properly kebab-cased
-4. **Image Display Issues**: Confirm image paths are correct and images exist in the public directory

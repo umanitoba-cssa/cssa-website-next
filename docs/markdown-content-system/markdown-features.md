@@ -1,6 +1,6 @@
 # Supported Markdown Features
 
-This document outlines the Markdown features supported by the Guides system. The Guides system uses `remark` and `remark-html` to convert Markdown to HTML, with additional plugins for enhanced functionality.
+This document outlines the Markdown features supported by the Markdown system. The Markdown system uses `remark` and `remark-html` to convert Markdown to HTML, with additional plugins for enhanced functionality.
 
 ## Basic Formatting
 
@@ -85,12 +85,12 @@ Ordered lists:
 
 ### Internal Links
 
-Links to other guides or sections:
+Links to other markdown or sections:
 
 ```markdown
 [Link to another guide](/resources/guides/guide-slug)
-[Link to a section within this guide](section-slug)
-[Link to a section in another guide](/resources/guides/guide-slug/section-slug)
+[Link to a section within this markdown area](section-slug)
+[Link to a section in another markdown area](/resources/someDir/markdown-slug/section-slug)
 ```
 
 ## Code
@@ -139,9 +139,9 @@ Supported languages for syntax highlighting include:
 ### Basic Image Syntax
 
 ```markdown
-![Alt text](/img/guides/image.png)
-![Alt text with title](/img/guides/image.png "Image title")
-````
+![Alt text](/img/contentDir/image.png)
+![Alt text with title](/img/contentDir/image.png "Image title")
+```
 
 ### Image Sizing
 
@@ -224,8 +224,8 @@ The following features are not currently supported:
 
 1. **Use Headings Correctly**: Start with H1 (`#`), and use H2 (`##`) for main sections, H3 (`###`) for subsections
 2. **Keep Formatting Simple**: Stick to basic formatting for best compatibility
-3. **Image Paths**: Use absolute paths for images (`/img/guides/...`) for most reliable results
+3. **Image Paths**: Use absolute paths for images (`/img/contentDir/...`) for most reliable results
 4. **Regular Testing**: Verify your Markdown renders correctly after adding new content
 5. **Code Highlighting**: Always specify the language for code blocks for proper syntax highlighting
 6. **Limit HTML Usage**: Use HTML only when Markdown syntax is insufficient
-7. **Document Structure**: Use headings to create a logical structure for automatic table of contents generation
+7. **Document Structure**: Use headings to create a logical structure for automatic table of contents generation 

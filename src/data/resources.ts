@@ -9,14 +9,14 @@ interface IResourceLink {
     linkText?: string;
 }
 
-interface IGuideList {
+interface IMarkdownList {
     slug: string;
     repoURL: string;
 }
 
 export const GITHUB_OWNER = "umanitoba-cssa";
 
-export const GuideList: IGuideList[] = [
+export const GuideList: IMarkdownList[] = [
     {
         slug: 'first-year-guide',
         repoURL: 'https://github.com/umanitoba-cssa/first-year-guide',
@@ -27,7 +27,7 @@ export const GuideList: IGuideList[] = [
     },
 ]
 
-export const MeetingList: IGuideList[] = [
+export const MeetingList: IMarkdownList[] = [
     {
         slug: 'general-meeting',
         repoURL: 'https://github.com/umanitoba-cssa/general-meeting'
