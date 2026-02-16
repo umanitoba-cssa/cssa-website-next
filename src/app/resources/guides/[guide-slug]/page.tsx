@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
-import { getGuideBySlug, getGuidesSlugs, extractHeadings, markdownToHtml } from '@/lib/mdx';
+import { getGuideBySlug, getGuidesSlugs, markdownToHtml } from '@/lib/mdx';
 import PageHeader from '@/components/page-header';
 import GuideSidebar from '@/components/guides/guide-sidebar';
 import MarkdownContent from '@/components/guides/markdown-content';

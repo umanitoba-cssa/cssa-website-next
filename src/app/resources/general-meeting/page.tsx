@@ -1,11 +1,10 @@
-import { getAllMarkdownGroups } from '@/lib/mdx';
+import { getAllMeetings } from '@/lib/mdx';
 import PageHeader from '@/components/page-header';
 import BlockHeader from '@/components/block-header';
 import GuidesList from '@/components/guides/guides-list';
 
 export default async function GuidesPage() {
-  const REPO = "general-meeting"
-  const meetings = await getAllMarkdownGroups(REPO);
+  const meetings = await getAllMeetings();
 
   return (
     <main className="flex flex-col">
