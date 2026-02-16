@@ -1,0 +1,30 @@
+name: Sync Markdown
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - uses: oven-sh/setup-bun@v1
+
+      - run: bun install
+      - run: bun run sync-markdown
+
+      - name: Commit changes
+        run: |
+          git config user.name github-actions
+          git config user.email actions@github.com
+          git add .
+          git diff --cached --quiet || git commit -m "sync content"
+          git push

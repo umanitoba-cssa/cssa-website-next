@@ -1,6 +1,6 @@
 # Markdown Components
 
-This document provides detailed information about the UI components used to render markdown content. Understanding these components is essential for maintenance and future development of the Guides system.
+This document provides detailed information about the UI components used to render markdown content.
 
 ## Core Rendering Components
 
