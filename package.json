@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "sync-markdown": "bun run scripts/sync-markdown.js",
+    "sync-markdown": "bun run scripts/sync-markdown.ts",
     "setup-webhook-sync": "bun run scripts/setup-webhook-sync.js"
   },
   "dependencies": {
