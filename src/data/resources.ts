@@ -25,7 +25,15 @@ export const GuideList: IGuideList[] = [
         slug: 'second-year-guide',
         repoURL: 'https://github.com/umanitoba-cssa/second-year-guide',
     },
-];
+]
+
+export const MeetingList: IGuideList[] = [
+    {
+        slug: 'general-meeting',
+        repoURL: 'https://github.com/umanitoba-cssa/general-meeting'
+    },
+]
+
 
 export const ResourceLinks: IResourceLink[] = [
     {

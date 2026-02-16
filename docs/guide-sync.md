@@ -31,7 +31,7 @@ const GuideList: IGuideList[] = [
 ### 1. Initial sync (required)
 
 ```bash
-bun run sync-guides
+bun run sync-markdown
 ```
 
 Run this once to initially sync all guides to your local development environment.
@@ -57,13 +57,13 @@ Make a change to any guide repository and push to see the automatic sync in acti
 ### Sync All Guides
 
 ```bash
-bun run sync-guides
+bun run sync-markdown
 ```
 
 ### Sync Specific Guide
 
 ```bash
-bun run sync-guides guide-slug
+bun run sync-markdown guide-slug
 ```
 
 ## Sync Options
@@ -71,9 +71,8 @@ bun run sync-guides guide-slug
 The system supports two sync approaches:
 
 ### 1. Manual Sync (Always Available)
-
-- **Full Control**: Use `bun run sync-guides` to sync when needed
-- **Specific Guide**: Use `bun run sync-guides guide-slug` to sync one guide
+- **Full Control**: Use `bun run sync-markdown` to sync when needed
+- **Specific Guide**: Use `bun run sync-markdown guide-slug` to sync one guide
 - **No Auto-sync**: Auto-sync has been disabled to prevent unnecessary API calls
 
 ### 2. Repository Webhooks (Recommended for Automation)
@@ -111,19 +110,19 @@ This workflow will automatically trigger the website sync whenever:
 ### Sync All Guides
 
 ```bash
-bun run sync-guides
+bun run sync-markdown
 ```
 
 ### Sync Specific Guide
 
 ```bash
-bun run sync-guides first-year-guide
+bun run sync-markdown first-year-guide
 ```
 
 ### Sync by Repository (used by webhooks)
 
 ```bash
-bun run scripts/sync-specific-guide.js owner/repo-name
+bun run scripts/sync-specific-markdown.js owner/repo-name
 ```
 
 ## Repository Requirements
@@ -205,7 +204,7 @@ src/
 │   ├── github-sync.ts   # Sync functionality
 │   └── mdx.ts          # MDX processing
 ├── scripts/
-│   └── sync-guides.js   # CLI sync tool
+│   └── sync-markdown.js   # CLI sync tool
 └── ...
 
 public/

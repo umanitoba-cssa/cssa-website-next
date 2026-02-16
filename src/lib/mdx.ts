@@ -45,26 +45,12 @@ const GUIDE_IMAGES_DIRECTORY = path.join(PUBLIC_DIRECTORY, 'img/guides');
  * Get slugs for all guides
  */
 export async function getGuidesSlugs(): Promise<string[]> {
-    try {
-        // Check if guides need to be synced, but don't auto-sync
-        // Users should run manual sync or use webhooks
-        if (!fs.existsSync(GUIDES_DIRECTORY)) {
-            console.warn(
-                'No guides found. Run "bun run sync-guides" to sync guides from repositories.',
-            );
-            return [];
-        }
-
-        return fs.readdirSync(GUIDES_DIRECTORY).filter((directory) => {
-            const fullPath = path.join(GUIDES_DIRECTORY, directory);
-            return (
-                fs.statSync(fullPath).isDirectory() &&
-                fs.existsSync(path.join(fullPath, 'index.md'))
-            );
-        });
-    } catch (error) {
-        console.error('Error getting guide slugs:', error);
-        return [];
+  try {
+    // Check if guides need to be synced, but don't auto-sync
+    // Users should run manual sync or use webhooks
+    if (!fs.existsSync(GUIDES_DIRECTORY)) {
+      console.warn('No guides found. Run "bun run sync-markdown" to sync guides from repositories.');
+      return [];
     }
 }
 
