@@ -4,7 +4,6 @@ import BlockHeader from '@/components/block-header';
 import { RecentEvents, OlderEvents } from '@/data/events';
 import fs from 'fs';
 import path from 'path';
-import React from 'react';
 
 interface EventPhotoPageProps {
     eventKey: string;
@@ -26,7 +25,9 @@ export default async function EventPhotoPage({
     }
 
     const dir = path.join(process.cwd(), 'public' + photoDir);
-    const images = fs.readdirSync(dir);
+    const images = fs.readdirSync(dir).sort((a, b) => {
+        return a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' });
+    });
 
     if (!images[headerImageIdx]) {
         throw new Error(`Header image index ${headerImageIdx} out of bounds for ${photoDir}`);

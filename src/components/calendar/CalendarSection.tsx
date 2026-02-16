@@ -37,8 +37,10 @@ export function CalendarSection({ events }: CalendarSectionProps) {
         const firstDate = grid[0]?.date;
         const lastDate = grid[grid.length - 1]?.date;
         if (!firstDate || !lastDate) return new Map<string, IEventLink[]>();
+
         const firstISO = firstDate.toISOString().slice(0, 10);
         const lastISO = lastDate.toISOString().slice(0, 10);
+
         const map = new Map<string, IEventLink[]>();
         for (const evt of events) {
             if (typeof evt.date === 'string' && evt.date >= firstISO && evt.date <= lastISO) {
