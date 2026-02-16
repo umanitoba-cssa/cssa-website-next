@@ -1,6 +1,6 @@
 #!/usr/bin/env bun
 
-import { syncAllGuides, syncAllMeetings, syncGuide } from '../src/lib/github-sync.ts';
+import { syncAllGuides, syncAllMeetings, syncMarkdown } from '../src/lib/github-sync.ts';
 
 async function main() {
   const args = process.argv.slice(2);
@@ -12,7 +12,7 @@ async function main() {
   } else if (args.length === 1) {
     const slug = args[0];
     console.log(`Syncing markdown: ${slug}`);
-    await syncGuide(slug);
+    await syncMarkdown(slug);
   } else {
     console.log('Usage: bun run sync-markdown [slug]');
     console.log('  bun run sync-markdown          - Sync all markdown');

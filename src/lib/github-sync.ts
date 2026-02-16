@@ -3,6 +3,8 @@ import path from 'path';
 import {GuideList, MeetingList} from '../data/resources';
 import {githubFetchWithApp} from './github-app';
 
+const MarkdownList = GuideList.concat(MeetingList)
+
 // GitHub API interfaces
 export interface GitHubTreeItem {
     path: string;
@@ -47,29 +49,6 @@ function parseGitHubUrl(url: string): GitHubRepoInfo {
         branch: match[3] || 'main', // Default to main branch
     };
 }
-/**
- * Fetch directory content from GitHub API
- */
-export async function fetchGitHubDir(owner: string, repo: string, filePath: string, branch: string): Promise<GitHubFileResponse[]> {
-    const url = `https://api.github.com/repos/${owner}/${repo}/contents/${filePath}?ref=${branch}`;
-
-    try {
-        const response = await githubFetchWithApp(url, {}, owner, repo);
-        if (!response.ok) {
-            if (response.status === 404) {
-                throw new Error(`File not found: ${filePath}`);
-            }
-            throw new Error(`GitHub API error: ${response.status} ${response.statusText}`);
-        }
-
-        const data: GitHubFileResponse[] = await response.json();
-        return data;
-    } catch (error) {
-        console.error(`Error fetching directory ${filePath} from ${owner}/${repo}:`, error);
-        throw error;
-    }
-}
-
 
 /**
  * Fetch file content from GitHub API
@@ -179,18 +158,18 @@ async function fetchGitHubBinaryFile(
 }
 
 /**
- * Sync a single guide from GitHub repository
+ * Sync a single Markdown repo from GitHub repository
  */
-async function syncGuideFromRepo(slug: string, repoURL: string, contentPath: string, imageDir: string): Promise<void> {
+async function syncMarkdownFromRepo(slug: string, repoURL: string, contentPath: string, imageDir: string): Promise<void> {
     console.log(`Syncing markdown: ${slug} from ${repoURL}`);
 
     try {
         const { owner, repo, branch } = parseGitHubUrl(repoURL);
 
-        // Create the guide directory
-        const guideDir = path.join(process.cwd(), contentPath, slug);
-        if (!fs.existsSync(guideDir)) {
-            fs.mkdirSync(guideDir, { recursive: true });
+        // Create the markdown directory
+        const markdownDir = path.join(process.cwd(), contentPath, slug);
+        if (!fs.existsSync(markdownDir)) {
+            fs.mkdirSync(markdownDir, {recursive: true});
         }
 
         // Fetch repository tree
@@ -251,7 +230,7 @@ async function syncGuideFromRepo(slug: string, repoURL: string, contentPath: str
         }
 
         // If no index.md was found, create one from README.md if it exists
-        const indexPath = path.join(guideDir, 'index.md');
+        const indexPath = path.join(markdownDir, 'index.md');
         if (!fs.existsSync(indexPath)) {
             const readmeFile = MarkdownSections.find(f => f.path.toLowerCase() === 'readme.md');
             if (readmeFile) {
@@ -261,7 +240,7 @@ async function syncGuideFromRepo(slug: string, repoURL: string, contentPath: str
             }
         }
     } catch (error) {
-        console.error(`Error syncing guide ${slug}:`, error);
+        console.error(`Error syncing markdown ${slug}:`, error);
         throw error;
     }
 }
@@ -273,7 +252,7 @@ export async function syncAllGuides(): Promise<void> {
     console.log('Starting guide synchronization...');
 
     const results = await Promise.allSettled(
-        GuideList.map(guide => syncGuideFromRepo(guide.slug, guide.repoURL, 'src/content/guides', 'public/img/guides'))
+        GuideList.map(guide => syncMarkdownFromRepo(guide.slug, guide.repoURL, 'src/content/guides', 'public/img/guides'))
     );
 
     const successes = results.filter((r) => r.status === 'fulfilled').length;
@@ -298,7 +277,7 @@ export async function syncAllMeetings(): Promise<void> {
     console.log('Starting meeting synchronization...');
 
     const results = await Promise.allSettled(
-        MeetingList.map(meeting => syncGuideFromRepo(meeting.slug, meeting.repoURL, 'src/content', 'public/img'))
+        MeetingList.map(meeting => syncMarkdownFromRepo(meeting.slug, meeting.repoURL, 'src/content', 'public/img'))
     );
 
     const successes = results.filter(r => r.status === 'fulfilled').length;
@@ -317,33 +296,31 @@ export async function syncAllMeetings(): Promise<void> {
 }
 
 /**
- * Sync a specific guide or meeting by slug
+ * Sync a specific markdown by slug
  */
-export async function syncGuide(slug: string): Promise<void> {
-    const guide = GuideList.find(g => g.slug === slug);
-    const meeting = MeetingList.find(m => m.slug === slug);
-    if (!guide && !meeting) {
-        throw new Error(`Guide not found: ${slug}`);
+export async function syncMarkdown(slug: string): Promise<void> {
+    const markdown = MarkdownList.find(g => g.slug === slug);
+    if (!markdown) {
+        throw new Error(`Markdown not found: ${slug}`);
     }
 
-    if (guide)
-      await syncGuideFromRepo(guide.slug, guide.repoURL, 'src/content/guides', 'public/img/guides');
-    else
-      await syncGuideFromRepo(meeting.slug, meeting.repoURL, 'src/content', 'public/img');
+    if (GuideList.includes(markdown))
+      await syncMarkdownFromRepo(markdown.slug, markdown.repoURL, 'src/content/guides', 'public/img/guides');
+    else if (MeetingList.includes(markdown))
+      await syncMarkdownFromRepo(markdown.slug, markdown.repoURL, 'src/content', 'public/img');
 }
 
 /**
- * Sync a specific guide or meeting by repository URL
+ * Sync a specific markdown by repository URL
  */
-export async function syncGuideByRepoUrl(repoUrl: string): Promise<void> {
-    const guide = GuideList.find(g => g.repoURL === repoUrl);
-    const meeting = MeetingList.find(m => m.slug === slug);
-    if (!guide && !meeting) {
+export async function syncMarkdownByRepoUrl(repoUrl: string): Promise<void> {
+    const markdown = MarkdownList.find(g => g.repoURL === repoUrl);
+    if (!markdown) {
         throw new Error(`Markdown not found for repository: ${repoUrl}`);
     }
 
-    if (guide)
-      await syncGuideFromRepo(guide.slug, guide.repoURL, 'src/content/guides', 'public/img/guides');
-    else
-      await syncGuideFromRepo(meeting.slug, meeting.repoURL, 'src/content', 'public/img');
+    if (GuideList.includes(markdown))
+      await syncMarkdownFromRepo(guide.slug, guide.repoURL, 'src/content/guides', 'public/img/guides');
+    else if (MeetingList.includes(markdown))
+      await syncMarkdownFromRepo(meeting.slug, meeting.repoURL, 'src/content', 'public/img');
 }

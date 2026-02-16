@@ -6,7 +6,6 @@ import { remark } from 'remark';
 import html from 'remark-html';
 import remarkGfm from 'remark-gfm';
 import { GITHUB_OWNER, GuideList, MeetingList } from '../data/resources';
-import { fetchGitHubDir, fetchGitHubFile, fetchGitHubTree, GitHubFileResponse } from './github-sync';
 
 export interface MarkdownMetadata {
   title: string;
@@ -15,7 +14,7 @@ export interface MarkdownMetadata {
   date?: string;
 }
 
-export interface GuideFrontmatter extends MarkdownMetadata {
+export interface MarkdownFrontmatter extends MarkdownMetadata {
   [key: string]: any;
 }
 
@@ -88,7 +87,7 @@ export async function getAllMeetings(): Promise<MarkdownGroup[]> {
     // Read index.md
     const indexPath = path.join(meetingDir, 'index.md');
     const indexRaw = fs.readFileSync(indexPath, 'utf8');
-    const { data: frontmatter, content } = matter(indexRaw) as { data: GuideFrontmatter, content: string };
+    const { data: frontmatter, content } = matter(indexRaw) as { data: MarkdownFrontmatter, content: string };
 
     // Read other markdown sections
     const sectionFiles = fs.readdirSync(meetingDir)
@@ -97,7 +96,7 @@ export async function getAllMeetings(): Promise<MarkdownGroup[]> {
     const sections: MarkdownSection[] = sectionFiles.map(file => {
       const filePath = path.join(meetingDir, file);
       const raw = fs.readFileSync(filePath, 'utf8');
-      const { data, content: sectionContent } = matter(raw) as { data: GuideFrontmatter, content: string };
+      const { data, content: sectionContent } = matter(raw) as { data: MarkdownFrontmatter, content: string };
 
       return {
         title: data.title || 'Untitled Section',
@@ -130,30 +129,6 @@ export async function getAllMeetings(): Promise<MarkdownGroup[]> {
 }
 
 /**
- * Get a guide by its slug. Legacy code that fetches directly from GitHub Repo
- */
-// export async function getGuideBySlugApi(slug: string): Promise<MarkdownGroup> {
-//   const indexFileContents = await fetchGitHubFile(GITHUB_OWNER, slug, 'index.md', "main");
-//
-//   const tree = await fetchGitHubTree(GITHUB_OWNER, slug, "main")
-//   const MarkdownSections = tree.filter(file => file.type === 'blob' && file.path.endsWith('.md'));
-//   const sections = await Promise.all(MarkdownSections.map(file => getMarkdownSectionBySlug(slug, file.path,file.path.split('/').pop()?.replace('.md', '') || '')));
-//    // Parse frontmatter
-//    const { data, content } = matter(indexFileContents);
-//    const frontmatter = data as GuideFrontmatter;
-//
-//    return {
-//      title: frontmatter.title || 'Untitled Guide',
-//      description: frontmatter.description || '',
-//      author: frontmatter.author,
-//      date: frontmatter.date,
-//      slug,
-//      sections,
-//      content
-//    };
-// }
-
-/**
  * Get markdown by its slug (local filesystem version)
  */
 export async function getMarkdownBySlug(slug: string, contentDir: string): Promise<MarkdownGroup> {
@@ -167,7 +142,7 @@ export async function getMarkdownBySlug(slug: string, contentDir: string): Promi
   }
 
   const indexRaw = fs.readFileSync(indexPath, 'utf8');
-  const { data: frontmatter, content } = matter(indexRaw) as { data: GuideFrontmatter, content: string };
+  const { data: frontmatter, content } = matter(indexRaw) as { data: MarkdownFrontmatter, content: string };
 
   // Read all other markdown sections (excluding index.md)
   const sectionFiles = fs.readdirSync(markdownDir)
@@ -176,7 +151,7 @@ export async function getMarkdownBySlug(slug: string, contentDir: string): Promi
   const sections: MarkdownSection[] = sectionFiles.map(file => {
     const filePath = path.join(markdownDir, file);
     const raw = fs.readFileSync(filePath, 'utf8');
-    const { data, content: sectionContent } = matter(raw) as { data: GuideFrontmatter, content: string };
+    const { data, content: sectionContent } = matter(raw) as { data: MarkdownFrontmatter, content: string };
 
     return {
       title: data.title || 'Untitled Section',
@@ -222,7 +197,7 @@ export function getMarkdownSectionBySlug(markdownSlug: string, sectionSlug: stri
 
     // Parse frontmatter
     const { data, content } = matter(fileContents);
-    const frontmatter = data as GuideFrontmatter;
+    const frontmatter = data as MarkdownFrontmatter;
 
     // Calculate reading time
     const stats = readingTime(content);

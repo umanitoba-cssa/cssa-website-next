@@ -1,6 +1,6 @@
 #!/usr/bin/env bun
 
-import { syncGuideByRepoUrl } from '../src/lib/github-sync.ts';
+import { syncMarkdownByRepoUrl } from '../src/lib/github-sync.ts';
 
 async function main() {
   const args = process.argv.slice(2);
@@ -17,7 +17,7 @@ async function main() {
   console.log(`Syncing markdown from repository: ${repository}`);
   
   try {
-    await syncGuideByRepoUrl(repoUrl);
+    await syncMarkdownByRepoUrl(repoUrl);
     console.log(`Successfully synced markdown from ${repository}`);
   } catch (error) {
     console.error(`Error syncing markdown from ${repository}:`, error);

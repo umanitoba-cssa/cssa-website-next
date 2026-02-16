@@ -1,6 +1,6 @@
 import '../markdown.css';
 
-export default function GuidesLayout({
+export default function MeetingsLayout({
   children,
 }: {
   children: React.ReactNode;
