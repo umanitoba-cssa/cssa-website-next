@@ -11,32 +11,32 @@ import Breadcrumbs from '@/components/guides/breadcrumbs';
 import path from 'path';
 
 interface SectionPageProps {
-  params: {
+  params: Promise<{
     'semester-slug': string;
     'meeting-item-slug': string;
-  };
+  }>;
 }
 
 export default async function SectionPage({ params }: SectionPageProps) {
+  const { ['semester-slug']: semesterSlug, ['meeting-item-slug']: meetingItemSlug } = await params;
   const REPO = "general-meeting"
-  const BRANCH = 'develop'
-  const guide = await getMarkdownGroupByPath(REPO, params['semester-slug'], params['semester-slug'], BRANCH);
-  const filePath = path.join(params['semester-slug'], params['meeting-item-slug']+".md");
+  const guide = await getMarkdownGroupByPath(REPO, semesterSlug, semesterSlug);
+  const filePath = path.join(semesterSlug, meetingItemSlug+".md");
   // Redirect to 404 if guide not found
   if (!guide.title || guide.title === 'Guide Not Found') {
     notFound();
   }
-  const section = await getMarkdownSectionBySlug(REPO, filePath, params['meeting-item-slug'], BRANCH);
+  const section = await getMarkdownSectionBySlug(REPO, filePath, meetingItemSlug);
   // Redirect to 404 if section not found
   if (!section.title || section.title === 'Section Not Found') {
     notFound();
   }
   
   // Process markdown content to HTML with guide slug for proper image processing
-  const htmlContent = await markdownToHtml(section.content, params['semester-slug']);
+  const htmlContent = await markdownToHtml(section.content, semesterSlug, "general-meeting");
   
   // Find the current section index for prev/next navigation
-  const currentSectionIndex = guide.sections.findIndex(s => s.slug === params['meeting-item-slug']);
+  const currentSectionIndex = guide.sections.findIndex(s => s.slug === meetingItemSlug);
   const prevSection = currentSectionIndex > 0 ? guide.sections[currentSectionIndex - 1] : null;
   const nextSection = currentSectionIndex < guide.sections.length - 1 ? guide.sections[currentSectionIndex + 1] : null;
   
@@ -44,8 +44,8 @@ export default async function SectionPage({ params }: SectionPageProps) {
   const breadcrumbItems = [
     { label: 'Resources', href: '/resources' },
     { label: 'Guides', href: '/resources/guides' },
-    { label: guide.title, href: `/resources/guides/${params['semester-slug']}` },
-    { label: section.title, href: `/resources/guides/${params['semester-slug']}/${params['meeting-item-slug']}`, active: true },
+    { label: guide.title, href: `/resources/guides/${semesterSlug}` },
+    { label: section.title, href: `/resources/guides/${semesterSlug}/${meetingItemSlug}`, active: true },
   ];
   
   return (
@@ -76,7 +76,7 @@ export default async function SectionPage({ params }: SectionPageProps) {
                   className="border-cssa-blue text-white hover:bg-cssa-blue/20 transition-colors flex items-center gap-2" 
                   asChild
                 >
-                  <Link href={`/resources/guides/${params['semester-slug']}/${prevSection.slug}`}>
+                  <Link href={`/resources/guides/${semesterSlug}/${prevSection.slug}`}>
                     <ChevronLeft className="h-4 w-4" />
                     {prevSection.title}
                   </Link>
@@ -87,7 +87,7 @@ export default async function SectionPage({ params }: SectionPageProps) {
                   className="border-cssa-blue text-white bg-cssa-blue/20 transition-colors flex items-center gap-2" 
                   asChild
                 >
-                  <Link href={`/resources/guides/${params['semester-slug']}`}>
+                  <Link href={`/resources/guides/${semesterSlug}`}>
                     <ChevronLeft className="h-4 w-4" />
                     Guide Overview
                   </Link>
@@ -100,7 +100,7 @@ export default async function SectionPage({ params }: SectionPageProps) {
                   className="border-cssa-blue text-white bg-cssa-blue/20 transition-colors flex items-center gap-2" 
                   asChild
                 >
-                  <Link href={`/resources/guides/${params['semester-slug']}/${nextSection.slug}`}>
+                  <Link href={`/resources/guides/${semesterSlug}/${nextSection.slug}`}>
                     {nextSection.title}
                     <ChevronRight className="h-4 w-4" />
                   </Link>

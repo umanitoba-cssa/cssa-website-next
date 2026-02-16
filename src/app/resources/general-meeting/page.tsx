@@ -1,13 +1,12 @@
-import { getAllGuides, getAllMarkdownGroups } from '@/lib/mdx';
+import { getAllMarkdownGroups } from '@/lib/mdx';
 import PageHeader from '@/components/page-header';
 import BlockHeader from '@/components/block-header';
 import GuidesList from '@/components/guides/guides-list';
 
 export default async function GuidesPage() {
   const REPO = "general-meeting"
-  const BRANCH = 'develop'
+  const meetings = await getAllMarkdownGroups(REPO);
 
-  const guides = await getAllMarkdownGroups(REPO, BRANCH);
   return (
     <main className="flex flex-col">
       <PageHeader title="General Meeting Archives" image="/img/backgrounds/resources.png" />
@@ -22,7 +21,7 @@ export default async function GuidesPage() {
           </p>
         </div>
 
-        <GuidesList guides={guides} href="/resources/general-meeting" />
+        <GuidesList guides={meetings} href="/resources/general-meeting" />
       </div>
     </main>
   );

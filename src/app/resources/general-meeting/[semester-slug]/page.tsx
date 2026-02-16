@@ -8,17 +8,16 @@ import Breadcrumbs from '@/components/guides/breadcrumbs';
 import path from 'path';
 
 interface groupPageProps {
-  params: {
+  params: Promise<{
     'semester-slug': string;
-  };
+  }>;
 }
 
-
 export default async function groupPage({ params }: groupPageProps) {
+  const { ['semester-slug']: semesterSlug } = await params;
   const REPO = "general-meeting"
-  const BRANCH = 'develop'
 
-  const group = await getMarkdownGroupByPath(REPO, params['semester-slug'], params['semester-slug'], BRANCH);
+  const group = await getMarkdownGroupByPath(REPO, semesterSlug, semesterSlug);
   console.log("section slug", group.sections.map((section) => section.slug));
   // Redirect to 404 if group not found
   if (!group.title || group.title === 'group Not Found') {
@@ -26,13 +25,13 @@ export default async function groupPage({ params }: groupPageProps) {
   }
   
   // Process markdown content to HTML with group slug for proper image processing
-  const htmlContent = await markdownToHtml(group.content, params['semester-slug']);
+  const htmlContent = await markdownToHtml(group.content, semesterSlug, "general-meeting");
   
   // Breadcrumb items
   const breadcrumbItems = [
     { label: 'Resources', href: '/resources' },
     { label: 'General Meeting', href: '/resources/general-meeting' },
-    { label: group.title, href: path.join('/resources/general-meeting', params['semester-slug']), active: true },
+    { label: group.title, href: path.join('/resources/general-meeting', semesterSlug), active: true },
   ];
   
   return (

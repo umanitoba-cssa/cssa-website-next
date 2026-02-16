@@ -298,7 +298,7 @@ export async function syncAllMeetings(): Promise<void> {
     console.log('Starting meeting synchronization...');
 
     const results = await Promise.allSettled(
-        MeetingList.map(meeting => syncGuideFromRepo(meeting.slug, meeting.repoURL, 'src/content/meetings', 'public/img/meetings'))
+        MeetingList.map(meeting => syncGuideFromRepo(meeting.slug, meeting.repoURL, 'src/content', 'public/img'))
     );
 
     const successes = results.filter(r => r.status === 'fulfilled').length;
@@ -329,7 +329,7 @@ export async function syncGuide(slug: string): Promise<void> {
     if (guide)
       await syncGuideFromRepo(guide.slug, guide.repoURL, 'src/content/guides', 'public/img/guides');
     else
-      await syncGuideFromRepo(meeting.slug, meeting.repoURL, 'src/content/meetings', 'public/img/meetings');
+      await syncGuideFromRepo(meeting.slug, meeting.repoURL, 'src/content', 'public/img');
 }
 
 /**
@@ -345,5 +345,5 @@ export async function syncGuideByRepoUrl(repoUrl: string): Promise<void> {
     if (guide)
       await syncGuideFromRepo(guide.slug, guide.repoURL, 'src/content/guides', 'public/img/guides');
     else
-      await syncGuideFromRepo(meeting.slug, meeting.repoURL, 'src/content/meetings', 'public/img/meetings');
+      await syncGuideFromRepo(meeting.slug, meeting.repoURL, 'src/content', 'public/img');
 }
