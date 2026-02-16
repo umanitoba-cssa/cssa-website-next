@@ -2,6 +2,7 @@ import BlockHeader from '@/components/block-header';
 import PageHeader from '@/components/page-header';
 import Image from 'next/image';
 import { Teasers } from '@/data/teasers';
+import UpcomingEventsSlideshow from '@/components/upcoming-events-slideshow';
 import Link from 'next/link';
 import { Fragment } from 'react';
 
@@ -12,7 +13,13 @@ export default function Home() {
                 title="Home"
                 image="/img/backgrounds/home.jpg"
             />
+
             <div className="container py-8 flex flex-col gap-8">
+                {/* Upcoming Events */}
+                <div className="flex flex-col gap-8">
+                    <BlockHeader title="Upcoming Events" />
+                    <UpcomingEventsSlideshow />
+                </div>
                 <div className="flex flex-col gap-4">
                     <BlockHeader title="Who we are" />
                     <p>

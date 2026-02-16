@@ -93,3 +93,42 @@ export const OlderEvents: Map<string, IEventLink> = new Map([
         },
     ],
 ]);
+
+export interface IUpcomingEvent {
+    title: string;
+    date: string;
+    description: string;
+    image: string;
+    link?: string;
+    linkText?: string;
+}
+
+export const UPCOMING_EVENTS: IUpcomingEvent[] = [
+    {
+        title: 'CSSA Bonfire',
+        date: 'September 13th 2026',
+        description:
+            "Join us for a cozy evening of s'mores, socializing, and fun at the annual CSSA Bonfire! Meet fellow CS students and enjoy the warmth of the fire.",
+        image: '/img/teasers/community.jpg',
+        link: '/events/bonfire',
+        linkText: 'Learn More',
+    },
+    {
+        title: 'Game Jam 2026',
+        date: 'November 11th 2026',
+        description:
+            'Put your game development skills to the test! Compete in teams to create a game from scratch in just 48 hours. Prizes, food, and fun await!',
+        image: '/img/teasers/resources.jpg',
+        link: '/events/game-jam',
+        linkText: 'Learn More',
+    },
+    {
+        title: 'Research Showcase',
+        date: 'January 7th 2027',
+        description:
+            'Discover the cutting-edge research happening right here in the CS department. Connect with professors and graduate students to learn about their work.',
+        image: '/img/teasers/advocacy.jpg',
+        link: '/resources/researchers',
+        linkText: 'Learn More',
+    },
+];
