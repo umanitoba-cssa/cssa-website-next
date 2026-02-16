@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
-interface GuideCardProps {
+interface MarkdownCardProps {
   title: string;
   description: string;
   author?: string;
@@ -9,7 +9,7 @@ interface GuideCardProps {
   href: string;
 }
 
-const GuideCard: React.FC<GuideCardProps> = ({
+const MarkdownCard: React.FC<MarkdownCardProps> = ({
   title,
   description,
   author,
@@ -42,7 +42,7 @@ const GuideCard: React.FC<GuideCardProps> = ({
         <CardContent>
           <div className="flex justify-end">
             <span className="text-sm text-primary hover:underline">
-              Read guide →
+              Read now →
             </span>
           </div>
         </CardContent>
@@ -51,4 +51,4 @@ const GuideCard: React.FC<GuideCardProps> = ({
   );
 };
 
-export default GuideCard;
+export default MarkdownCard; 

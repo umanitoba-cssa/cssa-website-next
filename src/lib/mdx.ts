@@ -35,15 +35,14 @@ export interface MarkdownSection extends MarkdownMetadata {
   };
 }
 
-const GUIDES_DIRECTORY = path.join(process.cwd(), 'src/content/guides');
-const GENERAL_MEETINGS_DIRECTORY = path.join(process.cwd(), 'src/content/general-meeting');
+const CONTENT_DIRECTORY = 'src/content';
 
 /**
  * Get metadata for all guides
  */
 export async function getAllGuides(): Promise<MarkdownGroup[]> {
   const guidesSlugs = GuideList.map(g => g.slug);
-  const guides = await Promise.all(guidesSlugs.map((repoName) => getMarkdownBySlug(repoName, GUIDES_DIRECTORY)));
+  const guides = await Promise.all(guidesSlugs.map((repoName) => getMarkdownBySlug(repoName, 'guides')));
   
   // Sort guides based on their order in GuideList configuration
   const guideOrder = GuideList.map(g => g.slug);
@@ -70,19 +69,21 @@ export async function getAllGuides(): Promise<MarkdownGroup[]> {
  * Get metadata for all meetings
  */
 export async function getAllMeetings(): Promise<MarkdownGroup[]> {
+  const contentDir = path.join(process.cwd(), CONTENT_DIRECTORY, "general-meeting");
+
   // List all subdirectories under general-meeting
-  if (!fs.existsSync(GENERAL_MEETINGS_DIRECTORY)) {
+  if (!fs.existsSync(contentDir)) {
     console.warn('No meetings found. Run sync to populate src/content/general-meeting.');
     return [];
   }
 
-  const meetingSlugs = fs.readdirSync(GENERAL_MEETINGS_DIRECTORY).filter(dir => {
-    const fullPath = path.join(GENERAL_MEETINGS_DIRECTORY, dir);
+  const meetingSlugs = fs.readdirSync(contentDir).filter(dir => {
+    const fullPath = path.join(contentDir, dir);
     return fs.statSync(fullPath).isDirectory() && fs.existsSync(path.join(fullPath, 'index.md'));
   });
 
   const meetings: MarkdownGroup[] = meetingSlugs.map(slug => {
-    const meetingDir = path.join(GENERAL_MEETINGS_DIRECTORY, slug);
+    const meetingDir = path.join(contentDir, slug);
 
     // Read index.md
     const indexPath = path.join(meetingDir, 'index.md');
@@ -156,12 +157,13 @@ export async function getAllMeetings(): Promise<MarkdownGroup[]> {
  * Get markdown by its slug (local filesystem version)
  */
 export async function getMarkdownBySlug(slug: string, contentDir: string): Promise<MarkdownGroup> {
-  const markdownDir = path.join(process.cwd(), contentDir, slug);
+  const markdownDir = path.join(process.cwd(), CONTENT_DIRECTORY, contentDir, slug);
+  console.log(markdownDir);
 
   // Read the main index.md of the markdown
   const indexPath = path.join(markdownDir, 'index.md');
   if (!fs.existsSync(indexPath)) {
-    throw new Error(`Markdown index.md not found for slug "${slug}"`);
+    throw new Error(`File index.md not found for slug "${slug}"`);
   }
 
   const indexRaw = fs.readFileSync(indexPath, 'utf8');
@@ -188,7 +190,7 @@ export async function getMarkdownBySlug(slug: string, contentDir: string): Promi
   });
 
   return {
-    title: frontmatter.title || 'Untitled Markdown',
+    title: frontmatter.title || 'Untitled Document',
     description: frontmatter.description || '',
     author: frontmatter.author,
     date: frontmatter.date,
@@ -202,7 +204,7 @@ export async function getMarkdownBySlug(slug: string, contentDir: string): Promi
  * Get a specific section by its slug
  */
 export function getMarkdownSectionBySlug(markdownSlug: string, sectionSlug: string, contentDir: string): MarkdownSection {
-    const fullPath = path.join(process.cwd(), contentDir, markdownSlug, `${sectionSlug}.md`);
+    const fullPath = path.join(process.cwd(), CONTENT_DIRECTORY, contentDir, markdownSlug, `${sectionSlug}.md`);
     let fileContents: string;
 
     try {
@@ -239,9 +241,9 @@ export function getMarkdownSectionBySlug(markdownSlug: string, sectionSlug: stri
 /**
  * Convert markdown to HTML
  */
-export async function markdownToHtml(markdown: string, markdownSlug: string, contentDir: string, imageDir: string): Promise<string> {
+export async function markdownToHtml(markdown: string, markdownSlug: string, contentDir: string): Promise<string> {
   // Pre-process Markdown content with markdown slug
-  const processedMarkdown = prepareMarkdownForMDX(markdown, markdownSlug, contentDir, imageDir);
+  const processedMarkdown = prepareMarkdownForMDX(markdown, markdownSlug, contentDir);
   
   const result = await remark()
     .use(html, { sanitize: false })
@@ -251,7 +253,7 @@ export async function markdownToHtml(markdown: string, markdownSlug: string, con
   let htmlContent = result.toString();
   
   // Process images in the generated HTML
-  htmlContent = processImages(htmlContent, markdownSlug, imageDir);
+  htmlContent = processImages(htmlContent, markdownSlug, contentDir);
   
   // Ensure code blocks have proper language classes for Prism.js
   htmlContent = htmlContent.replace(
@@ -305,8 +307,7 @@ export function processLinks(content: string, markdownSlug: string, contentDir: 
         return `[${text}](${url})`;
       }
       // Convert relative file paths to absolute
-      const contentFolder = contentDir.split('/').pop()?.replace('.md', '')
-      return `[${text}](/resources/${contentFolder}/${markdownSlug}/${url})`;
+      return `[${text}](/resources/${contentDir}/${markdownSlug}/${url})`;
     }
   );
 }
@@ -337,9 +338,9 @@ export function processImagePaths(content: string, markdownSlug?: string, imageD
 /**
  * Prepare markdown content for rendering with MDX
  */
-export function prepareMarkdownForMDX(content: string, markdownSlug: string, contentDir: string, imageDir: string): string {
+export function prepareMarkdownForMDX(content: string, markdownSlug: string, contentDir: string): string {
   // Process image paths to absolute
-  let processedContent = processImagePaths(content, markdownSlug, imageDir);
+  let processedContent = processImagePaths(content, markdownSlug, contentDir);
   
   // Process links if markdownSlug is provided
   if (markdownSlug) {

@@ -88,9 +88,9 @@ export const CSSALinks: IResourceLink[] = [
         linkText: 'Browse researchers →',
     },
     {
-        title: 'General Meeting Archives',
-        description: 'Past CSSA General Meeting notes',
-        href: 'resources/general-meeting-archives',
+        title: "General Meeting Archives",
+        description: "Past CSSA General Meeting notes",
+        href: "resources/general-meeting",
         internal: true,
         linkText: 'Browse archives →',
     },

@@ -1,15 +1,14 @@
-import { notFound } from 'next/navigation';
+import MarkdownNotFound from '@/components/guides/markdown-not-found'
 import { getMarkdownBySlug, getMarkdownSectionBySlug, markdownToHtml } from '@/lib/mdx';
 import PageHeader from '@/components/page-header';
-import GuideSidebar from '@/components/guides/guide-sidebar';
+import MarkdownSidebar from '@/components/guides/markdown-sidebar';
 import MarkdownContent from '@/components/guides/markdown-content';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import Breadcrumbs from '@/components/guides/breadcrumbs';
 
-const contentDir = 'src/content/general-meeting';
-const imageDir = 'general-meeting';
+const contentDir = 'general-meeting';
 
 interface SectionPageProps {
   params: {
@@ -24,17 +23,17 @@ export default async function SectionPage({ params }: SectionPageProps) {
   
   // Redirect to 404 if meeting not found
   if (!meeting.title || meeting.title === 'Meeting Not Found') {
-    notFound();
+    return (<MarkdownNotFound sourceDir="/resources/general-meeting" sourceLabel="Meeting"/>);
   }
 
   const section = getMarkdownSectionBySlug(semesterSlug, sectionSlug, contentDir);
   // Redirect to 404 if section not found
   if (!section.title || section.title === 'Section Not Found') {
-    notFound();
+    return (<MarkdownNotFound sourceDir="/resources/general-meeting" sourceLabel="Meeting"/>);
   }
   
   // Process markdown content to HTML with meeting slug for proper image processing
-  const htmlContent = await markdownToHtml(section.content, semesterSlug, contentDir, imageDir);
+  const htmlContent = await markdownToHtml(section.content, semesterSlug, contentDir);
   
   // Find the current section index for prev/next navigation
   const currentSectionIndex = meeting.sections.findIndex(s => s.slug === sectionSlug);
@@ -58,7 +57,7 @@ export default async function SectionPage({ params }: SectionPageProps) {
         
         <div className="lg:grid lg:grid-cols-3 gap-8">
           <div className="lg:col-span-1">
-            <GuideSidebar guide={meeting} rootPath={"/resources/general-meeting"} />
+            <MarkdownSidebar markdown={meeting} rootPath={"/resources/general-meeting"} />
           </div>
           
           <div className="lg:col-span-2 markdown-content-container">

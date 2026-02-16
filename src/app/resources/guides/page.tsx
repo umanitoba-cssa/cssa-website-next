@@ -1,7 +1,7 @@
 import { getAllGuides } from '@/lib/mdx';
 import PageHeader from '@/components/page-header';
 import BlockHeader from '@/components/block-header';
-import GuidesList from '@/components/guides/guides-list';
+import MarkdownList from '@/components/guides/markdown-list';
 
 export const metadata = {
     title: 'Guides | CSSA Resources',
@@ -28,7 +28,7 @@ export default async function GuidesPage() {
                     </p>
                 </div>
 
-        <GuidesList guides={guides} href="/resources/guides" />
+        <MarkdownList markdown={guides} href="/resources/guides" />
       </div>
     </main>
   );

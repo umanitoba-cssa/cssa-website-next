@@ -1,12 +1,11 @@
-import { notFound } from 'next/navigation';
+import MarkdownNotFound from '@/components/guides/markdown-not-found'
 import { getMarkdownBySlug, markdownToHtml } from '@/lib/mdx';
 import PageHeader from '@/components/page-header';
-import GuideSidebar from '@/components/guides/guide-sidebar';
+import MarkdownSidebar from '@/components/guides/markdown-sidebar';
 import MarkdownContent from '@/components/guides/markdown-content';
 import Breadcrumbs from '@/components/guides/breadcrumbs';
 
-const contentDir = 'src/content/general-meeting';
-const imageDir = 'general-meeting';
+const contentDir = 'general-meeting';
 
 interface MeetingPageProps {
   params: Promise<{
@@ -19,10 +18,10 @@ export default async function MeetingPage({ params }: MeetingPageProps) {
   const meeting = await getMarkdownBySlug(semesterSlug, contentDir);
   
   if (!meeting.title || meeting.title === 'Meeting Not Found') {
-    notFound();
+    return (<MarkdownNotFound sourceDir="/resources/general-meeting" sourceLabel="Meeting"/>);
   }
   
-  const htmlContent = await markdownToHtml(meeting.content, semesterSlug, contentDir, imageDir);
+  const htmlContent = await markdownToHtml(meeting.content, semesterSlug, contentDir);
   
   const breadcrumbItems = [
     { label: 'Resources', href: '/resources' },
@@ -39,7 +38,7 @@ export default async function MeetingPage({ params }: MeetingPageProps) {
         
         <div className="lg:grid lg:grid-cols-3 gap-8">
           <div className="lg:col-span-1">
-            <GuideSidebar guide={meeting} rootPath={"/resources/general-meeting"} />
+            <MarkdownSidebar markdown={meeting} rootPath={"/resources/general-meeting"} />
           </div>
           
           <div className="lg:col-span-2 markdown-content-container">

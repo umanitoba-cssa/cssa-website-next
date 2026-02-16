@@ -1,7 +1,7 @@
 import { getAllMeetings } from '@/lib/mdx';
 import PageHeader from '@/components/page-header';
 import BlockHeader from '@/components/block-header';
-import GuidesList from '@/components/guides/guides-list';
+import MarkdownList from '@/components/guides/markdown-list';
 
 export default async function GuidesPage() {
   const meetings = await getAllMeetings();
@@ -20,7 +20,7 @@ export default async function GuidesPage() {
           </p>
         </div>
 
-        <GuidesList guides={meetings} href="/resources/general-meeting" />
+        <MarkdownList markdown={meetings} href="/resources/general-meeting" />
       </div>
     </main>
   );
