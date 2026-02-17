@@ -61,6 +61,6 @@ export const Routes: IRoute[] = [
     {
         title: '',
         href: '/MovieNight',
-        image: "/img/backgrounds/home.jpg"
-    }
-]
+        image: '/img/backgrounds/home.jpg',
+    },
+];

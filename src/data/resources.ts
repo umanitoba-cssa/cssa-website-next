@@ -14,7 +14,7 @@ interface IMarkdownPart {
     repoURL: string;
 }
 
-export const GITHUB_OWNER = "umanitoba-cssa";
+export const GITHUB_OWNER = 'umanitoba-cssa';
 
 export const GuideList: IMarkdownPart[] = [
     {
@@ -25,16 +25,14 @@ export const GuideList: IMarkdownPart[] = [
         slug: 'second-year-guide',
         repoURL: 'https://github.com/umanitoba-cssa/second-year-guide',
     },
-]
+];
 
 export const GeneralMeetingPart: IMarkdownPart = {
     slug: 'general-meeting',
-    repoURL: 'https://github.com/umanitoba-cssa/general-meeting'
-}
+    repoURL: 'https://github.com/umanitoba-cssa/general-meeting',
+};
 
-export const MarkdownRepoList: IMarkdownPart[] = [
-    GeneralMeetingPart,
-]
+export const MarkdownRepoList: IMarkdownPart[] = [GeneralMeetingPart];
 
 export const ResourceLinks: IResourceLink[] = [
     {
@@ -89,9 +87,9 @@ export const CSSALinks: IResourceLink[] = [
         linkText: 'Browse researchers →',
     },
     {
-        title: "General Meeting Archives",
-        description: "Past CSSA General Meeting notes",
-        href: "resources/general-meeting",
+        title: 'General Meeting Archives',
+        description: 'Past CSSA General Meeting notes',
+        href: 'resources/general-meeting',
         internal: true,
         linkText: 'Browse archives →',
     },
