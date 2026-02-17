@@ -1,9 +1,5 @@
 import '../markdown.css';
 
-export default function MeetingsLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return children;
-} 
+export default function MeetingsLayout({ children }: { children: React.ReactNode }) {
+    return children;
+}

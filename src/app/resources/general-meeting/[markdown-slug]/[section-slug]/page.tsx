@@ -1,4 +1,4 @@
-import MarkdownNotFound from '@/components/markdown/markdown-not-found'
+import MarkdownNotFound from '@/components/markdown/markdown-not-found';
 import { getMarkdownBySlug, getMarkdownSectionBySlug, markdownToHtml } from '@/lib/mdx';
 import PageHeader from '@/components/page-header';
 import MarkdownSidebar from '@/components/markdown/markdown-sidebar';

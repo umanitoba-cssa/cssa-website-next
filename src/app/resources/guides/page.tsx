@@ -28,8 +28,11 @@ export default async function GuidesPage() {
                     </p>
                 </div>
 
-        <MarkdownList markdown={guides} href="/resources/guides" />
-      </div>
-    </main>
-  );
-} 
+                <MarkdownList
+                    markdown={guides}
+                    href="/resources/guides"
+                />
+            </div>
+        </main>
+    );
+}

@@ -87,4 +87,4 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({ headings, className }
     );
 };
 
-export default TableOfContents; 
+export default TableOfContents;
