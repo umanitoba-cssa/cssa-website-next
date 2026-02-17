@@ -3,7 +3,7 @@
 import { spawn, execSync } from "child_process";
 import fs from "fs";
 import path from "path";
-import { GuideList, MarkdownPartList } from '../src/data/resources.ts';
+import { GuideList, MarkdownRepoList } from '../src/data/resources.ts';
 
 function run(cmd: string[], cwd = process.cwd()) {
   return new Promise<void>((resolve, reject) => {
@@ -97,7 +97,7 @@ async function main() {
   if (args.length === 0) {
     console.log("Ensuring all submodules exist and updating them...");
 
-    for (const item of MarkdownPartList) {
+    for (const item of MarkdownRepoList) {
       await ensureSubmodule(item.slug, item.repoURL);
       await updateSubmodule(item.slug);
       syncImages(item.slug); // copy images to public
@@ -111,7 +111,7 @@ async function main() {
 
   } else if (args.length === 1) {
     const slug = args[0];
-    const item_m = MarkdownPartList.find(m => m.slug === slug);
+    const item_m = MarkdownRepoList.find(m => m.slug === slug);
     const item_g = GuideList.find(m => m.slug === slug);
     if (!item_m && !item_g) {
       console.error(`No entry found for slug: ${slug}`);

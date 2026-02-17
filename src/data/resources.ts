@@ -32,7 +32,7 @@ export const GeneralMeetingPart: IMarkdownPart = {
     repoURL: 'https://github.com/umanitoba-cssa/general-meeting'
 }
 
-export const MarkdownPartList: IMarkdownPart[] = [
+export const MarkdownRepoList: IMarkdownPart[] = [
     GeneralMeetingPart,
 ]
 

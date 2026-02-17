@@ -95,7 +95,7 @@ That being said, to add a new Guide, you must do the following:
 3. Add a new entry to the `GuideList`, found in `src/data/resources.ts`, for reference:
 
 ```ts
-export const GuideList: IMarkdownPartList[] = [
+export const GuideList: IMarkdownRepoList[] = [
     {
         slug: 'first-year-guide',
         repoURL: 'https://github.com/umanitoba-cssa/first-year-guide',
@@ -132,7 +132,7 @@ will walk through adding this new content to the website.
 2. Create and add a new entry to `MarkdowPartList` in `src/data/resources.ts`, for instance:
 
 ```ts
-export const MarkdownPartList: IMarkdownPartList[] = [
+export const MarkdownRepoList: IMarkdownRepoList[] = [
     {
         slug: 'general-meeting',
         repoURL: 'https://github.com/umanitoba-cssa/general-meeting'
