@@ -5,6 +5,7 @@ export interface IEventLink {
     internal?: boolean;
     linkText?: string;
     date?: string;
+    image?: string;
 }
 
 const goosiesDescription = 'Annual award show for the Department of Computer Science';
@@ -18,6 +19,7 @@ export const RecentEvents: Map<string, IEventLink> = new Map([
             href: 'events/capture-the-flag-2026',
             internal: true,
             linkText: 'See Page →',
+            image: '/img/capture-the-flag/2026photos/IMG_1320.JPG',
         },
     ],
     [
@@ -28,6 +30,7 @@ export const RecentEvents: Map<string, IEventLink> = new Map([
             href: 'events/game-jam-2025',
             internal: true,
             linkText: 'See Page →',
+            image: '/img/game-jam/2025/gj_banner.svg',
         },
     ],
     [
@@ -38,6 +41,7 @@ export const RecentEvents: Map<string, IEventLink> = new Map([
             href: 'events/goosies-2024',
             internal: true,
             linkText: 'View Photos →',
+            image: '/img/goosies/2024photos/ccdr 2025-04-25 192550.801.jpeg',
         },
     ],
     [
@@ -48,6 +52,7 @@ export const RecentEvents: Map<string, IEventLink> = new Map([
             href: 'events/bonfire-2024',
             internal: true,
             linkText: 'View Photos →',
+            image: '/img/bonfire/2024photos/IMG_1753.jpeg',
         },
     ],
 ]);
@@ -62,6 +67,7 @@ export const OlderEvents: Map<string, IEventLink> = new Map([
             href: 'events/capture-the-flag-2025',
             internal: true,
             linkText: 'View Photos →',
+            image: '/img/capture-the-flag/2025photos/IMG_0818.jpeg',
         },
     ],
     [
@@ -72,6 +78,7 @@ export const OlderEvents: Map<string, IEventLink> = new Map([
             href: 'events/game-jam-2024',
             internal: true,
             linkText: 'See Page →',
+            image: '/img/game-jam/2024/banner.svg',
         },
     ],
     [
@@ -82,6 +89,7 @@ export const OlderEvents: Map<string, IEventLink> = new Map([
             href: 'events/goosies-2023',
             internal: true,
             linkText: 'View Photos →',
+            image: '/img/backgrounds/home.jpg',
         },
     ],
 ]);

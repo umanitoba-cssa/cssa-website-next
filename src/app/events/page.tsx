@@ -35,6 +35,13 @@ export default async function Events() {
                         rel={link.internal ? undefined : 'noreferrer'}>
                         <Card className="h-full border-primary">
                             <CardHeader>
+                                {link.image && (
+                                    <img
+                                        src={link.image}
+                                        alt={link.title}
+                                        className="w-full object-cover aspect-video"
+                                    />
+                                )}
                                 <CardTitle className="text-lg flex flex-row gap-2">
                                     {link.title}
                                     {!link.internal && <FaExternalLinkAlt className="my-auto" />}
@@ -67,6 +74,13 @@ export default async function Events() {
                         rel={link.internal ? undefined : 'noreferrer'}>
                         <Card className="h-full border-primary">
                             <CardHeader>
+                                {link.image && (
+                                    <img
+                                        src={link.image}
+                                        alt={link.title}
+                                        className="w-full object-cover aspect-video"
+                                    />
+                                )}
                                 <CardTitle className="text-lg flex flex-row gap-2">
                                     {link.title}
                                     {!link.internal && <FaExternalLinkAlt className="my-auto" />}
