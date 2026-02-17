@@ -11,14 +11,14 @@ import Breadcrumbs from '@/components/markdown/breadcrumbs';
 const contentDir = 'general-meeting';
 
 interface SectionPageProps {
-    params: {
+    params: Promise<{
         'markdown-slug': string;
         'section-slug': string;
-    };
+    }>;
 }
 
 export default async function SectionPage({ params }: SectionPageProps) {
-    const { ['markdown-slug']: markdownSlug, ['section-slug']: sectionSlug } = params;
+    const { ['markdown-slug']: markdownSlug, ['section-slug']: sectionSlug } = await params;
     const markdown = await getMarkdownBySlug(markdownSlug, contentDir);
 
     // Redirect to 404 if meeting not found

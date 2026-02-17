@@ -1,6 +1,3 @@
-[submodule "src/content/general-meeting"]
-	path = src/content/general-meeting
-	url = https://github.com/umanitoba-cssa/general-meeting
 [submodule "src/content/guides/first-year-guide"]
 	path = src/content/guides/first-year-guide
 	url = https://github.com/umanitoba-cssa/first-year-guide
