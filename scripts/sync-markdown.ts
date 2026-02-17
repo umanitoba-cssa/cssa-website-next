@@ -119,7 +119,7 @@ async function main() {
             await ensureSubmodule(item_m.slug, item_m.repoURL);
             await updateSubmodule(item_m.slug);
             syncImages(item_m.slug);
-        } else {
+        } else if (item_g) {
             await ensureSubmodule(item_g.slug, item_g.repoURL, 'guides');
             await updateSubmodule(item_g.slug, 'guides');
             syncImages(item_g.slug, 'guides');
