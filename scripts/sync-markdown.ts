@@ -3,7 +3,7 @@
 import { spawn, execSync } from 'child_process';
 import fs from 'fs';
 import path from 'path';
-import { GuideList, MarkdownRepoList } from '../src/data/resources.ts';
+import { GuideList, MarkdownRepoList } from '../src/data/resources';
 
 function run(cmd: string[], cwd = process.cwd()) {
     return new Promise<void>((resolve, reject) => {
