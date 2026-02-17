@@ -37,6 +37,19 @@ export interface MarkdownSection extends MarkdownMetadata {
 const CONTENT_DIRECTORY = 'src/content';
 
 /**
+ * Safe parsing helper for gray-matter
+ */
+function parseMarkdownFile(filePath: string): {
+    frontmatter: MarkdownFrontmatter;
+    content: string;
+} {
+    const raw = fs.readFileSync(filePath, 'utf8');
+    const parsed = matter(raw);
+    const frontmatter = parsed.data as unknown as MarkdownFrontmatter;
+    return { frontmatter, content: parsed.content };
+}
+
+/**
  * Get metadata for all guides
  */
 export async function getAllGuides(): Promise<MarkdownGroup[]> {
@@ -45,37 +58,25 @@ export async function getAllGuides(): Promise<MarkdownGroup[]> {
         guidesSlugs.map((repoName) => getMarkdownBySlug(repoName, 'guides')),
     );
 
-    // Sort guides based on their order in GuideList configuration
     const guideOrder = GuideList.map((g) => g.slug);
 
     return guides.sort((a, b) => {
         const aIndex = guideOrder.indexOf(a.slug);
         const bIndex = guideOrder.indexOf(b.slug);
 
-        // If both guides are in the GuideList, sort by their position
-        if (aIndex !== -1 && bIndex !== -1) {
-            return aIndex - bIndex;
-        }
-
-        // If only one guide is in the GuideList, prioritize it
+        if (aIndex !== -1 && bIndex !== -1) return aIndex - bIndex;
         if (aIndex !== -1) return -1;
         if (bIndex !== -1) return 1;
-
-        // If neither guide is in the GuideList, fall back to alphabetical sort
         return a.title.localeCompare(b.title);
     });
 }
 
 /**
- * Get metadata for all markdown of the specified slug
+ * Get metadata for all markdown of a specific slug
  */
 export async function getAllMarkdown(markdownSlug: string): Promise<MarkdownGroup[]> {
     const contentDir = path.join(process.cwd(), CONTENT_DIRECTORY, markdownSlug);
-
-    if (!fs.existsSync(contentDir)) {
-        console.warn('No markdown found. Run sync to populate src/content/');
-        return [];
-    }
+    if (!fs.existsSync(contentDir)) return [];
 
     const markdownSlugs = fs.readdirSync(contentDir).filter((dir) => {
         const fullPath = path.join(contentDir, dir);
@@ -87,26 +88,18 @@ export async function getAllMarkdown(markdownSlug: string): Promise<MarkdownGrou
     const markdownSlugList: MarkdownGroup[] = markdownSlugs.map((slug) => {
         const markdownDir = path.join(contentDir, slug);
 
-        // Read index.md
-        const indexPath = path.join(markdownDir, 'index.md');
-        const indexRaw = fs.readFileSync(indexPath, 'utf8');
-        const { data: frontmatter, content } = matter(indexRaw) as {
-            data: MarkdownFrontmatter;
-            content: string;
-        };
+        // Parse index.md
+        const { frontmatter, content } = parseMarkdownFile(path.join(markdownDir, 'index.md'));
 
-        // Read other markdown sections
+        // Parse other sections
         const sectionFiles = fs
             .readdirSync(markdownDir)
             .filter((f) => f.endsWith('.md') && f !== 'index.md');
 
         const sections: MarkdownSection[] = sectionFiles.map((file) => {
-            const filePath = path.join(markdownDir, file);
-            const raw = fs.readFileSync(filePath, 'utf8');
-            const { data, content: sectionContent } = matter(raw) as {
-                data: MarkdownFrontmatter;
-                content: string;
-            };
+            const { frontmatter: data, content: sectionContent } = parseMarkdownFile(
+                path.join(markdownDir, file),
+            );
 
             return {
                 title: data.title || 'Untitled Section',
@@ -130,7 +123,6 @@ export async function getAllMarkdown(markdownSlug: string): Promise<MarkdownGrou
         };
     });
 
-    // Sort meetings by date (descending: newest first)
     return markdownSlugList.sort((a, b) => {
         if (!a.date) return 1;
         if (!b.date) return -1;
@@ -143,33 +135,16 @@ export async function getAllMarkdown(markdownSlug: string): Promise<MarkdownGrou
  */
 export async function getMarkdownBySlug(slug: string, contentDir: string): Promise<MarkdownGroup> {
     const markdownDir = path.join(process.cwd(), CONTENT_DIRECTORY, contentDir, slug);
-    console.log(markdownDir);
+    const { frontmatter, content } = parseMarkdownFile(path.join(markdownDir, 'index.md'));
 
-    // Read the main index.md of the markdown
-    const indexPath = path.join(markdownDir, 'index.md');
-    if (!fs.existsSync(indexPath)) {
-        throw new Error(`File index.md not found for slug "${slug}"`);
-    }
-
-    const indexRaw = fs.readFileSync(indexPath, 'utf8');
-    const { data: frontmatter, content } = matter(indexRaw) as {
-        data: MarkdownFrontmatter;
-        content: string;
-    };
-
-    // Read all other markdown sections (excluding index.md)
     const sectionFiles = fs
         .readdirSync(markdownDir)
         .filter((f) => f.endsWith('.md') && f !== 'index.md');
 
     const sections: MarkdownSection[] = sectionFiles.map((file) => {
-        const filePath = path.join(markdownDir, file);
-        const raw = fs.readFileSync(filePath, 'utf8');
-        const { data, content: sectionContent } = matter(raw) as {
-            data: MarkdownFrontmatter;
-            content: string;
-        };
-
+        const { frontmatter: data, content: sectionContent } = parseMarkdownFile(
+            path.join(markdownDir, file),
+        );
         return {
             title: data.title || 'Untitled Section',
             description: data.description || '',
@@ -207,12 +182,7 @@ export function getMarkdownSectionBySlug(
         markdownSlug,
         `${sectionSlug}.md`,
     );
-    let fileContents: string;
-
-    try {
-        fileContents = fs.readFileSync(fullPath, 'utf8');
-    } catch (error) {
-        console.error(`Error reading section file ${fullPath}:`, error);
+    if (!fs.existsSync(fullPath)) {
         return {
             title: 'Section Not Found',
             description: 'The requested section could not be found.',
@@ -222,12 +192,7 @@ export function getMarkdownSectionBySlug(
         };
     }
 
-    // Parse frontmatter
-    const { data, content } = matter(fileContents);
-    const frontmatter = data as MarkdownFrontmatter;
-
-    // Calculate reading time
-    const stats = readingTime(content);
+    const { frontmatter, content } = parseMarkdownFile(fullPath);
 
     return {
         title: frontmatter.title || 'Untitled Section',
@@ -236,7 +201,7 @@ export function getMarkdownSectionBySlug(
         date: frontmatter.date,
         slug: sectionSlug,
         content,
-        readingTime: stats,
+        readingTime: readingTime(content),
     };
 }
 
@@ -248,9 +213,7 @@ export async function markdownToHtml(
     markdownSlug: string,
     contentDir: string,
 ): Promise<string> {
-    // Pre-process Markdown content with markdown slug
     const processedMarkdown = prepareMarkdownForMDX(markdown, markdownSlug, contentDir);
-
     const result = await remark()
         .use(html, { sanitize: false })
         .use(remarkGfm)
@@ -258,12 +221,11 @@ export async function markdownToHtml(
 
     let htmlContent = result.toString();
 
-    // Process images in the generated HTML
+    // Fix images
     htmlContent = processImages(htmlContent, markdownSlug, contentDir);
 
-    // Ensure code blocks have proper language classes for Prism.js
+    // Add Prism.js classes to code blocks
     htmlContent = htmlContent.replace(/<pre><code class="language-(\w+)">/g, (match, language) => {
-        // Apply the language class to both pre and code tags for better Prism.js detection
         return `<pre class="language-${language}"><code class="language-${language}">`;
     });
 
