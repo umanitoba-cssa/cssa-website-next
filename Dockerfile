@@ -110,6 +110,7 @@ COPY --from=builder /usr/src/app/public ./public
 COPY --from=builder /usr/src/app/next.config.mjs ./
 COPY --from=builder /usr/src/app/tailwind.config.ts ./
 COPY --from=builder /usr/src/app/postcss.config.mjs ./
+COPY --from=builder /usr/src/app/src/content ./src/content
 
 RUN mkdir -p /usr/src/app/.next/cache/images \
     && chown -R bun:bun /usr/src/app/.next
