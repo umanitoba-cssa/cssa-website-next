@@ -12,40 +12,40 @@ const contentDir = 'general-meeting';
 
 interface SectionPageProps {
   params: {
-    'semester-slug': string;
+    'markdown-slug': string;
     'section-slug': string;
   };
 }
 
 export default async function SectionPage({ params }: SectionPageProps) {
-  const { ['semester-slug']: semesterSlug, ['section-slug']: sectionSlug } = params;
-  const meeting = await getMarkdownBySlug(semesterSlug, contentDir);
+  const { ['markdown-slug']: markdownSlug, ['section-slug']: sectionSlug } = params;
+  const markdown = await getMarkdownBySlug(markdownSlug, contentDir);
   
   // Redirect to 404 if meeting not found
-  if (!meeting.title || meeting.title === 'Meeting Not Found') {
-    return (<MarkdownNotFound sourceDir="/resources/general-meeting" sourceLabel="Meeting"/>);
+  if (!markdown.title || markdown.title === 'Meeting Not Found') {
+    return (<MarkdownNotFound sourceDir={`/resources/${contentDir}`} sourceLabel="Meeting"/>);
   }
 
-  const section = getMarkdownSectionBySlug(semesterSlug, sectionSlug, contentDir);
+  const section = getMarkdownSectionBySlug(markdownSlug, sectionSlug, contentDir);
   // Redirect to 404 if section not found
   if (!section.title || section.title === 'Section Not Found') {
-    return (<MarkdownNotFound sourceDir="/resources/general-meeting" sourceLabel="Meeting"/>);
+    return (<MarkdownNotFound sourceDir={`/resources/${contentDir}`} sourceLabel="Meeting"/>);
   }
   
   // Process markdown content to HTML with meeting slug for proper image processing
-  const htmlContent = await markdownToHtml(section.content, semesterSlug, contentDir);
+  const htmlContent = await markdownToHtml(section.content, markdownSlug, contentDir);
   
   // Find the current section index for prev/next navigation
-  const currentSectionIndex = meeting.sections.findIndex(s => s.slug === sectionSlug);
-  const prevSection = currentSectionIndex > 0 ? meeting.sections[currentSectionIndex - 1] : null;
-  const nextSection = currentSectionIndex < meeting.sections.length - 1 ? meeting.sections[currentSectionIndex + 1] : null;
+  const currentSectionIndex = markdown.sections.findIndex(s => s.slug === sectionSlug);
+  const prevSection = currentSectionIndex > 0 ? markdown.sections[currentSectionIndex - 1] : null;
+  const nextSection = currentSectionIndex < markdown.sections.length - 1 ? markdown.sections[currentSectionIndex + 1] : null;
   
   // Breadcrumb items
   const breadcrumbItems = [
     { label: 'Resources', href: '/resources' },
-    { label: 'Meetings', href: '/resources/general-meeting' },
-    { label: meeting.title, href: `/resources/general-meeting/${semesterSlug}` },
-    { label: section.title, href: `/resources/general-meeting/${semesterSlug}/${sectionSlug}`, active: true },
+    { label: 'Meetings', href: `/resources/${contentDir}` },
+    { label: markdown.title, href: `/resources/${contentDir}/${markdownSlug}` },
+    { label: section.title, href: `/resources/${contentDir}/${markdownSlug}/${sectionSlug}`, active: true },
   ];
   
   return (
@@ -57,7 +57,7 @@ export default async function SectionPage({ params }: SectionPageProps) {
         
         <div className="lg:grid lg:grid-cols-3 gap-8">
           <div className="lg:col-span-1">
-            <MarkdownSidebar markdown={meeting} rootPath={"/resources/general-meeting"} />
+            <MarkdownSidebar markdown={markdown} rootPath={`/resources/${contentDir}`} />
           </div>
           
           <div className="lg:col-span-2 markdown-content-container">
@@ -72,7 +72,7 @@ export default async function SectionPage({ params }: SectionPageProps) {
                   className="border-cssa-blue text-white hover:bg-cssa-blue/20 transition-colors flex items-center gap-2" 
                   asChild
                 >
-                  <Link href={`/resources/general-meeting/${semesterSlug}/${prevSection.slug}`}>
+                  <Link href={`/resources/${contentDir}/${markdownSlug}/${prevSection.slug}`}>
                     <ChevronLeft className="h-4 w-4" />
                     {prevSection.title}
                   </Link>
@@ -83,7 +83,7 @@ export default async function SectionPage({ params }: SectionPageProps) {
                   className="border-cssa-blue text-white bg-cssa-blue/20 transition-colors flex items-center gap-2" 
                   asChild
                 >
-                  <Link href={`/resources/general-meeting/${semesterSlug}`}>
+                  <Link href={`/resources/${contentDir}/${markdownSlug}`}>
                     <ChevronLeft className="h-4 w-4" />
                     Meeting Overview
                   </Link>
@@ -96,7 +96,7 @@ export default async function SectionPage({ params }: SectionPageProps) {
                   className="border-cssa-blue text-white bg-cssa-blue/20 transition-colors flex items-center gap-2" 
                   asChild
                 >
-                  <Link href={`/resources/general-meeting/${semesterSlug}/${nextSection.slug}`}>
+                  <Link href={`/resources/${contentDir}/${markdownSlug}/${nextSection.slug}`}>
                     {nextSection.title}
                     <ChevronRight className="h-4 w-4" />
                   </Link>

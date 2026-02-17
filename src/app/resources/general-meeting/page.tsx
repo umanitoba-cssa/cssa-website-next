@@ -1,10 +1,10 @@
-import { getAllMeetings } from '@/lib/mdx';
+import { getAllMarkdown } from '@/lib/mdx';
 import PageHeader from '@/components/page-header';
 import BlockHeader from '@/components/block-header';
 import MarkdownList from '@/components/markdown/markdown-list';
 
 export default async function MeetingsPage() {
-  const meetings = await getAllMeetings();
+  const meetings = await getAllMarkdown("general-meeting");
 
   return (
     <main className="flex flex-col">

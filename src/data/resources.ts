@@ -9,14 +9,14 @@ interface IResourceLink {
     linkText?: string;
 }
 
-interface IMarkdownList {
+interface IMarkdownPart {
     slug: string;
     repoURL: string;
 }
 
 export const GITHUB_OWNER = "umanitoba-cssa";
 
-export const GuideList: IMarkdownList[] = [
+export const GuideList: IMarkdownPart[] = [
     {
         slug: 'first-year-guide',
         repoURL: 'https://github.com/umanitoba-cssa/first-year-guide',
@@ -27,13 +27,14 @@ export const GuideList: IMarkdownList[] = [
     },
 ]
 
-export const MeetingList: IMarkdownList[] = [
-    {
-        slug: 'general-meeting',
-        repoURL: 'https://github.com/umanitoba-cssa/general-meeting'
-    },
-]
+export const GeneralMeetingPart: IMarkdownPart = {
+    slug: 'general-meeting',
+    repoURL: 'https://github.com/umanitoba-cssa/general-meeting'
+}
 
+export const MarkdownPartList: IMarkdownPart[] = [
+    GeneralMeetingPart,
+]
 
 export const ResourceLinks: IResourceLink[] = [
     {

@@ -65,36 +65,35 @@ export async function getAllGuides(): Promise<MarkdownGroup[]> {
 }
 
 /**
- * Get metadata for all meetings
+ * Get metadata for all markdown of the specified slug
  */
-export async function getAllMeetings(): Promise<MarkdownGroup[]> {
-  const contentDir = path.join(process.cwd(), CONTENT_DIRECTORY, "general-meeting");
+export async function getAllMarkdown(markdownSlug: string): Promise<MarkdownGroup[]> {
+  const contentDir = path.join(process.cwd(), CONTENT_DIRECTORY, markdownSlug);
 
-  // List all subdirectories under general-meeting
   if (!fs.existsSync(contentDir)) {
-    console.warn('No meetings found. Run sync to populate src/content/general-meeting.');
+    console.warn('No markdown found. Run sync to populate src/content/');
     return [];
   }
 
-  const meetingSlugs = fs.readdirSync(contentDir).filter(dir => {
+  const markdownSlugs = fs.readdirSync(contentDir).filter(dir => {
     const fullPath = path.join(contentDir, dir);
     return fs.statSync(fullPath).isDirectory() && fs.existsSync(path.join(fullPath, 'index.md'));
   });
 
-  const meetings: MarkdownGroup[] = meetingSlugs.map(slug => {
-    const meetingDir = path.join(contentDir, slug);
+  const markdownSlugList: MarkdownGroup[] = markdownSlugs.map(slug => {
+    const markdownDir = path.join(contentDir, slug);
 
     // Read index.md
-    const indexPath = path.join(meetingDir, 'index.md');
+    const indexPath = path.join(markdownDir, 'index.md');
     const indexRaw = fs.readFileSync(indexPath, 'utf8');
     const { data: frontmatter, content } = matter(indexRaw) as { data: MarkdownFrontmatter, content: string };
 
     // Read other markdown sections
-    const sectionFiles = fs.readdirSync(meetingDir)
+    const sectionFiles = fs.readdirSync(markdownDir)
       .filter(f => f.endsWith('.md') && f !== 'index.md');
 
     const sections: MarkdownSection[] = sectionFiles.map(file => {
-      const filePath = path.join(meetingDir, file);
+      const filePath = path.join(markdownDir, file);
       const raw = fs.readFileSync(filePath, 'utf8');
       const { data, content: sectionContent } = matter(raw) as { data: MarkdownFrontmatter, content: string };
 
@@ -110,7 +109,7 @@ export async function getAllMeetings(): Promise<MarkdownGroup[]> {
     });
 
     return {
-      title: frontmatter.title || 'Untitled Meeting',
+      title: frontmatter.title || 'Untitled Markdown Doc',
       description: frontmatter.description || '',
       author: frontmatter.author,
       date: frontmatter.date,
@@ -121,7 +120,7 @@ export async function getAllMeetings(): Promise<MarkdownGroup[]> {
   });
 
   // Sort meetings by date (descending: newest first)
-  return meetings.sort((a, b) => {
+  return markdownSlugList.sort((a, b) => {
     if (!a.date) return 1;
     if (!b.date) return -1;
     return new Date(b.date).getTime() - new Date(a.date).getTime();

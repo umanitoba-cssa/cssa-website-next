@@ -7,38 +7,38 @@ import Breadcrumbs from '@/components/markdown/breadcrumbs';
 
 const contentDir = 'general-meeting';
 
-interface MeetingPageProps {
+interface MarkdownPageProps {
   params: Promise<{
-    'semester-slug': string;
+    'markdown-slug': string;
   }>;
 }
 
-export default async function MeetingPage({ params }: MeetingPageProps) {
-  const { ['semester-slug']: semesterSlug } = await params;
-  const meeting = await getMarkdownBySlug(semesterSlug, contentDir);
+export default async function MeetingPage({ params }: MarkdownPageProps) {
+  const { ['markdown-slug']: markdownSlug } = await params;
+  const markdown = await getMarkdownBySlug(markdownSlug, contentDir);
   
-  if (!meeting.title || meeting.title === 'Meeting Not Found') {
-    return (<MarkdownNotFound sourceDir="/resources/general-meeting" sourceLabel="Meeting"/>);
+  if (!markdown.title || markdown.title === 'Meeting Not Found') {
+    return (<MarkdownNotFound sourceDir={`/resources/${contentDir}`} sourceLabel="Meeting"/>);
   }
   
-  const htmlContent = await markdownToHtml(meeting.content, semesterSlug, contentDir);
+  const htmlContent = await markdownToHtml(markdown.content, markdownSlug, contentDir);
   
   const breadcrumbItems = [
     { label: 'Resources', href: '/resources' },
-    { label: 'Meetings', href: '/resources/general-meeting' },
-    { label: meeting.title, href: `/resources/general-meeting/${semesterSlug}`, active: true },
+    { label: 'Meetings', href: `/resources/${contentDir}` },
+    { label: markdown.title, href: `/resources/${contentDir}/${markdownSlug}`, active: true },
   ];
   
   return (
     <main className="flex flex-col">
-      <PageHeader title={meeting.title} image="/img/backgrounds/resources.png" />
+      <PageHeader title={markdown.title} image="/img/backgrounds/resources.png" />
       
       <div className="container py-8">
         <Breadcrumbs items={breadcrumbItems} className="mb-6" />
         
         <div className="lg:grid lg:grid-cols-3 gap-8">
           <div className="lg:col-span-1">
-            <MarkdownSidebar markdown={meeting} rootPath={"/resources/general-meeting"} />
+            <MarkdownSidebar markdown={markdown} rootPath={`/resources/${contentDir}`} />
           </div>
           
           <div className="lg:col-span-2 markdown-content-container">
@@ -46,13 +46,13 @@ export default async function MeetingPage({ params }: MeetingPageProps) {
               <MarkdownContent source={htmlContent} />
             </article>
             
-            {(meeting.author || meeting.date) && (
+            {(markdown.author || markdown.date) && (
               <div className="mt-12 pt-4 border-t border-gray-700 text-sm text-gray-400">
-                {meeting.author && <p>Written by: {meeting.author}</p>}
-                {meeting.date && (
+                {markdown.author && <p>Written by: {markdown.author}</p>}
+                {markdown.date && (
                   <p>
                     Last updated:{' '}
-                    {new Date(meeting.date).toLocaleDateString('en-US', {
+                    {new Date(markdown.date).toLocaleDateString('en-US', {
                       year: 'numeric',
                       month: 'long',
                       day: 'numeric',
