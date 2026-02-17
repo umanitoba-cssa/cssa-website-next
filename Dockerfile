@@ -41,8 +41,6 @@ COPY src/ ./src/
 COPY public/ ./public/
 COPY tailwind.config.ts postcss.config.mjs ./
 
-RUN bun run sync-markdown
-
 # Set environment to production and build
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
