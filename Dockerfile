@@ -41,6 +41,8 @@ COPY src/ ./src/
 COPY public/ ./public/
 COPY tailwind.config.ts postcss.config.mjs ./
 
+RUN bun run sync-markdown
+
 # Set environment to production and build
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
@@ -54,7 +56,6 @@ RUN NEXT_PUBLIC_RECAPTCHA_SITE_KEY="${NEXT_PUBLIC_RECAPTCHA_SITE_KEY}" \
     GOOGLE_PRIVATE_KEY="${GOOGLE_PRIVATE_KEY}" \
     GOOGLE_CALENDAR_ID="${GOOGLE_CALENDAR_ID}" \
     CANTEEN_SHEEET_ID="${CANTEEN_SHEEET_ID}" \
-    bun run sync-markdown && \
     NEXT_PUBLIC_RECAPTCHA_SITE_KEY="${NEXT_PUBLIC_RECAPTCHA_SITE_KEY}" \
     RECAPTCHA_SECRET_KEY="${RECAPTCHA_SECRET_KEY}" \
     YOUTUBE_API_KEY="${YOUTUBE_API_KEY}" \
