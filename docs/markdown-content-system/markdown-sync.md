@@ -12,7 +12,7 @@
 
 ## What The Syncing Script Does
 
-1. The scripts loops over the MarkdownPart's found in `src/data/resources.ts`
+1. The scripts loops over the MarkdownRepo's found in `src/data/resources.ts`
 
 2. It creates submodules for them in `src/content/` if they don't already exist
 

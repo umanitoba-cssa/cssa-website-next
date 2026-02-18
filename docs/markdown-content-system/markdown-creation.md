@@ -72,17 +72,20 @@ geometry: margin=1in
 
 5. Finally, navigate to the `cssa-website-next` repo and run `bun run sync-markdown`
 
-- This will sync all submodules (included the general-meeting repo)
+- This will sync all submodules (including the general-meeting repo)
 - Then you may stage and commit the new files/info however you please
 
 
-## Guides
+## Guides vs General Meeting Notes
 
 The only difference between Guides and General Meeting notes is that each Guide
 has its own dedicated repository, whereas all General Meeting notes live under
 the same repo, but each have their own folder within that repo.
 
-That being said, to add a new Guide, you must do the following:
+
+## Guides
+
+To add a new Guide, you must do the following:
 
 1. Create a new repository that contains all the desired markdown files and image files.
 
@@ -129,7 +132,7 @@ will walk through adding this new content to the website.
   conventions described above.
 - Push the files to the `main` branch of this new repo
 
-2. Create and add a new entry to `MarkdowPartList` in `src/data/resources.ts`, for instance:
+2. Create and add a new entry to `MarkdownRepoList` in `src/data/resources.ts`, for instance:
 
 ```ts
 export const MarkdownRepoList: IMarkdownRepoList[] = [
