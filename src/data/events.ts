@@ -103,7 +103,7 @@ export interface IUpcomingEvent {
     linkText?: string;
 }
 
-const ALL_UPCOMING_EVENTS: IUpcomingEvent[] = [
+const AllUpcomingEvents: IUpcomingEvent[] = [
     {
         title: 'CSSA Bonfire',
         date: 'September 13th 2025',
@@ -117,18 +117,9 @@ const ALL_UPCOMING_EVENTS: IUpcomingEvent[] = [
         title: 'CSSA Bonfire',
         date: 'September 13th 2026',
         description:
-            "Join us for a cozy evening of s'mores, socializing, and fun at the annual CSSA Bonfire! Meet fellow CS students and enjoy the warmth of the fire.",
+            "JoinJoinJoinJoinJoinJoinJoinJoinJoinJoinJoinJoinJoinJoinJoinJoinJoinJoinvJoin us for a cozy evening of s'mores, socializing, and fun at the annual CSSA Bonfire! Meet fellow CS students and enjoy the warmth of the fire.",
         image: '/img/teasers/community.jpg',
         link: '/events/bonfire',
-        linkText: 'Learn More',
-    },
-    {
-        title: 'Research Showcase',
-        date: 'January 7th 2027',
-        description:
-            'Discover the cutting-edge research happening right here in the CS department. Connect with professors and graduate students to learn about their work.',
-        image: '/img/teasers/advocacy.jpg',
-        link: '/resources/researchers',
         linkText: 'Learn More',
     },
     {
@@ -140,11 +131,21 @@ const ALL_UPCOMING_EVENTS: IUpcomingEvent[] = [
         link: '/events/game-jam',
         linkText: 'Learn More',
     },
+    {
+        title: 'Research Showcase',
+        date: 'January 7th 2027',
+        description:
+            'Discover the cutting-edge research happening right here in the CS department. Connect with professors and graduate students to learn about their work.',
+        image: '/img/teasers/advocacy.jpg',
+        link: '/resources/researchers',
+        linkText: 'Learn More',
+    },
 ];
 
-export const UPCOMING_EVENTS: IUpcomingEvent[] = ALL_UPCOMING_EVENTS.filter((event) => {
+export const UPCOMING_EVENTS: IUpcomingEvent[] = AllUpcomingEvents.filter((event) => {
     return new Date(event.date.replace(/(\d+)(st|nd|rd|th)/, '$1')) > new Date();
 }).sort((a, b) => {
+    // sort by time
     return (
         new Date(a.date.replace(/(\d+)(st|nd|rd|th)/, '$1')).getTime() -
         new Date(b.date.replace(/(\d+)(st|nd|rd|th)/, '$1')).getTime()
