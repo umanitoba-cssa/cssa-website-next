@@ -2,7 +2,7 @@ import BlockHeader from '@/components/block-header';
 import PageHeader from '@/components/page-header';
 import Image from 'next/image';
 import { Teasers } from '@/data/teasers';
-import { UPCOMING_EVENTS } from '@/data/events';
+import { UpcomingEvents } from '@/data/events';
 import UpcomingEventsSlideshow from '@/components/upcoming-events-slideshow';
 import Link from 'next/link';
 import { Fragment } from 'react';
@@ -17,7 +17,7 @@ export default function Home() {
 
             <div className="container py-8 flex flex-col gap-8">
                 {/* Upcoming Events */}
-                {UPCOMING_EVENTS.length > 0 && (
+                {UpcomingEvents.length > 0 && (
                     <div className="flex flex-col gap-8">
                         <BlockHeader title="Upcoming Events" />
                         <UpcomingEventsSlideshow />

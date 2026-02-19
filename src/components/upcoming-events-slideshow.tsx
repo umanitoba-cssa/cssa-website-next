@@ -14,7 +14,7 @@ import {
     CarouselPrevious,
 } from '@/components/ui/carousel';
 import { Button } from '@/components/ui/button';
-import { UPCOMING_EVENTS } from '@/data/events';
+import { UpcomingEvents } from '@/data/events';
 
 export default function UpcomingEventsSlideshow() {
     const [api, setApi] = React.useState<CarouselApi>();
@@ -49,7 +49,7 @@ export default function UpcomingEventsSlideshow() {
                 }}
                 className="w-full">
                 <CarouselContent>
-                    {UPCOMING_EVENTS.map((event, index) => (
+                    {UpcomingEvents.map((event, index) => (
                         <CarouselItem key={index}>
                             <div className="grid lg:grid-cols-[400px_auto] gap-12 lg:gap-8 items-center p-1">
                                 {/* Image Section */}
