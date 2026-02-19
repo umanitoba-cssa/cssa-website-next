@@ -173,34 +173,6 @@ export const ExecProfiles = [
             Feel free to shoot me a message at any time if you have got any feedback or ideas, because advocacy is never a one-person job!",
         year: '2025 - 2026',
     },
-    {
-        name: 'Tofunmi Layi-Babatunde',
-        group: 'Exec',
-        position: 'Director of Advocacy',
-        image: '/img/team/prevExecs/tofunmi.png',
-        year: '2024 - 2025',
-    },
-    {
-        name: 'Edwin Duong',
-        group: 'Exec',
-        position: 'Director of Internal Affairs',
-        image: '/img/team/vacant.png',
-        year: '2024 - 2025',
-    },
-    {
-        name: 'Chinu Chandaria',
-        group: 'Exec',
-        position: 'Director of Events',
-        image: '/img/team/prevExecs/chinu.png',
-        year: '2024 - 2025',
-    },
-    {
-        name: 'Ginelle Temull',
-        group: 'Exec',
-        position: 'Director of Finance',
-        image: '/img/team/prevExecs/ginelle.png',
-        year: '2024 - 2025',
-    },
 ];
 
 export const PromotionsProfiles = [
@@ -461,5 +433,5 @@ export const filterByYear = (profile: IProfile[], year: string) => {
     return profile.filter((exec) => exec.year === year);
 };
 
-export const years = ['2024 - 2025', '2025 - 2026'];
+export const years = ['2025 - 2026'];
 export const FinanceProfiles = [];
