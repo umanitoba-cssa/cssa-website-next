@@ -1,27 +1,15 @@
 import Link from 'next/link';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
-interface GuideCardProps {
+interface MarkdownCardProps {
     title: string;
     description: string;
-    slug: string;
     author?: string;
     date?: string;
+    href: string;
 }
 
-const GuideCard: React.FC<GuideCardProps> = ({
-    title,
-    description,
-    slug,
-    author,
-    date,
-}: {
-    title: string;
-    description: string;
-    slug: string;
-    author?: string;
-    date?: string;
-}) => {
+const MarkdownCard: React.FC<MarkdownCardProps> = ({ title, description, author, date, href }) => {
     // Format date if available
     const formattedDate = date
         ? new Date(date).toLocaleDateString('en-US', {
@@ -33,7 +21,7 @@ const GuideCard: React.FC<GuideCardProps> = ({
 
     return (
         <Link
-            href={`/resources/guides/${slug}`}
+            href={href}
             className="block h-full">
             <Card className="h-full transition-shadow hover:shadow-md">
                 <CardHeader>
@@ -49,7 +37,7 @@ const GuideCard: React.FC<GuideCardProps> = ({
                 </CardHeader>
                 <CardContent>
                     <div className="flex justify-end">
-                        <span className="text-sm text-primary hover:underline">Read guide →</span>
+                        <span className="text-sm text-primary hover:underline">Read now →</span>
                     </div>
                 </CardContent>
             </Card>
@@ -57,4 +45,4 @@ const GuideCard: React.FC<GuideCardProps> = ({
     );
 };
 
-export default GuideCard;
+export default MarkdownCard;

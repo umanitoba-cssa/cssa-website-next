@@ -1,80 +1,78 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
-import { Guide, Section } from '@/lib/mdx';
+import { MarkdownGroup } from '@/lib/mdx';
 import { ChevronDown } from 'lucide-react';
+import path from 'path';
 
-interface GuideSidebarProps {
-    guide: Guide;
+interface MarkdownSidebarProps {
+    markdown: MarkdownGroup;
+    rootPath: string;
     className?: string;
 }
 
-const GuideSidebar: React.FC<GuideSidebarProps> = ({ guide, className }) => {
+const MarkdownSidebar: React.FC<MarkdownSidebarProps> = ({ markdown, rootPath, className }) => {
+    const [isOpen, setIsOpen] = useState(false);
     const pathname = usePathname();
-    const isRootPath = pathname === `/resources/guides/${guide.slug}`;
-    const [openForPath, setOpenForPath] = useState<string | null>(null);
-    const isOpen = openForPath === pathname;
 
-    const activeSection = React.useMemo(() => {
-        const pathParts = pathname.split('/');
+    const basePath = path.join(rootPath, markdown.slug);
+    const isRootPath = pathname === basePath;
 
-        if (
-            pathParts.length === 5 &&
-            pathParts[1] === 'resources' &&
-            pathParts[2] === 'guides' &&
-            pathParts[3] === guide.slug
-        ) {
-            return pathParts[4];
-        }
+    // derive active section from pathname (no React state needed)
+    const pathParts = pathname.split('/');
+    let activeSection = '';
 
-        return '';
-    }, [pathname, guide.slug]);
+    if (pathParts.length === 5 && pathParts[1] === 'resources' && pathParts[3] === markdown.slug) {
+        activeSection = pathParts[4];
+    }
+
+    const closeMobileMenu = () => setIsOpen(false);
 
     return (
         <>
-            {/* Mobile version with dropdown */}
+            {/* Mobile version */}
             <div className="block lg:hidden mb-6">
                 <button
-                    onClick={() => setOpenForPath((prev) => (prev === pathname ? null : pathname))}
+                    onClick={() => setIsOpen((v) => !v)}
                     className="flex items-center justify-between w-full px-4 py-3 bg-muted rounded-md"
                     aria-expanded={isOpen}>
-                    <span className="font-medium">Guide Navigation</span>
+                    <span className="font-medium">Markdown Navigation</span>
                     <ChevronDown
                         className={cn('h-5 w-5 transition-transform', isOpen && 'rotate-180')}
                     />
                 </button>
+
                 {isOpen && (
                     <nav className="mt-2 border rounded-md p-4 bg-background">
                         <ul className="space-y-3">
                             <li>
                                 <Link
-                                    href={`/resources/guides/${guide.slug}`}
+                                    href={basePath}
+                                    onClick={closeMobileMenu}
                                     className={cn(
                                         'block py-1 hover:text-primary transition-colors',
                                         isRootPath && activeSection === ''
                                             ? 'text-primary font-medium'
                                             : 'text-muted-foreground',
-                                    )}
-                                    onClick={() => setOpenForPath(null)} // Close dropdown on click
-                                >
+                                    )}>
                                     Overview
                                 </Link>
                             </li>
-                            {guide.sections.map((section) => (
+
+                            {markdown.sections.map((section) => (
                                 <li key={section.slug}>
                                     <Link
-                                        href={`/resources/guides/${guide.slug}/${section.slug}`}
+                                        href={path.join(basePath, section.slug)}
+                                        onClick={closeMobileMenu}
                                         className={cn(
                                             'block py-1 hover:text-primary transition-colors',
                                             activeSection === section.slug
                                                 ? 'text-primary font-medium'
                                                 : 'text-muted-foreground',
-                                        )}
-                                        onClick={() => setOpenForPath(null)} // Close dropdown on click
-                                    >
+                                        )}>
                                         {section.title}
                                     </Link>
                                 </li>
@@ -86,11 +84,12 @@ const GuideSidebar: React.FC<GuideSidebarProps> = ({ guide, className }) => {
 
             {/* Desktop version */}
             <nav className={cn('hidden lg:block sticky top-6', className)}>
-                <h3 className="font-semibold text-lg mb-3">{guide.title}</h3>
+                <h3 className="font-semibold text-lg mb-3">{markdown.title}</h3>
+
                 <ul className="space-y-3">
                     <li>
                         <Link
-                            href={`/resources/guides/${guide.slug}`}
+                            href={basePath}
                             className={cn(
                                 'block py-1 hover:text-primary transition-colors',
                                 isRootPath && activeSection === ''
@@ -100,10 +99,11 @@ const GuideSidebar: React.FC<GuideSidebarProps> = ({ guide, className }) => {
                             Overview
                         </Link>
                     </li>
-                    {guide.sections.map((section) => (
+
+                    {markdown.sections.map((section) => (
                         <li key={section.slug}>
                             <Link
-                                href={`/resources/guides/${guide.slug}/${section.slug}`}
+                                href={path.join(basePath, section.slug)}
                                 className={cn(
                                     'block py-1 hover:text-primary transition-colors',
                                     activeSection === section.slug
@@ -120,4 +120,4 @@ const GuideSidebar: React.FC<GuideSidebarProps> = ({ guide, className }) => {
     );
 };
 
-export default GuideSidebar;
+export default MarkdownSidebar;

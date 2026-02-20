@@ -4,3 +4,6 @@
 [submodule "src/content/guides/second-year-guide"]
 	path = src/content/guides/second-year-guide
 	url = https://github.com/umanitoba-cssa/second-year-guide
+[submodule "src/content/general-meeting"]
+	path = src/content/general-meeting
+	url = https://github.com/umanitoba-cssa/general-meeting

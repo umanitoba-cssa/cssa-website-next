@@ -7,25 +7,24 @@ import html from 'remark-html';
 import remarkGfm from 'remark-gfm';
 import { GuideList } from '../data/resources';
 
-// Types for our guides and sections
-export interface GuideMetadata {
+export interface MarkdownMetadata {
     title: string;
     description: string;
     author?: string;
     date?: string;
 }
 
-export interface GuideFrontmatter extends GuideMetadata {
+export interface MarkdownFrontmatter extends MarkdownMetadata {
     [key: string]: any;
 }
 
-export interface Guide extends GuideMetadata {
+export interface MarkdownGroup extends MarkdownMetadata {
     slug: string;
-    sections: Section[];
+    sections: MarkdownSection[];
     content: string;
 }
 
-export interface Section extends GuideMetadata {
+export interface MarkdownSection extends MarkdownMetadata {
     slug: string;
     content: string;
     readingTime: {
@@ -35,95 +34,130 @@ export interface Section extends GuideMetadata {
     };
 }
 
-// Constants
-const GUIDES_DIRECTORY = path.join(process.cwd(), 'src/content/guides');
-const PUBLIC_DIRECTORY = path.join(process.cwd(), 'public');
-const GUIDE_IMAGES_DIRECTORY = path.join(PUBLIC_DIRECTORY, 'img/guides');
+const CONTENT_DIRECTORY = 'src/content';
 
 /**
- * Get slugs for all guides
+ * Safe parsing helper for gray-matter
  */
-export async function getGuidesSlugs(): Promise<string[]> {
-    try {
-        // Check if guides need to be synced, but don't auto-sync
-        // Users should run manual sync or use webhooks
-        if (!fs.existsSync(GUIDES_DIRECTORY)) {
-            console.warn(
-                'No guides found. Run "bun run sync-guides" to sync guides from repositories.',
-            );
-            return [];
-        }
-
-        return fs.readdirSync(GUIDES_DIRECTORY).filter((directory) => {
-            const fullPath = path.join(GUIDES_DIRECTORY, directory);
-            return (
-                fs.statSync(fullPath).isDirectory() &&
-                fs.existsSync(path.join(fullPath, 'index.md'))
-            );
-        });
-    } catch (error) {
-        console.error('Error getting guide slugs:', error);
-        return [];
-    }
+function parseMarkdownFile(filePath: string): {
+    frontmatter: MarkdownFrontmatter;
+    content: string;
+} {
+    const raw = fs.readFileSync(filePath, 'utf8');
+    const parsed = matter(raw);
+    const frontmatter = parsed.data as unknown as MarkdownFrontmatter;
+    return { frontmatter, content: parsed.content };
 }
 
 /**
  * Get metadata for all guides
  */
-export async function getAllGuides(): Promise<Guide[]> {
-    const guidesSlugs = await getGuidesSlugs();
-    const guides = guidesSlugs.map((slug) => getGuideBySlug(slug));
+export async function getAllGuides(): Promise<MarkdownGroup[]> {
+    const guidesSlugs = GuideList.map((g) => g.slug);
+    const guides = await Promise.all(
+        guidesSlugs.map((repoName) => getMarkdownBySlug(repoName, 'guides')),
+    );
 
-    // Sort guides based on their order in GuideList configuration
     const guideOrder = GuideList.map((g) => g.slug);
 
     return guides.sort((a, b) => {
         const aIndex = guideOrder.indexOf(a.slug);
         const bIndex = guideOrder.indexOf(b.slug);
 
-        // If both guides are in the GuideList, sort by their position
-        if (aIndex !== -1 && bIndex !== -1) {
-            return aIndex - bIndex;
-        }
-
-        // If only one guide is in the GuideList, prioritize it
+        if (aIndex !== -1 && bIndex !== -1) return aIndex - bIndex;
         if (aIndex !== -1) return -1;
         if (bIndex !== -1) return 1;
-
-        // If neither guide is in the GuideList, fall back to alphabetical sort
         return a.title.localeCompare(b.title);
     });
 }
 
 /**
- * Get a guide by its slug
+ * Get metadata for all markdown of a specific slug
  */
-export function getGuideBySlug(slug: string): Guide {
-    const fullPath = path.join(GUIDES_DIRECTORY, slug, 'index.md');
-    let fileContents: string;
+export async function getAllMarkdown(markdownSlug: string): Promise<MarkdownGroup[]> {
+    const contentDir = path.join(process.cwd(), CONTENT_DIRECTORY, markdownSlug);
+    if (!fs.existsSync(contentDir)) return [];
 
-    try {
-        fileContents = fs.readFileSync(fullPath, 'utf8');
-    } catch (error) {
-        console.error(`Error reading guide file ${fullPath}:`, error);
+    const markdownSlugs = fs.readdirSync(contentDir).filter((dir) => {
+        const fullPath = path.join(contentDir, dir);
+        return (
+            fs.statSync(fullPath).isDirectory() && fs.existsSync(path.join(fullPath, 'index.md'))
+        );
+    });
+
+    const markdownSlugList: MarkdownGroup[] = markdownSlugs.map((slug) => {
+        const markdownDir = path.join(contentDir, slug);
+
+        // Parse index.md
+        const { frontmatter, content } = parseMarkdownFile(path.join(markdownDir, 'index.md'));
+
+        // Parse other sections
+        const sectionFiles = fs
+            .readdirSync(markdownDir)
+            .filter((f) => f.endsWith('.md') && f !== 'index.md');
+
+        const sections: MarkdownSection[] = sectionFiles.map((file) => {
+            const { frontmatter: data, content: sectionContent } = parseMarkdownFile(
+                path.join(markdownDir, file),
+            );
+
+            return {
+                title: data.title || 'Untitled Section',
+                description: data.description || '',
+                author: data.author,
+                date: data.date,
+                slug: file.replace('.md', ''),
+                content: sectionContent,
+                readingTime: readingTime(sectionContent),
+            };
+        });
+
         return {
-            title: 'Guide Not Found',
-            description: 'The requested guide could not be found.',
+            title: frontmatter.title || 'Untitled Markdown Doc',
+            description: frontmatter.description || '',
+            author: frontmatter.author,
+            date: frontmatter.date,
             slug,
-            sections: [],
-            content: '',
+            sections,
+            content,
         };
-    }
+    });
 
-    // Parse frontmatter
-    const { data, content } = matter(fileContents);
-    const frontmatter = data as GuideFrontmatter;
+    return markdownSlugList.sort((a, b) => {
+        if (!a.date) return 1;
+        if (!b.date) return -1;
+        return new Date(b.date).getTime() - new Date(a.date).getTime();
+    });
+}
 
-    // Get sections
-    const sections = getSectionsByGuideSlug(slug);
+/**
+ * Get markdown by its slug (local filesystem version)
+ */
+export async function getMarkdownBySlug(slug: string, contentDir: string): Promise<MarkdownGroup> {
+    const markdownDir = path.join(process.cwd(), CONTENT_DIRECTORY, contentDir, slug);
+    const { frontmatter, content } = parseMarkdownFile(path.join(markdownDir, 'index.md'));
+
+    const sectionFiles = fs
+        .readdirSync(markdownDir)
+        .filter((f) => f.endsWith('.md') && f !== 'index.md');
+
+    const sections: MarkdownSection[] = sectionFiles.map((file) => {
+        const { frontmatter: data, content: sectionContent } = parseMarkdownFile(
+            path.join(markdownDir, file),
+        );
+        return {
+            title: data.title || 'Untitled Section',
+            description: data.description || '',
+            author: data.author,
+            date: data.date,
+            slug: file.replace('.md', ''),
+            content: sectionContent,
+            readingTime: readingTime(sectionContent),
+        };
+    });
 
     return {
-        title: frontmatter.title || 'Untitled Guide',
+        title: frontmatter.title || 'Untitled Document',
         description: frontmatter.description || '',
         author: frontmatter.author,
         date: frontmatter.date,
@@ -134,43 +168,21 @@ export function getGuideBySlug(slug: string): Guide {
 }
 
 /**
- * Get all sections for a guide
- */
-export function getSectionsByGuideSlug(slug: string): Section[] {
-    const guideDirectory = path.join(GUIDES_DIRECTORY, slug);
-
-    try {
-        if (!fs.existsSync(guideDirectory)) {
-            return [];
-        }
-
-        const sectionFiles = fs
-            .readdirSync(guideDirectory)
-            .filter((file) => file.endsWith('.md') && file !== 'index.md');
-
-        const sections = sectionFiles.map((file) => {
-            const sectionSlug = file.replace(/\.md$/, '');
-            return getSectionBySlug(slug, sectionSlug);
-        });
-
-        return sections;
-    } catch (error) {
-        console.error(`Error getting sections for guide ${slug}:`, error);
-        return [];
-    }
-}
-
-/**
  * Get a specific section by its slug
  */
-export function getSectionBySlug(guideSlug: string, sectionSlug: string): Section {
-    const fullPath = path.join(GUIDES_DIRECTORY, guideSlug, `${sectionSlug}.md`);
-    let fileContents: string;
-
-    try {
-        fileContents = fs.readFileSync(fullPath, 'utf8');
-    } catch (error) {
-        console.error(`Error reading section file ${fullPath}:`, error);
+export function getMarkdownSectionBySlug(
+    markdownSlug: string,
+    sectionSlug: string,
+    contentDir: string,
+): MarkdownSection {
+    const fullPath = path.join(
+        process.cwd(),
+        CONTENT_DIRECTORY,
+        contentDir,
+        markdownSlug,
+        `${sectionSlug}.md`,
+    );
+    if (!fs.existsSync(fullPath)) {
         return {
             title: 'Section Not Found',
             description: 'The requested section could not be found.',
@@ -180,12 +192,7 @@ export function getSectionBySlug(guideSlug: string, sectionSlug: string): Sectio
         };
     }
 
-    // Parse frontmatter
-    const { data, content } = matter(fileContents);
-    const frontmatter = data as GuideFrontmatter;
-
-    // Calculate reading time
-    const stats = readingTime(content);
+    const { frontmatter, content } = parseMarkdownFile(fullPath);
 
     return {
         title: frontmatter.title || 'Untitled Section',
@@ -194,17 +201,19 @@ export function getSectionBySlug(guideSlug: string, sectionSlug: string): Sectio
         date: frontmatter.date,
         slug: sectionSlug,
         content,
-        readingTime: stats,
+        readingTime: readingTime(content),
     };
 }
 
 /**
  * Convert markdown to HTML
  */
-export async function markdownToHtml(markdown: string, guideSlug?: string): Promise<string> {
-    // Pre-process Markdown content with guide slug
-    const processedMarkdown = prepareMarkdownForMDX(markdown, guideSlug);
-
+export async function markdownToHtml(
+    markdown: string,
+    markdownSlug: string,
+    contentDir: string,
+): Promise<string> {
+    const processedMarkdown = prepareMarkdownForMDX(markdown, markdownSlug, contentDir);
     const result = await remark()
         .use(html, { sanitize: false })
         .use(remarkGfm)
@@ -212,12 +221,11 @@ export async function markdownToHtml(markdown: string, guideSlug?: string): Prom
 
     let htmlContent = result.toString();
 
-    // Process images in the generated HTML
-    htmlContent = processImages(htmlContent, guideSlug);
+    // Fix images
+    htmlContent = processImages(htmlContent, markdownSlug, contentDir);
 
-    // Ensure code blocks have proper language classes for Prism.js
+    // Add Prism.js classes to code blocks
     htmlContent = htmlContent.replace(/<pre><code class="language-(\w+)">/g, (match, language) => {
-        // Apply the language class to both pre and code tags for better Prism.js detection
         return `<pre class="language-${language}"><code class="language-${language}">`;
     });
 
@@ -227,7 +235,7 @@ export async function markdownToHtml(markdown: string, guideSlug?: string): Prom
 /**
  * Process images in HTML content
  */
-function processImages(htmlContent: string, guideSlug?: string): string {
+function processImages(htmlContent: string, markdownSlug?: string, imageDir?: string): string {
     // Replace relative image paths with absolute paths
     return htmlContent.replace(
         /<img([^>]+)src=["'](?!https?:\/\/)([^"']+)["']/g,
@@ -237,59 +245,20 @@ function processImages(htmlContent: string, guideSlug?: string): string {
                 return `<img${attributes}src="${url}"`;
             }
 
-            // Otherwise, make it absolute using the guide slug
-            if (guideSlug) {
-                return `<img${attributes}src="/img/guides/${guideSlug}/${url}"`;
+            // Otherwise, make it absolute using the markdown slug
+            if (markdownSlug) {
+                return `<img${attributes}src="/img/${imageDir}/${markdownSlug}/${url}"`;
             } else {
-                return `<img${attributes}src="/img/guides/${url}"`;
+                return `<img${attributes}src="/img/${imageDir}/${url}"`;
             }
         },
     );
 }
 
 /**
- * Sanitize HTML content in markdown to prevent React issues
- */
-function sanitizeHtmlInMarkdown(markdown: string): string {
-    // Remove style attributes from HTML in markdown
-    return markdown.replace(
-        /<([a-z][a-z0-9]*)\s+style=(['"])([^'"]*)\2/gi,
-        (match, tag, quote, styles) => {
-            return `<${tag}`;
-        },
-    );
-}
-
-/**
- * Extract headings from markdown content for table of contents
- */
-export function extractHeadings(markdown: string) {
-    const headingRegex = /^(#{1,6})\s+(.+)$/gm;
-    const headings = [];
-    let match;
-
-    while ((match = headingRegex.exec(markdown)) !== null) {
-        const level = match[1].length;
-        const text = match[2].trim();
-        const slug = text
-            .toLowerCase()
-            .replace(/[^\w\s-]/g, '')
-            .replace(/\s+/g, '-');
-
-        headings.push({
-            level,
-            text,
-            slug,
-        });
-    }
-
-    return headings;
-}
-
-/**
  * Process links in markdown content
  */
-export function processLinks(content: string, guideSlug: string): string {
+export function processLinks(content: string, markdownSlug: string, contentDir: string): string {
     // Convert relative links to absolute paths
     return content.replace(/\[(.*?)\]\((?!https?:\/\/)([^)]+)\)/g, (match, text, url) => {
         // Keep anchor links as-is
@@ -301,14 +270,18 @@ export function processLinks(content: string, guideSlug: string): string {
             return `[${text}](${url})`;
         }
         // Convert relative file paths to absolute
-        return `[${text}](/resources/guides/${guideSlug}/${url})`;
+        return `[${text}](/resources/${contentDir}/${markdownSlug}/${url})`;
     });
 }
 
 /**
  * Process image paths in markdown content
  */
-export function processImagePaths(content: string, guideSlug?: string): string {
+export function processImagePaths(
+    content: string,
+    markdownSlug?: string,
+    imageDir?: string,
+): string {
     // Replace relative image paths with absolute paths
     return content.replace(/!\[(.*?)\]\((?!https?:\/\/)([^)]+)\)/g, (match, alt, url) => {
         // If it's already an absolute path starting with /, keep it
@@ -316,11 +289,11 @@ export function processImagePaths(content: string, guideSlug?: string): string {
             return `![${alt}](${url})`;
         }
 
-        // Otherwise, make it absolute using the guide slug
-        if (guideSlug) {
-            return `![${alt}](/img/guides/${guideSlug}/${url})`;
+        // Otherwise, make it absolute using the markdown slug
+        if (markdownSlug) {
+            return `![${alt}](/img/${imageDir}/${markdownSlug}/${url})`;
         } else {
-            return `![${alt}](/img/guides/${url})`;
+            return `![${alt}](/img/${imageDir}/${url})`;
         }
     });
 }
@@ -328,13 +301,17 @@ export function processImagePaths(content: string, guideSlug?: string): string {
 /**
  * Prepare markdown content for rendering with MDX
  */
-export function prepareMarkdownForMDX(content: string, guideSlug?: string): string {
+export function prepareMarkdownForMDX(
+    content: string,
+    markdownSlug: string,
+    contentDir: string,
+): string {
     // Process image paths to absolute
-    let processedContent = processImagePaths(content, guideSlug);
+    let processedContent = processImagePaths(content, markdownSlug, contentDir);
 
-    // Process links if guideSlug is provided
-    if (guideSlug) {
-        processedContent = processLinks(processedContent, guideSlug);
+    // Process links if markdownSlug is provided
+    if (markdownSlug) {
+        processedContent = processLinks(processedContent, markdownSlug, contentDir);
     }
 
     // Sanitize HTML within markdown to avoid React issues
@@ -348,21 +325,4 @@ export function prepareMarkdownForMDX(content: string, guideSlug?: string): stri
     );
 
     return processedContent;
-}
-
-/**
- * Ensure guide image directory exists
- */
-export function ensureGuideImageDirectory(guideSlug: string): string {
-    const guideImageDir = path.join(GUIDE_IMAGES_DIRECTORY, guideSlug);
-
-    if (!fs.existsSync(GUIDE_IMAGES_DIRECTORY)) {
-        fs.mkdirSync(GUIDE_IMAGES_DIRECTORY, { recursive: true });
-    }
-
-    if (!fs.existsSync(guideImageDir)) {
-        fs.mkdirSync(guideImageDir, { recursive: true });
-    }
-
-    return guideImageDir;
 }

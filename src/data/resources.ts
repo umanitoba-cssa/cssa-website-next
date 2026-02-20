@@ -9,12 +9,14 @@ interface IResourceLink {
     linkText?: string;
 }
 
-interface IGuideList {
+interface IMarkdownPart {
     slug: string;
     repoURL: string;
 }
 
-export const GuideList: IGuideList[] = [
+export const GITHUB_OWNER = 'umanitoba-cssa';
+
+export const GuideList: IMarkdownPart[] = [
     {
         slug: 'first-year-guide',
         repoURL: 'https://github.com/umanitoba-cssa/first-year-guide',
@@ -24,6 +26,13 @@ export const GuideList: IGuideList[] = [
         repoURL: 'https://github.com/umanitoba-cssa/second-year-guide',
     },
 ];
+
+export const GeneralMeetingPart: IMarkdownPart = {
+    slug: 'general-meeting',
+    repoURL: 'https://github.com/umanitoba-cssa/general-meeting',
+};
+
+export const MarkdownRepoList: IMarkdownPart[] = [GeneralMeetingPart];
 
 export const ResourceLinks: IResourceLink[] = [
     {
@@ -80,7 +89,7 @@ export const CSSALinks: IResourceLink[] = [
     {
         title: 'General Meeting Archives',
         description: 'Past CSSA General Meeting notes',
-        href: 'resources/general-meeting-archives',
+        href: 'resources/general-meeting',
         internal: true,
         linkText: 'Browse archives →',
     },

@@ -56,7 +56,10 @@ export async function getCalendarEvents(opts: {
 
 export async function getEvents() {
     const calendarId = process.env.GOOGLE_CALENDAR_ID;
-    if (!calendarId) throw new Error('Missing env CALENDAR_ID');
+    if (!calendarId) {
+        console.warn('Missing env CALENDAR_ID');
+        return [];
+    }
 
     const start = new Date(2022, 0, 1, 0, 0, 0);
     const now = new Date();

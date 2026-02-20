@@ -8,59 +8,59 @@ import { Button } from '@/components/ui/button';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import Breadcrumbs from '@/components/markdown/breadcrumbs';
 
-const contentDir = 'guides';
+const contentDir = 'general-meeting';
 
 interface SectionPageProps {
     params: Promise<{
-        'guide-slug': string;
+        'markdown-slug': string;
         'section-slug': string;
     }>;
 }
 
 export default async function SectionPage({ params }: SectionPageProps) {
-    const { ['guide-slug']: guideSlug, ['section-slug']: sectionSlug } = await params;
-    const guide = await getMarkdownBySlug(guideSlug, contentDir);
+    const { ['markdown-slug']: markdownSlug, ['section-slug']: sectionSlug } = await params;
+    const markdown = await getMarkdownBySlug(markdownSlug, contentDir);
 
-    // Redirect to 404 if guide not found
-    if (!guide.title || guide.title === 'Guide Not Found') {
+    // Redirect to 404 if meeting not found
+    if (!markdown.title || markdown.title === 'Meeting Not Found') {
         return (
             <MarkdownNotFound
-                sourceDir="/resources/guides"
-                sourceLabel="Guide"
+                sourceDir={`/resources/${contentDir}`}
+                sourceLabel="Meeting"
             />
         );
     }
 
-    const section = getMarkdownSectionBySlug(guideSlug, sectionSlug, contentDir);
+    const section = getMarkdownSectionBySlug(markdownSlug, sectionSlug, contentDir);
     // Redirect to 404 if section not found
     if (!section.title || section.title === 'Section Not Found') {
         return (
             <MarkdownNotFound
-                sourceDir="/resources/guides"
-                sourceLabel="Guide"
+                sourceDir={`/resources/${contentDir}`}
+                sourceLabel="Meeting"
             />
         );
     }
 
-    // Process markdown content to HTML with guide slug for proper image processing
-    const htmlContent = await markdownToHtml(section.content, guideSlug, contentDir);
+    // Process markdown content to HTML with meeting slug for proper image processing
+    const htmlContent = await markdownToHtml(section.content, markdownSlug, contentDir);
 
     // Find the current section index for prev/next navigation
-    const currentSectionIndex = guide.sections.findIndex((s) => s.slug === sectionSlug);
-    const prevSection = currentSectionIndex > 0 ? guide.sections[currentSectionIndex - 1] : null;
+    const currentSectionIndex = markdown.sections.findIndex((s) => s.slug === sectionSlug);
+    const prevSection = currentSectionIndex > 0 ? markdown.sections[currentSectionIndex - 1] : null;
     const nextSection =
-        currentSectionIndex < guide.sections.length - 1
-            ? guide.sections[currentSectionIndex + 1]
+        currentSectionIndex < markdown.sections.length - 1
+            ? markdown.sections[currentSectionIndex + 1]
             : null;
 
     // Breadcrumb items
     const breadcrumbItems = [
         { label: 'Resources', href: '/resources' },
-        { label: 'Guides', href: '/resources/guides' },
-        { label: guide.title, href: `/resources/guides/${guideSlug}` },
+        { label: 'Meetings', href: `/resources/${contentDir}` },
+        { label: markdown.title, href: `/resources/${contentDir}/${markdownSlug}` },
         {
             label: section.title,
-            href: `/resources/guides/${guideSlug}/${sectionSlug}`,
+            href: `/resources/${contentDir}/${markdownSlug}/${sectionSlug}`,
             active: true,
         },
     ];
@@ -81,8 +81,8 @@ export default async function SectionPage({ params }: SectionPageProps) {
                 <div className="lg:grid lg:grid-cols-3 gap-8">
                     <div className="lg:col-span-1">
                         <MarkdownSidebar
-                            markdown={guide}
-                            rootPath={'/resources/guides'}
+                            markdown={markdown}
+                            rootPath={`/resources/${contentDir}`}
                         />
                     </div>
 
@@ -98,7 +98,7 @@ export default async function SectionPage({ params }: SectionPageProps) {
                                     className="border-cssa-blue text-white hover:bg-cssa-blue/20 transition-colors flex items-center gap-2"
                                     asChild>
                                     <Link
-                                        href={`/resources/guides/${guideSlug}/${prevSection.slug}`}>
+                                        href={`/resources/${contentDir}/${markdownSlug}/${prevSection.slug}`}>
                                         <ChevronLeft className="h-4 w-4" />
                                         {prevSection.title}
                                     </Link>
@@ -108,9 +108,9 @@ export default async function SectionPage({ params }: SectionPageProps) {
                                     variant="outline"
                                     className="border-cssa-blue text-white bg-cssa-blue/20 transition-colors flex items-center gap-2"
                                     asChild>
-                                    <Link href={`/resources/guides/${guideSlug}`}>
+                                    <Link href={`/resources/${contentDir}/${markdownSlug}`}>
                                         <ChevronLeft className="h-4 w-4" />
-                                        Guide Overview
+                                        Meeting Overview
                                     </Link>
                                 </Button>
                             )}
@@ -121,7 +121,7 @@ export default async function SectionPage({ params }: SectionPageProps) {
                                     className="border-cssa-blue text-white bg-cssa-blue/20 transition-colors flex items-center gap-2"
                                     asChild>
                                     <Link
-                                        href={`/resources/guides/${guideSlug}/${nextSection.slug}`}>
+                                        href={`/resources/${contentDir}/${markdownSlug}/${nextSection.slug}`}>
                                         {nextSection.title}
                                         <ChevronRight className="h-4 w-4" />
                                     </Link>

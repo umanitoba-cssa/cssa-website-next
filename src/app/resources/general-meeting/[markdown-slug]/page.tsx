@@ -5,39 +5,39 @@ import MarkdownSidebar from '@/components/markdown/markdown-sidebar';
 import MarkdownContent from '@/components/markdown/markdown-content';
 import Breadcrumbs from '@/components/markdown/breadcrumbs';
 
-const contentDir = 'guides';
+const contentDir = 'general-meeting';
 
-interface GuidePageProps {
+interface MarkdownPageProps {
     params: Promise<{
-        'guide-slug': string;
+        'markdown-slug': string;
     }>;
 }
 
-export default async function GuidePage({ params }: GuidePageProps) {
-    const { ['guide-slug']: guideSlug } = await params;
-    const guide = await getMarkdownBySlug(guideSlug, contentDir);
+export default async function MeetingPage({ params }: MarkdownPageProps) {
+    const { ['markdown-slug']: markdownSlug } = await params;
+    const markdown = await getMarkdownBySlug(markdownSlug, contentDir);
 
-    if (!guide.title || guide.title === 'guide Not Found') {
+    if (!markdown.title || markdown.title === 'Meeting Not Found') {
         return (
             <MarkdownNotFound
-                sourceDir="/resources/guides"
-                sourceLabel="Guide"
+                sourceDir={`/resources/${contentDir}`}
+                sourceLabel="Meeting"
             />
         );
     }
 
-    const htmlContent = await markdownToHtml(guide.content, guideSlug, contentDir);
+    const htmlContent = await markdownToHtml(markdown.content, markdownSlug, contentDir);
 
     const breadcrumbItems = [
         { label: 'Resources', href: '/resources' },
-        { label: 'Guides', href: '/resources/guides' },
-        { label: guide.title, href: `/resources/guides/${guideSlug}`, active: true },
+        { label: 'Meetings', href: `/resources/${contentDir}` },
+        { label: markdown.title, href: `/resources/${contentDir}/${markdownSlug}`, active: true },
     ];
 
     return (
         <main className="flex flex-col">
             <PageHeader
-                title={guide.title}
+                title={markdown.title}
                 image="/img/backgrounds/resources.png"
             />
 
@@ -50,8 +50,8 @@ export default async function GuidePage({ params }: GuidePageProps) {
                 <div className="lg:grid lg:grid-cols-3 gap-8">
                     <div className="lg:col-span-1">
                         <MarkdownSidebar
-                            markdown={guide}
-                            rootPath={'/resources/guides'}
+                            markdown={markdown}
+                            rootPath={`/resources/${contentDir}`}
                         />
                     </div>
 
@@ -60,13 +60,13 @@ export default async function GuidePage({ params }: GuidePageProps) {
                             <MarkdownContent source={htmlContent} />
                         </article>
 
-                        {(guide.author || guide.date) && (
+                        {(markdown.author || markdown.date) && (
                             <div className="mt-12 pt-4 border-t border-gray-700 text-sm text-gray-400">
-                                {guide.author && <p>Written by: {guide.author}</p>}
-                                {guide.date && (
+                                {markdown.author && <p>Written by: {markdown.author}</p>}
+                                {markdown.date && (
                                     <p>
                                         Last updated:{' '}
-                                        {new Date(guide.date).toLocaleDateString('en-US', {
+                                        {new Date(markdown.date).toLocaleDateString('en-US', {
                                             year: 'numeric',
                                             month: 'long',
                                             day: 'numeric',
