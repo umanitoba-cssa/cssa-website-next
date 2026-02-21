@@ -15,8 +15,10 @@ import {
     StudentResourcesProfiles,
     IProfile,
     filterByYear,
-    years,
+    years as currentYears,
 } from '@/data/team';
+import { PrevExecsProfiles, years as prevYears } from '@/data/prev-team';
+
 import { useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import {
@@ -31,6 +33,7 @@ import {
 export default function Team() {
     const [selectedProfile, setSelectedProfile] = useState<IProfile | null>(null);
     const [year, setYear] = useState('2025 - 2026');
+    const allYears = Array.from(new Set([...currentYears, ...prevYears]));
 
     return (
         <main className="flex flex-col">
@@ -47,7 +50,7 @@ export default function Team() {
                     </SelectTrigger>
                     <SelectContent>
                         <SelectGroup>
-                            {years.map((year: string) => (
+                            {allYears.map((year: string) => (
                                 <SelectItem
                                     key={year}
                                     value={year}>
@@ -58,19 +61,21 @@ export default function Team() {
                     </SelectContent>
                 </Select>
 
-                {filterByYear(ExecProfiles, year).length > 0 && (
+                {filterByYear([...ExecProfiles, ...PrevExecsProfiles], year).length > 0 && (
                     <>
                         <BlockHeader title="Executive Team" />
                         <div className="flex flex-row gap-4 flex-wrap justify-center">
-                            {filterByYear(ExecProfiles, year).map((profile) => (
-                                <ProfileCard
-                                    key={`${profile.name}-${profile.group}-${profile.position}`}
-                                    profile={profile}
-                                    onClick={() => {
-                                        setSelectedProfile(profile);
-                                    }}
-                                />
-                            ))}
+                            {filterByYear([...ExecProfiles, ...PrevExecsProfiles], year).map(
+                                (profile) => (
+                                    <ProfileCard
+                                        key={`${profile.name}-${profile.group}-${profile.position}`}
+                                        profile={profile}
+                                        onClick={() => {
+                                            setSelectedProfile(profile);
+                                        }}
+                                    />
+                                ),
+                            )}
                         </div>
                     </>
                 )}
