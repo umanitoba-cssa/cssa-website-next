@@ -2,6 +2,13 @@ import { IProfile } from './team';
 
 export const PrevExecsProfiles = [
     {
+        name: 'Okiki Fasanmi',
+        group: 'Exec',
+        position: 'Vice President',
+        image: '/img/team/prevExecs/okiki.png',
+        year: '2024 - 2025',
+    },
+    {
         name: 'Tofunmi Layi-Babatunde',
         group: 'Exec',
         position: 'Director of Advocacy',
@@ -41,13 +48,6 @@ export const PrevExecsProfiles = [
         group: 'Exec',
         position: 'Assistant Director of Promotions',
         image: '/img/team/execs/kc.JPG',
-        year: '2024 - 2025',
-    },
-    {
-        name: 'Okiki Fasanmi',
-        group: 'Exec',
-        position: 'Vice President',
-        image: '/img/team/prevExecs/okiki.png',
         year: '2024 - 2025',
     },
 ];
