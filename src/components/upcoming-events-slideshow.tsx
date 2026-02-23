@@ -39,11 +39,15 @@ export default function UpcomingEventsSlideshow() {
         <div className="flex flex-col gap-4">
             <Carousel
                 setApi={setApi}
-                plugins={[
-                    Autoplay({
-                        delay: 5000,
-                    }),
-                ]}
+                plugins={
+                    UpcomingEvents.length > 1
+                        ? [
+                              Autoplay({
+                                  delay: 5000,
+                              }),
+                          ]
+                        : []
+                }
                 opts={{
                     loop: true,
                 }}
