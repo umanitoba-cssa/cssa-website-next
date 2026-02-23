@@ -58,7 +58,6 @@ export default function CTF2026() {
                         an individual and we will help you find a team.
                     </p>
                     <p>
-                        {' '}
                         <a
                             className="underline"
                             href="https://discord.gg/cSxPQD6VtZ"
