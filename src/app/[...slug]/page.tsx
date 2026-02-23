@@ -10,7 +10,7 @@ export default async function RedirectPage({ params }: { params: Promise<{ slug?
 
     const path = slug.join('/');
 
-    const match = redirects.find((item) => item.link === path);
+    const match = redirects.find((item) => item['cssa-website-route-to-redirect'] === path);
 
     if (match) {
         redirect(match.destination);
