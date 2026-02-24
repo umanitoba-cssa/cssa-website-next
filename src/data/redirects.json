@@ -1,9 +1,5 @@
 [
     {
-        "route-to-redirect": "ctf/discord",
-        "destination": "https://youtu.be/dQw4w9WgXcQ?si=LqEh084TwSZhBsAO"
-    },
-    {
         "route-to-redirect": "events/case-competition/discord",
         "destination": "https://discord.gg/cSxPQD6VtZ"
     }
