@@ -3,14 +3,14 @@
 import { useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { IEventLink } from '@/data/events';
-import { useCalendarNavigation } from '@/hooks/calendar/UseCalendarNavigation';
-import { useEventsByDate } from '@/hooks/calendar/UseEventsByDate';
+import { useCalendarNavigation } from '@/hooks/calendar/useCalendarNavigation';
+import { useEventsByDate } from '@/hooks/calendar/useEventsByDate';
 import { useMobileWeekNavigation } from '../../hooks/calendar/useMobileWeekNavigation';
 import { useDesktopNavigation } from '@/hooks/calendar/useDesktopNavigation';
-import { MonthYearPickerModal } from './MonthYearPickerModal';
-import EventModal from './EventModal';
-import { MobileCalendar } from './CalendarSectionComponents';
-import { DesktopCalendar } from './CalendarSectionComponents';
+import { MonthYearPickerModal } from './month-year-picker-modal';
+import EventModal from './event-modal';
+import { MobileCalendar } from './mobile-calendar';
+import { DesktopCalendar } from './desktop-calendar';
 
 type Props = {
     events: IEventLink[];
