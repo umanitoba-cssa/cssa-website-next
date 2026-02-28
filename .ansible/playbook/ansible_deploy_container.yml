@@ -49,4 +49,5 @@
           CANTEEN_SHEEET_ID: '{{ canteen_sheet_id }}'
           GITHUB_APP_ID: '{{ github_app_id }}'
           GITHUB_PRIVATE_KEY: '{{ github_private_key }}'
+          GOOGLE_CALENDAR_ID: '{{ google_calendar_id }}'
         container_default_behavior: compatibility
