@@ -12,11 +12,11 @@ import EventModal from './event-modal';
 import { MobileCalendar } from './mobile-calendar';
 import { DesktopCalendar } from './desktop-calendar';
 
-type Props = {
+type CalendarProps = {
     events: IEventLink[];
 };
 
-export default function CalendarSection({ events }: Props) {
+export default function CalendarSection({ events }: CalendarProps) {
     const router = useRouter();
     const [isPickerOpen, setIsPickerOpen] = useState(false);
     const [selectedEvent, setSelectedEvent] = useState<IEventLink | null>(null);
