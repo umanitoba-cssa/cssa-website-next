@@ -8,7 +8,6 @@
         "start": "next start",
         "prepare": "husky",
         "sync-markdown": "bun run scripts/sync-markdown.ts",
-        "setup-webhook-sync": "bun run scripts/setup-webhook-sync.js",
         "lint": "prettier --write . && eslint .",
         "lint:fix": "prettier --write . && eslint . --fix"
     },
