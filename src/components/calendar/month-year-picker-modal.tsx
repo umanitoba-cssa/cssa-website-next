@@ -3,7 +3,12 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaTimes } from 'react-icons/fa';
-import { FooterButtons, MonthGrid, YearSelector, MONTHS } from './MonthYearPickerModalComponents';
+import {
+    FooterButtons,
+    MonthGrid,
+    YearSelector,
+    MONTHS,
+} from './month-year-picker-modal-components';
 
 type MonthYearPickerModalProps = {
     isOpen: boolean;
