@@ -7,7 +7,7 @@ export default function CTF2026() {
         <main className="flex flex-col">
             <PageHeader
                 title="Capture The Flag 2026"
-                image="/img/capture-the-flag/2025photos/IMG_0818.jpeg"
+                image="/img/capture-the-flag/2026photos/IMG_1320.JPG"
             />
             <div className="container py-12 flex flex-col gap-12">
                 <hr className="border-t-4 border-cssa-gold" />

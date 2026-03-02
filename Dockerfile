@@ -54,7 +54,6 @@ RUN NEXT_PUBLIC_RECAPTCHA_SITE_KEY="${NEXT_PUBLIC_RECAPTCHA_SITE_KEY}" \
     GOOGLE_PRIVATE_KEY="${GOOGLE_PRIVATE_KEY}" \
     GOOGLE_CALENDAR_ID="${GOOGLE_CALENDAR_ID}" \
     CANTEEN_SHEEET_ID="${CANTEEN_SHEEET_ID}" \
-    bun run sync-guides && \
     NEXT_PUBLIC_RECAPTCHA_SITE_KEY="${NEXT_PUBLIC_RECAPTCHA_SITE_KEY}" \
     RECAPTCHA_SECRET_KEY="${RECAPTCHA_SECRET_KEY}" \
     YOUTUBE_API_KEY="${YOUTUBE_API_KEY}" \
@@ -111,6 +110,7 @@ COPY --from=builder /usr/src/app/public ./public
 COPY --from=builder /usr/src/app/next.config.mjs ./
 COPY --from=builder /usr/src/app/tailwind.config.ts ./
 COPY --from=builder /usr/src/app/postcss.config.mjs ./
+COPY --from=builder /usr/src/app/src/content ./src/content
 
 RUN mkdir -p /usr/src/app/.next/cache/images \
     && chown -R bun:bun /usr/src/app/.next

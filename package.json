@@ -7,8 +7,7 @@
         "build": "next build",
         "start": "next start",
         "prepare": "husky",
-        "sync-guides": "bun run scripts/sync-guides.js",
-        "setup-webhook-sync": "bun run scripts/setup-webhook-sync.js",
+        "sync-markdown": "bun run scripts/sync-markdown.ts",
         "lint": "prettier --write . && eslint .",
         "lint:fix": "prettier --write . && eslint . --fix"
     },
@@ -32,6 +31,7 @@
         "autoprefixer": "^10.4.23",
         "class-variance-authority": "^0.7.1",
         "clsx": "^2.1.1",
+        "embla-carousel-autoplay": "^8.6.0",
         "embla-carousel-react": "^8.6.0",
         "embla-carousel-wheel-gestures": "^8.1.0",
         "framer-motion": "^12.23.26",

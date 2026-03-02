@@ -1,13 +1,14 @@
-import { notFound } from 'next/navigation';
-import { Metadata } from 'next';
-import { getGuideBySlug, getSectionBySlug, getGuidesSlugs, markdownToHtml } from '@/lib/mdx';
+import MarkdownNotFound from '@/components/markdown/markdown-not-found';
+import { getMarkdownBySlug, getMarkdownSectionBySlug, markdownToHtml } from '@/lib/mdx';
 import PageHeader from '@/components/page-header';
-import GuideSidebar from '@/components/guides/guide-sidebar';
-import MarkdownContent from '@/components/guides/markdown-content';
+import MarkdownSidebar from '@/components/markdown/markdown-sidebar';
+import MarkdownContent from '@/components/markdown/markdown-content';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import Breadcrumbs from '@/components/guides/breadcrumbs';
+import Breadcrumbs from '@/components/markdown/breadcrumbs';
+
+const contentDir = 'guides';
 
 interface SectionPageProps {
     params: Promise<{
@@ -16,67 +17,33 @@ interface SectionPageProps {
     }>;
 }
 
-export async function generateMetadata({ params }: SectionPageProps): Promise<Metadata> {
-    const { 'guide-slug': guideSlug, 'section-slug': sectionSlug } = await params;
-    const guide = getGuideBySlug(guideSlug);
-
-    if (!guide.title || guide.title === 'Guide Not Found') {
-        return {
-            title: 'Guide Not Found | CSSA Resources',
-            description: 'The requested guide could not be found.',
-        };
-    }
-
-    const section = getSectionBySlug(guideSlug, sectionSlug);
-
-    if (!section.title || section.title === 'Section Not Found') {
-        return {
-            title: `Section Not Found | ${guide.title}`,
-            description: 'The requested section could not be found.',
-        };
-    }
-
-    return {
-        title: `${section.title} | ${guide.title}`,
-        description: section.description || guide.description,
-    };
-}
-
-export async function generateStaticParams() {
-    const guides = await getGuidesSlugs();
-    const params: { 'guide-slug': string; 'section-slug': string }[] = [];
-
-    for (const guideSlug of guides) {
-        const guide = getGuideBySlug(guideSlug);
-        guide.sections.forEach((section) => {
-            params.push({
-                'guide-slug': guideSlug,
-                'section-slug': section.slug,
-            });
-        });
-    }
-
-    return params;
-}
-
 export default async function SectionPage({ params }: SectionPageProps) {
-    const { 'guide-slug': guideSlug, 'section-slug': sectionSlug } = await params;
-    const guide = getGuideBySlug(guideSlug);
+    const { ['guide-slug']: guideSlug, ['section-slug']: sectionSlug } = await params;
+    const guide = await getMarkdownBySlug(guideSlug, contentDir);
 
     // Redirect to 404 if guide not found
     if (!guide.title || guide.title === 'Guide Not Found') {
-        notFound();
+        return (
+            <MarkdownNotFound
+                sourceDir="/resources/guides"
+                sourceLabel="Guide"
+            />
+        );
     }
 
-    const section = getSectionBySlug(guideSlug, sectionSlug);
-
+    const section = getMarkdownSectionBySlug(guideSlug, sectionSlug, contentDir);
     // Redirect to 404 if section not found
     if (!section.title || section.title === 'Section Not Found') {
-        notFound();
+        return (
+            <MarkdownNotFound
+                sourceDir="/resources/guides"
+                sourceLabel="Guide"
+            />
+        );
     }
 
     // Process markdown content to HTML with guide slug for proper image processing
-    const htmlContent = await markdownToHtml(section.content, guideSlug);
+    const htmlContent = await markdownToHtml(section.content, guideSlug, contentDir);
 
     // Find the current section index for prev/next navigation
     const currentSectionIndex = guide.sections.findIndex((s) => s.slug === sectionSlug);
@@ -106,25 +73,24 @@ export default async function SectionPage({ params }: SectionPageProps) {
             />
 
             <div className="container py-8">
-                {/* Breadcrumbs */}
                 <Breadcrumbs
                     items={breadcrumbItems}
                     className="mb-6"
                 />
 
                 <div className="lg:grid lg:grid-cols-3 gap-8">
-                    {/* Sidebar Navigation */}
                     <div className="lg:col-span-1">
-                        <GuideSidebar guide={guide} />
+                        <MarkdownSidebar
+                            markdown={guide}
+                            rootPath={'/resources/guides'}
+                        />
                     </div>
 
-                    {/* Main Content */}
                     <div className="lg:col-span-2 markdown-content-container">
                         <article className="prose dark:prose-invert max-w-none">
                             <MarkdownContent source={htmlContent} />
                         </article>
 
-                        {/* Section Navigation */}
                         <div className="mt-12 pt-4 border-t border-gray-700 flex justify-between">
                             {prevSection ? (
                                 <Button
@@ -163,7 +129,6 @@ export default async function SectionPage({ params }: SectionPageProps) {
                             )}
                         </div>
 
-                        {/* Metadata */}
                         {(section.author || section.date) && (
                             <div className="mt-6 pt-4 text-sm text-gray-400">
                                 {section.author && <p>Written by: {section.author}</p>}
