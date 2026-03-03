@@ -43,7 +43,7 @@ export default function Footer() {
                 </div>
             </div>
             <div className="flex flex-row gap-4 place-items-center text-center">
-                © Copyright 2023 - 2025 Computer Science Students&apos; Association
+                © Copyright 2023 - 2026 Computer Science Students&apos; Association
             </div>
             <div className="text-center">
                 This work is licensed under a{' '}
