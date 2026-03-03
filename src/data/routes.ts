@@ -7,6 +7,12 @@ interface IRoute {
 
 export const Routes: IRoute[] = [
     {
+        title: 'Elections 2026',
+        href: '/elections',
+        image: '/img/backgrounds/home.jpg',
+        showInNavbar: true,
+    },
+    {
         title: 'Home',
         href: '/',
         image: '/img/backgrounds/home.jpg',
