@@ -55,6 +55,20 @@ export default function Elections() {
                         </li>
                     </ul>
                 </div>
+                <div className="flex flex-col gap-4">
+                    <BlockHeader title="How to nominate yourself for a position?" />
+                    <p>
+                        Please email our CRO (email can be found in the election package) with the
+                        following heading <strong>[CSSA Election]</strong>.
+                    </p>
+                    <p>In the body of the email, please include:</p>
+                    <ul className="list-disc pl-10">
+                        <li>Your name</li>
+                        <li>The position you are running for</li>
+                        <li>That you have read the elections package</li>
+                        <li>That you agree to all the rules/guidelines in the package</li>
+                    </ul>
+                </div>
             </div>
         </main>
     );
