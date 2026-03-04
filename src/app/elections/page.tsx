@@ -65,9 +65,12 @@ export default function Elections() {
                     <ul className="list-disc pl-10">
                         <li>Your name</li>
                         <li>The position you are running for</li>
-                        <li>That you have read the elections package</li>
+                        <li>That you have read the election package</li>
                         <li>That you agree to all the rules/guidelines in the package</li>
                     </ul>
+                    <p>
+                        <i>All campaign volunteers must be cleared with the CRO.</i>
+                    </p>
                 </div>
             </div>
         </main>
