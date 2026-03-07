@@ -38,7 +38,7 @@ export default function Elections() {
                             <strong>Nomination Period:</strong> Monday, March 2 - Sunday, March 8
                         </li>
                         <li>
-                            <strong>All-Candidates Meeting:</strong> Monday, March 9, 7 PM
+                            <strong>All-Candidates Meeting:</strong> Monday, March 9, 6 PM
                         </li>
                         <li>
                             <strong>Campaigning Period:</strong> Tuesday, March 10 - Sunday, March
