@@ -20,8 +20,7 @@ export default function CTF2026() {
                 <div>
                     <p>📅 March 21, 2026</p>
                     <p>🕒 9:00 AM - 7:00 PM</p>
-                    <p>📍 TBA, University of Manitoba</p>{' '}
-                    {/* TODO in TECH-138: Update with rooms booked */}
+                    <p>📍 EITC Atrium, University of Manitoba</p>
                 </div>
 
                 <BlockHeader title="What is Case Competition?" />
