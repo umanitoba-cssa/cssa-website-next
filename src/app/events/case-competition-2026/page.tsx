@@ -7,7 +7,7 @@ export default function CTF2026() {
         <main className="flex flex-col bg-[#2b3b74] text-[#ffffff]">
             <div className="w-full bg-[#2b3b74] h-72 sm:h-80 md:h-96 lg:h-[600px] xl:h-[800px] relative">
                 <Image
-                    src="/img/case-competition/banner-case-comp.png"
+                    src="/img/case-competition/banner.png"
                     alt="Case Competition"
                     fill
                     className="object-contain"
@@ -15,36 +15,39 @@ export default function CTF2026() {
             </div>
 
             <div className="container py-12 flex flex-col gap-12">
-                {/* TODO in TECH-138: Update sponsors, add here */}
-
-                <div className="flex flex-col items-center gap-5">
+                <div className="flex flex-col items-center  pb-8">
                     <h3>PRESENTED BY</h3>
-                    <h4>Gold Sponsors</h4>
-                    <div className="flex flex-wrap gap-5 justify-center items-center">
-                        <SponsorCard
-                            name="Payworks"
-                            image="/img/sponsors/payworks.svg"
-                            website="https://payworks.ca/"
-                        />
-                        <SponsorCard
-                            name="Science Students' Association"
-                            image="/img/sponsors/"
-                            website="https://www.umanitobassa.com/"
-                        />
+
+                    <div className="flex flex-col items-center gap-5 my-5">
+                        <h4>Gold Sponsors</h4>
+                        <div className="flex flex-wrap gap-5 justify-center items-center">
+                            <SponsorCard
+                                name="Payworks"
+                                image="/img/sponsors/payworks.svg"
+                                website="https://payworks.ca/"
+                            />
+                            <SponsorCard
+                                name="Science Students' Association"
+                                image="/img/sponsors/ssa.svg"
+                                website="https://www.umanitobassa.com/"
+                            />
+                        </div>
                     </div>
 
-                    <h4 className="pt-10">Silver Sponsors</h4>
-                    <div className="flex flex-wrap gap-5 justify-center items-center">
-                        <SponsorCard
-                            name="Department of Computer Science"
-                            image="/img/sponsors/UMDeptCS.svg"
-                            website="https://umanitoba.ca/science/computer-science"
-                        />
-                        <SponsorCard
-                            name="G3"
-                            image="/img/sponsors/g3-logo.svg"
-                            website="https://g3.ca"
-                        />
+                    <div className="flex flex-col items-center gap-5">
+                        <h4 className="pt-10">Silver Sponsors</h4>
+                        <div className="flex flex-wrap gap-12 justify-center items-center">
+                            <SponsorCard
+                                name="Department of Computer Science"
+                                image="/img/sponsors/UMDeptCS.svg"
+                                website="https://umanitoba.ca/science/computer-science"
+                            />
+                            <SponsorCard
+                                name="G3"
+                                image="/img/sponsors/g3-logo.svg"
+                                website="https://g3.ca"
+                            />
+                        </div>
                     </div>
                 </div>
 
@@ -99,13 +102,54 @@ export default function CTF2026() {
                     </p>
                 </div>
 
-                <BlockHeader title="Coming Soon" />
-                <p>
-                    Curious about the sponsors, prizes, and schedule? We&apos;ll let you know soon.
-                    We promise it&apos;s worth the wait!
-                </p>
+                <BlockHeader title="Schedule" />
+                <div className="w-full overflow-hidden rounded-xl">
+                    <table className="w-full">
+                        <tbody>
+                            <tr className="bg-[#384b89]">
+                                <td className="px-4 py-3">8:30 AM</td>
+                                <td className="px-4 py-3">Registration</td>
+                            </tr>
+                            <tr className="bg-[#1f2d5a]">
+                                <td className="px-4 py-3">9:00 AM</td>
+                                <td className="px-4 py-3">Opening ceremony</td>
+                            </tr>
+                            <tr className="bg-[#384b89]">
+                                <td className="px-4 py-3">9:15 AM</td>
+                                <td className="px-4 py-3">Case Competition starts</td>
+                            </tr>
+                            <tr className="bg-[#1f2d5a]">
+                                <td className="px-4 py-3">12:00 PM</td>
+                                <td className="px-4 py-3">Lunch</td>
+                            </tr>
+                            <tr className="bg-[#384b89]">
+                                <td className="px-4 py-3">3:30 PM</td>
+                                <td className="px-4 py-3">
+                                    Case Competition ends, initial round of judging starts
+                                </td>
+                            </tr>
+                            <tr className="bg-[#1f2d5a]">
+                                <td className="px-4 py-3">5:00 PM</td>
+                                <td className="px-4 py-3">Dinner</td>
+                            </tr>
+                            <tr className="bg-[#384b89]">
+                                <td className="px-4 py-3">5:30 PM</td>
+                                <td className="px-4 py-3">Final round of judging starts</td>
+                            </tr>
+                            <tr className="bg-[#1f2d5a]">
+                                <td className="px-4 py-3">6:45 PM</td>
+                                <td className="px-4 py-3">Judging ends</td>
+                            </tr>
+                            <tr className="bg-[#384b89]">
+                                <td className="px-4 py-3">7:00 PM</td>
+                                <td className="px-4 py-3">Closing ceremony</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
-                {/* TODO in TECH-138: Add schedule, prizes blockheaders. Remove Coming Soon */}
+                <BlockHeader title="Prizes" />
+                <p>To be revealed at the event!</p>
             </div>
         </main>
     );
