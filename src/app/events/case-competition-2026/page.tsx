@@ -1,4 +1,5 @@
 import BlockHeader from '@/components/block-header';
+import SponsorCard from '@/components/sponsor-card';
 import Image from 'next/image';
 
 export default function CTF2026() {
@@ -16,6 +17,37 @@ export default function CTF2026() {
             <div className="container py-12 flex flex-col gap-12">
                 {/* TODO in TECH-138: Update sponsors, add here */}
 
+                <div className="flex flex-col items-center gap-5">
+                    <h3>PRESENTED BY</h3>
+                    <h4>Gold Sponsors</h4>
+                    <div className="flex flex-wrap gap-5 justify-center items-center">
+                        <SponsorCard
+                            name="Payworks"
+                            image="/img/sponsors/payworks.svg"
+                            website="https://payworks.ca/"
+                        />
+                        <SponsorCard
+                            name="Science Students' Association"
+                            image="/img/sponsors/"
+                            website="https://www.umanitobassa.com/"
+                        />
+                    </div>
+
+                    <h4 className="pt-10">Silver Sponsors</h4>
+                    <div className="flex flex-wrap gap-5 justify-center items-center">
+                        <SponsorCard
+                            name="Department of Computer Science"
+                            image="/img/sponsors/UMDeptCS.svg"
+                            website="https://umanitoba.ca/science/computer-science"
+                        />
+                        <SponsorCard
+                            name="G3"
+                            image="/img/sponsors/g3-logo.svg"
+                            website="https://g3.ca"
+                        />
+                    </div>
+                </div>
+
                 <BlockHeader title="Event Details" />
                 <div>
                     <p>📅 March 21, 2026</p>
@@ -23,7 +55,7 @@ export default function CTF2026() {
                     <p>📍 EITC Atrium, University of Manitoba</p>
                 </div>
 
-                <BlockHeader title="What is Case Competition?" />
+                <BlockHeader title="What is the Case Competition?" />
                 <div className="flex flex-col gap-6">
                     <p>
                         Students will be placed into teams of five and given a central case provided
