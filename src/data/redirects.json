@@ -6,5 +6,9 @@
     {
         "route-to-redirect": "lounge/discord",
         "destination": "https://discord.gg/B7cZDQcTj4"
+    },
+    {
+        "route-to-redirect": "elections/lounge-director",
+        "destination": "https://forms.cloud.microsoft/r/2tBF9a9wH9"
     }
 ]
