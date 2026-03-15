@@ -86,7 +86,7 @@ export default function CTF2026() {
                 <BlockHeader title="How can I register?" />
                 <div className="flex flex-col gap-6">
                     <p>
-                        You can sign up for the event by joining the Case Competition 2026 Discord
+                        You can sign up for the event by joining the Design & Craft 2026 Discord
                         server and following the instructions in the <i>#registration</i> channel.
                         Teams are limited up to a maximum of 5 people, but you can also register as
                         an individual and we will help you find a team.
