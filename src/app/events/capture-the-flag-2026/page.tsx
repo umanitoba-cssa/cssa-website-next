@@ -1,4 +1,5 @@
 import BlockHeader from '@/components/block-header';
+import Image from 'next/image';
 import PageHeader from '@/components/page-header';
 import SponsorCard from '@/components/sponsor-card';
 
@@ -33,8 +34,10 @@ export default function CTF2026() {
                 </div>
 
                 <BlockHeader title="Event Details" />
-                <p>🕒 February 7, 2026, 8:00AM-5:30PM</p>
-                <p>📍 E3-270, E2-150, University of Manitoba</p>
+                <div>
+                    <p>🕒 February 7, 2026, 8:00AM-5:30PM</p>
+                    <p>📍 E3-270, E2-150, University of Manitoba</p>
+                </div>
 
                 <BlockHeader title="What is Capture The Flag Competition?" />
                 <p>
@@ -67,11 +70,79 @@ export default function CTF2026() {
                     </a>
                 </p>
 
-                <BlockHeader title="Schedule" />
-                <p>More details to come!</p>
+                <BlockHeader title="Prizes" />
+                <div className="flex flex-wrap flex-col justify-center gap-4">
+                    <div className="flex flex-wrap justify-center gap-4">
+                        <div className="bg-[#1f3a70] text-white rounded-full px-6 py-3">
+                            <p className="font-semibold">First place: $200</p>
+                        </div>
+                        <div className="bg-[#1f3a70] text-white rounded-full px-6 py-3">
+                            <p className="font-semibold">Second place: $125</p>
+                        </div>
+                        <div className="bg-[#1f3a70] text-white rounded-full px-6 py-3">
+                            <p className="font-semibold">Third place: $75</p>
+                        </div>
+                    </div>
 
-                <BlockHeader title="Prize(s)" />
-                <p>More details to come!</p>
+                    <div className="flex flex-wrap justify-center gap-4">
+                        <div className="bg-[#1f3a70] text-white rounded-full px-6 py-3">
+                            <p className="font-semibold text-sm">Best First Time Team: $50</p>
+                        </div>
+                        <div className="bg-[#1f3a70] text-white rounded-full px-6 py-3">
+                            <p className="font-semibold text-sm">
+                                Best Woman and Gender Minority Team: $50
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <BlockHeader title="Award Winners" />
+                <div className="flex flex-wrap justify-center gap-4">
+                    {[
+                        {
+                            id: 1,
+                            src: '/img/capture-the-flag/2026photos/awards/first-place.jpg',
+                            alt: 'First Place',
+                        },
+                        {
+                            id: 2,
+                            src: '/img/capture-the-flag/2026photos/awards/second-place.jpg',
+                            alt: 'Second Place',
+                        },
+                        {
+                            id: 3,
+                            src: '/img/capture-the-flag/2026photos/awards/third-place.jpg',
+                            alt: 'Third Place',
+                        },
+                        {
+                            id: 4,
+                            src: '/img/capture-the-flag/2026photos/awards/best-first-time.jpg',
+                            alt: 'Best First Time Team',
+                        },
+                        {
+                            id: 5,
+                            src: '/img/capture-the-flag/2026photos/awards/best-gender-minority.jpg',
+                            alt: 'Best Woman and Gender Minority Team',
+                        },
+                    ].map((award) => (
+                        <div
+                            key={award.id}
+                            className="flex flex-col items-center"
+                            style={{ width: '400px' }}>
+                            <div
+                                className="relative w-full"
+                                style={{ aspectRatio: '16/9' }}>
+                                <Image
+                                    src={award.src}
+                                    fill
+                                    alt={award.alt}
+                                    className={`object-contain`}
+                                />
+                            </div>
+                            <p className="mt-2 text-center">{award.alt}</p>
+                        </div>
+                    ))}
+                </div>
             </div>
         </main>
     );
