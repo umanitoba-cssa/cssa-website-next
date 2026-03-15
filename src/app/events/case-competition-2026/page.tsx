@@ -58,7 +58,7 @@ export default function CTF2026() {
                     <p>📍 EITC Atrium, University of Manitoba</p>
                 </div>
 
-                <BlockHeader title="What is the Case Competition?" />
+                <BlockHeader title="What is this event about?" />
                 <div className="flex flex-col gap-6">
                     <p>
                         Students will be placed into teams of five and given a central case provided
@@ -108,7 +108,7 @@ export default function CTF2026() {
                         <tbody>
                             <tr className="bg-[#384b89]">
                                 <td className="px-4 py-3">8:30 AM</td>
-                                <td className="px-4 py-3">Registration</td>
+                                <td className="px-4 py-3">Registration starts</td>
                             </tr>
                             <tr className="bg-[#1f2d5a]">
                                 <td className="px-4 py-3">9:00 AM</td>
@@ -116,31 +116,33 @@ export default function CTF2026() {
                             </tr>
                             <tr className="bg-[#384b89]">
                                 <td className="px-4 py-3">9:15 AM</td>
-                                <td className="px-4 py-3">Case Competition starts</td>
+                                <td className="px-4 py-3">Sprint starts</td>
                             </tr>
                             <tr className="bg-[#1f2d5a]">
                                 <td className="px-4 py-3">12:00 PM</td>
                                 <td className="px-4 py-3">Lunch</td>
                             </tr>
                             <tr className="bg-[#384b89]">
-                                <td className="px-4 py-3">3:30 PM</td>
-                                <td className="px-4 py-3">
-                                    Case Competition ends, initial round of judging starts
-                                </td>
+                                <td className="px-4 py-3">3:15 PM</td>
+                                <td className="px-4 py-3">Sprint ends</td>
                             </tr>
                             <tr className="bg-[#1f2d5a]">
+                                <td className="px-4 py-3">3:30 PM</td>
+                                <td className="px-4 py-3">Initial round of judging starts</td>
+                            </tr>
+                            <tr className="bg-[#384b89]">
                                 <td className="px-4 py-3">5:00 PM</td>
                                 <td className="px-4 py-3">Dinner</td>
                             </tr>
-                            <tr className="bg-[#384b89]">
+                            <tr className="bg-[#1f2d5a]">
                                 <td className="px-4 py-3">5:30 PM</td>
                                 <td className="px-4 py-3">Final round of judging starts</td>
                             </tr>
-                            <tr className="bg-[#1f2d5a]">
+                            <tr className="bg-[#384b89]">
                                 <td className="px-4 py-3">6:45 PM</td>
                                 <td className="px-4 py-3">Judging ends</td>
                             </tr>
-                            <tr className="bg-[#384b89]">
+                            <tr className="bg-[#1f2d5a]">
                                 <td className="px-4 py-3">7:00 PM</td>
                                 <td className="px-4 py-3">Closing ceremony</td>
                             </tr>

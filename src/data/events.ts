@@ -105,7 +105,7 @@ export interface IUpcomingEvent {
 
 const AllUpcomingEvents: IUpcomingEvent[] = [
     {
-        title: 'Case Competition',
+        title: 'Design & Craft Sprint (Case Competition)',
         date: 'March 21, 2026',
         description:
             'Love problem-solving? Join us for a case competition where teams of five compete to solve a technical challenge.',
