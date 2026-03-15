@@ -92,29 +92,25 @@ export default async function SectionPage({ params }: SectionPageProps) {
                         </article>
 
                         <div className="mt-12 pt-4 border-t border-gray-700 flex justify-between">
-                            {prevSection ? (
-                                <Button
-                                    variant="outline"
-                                    className="border-cssa-blue text-white hover:bg-cssa-blue/20 transition-colors flex items-center gap-2"
-                                    asChild>
+                            <Button
+                                variant="outline"
+                                className="border-cssa-blue text-white hover:bg-cssa-blue/20 transition-colors flex items-center gap-2"
+                                asChild>
+                                {prevSection ? (
                                     <Link
                                         href={`/resources/${contentDir}/${markdownSlug}/${prevSection.slug}`}>
                                         <ChevronLeft className="h-4 w-4" />
-                                        {prevSection.title}
+                                        <p className="desktop-only text-base">
+                                            {prevSection.title}
+                                        </p>
                                     </Link>
-                                </Button>
-                            ) : (
-                                <Button
-                                    variant="outline"
-                                    className="border-cssa-blue text-white bg-cssa-blue/20 transition-colors flex items-center gap-2"
-                                    asChild>
+                                ) : (
                                     <Link href={`/resources/${contentDir}/${markdownSlug}`}>
                                         <ChevronLeft className="h-4 w-4" />
-                                        Meeting Overview
+                                        <p className="desktop-only text-base">Meeting Overview</p>
                                     </Link>
-                                </Button>
-                            )}
-
+                                )}
+                            </Button>
                             {nextSection && (
                                 <Button
                                     variant="outline"
@@ -122,7 +118,9 @@ export default async function SectionPage({ params }: SectionPageProps) {
                                     asChild>
                                     <Link
                                         href={`/resources/${contentDir}/${markdownSlug}/${nextSection.slug}`}>
-                                        {nextSection.title}
+                                        <p className="desktop-only text-base">
+                                            {nextSection.title}
+                                        </p>
                                         <ChevronRight className="h-4 w-4" />
                                     </Link>
                                 </Button>
