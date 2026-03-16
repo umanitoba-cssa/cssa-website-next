@@ -8,7 +8,7 @@ export default function CTF2026() {
             <div className="w-full bg-[#2b3b74] h-72 sm:h-80 md:h-96 lg:h-[600px] xl:h-[800px] relative">
                 <Image
                     src="/img/case-competition/banner.png"
-                    alt="Case Competition"
+                    alt="Design & Craft Sprint"
                     fill
                     className="object-contain"
                 />
