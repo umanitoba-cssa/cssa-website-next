@@ -136,7 +136,7 @@ export default function CTF2026() {
                                     src={award.src}
                                     fill
                                     alt={award.alt}
-                                    className={`object-contain`}
+                                    className="object-contain"
                                 />
                             </div>
                             <p className="mt-2 text-center">{award.alt}</p>
