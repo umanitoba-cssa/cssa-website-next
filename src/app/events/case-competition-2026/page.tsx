@@ -105,6 +105,17 @@ export default function CTF2026() {
                 <BlockHeader title="Schedule" />
                 <div className="w-full overflow-hidden rounded-xl">
                     <table className="w-full">
+                        <caption className="sr-only">Case competition schedule</caption>
+                        <thead>
+                            <tr className="bg-[#1f2d5a]">
+                                <th scope="col" className="px-4 py-3 text-left">
+                                    Time
+                                </th>
+                                <th scope="col" className="px-4 py-3 text-left">
+                                    Activity
+                                </th>
+                            </tr>
+                        </thead>
                         <tbody>
                             <tr className="bg-[#384b89]">
                                 <td className="px-4 py-3">8:30 AM</td>
