@@ -98,14 +98,17 @@ export default async function SectionPage({ params }: SectionPageProps) {
                                 asChild>
                                 {prevSection ? (
                                     <Link
-                                        href={`/resources/${contentDir}/${markdownSlug}/${prevSection.slug}`}>
+                                        href={`/resources/${contentDir}/${markdownSlug}/${prevSection.slug}`}
+                                        aria-label={`Previous section: ${prevSection.title}`}>
                                         <ChevronLeft className="h-4 w-4" />
                                         <p className="desktop-only text-base">
                                             {prevSection.title}
                                         </p>
                                     </Link>
                                 ) : (
-                                    <Link href={`/resources/${contentDir}/${markdownSlug}`}>
+                                    <Link
+                                        href={`/resources/${contentDir}/${markdownSlug}`}
+                                        aria-label="Previous section: Meeting Overview">
                                         <ChevronLeft className="h-4 w-4" />
                                         <p className="desktop-only text-base">Meeting Overview</p>
                                     </Link>
@@ -117,7 +120,8 @@ export default async function SectionPage({ params }: SectionPageProps) {
                                     className="border-cssa-blue text-white bg-cssa-blue/20 transition-colors flex items-center gap-2"
                                     asChild>
                                     <Link
-                                        href={`/resources/${contentDir}/${markdownSlug}/${nextSection.slug}`}>
+                                        href={`/resources/${contentDir}/${markdownSlug}/${nextSection.slug}`}
+                                        aria-label={`Next section: ${nextSection.title}`}>
                                         <p className="desktop-only text-base">
                                             {nextSection.title}
                                         </p>
