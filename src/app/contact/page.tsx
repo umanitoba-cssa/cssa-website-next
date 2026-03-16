@@ -16,14 +16,15 @@ export type FormData = {
 };
 
 const Contact: FC = () => {
-    const { register, handleSubmit, setValue } = useForm<FormData>();
+    const { register, handleSubmit, setValue, reset } = useForm<FormData>();
 
     const onSubmit = useCallback(
         (data: FormData) => {
             sendEmail(data);
             setValue('recaptchaToken', undefined);
+            reset();
         },
-        [setValue],
+        [setValue, reset],
     );
 
     useEffect(() => {
