@@ -108,10 +108,14 @@ export default function CTF2026() {
                         <caption className="sr-only">Case competition schedule</caption>
                         <thead>
                             <tr className="bg-[#1f2d5a]">
-                                <th scope="col" className="px-4 py-3 text-left">
+                                <th
+                                    scope="col"
+                                    className="px-4 py-3 text-left">
                                     Time
                                 </th>
-                                <th scope="col" className="px-4 py-3 text-left">
+                                <th
+                                    scope="col"
+                                    className="px-4 py-3 text-left">
                                     Activity
                                 </th>
                             </tr>
@@ -162,7 +166,7 @@ export default function CTF2026() {
                 </div>
 
                 <BlockHeader title="Prizes" />
-                <p>To be revealed at the event!</p>
+                <p>To be revealed at the event.</p>
             </div>
         </main>
     );
