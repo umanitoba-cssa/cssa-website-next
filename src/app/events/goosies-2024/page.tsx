@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-// import { EventTeaser } from "../../components/EventTeaser/EventTeaser";
 import PageHeader from '@/components/page-header';
 import { MdOutlineLocationOn } from 'react-icons/md';
 import { FaRegClock, FaTshirt } from 'react-icons/fa';
