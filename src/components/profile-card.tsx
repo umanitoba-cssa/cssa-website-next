@@ -3,6 +3,7 @@ import Image from 'next/image';
 import React from 'react';
 import { motion } from 'framer-motion';
 import { IProfile } from '@/data/team';
+import { getCompressedImageProps } from '@/components/compress-image';
 
 export default function ProfileCard({
     profile,
@@ -28,6 +29,7 @@ export default function ProfileCard({
                     alt={profile?.name}
                     fill
                     className="object-cover"
+                    {...getCompressedImageProps(208)}
                 />
             </div>
             <div className="text-center">
