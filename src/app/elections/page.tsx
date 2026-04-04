@@ -13,15 +13,6 @@ export default function Elections() {
                 <div className="flex flex-col gap-4">
                     <BlockHeader title="Election Information" />
                     <a
-                        href={`https://docs.google.com/document/d/1f4LfCH8aRxPPb0OgNE_2stsrRsJYH7hd/edit`}>
-                        <Button
-                            className="w-full"
-                            variant="default"
-                            size="lg">
-                            Election Package
-                        </Button>
-                    </a>
-                    <a
                         href={`https://github.com/umanitoba-cssa/constitution/blob/main/Constitution.md`}>
                         <Button
                             className="w-full"
