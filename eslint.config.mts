@@ -5,9 +5,13 @@ import tseslint from 'typescript-eslint';
 import reactPlugin from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
 import prettierPlugin from 'eslint-plugin-prettier';
+import jsxA11y from 'eslint-plugin-jsx-a11y';
 import { defineConfig } from 'eslint/config';
 
 export default defineConfig([
+    // Accessibility recommended config
+    jsxA11y.flatConfigs.recommended,
+
     // Ignore files and folders
     {
         ignores: ['node_modules/**', '.next/**', 'dist/**', 'build/**', '*.md'],
@@ -28,7 +32,12 @@ export default defineConfig([
         },
         ...js.configs.recommended,
         rules: {
-            'prettier/prettier': 'error',
+            'prettier/prettier': [
+                'error',
+                {
+                    endOfLine: "auto", // maintains existing line endings
+                },
+            ],
         },
     },
 
@@ -67,7 +76,12 @@ export default defineConfig([
             'react/react-in-jsx-scope': 'off',
 
             // Prettier reports formatting issues but does not conflict
-            'prettier/prettier': 'error',
+            'prettier/prettier': [
+                'error',
+                {
+                    endOfLine: "auto", // maintains existing line endings
+                },
+            ],
 
             // Enforce self-closing tags where possible
             'react/self-closing-comp': 'error',
