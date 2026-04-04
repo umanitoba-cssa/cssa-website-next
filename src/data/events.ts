@@ -106,7 +106,7 @@ export interface IUpcomingEvent {
 const AllUpcomingEvents: IUpcomingEvent[] = [
     {
         title: 'Design & Craft Sprint (Case Competition)',
-        date: 'March 21, 2026',
+        date: 'April 4, 2026',
         description:
             'Love problem-solving? Join us for a case competition where teams of five compete to solve a technical challenge.',
         image: '/img/case-competition/banner.png',
@@ -116,7 +116,10 @@ const AllUpcomingEvents: IUpcomingEvent[] = [
 ];
 
 export const UpcomingEvents: IUpcomingEvent[] = AllUpcomingEvents.filter((event) => {
-    return new Date(event.date.replace(/(\d+)(st|nd|rd|th)/, '$1')) > new Date();
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const eventDate = new Date(event.date.replace(/(\d+)(st|nd|rd|th)/, '$1'));
+    return eventDate >= today;
 }).sort((a, b) => {
     // sort by time
     return (
