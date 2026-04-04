@@ -116,7 +116,10 @@ const AllUpcomingEvents: IUpcomingEvent[] = [
 ];
 
 export const UpcomingEvents: IUpcomingEvent[] = AllUpcomingEvents.filter((event) => {
-    return new Date(event.date.replace(/(\d+)(st|nd|rd|th)/, '$1')) > new Date();
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const eventDate = new Date(event.date.replace(/(\d+)(st|nd|rd|th)/, '$1'));
+    return eventDate >= today;
 }).sort((a, b) => {
     // sort by time
     return (
