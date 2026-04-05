@@ -16,7 +16,7 @@ import { RecentEvents, OlderEvents } from '@/data/events';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
 import { FaExternalLinkAlt } from 'react-icons/fa';
-import CalendarSection from '../../components/calendar/calendar-section';
+import CalendarClientWrapper from '../../components/calendar/calendar-client-wrapper';
 import { getEvents } from '@/api/calendar';
 
 export default async function Events() {
@@ -137,7 +137,7 @@ export default async function Events() {
                     <BlockHeader title="Calendar" />
                     <p>Calendar View of events ran by the CSSA.</p>
 
-                    <CalendarSection events={events} />
+                    <CalendarClientWrapper events={events} />
                 </div>
             </div>
         </main>
