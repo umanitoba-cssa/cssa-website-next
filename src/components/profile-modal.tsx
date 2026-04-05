@@ -12,6 +12,7 @@ import {
 import Image from 'next/image';
 import { IProfile } from '@/data/team';
 import { useEffect, useState } from 'react';
+import { getCompressedImageProps } from '@/components/compress-image';
 
 export default function ProfileModal({
     profile,
@@ -90,6 +91,7 @@ export default function ProfileModal({
                                     alt={profile?.name}
                                     fill
                                     className="object-cover"
+                                    {...getCompressedImageProps(208)}
                                 />
                             </div>
 
