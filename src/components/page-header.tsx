@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { getBannerImageProps } from './compress-image';
+import { getCompressedBannerImageProps } from './compress-image';
 
 export default function PageHeader({ title, image }: { title: string; image: string }) {
     return (
@@ -11,7 +11,7 @@ export default function PageHeader({ title, image }: { title: string; image: str
                         fill
                         src={image}
                         alt={title}
-                        {...getBannerImageProps()}
+                        {...getCompressedBannerImageProps(1920, 200)}
                     />
                     <div className="w-full h-full bg-opacity-30 bg-black p-12 relative">
                         <div className="container z-10">

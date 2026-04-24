@@ -91,7 +91,7 @@ export default function ProfileModal({
                                     alt={profile?.name}
                                     fill
                                     className="object-cover"
-                                    {...getCompressedImageProps(208)}
+                                    {...getCompressedImageProps(208, 208)}
                                 />
                             </div>
 
