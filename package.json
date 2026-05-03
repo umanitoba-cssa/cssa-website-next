@@ -8,7 +8,7 @@
         "start": "next start",
         "prepare": "husky",
         "sync-markdown": "bun run scripts/sync-markdown.ts",
-        "lint": "prettier --write . && eslint .",
+        "lint": "prettier . && eslint .",
         "lint:fix": "prettier --write . && eslint . --fix"
     },
     "lint-staged": {
