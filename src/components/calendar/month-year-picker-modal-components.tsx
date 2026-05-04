@@ -21,7 +21,11 @@ interface MonthGridProps {
 export const YearSelector = ({ selectedYear, setSelectedYear, years }: YearSelectorProps) => {
     return (
         <div className="mb-6">
-            <label className="block text-sm text-gray-300 mb-2 font-medium">Year</label>
+            <label
+                htmlFor="year"
+                className="block text-sm text-gray-300 mb-2 font-medium">
+                Year
+            </label>
             <div className="relative">
                 <select
                     value={selectedYear}
@@ -82,7 +86,11 @@ export const MonthGrid = ({
 }: MonthGridProps) => {
     return (
         <div className="mb-6">
-            <label className="block text-sm text-gray-300 mb-2 font-medium">Month</label>
+            <label
+                htmlFor="month"
+                className="block text-sm text-gray-300 mb-2 font-medium">
+                Month
+            </label>
             <div className="grid grid-cols-3 gap-2">
                 {MONTHS.map((month, idx) => {
                     const isSelected = idx === selectedMonth;

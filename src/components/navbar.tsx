@@ -55,8 +55,15 @@ export const Navbar = () => {
                     </Button>
                 </div>
                 <div
+                    role="button"
+                    tabIndex={0}
                     onClick={() => {
                         setNavOpen(false);
+                    }}
+                    onKeyDown={(e) => {
+                        if (e.key === 'Escape') {
+                            setNavOpen(false);
+                        }
                     }}
                     data-open={navOpen}
                     className="flex flex-col gap-2 items-center overflow-hidden transition-[max-height] duration-300 ease-in-out data-[open=false]:h-0 data-[open=true]:max-h-screen">
