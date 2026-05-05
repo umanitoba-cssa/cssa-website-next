@@ -32,12 +32,7 @@ export default defineConfig([
         },
         ...js.configs.recommended,
         rules: {
-            'prettier/prettier': [
-                'error',
-                {
-                    endOfLine: "auto", // maintains existing line endings
-                },
-            ],
+            'prettier/prettier': 'error',
         },
     },
 
@@ -76,12 +71,7 @@ export default defineConfig([
             'react/react-in-jsx-scope': 'off',
 
             // Prettier reports formatting issues but does not conflict
-            'prettier/prettier': [
-                'error',
-                {
-                    endOfLine: "auto", // maintains existing line endings
-                },
-            ],
+            'prettier/prettier': 'error',
 
             // Enforce self-closing tags where possible
             'react/self-closing-comp': 'error',
