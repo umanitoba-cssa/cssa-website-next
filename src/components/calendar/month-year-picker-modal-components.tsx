@@ -28,6 +28,7 @@ export const YearSelector = ({ selectedYear, setSelectedYear, years }: YearSelec
             </label>
             <div className="relative">
                 <select
+                    id="year"
                     value={selectedYear}
                     onChange={(e) => setSelectedYear(Number(e.target.value))}
                     className="w-full bg-gray-800 border border-gray-600 rounded-lg px-4 py-3 text-white appearance-none cursor-pointer hover:bg-gray-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500">
@@ -86,12 +87,16 @@ export const MonthGrid = ({
 }: MonthGridProps) => {
     return (
         <div className="mb-6">
-            <label
-                htmlFor="month"
+            <span
+                id="month-label"
                 className="block text-sm text-gray-300 mb-2 font-medium">
                 Month
-            </label>
-            <div className="grid grid-cols-3 gap-2">
+            </span>
+
+            <div
+                role="group"
+                aria-labelledby="month-label"
+                className="grid grid-cols-3 gap-2">
                 {MONTHS.map((month, idx) => {
                     const isSelected = idx === selectedMonth;
                     const isCurrent = idx === thisMonth && selectedYear === thisYear;
@@ -99,17 +104,19 @@ export const MonthGrid = ({
                     return (
                         <button
                             key={month}
+                            type="button"
                             onClick={() => setSelectedMonth(idx)}
+                            aria-pressed={isSelected}
                             className={`
-                            px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200
-                            ${
-                                isSelected
-                                    ? 'bg-blue-600 text-white'
-                                    : 'bg-gray-800 text-gray-300 hover:bg-gray-700 hover:text-white'
-                            }
-                            ${isCurrent && !isSelected ? 'ring-1 ring-blue-400' : ''}
-                        `}>
-                            {month.slice(0, 3)}
+                                px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200
+                                ${
+                                    isSelected
+                                        ? 'bg-blue-600 text-white'
+                                        : 'bg-gray-800 text-gray-300 hover:bg-gray-700 hover:text-white'
+                                }
+                                ${isCurrent && !isSelected ? 'ring-1 ring-blue-400' : ''}
+                            `}>
+                            <span aria-label={month}>{month.slice(0, 3)}</span>
                         </button>
                     );
                 })}

@@ -13,6 +13,7 @@ export const Navbar = () => {
                 key={route.href}
                 href={route.href}
                 label={route.title}
+                tabNavigable={navOpen}
             />
         );
     });
@@ -56,7 +57,7 @@ export const Navbar = () => {
                 </div>
                 <div
                     role="button"
-                    tabIndex={0}
+                    tabIndex={-1}
                     onClick={() => {
                         setNavOpen(false);
                     }}
