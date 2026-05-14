@@ -13,7 +13,8 @@ export default function Footer() {
                     <a
                         rel="noreferrer"
                         className="hover:underline"
-                        href="https://discord.umanitobacssa.ca/">
+                        href="https://discord.umanitobacssa.ca/"
+                        aria-label="Join us on Discord">
                         Join us on Discord
                     </a>
                 </div>
@@ -25,7 +26,8 @@ export default function Footer() {
                     <a
                         rel="noreferrer"
                         className="hover:underline"
-                        href="https://instagram.com/umanitobacssa">
+                        href="https://instagram.com/umanitobacssa"
+                        aria-label="Follow us on Instagram">
                         @umanitobacssa
                     </a>
                 </div>
@@ -37,7 +39,8 @@ export default function Footer() {
                     <a
                         rel="noreferrer"
                         className="hover:underline"
-                        href="mailto:cssa@umanitoba.ca">
+                        href="mailto:cssa@umanitoba.ca"
+                        aria-label="Email us">
                         cssa@umanitoba.ca
                     </a>
                 </div>
@@ -49,7 +52,8 @@ export default function Footer() {
                     <a
                         rel="noreferrer"
                         className="hover:underline"
-                        href="https://github.com/umanitoba-cssa/">
+                        href="https://github.com/umanitoba-cssa/"
+                        aria-label="Visit us on GitHub">
                         @umanitoba-cssa
                     </a>
                 </div>

@@ -51,8 +51,12 @@ export const Navbar = () => {
                             setNavOpen(!navOpen);
                         }}
                         variant="outline"
-                        className="p-2">
-                        <IoMdMenu className="h-8 w-8" />
+                        className="p-2"
+                        aria-label="Toggle Menu">
+                        <IoMdMenu
+                            className="h-8 w-8"
+                            aria-label="Menu"
+                        />
                     </Button>
                 </div>
                 <div
