@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaTimes } from 'react-icons/fa';
 import {
@@ -27,6 +27,8 @@ export function MonthYearPickerModal({
 }: MonthYearPickerModalProps) {
     const [selectedMonth, setSelectedMonth] = useState(currentMonth);
     const [selectedYear, setSelectedYear] = useState(currentYear);
+    const modalContentRef = useRef<HTMLDivElement>(null);
+    const yearSelectRef = useRef<HTMLSelectElement>(null);
 
     const today = new Date();
     const thisMonth = today.getMonth();
@@ -43,18 +45,55 @@ export function MonthYearPickerModal({
         return result;
     }, [thisYear]);
 
-    // Handle escape key
+    // Handle escape key and focus management
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
             if (e.key === 'Escape' && isOpen) {
                 e.preventDefault();
                 onClose();
             }
+
+            // Focus trap: prevent tab from leaving the modal
+            if (e.key === 'Tab' && isOpen && modalContentRef.current) {
+                const focusableElements = modalContentRef.current.querySelectorAll(
+                    'button, select, [tabindex]:not([tabindex="-1"])',
+                );
+                const focusableArray = Array.from(focusableElements) as HTMLElement[];
+
+                if (focusableArray.length === 0) return;
+
+                const firstElement = focusableArray[0];
+                const lastElement = focusableArray[focusableArray.length - 1];
+                const activeElement = document.activeElement;
+
+                if (e.shiftKey) {
+                    // Shift + Tab on first element, go to last
+                    if (activeElement === firstElement) {
+                        e.preventDefault();
+                        lastElement.focus();
+                    }
+                } else {
+                    // Tab on last element, go to first
+                    if (activeElement === lastElement) {
+                        e.preventDefault();
+                        firstElement.focus();
+                    }
+                }
+            }
         };
 
         window.addEventListener('keydown', handleKeyDown);
         return () => window.removeEventListener('keydown', handleKeyDown);
     }, [isOpen, onClose]);
+
+    // Move focus to modal when it opens
+    useEffect(() => {
+        if (isOpen && yearSelectRef.current) {
+            setTimeout(() => {
+                yearSelectRef.current?.focus();
+            }, 0);
+        }
+    }, [isOpen]);
 
     const handleConfirm = () => {
         onSelect(selectedMonth, selectedYear);
@@ -78,6 +117,7 @@ export function MonthYearPickerModal({
                 className="fixed inset-0 z-50 flex items-center justify-center bg-black/60"
                 onClick={onClose}>
                 <motion.div
+                    ref={modalContentRef}
                     initial={{ scale: 0.98 }}
                     animate={{ scale: 1 }}
                     exit={{ scale: 0.98 }}
@@ -108,6 +148,7 @@ export function MonthYearPickerModal({
                             selectedYear={selectedYear}
                             setSelectedYear={setSelectedYear}
                             years={years}
+                            ref={yearSelectRef}
                         />
 
                         {/* Month Grid */}

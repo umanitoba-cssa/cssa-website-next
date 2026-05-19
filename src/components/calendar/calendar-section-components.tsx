@@ -91,8 +91,15 @@ export function CalendarCell({
             <div className={`space-y-2  ${hasEvents ? 'rounded-lg p-1 ' : ''}`}>
                 {events.map((evt) => (
                     <div
+                        role="button"
+                        tabIndex={0}
                         key={evt.title}
                         className="p-2 cursor-pointer rounded-lg transition-colors group  bg-[#D4D4D4]/10 hover:bg-white/10"
+                        onKeyDown={(e) => {
+                            if (e.key === 'Escape') {
+                                onEventClick(evt);
+                            }
+                        }}
                         onClick={() => onEventClick(evt)}>
                         <div
                             className="text-white text-xs font-medium leading-tight truncate max-w-full"

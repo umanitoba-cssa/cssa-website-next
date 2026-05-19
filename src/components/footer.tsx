@@ -6,38 +6,54 @@ export default function Footer() {
         <div className="flex flex-col container gap-4 place-items-center py-4 text-sm border-t border-t-gray-400">
             <div className="flex flex-row flex-wrap gap-4 place-items-center justify-evenly">
                 <div className="flex flex-row gap-2 place-items-center">
-                    <FaDiscord className="w-8 h-8" />
+                    <FaDiscord
+                        className="w-8 h-8"
+                        aria-label="Discord"
+                    />
                     <a
                         rel="noreferrer"
                         className="hover:underline"
-                        href="https://discord.umanitobacssa.ca/">
+                        href="https://discord.umanitobacssa.ca/"
+                        aria-label="Join us on Discord">
                         Join us on Discord
                     </a>
                 </div>
                 <div className="flex flex-row gap-2 place-items-center">
-                    <FaInstagram className="w-8 h-8" />
+                    <FaInstagram
+                        className="w-8 h-8"
+                        aria-label="Instagram"
+                    />
                     <a
                         rel="noreferrer"
                         className="hover:underline"
-                        href="https://instagram.com/umanitobacssa">
+                        href="https://instagram.com/umanitobacssa"
+                        aria-label="Follow us on Instagram">
                         @umanitobacssa
                     </a>
                 </div>
                 <div className="flex flex-row gap-2 place-items-center">
-                    <BsFillEnvelopeFill className="w-8 h-8" />
+                    <BsFillEnvelopeFill
+                        className="w-8 h-8"
+                        aria-label="Email"
+                    />
                     <a
                         rel="noreferrer"
                         className="hover:underline"
-                        href="mailto:cssa@umanitoba.ca">
+                        href="mailto:cssa@umanitoba.ca"
+                        aria-label="Email us">
                         cssa@umanitoba.ca
                     </a>
                 </div>
                 <div className="flex flex-row gap-2 place-items-center">
-                    <FaGithub className="w-8 h-8" />
+                    <FaGithub
+                        className="w-8 h-8"
+                        aria-label="GitHub"
+                    />
                     <a
                         rel="noreferrer"
                         className="hover:underline"
-                        href="https://github.com/umanitoba-cssa/">
+                        href="https://github.com/umanitoba-cssa/"
+                        aria-label="Visit us on GitHub">
                         @umanitoba-cssa
                     </a>
                 </div>
