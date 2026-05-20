@@ -88,7 +88,7 @@ export const OlderEvents: Map<string, IEventLink> = new Map([
             description: goosiesDescription,
             href: 'events/goosies-2024',
             internal: true,
-            linkText: 'View Photos →',
+            linkText: 'See page →',
             image: '/img/backgrounds/home.jpg',
         },
     ],
