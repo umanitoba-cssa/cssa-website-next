@@ -4,7 +4,8 @@ import { getCompressedBannerImageProps } from './compress-image';
 export default function PageHeader({ title, image }: { title: string; image: string }) {
     return (
         <>
-            <div className="desktop-only">
+            {/* DESKTOP LAYOUT */}
+            <div className="hidden md:block">
                 <div className="w-full h-[500px] overflow-hidden relative">
                     <Image
                         className="relative object-cover"
@@ -20,22 +21,22 @@ export default function PageHeader({ title, image }: { title: string; image: str
                     </div>
                 </div>
             </div>
-            <div className="mobile-only flex flex-col gap-4">
+
+            {/* MOBILE LAYOUT */}
+            <div className="block md:hidden flex flex-col gap-4">
                 <div className="container">
                     <h2 className="text-3xl text-white">{title}</h2>
                 </div>
                 <div className="w-full h-48 relative">
-                    <Image
-                        className="relative object-cover"
-                        fill
-                        src={image}
-                        alt={title}
-                        sizes="100vw"
-                        quality={75}
-                        priority
-                        fetchPriority="high"
-                        loading="eager"
-                    />
+                    <div className="absolute inset-0">
+                        <Image
+                            className="relative object-cover"
+                            fill
+                            src={image}
+                            alt={title}
+                            {...getCompressedBannerImageProps(1920, 768)}
+                        />
+                    </div>
                 </div>
             </div>
         </>
