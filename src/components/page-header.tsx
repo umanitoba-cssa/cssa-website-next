@@ -12,7 +12,7 @@ export default function PageHeader({ title, image }: { title: string; image: str
                         fill
                         src={image}
                         alt={title}
-                        {...getCompressedBannerImageProps(1920, 200)}
+                        {...getCompressedBannerImageProps(1920, 768)}
                     />
                     <div className="w-full h-full bg-opacity-30 bg-black p-12 relative">
                         <div className="container z-10">
