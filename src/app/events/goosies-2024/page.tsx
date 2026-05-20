@@ -59,11 +59,15 @@ export default function Goosies2024() {
                         responsibly
                     </p>
                     <div className="flex flex-row gap-4 gap-y-2 pt-6">
-                        <Button size="lg">
+                        <Button
+                            size="lg"
+                            asChild>
                             <Link href="#">Registration Closed</Link>
                         </Button>
                         <br />
-                        <Button size="lg">
+                        <Button
+                            size="lg"
+                            asChild>
                             <Link href="#">Voting Closed</Link>
                         </Button>
                     </div>
@@ -116,11 +120,15 @@ export default function Goosies2024() {
                         responsibly
                     </p>
                     <div className="flex flex-col gap-4 gap-y-2">
-                        <Button size="lg">
+                        <Button
+                            size="lg"
+                            asChild>
                             <Link href="#">Registration Closed</Link>
                         </Button>
                         <br />
-                        <Button size="lg">
+                        <Button
+                            size="lg"
+                            asChild>
                             <Link href="#">Voting Closed</Link>
                         </Button>
                     </div>
