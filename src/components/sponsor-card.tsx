@@ -16,8 +16,8 @@ export default function SponsorCard({ name, image, website }: ISponsor) {
                             <Image
                                 src={image}
                                 alt={name}
-                                width="0"
-                                height="0"
+                                width={0}
+                                height={0}
                                 style={{ width: '100%', height: 'auto' }}
                                 className=""
                             />

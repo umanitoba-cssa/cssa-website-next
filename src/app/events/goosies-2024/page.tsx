@@ -15,8 +15,8 @@ export default function Goosies2024() {
             <div className="desktop-only container py-8 flex flex-row gap-8">
                 <div className="">
                     <Image
-                        height="1000"
-                        width="1000"
+                        height={1000}
+                        width={1000}
                         src="/img/goosies/goosies2024.png"
                         alt="Goosies Poster for 2024"
                         className="object-cover"
@@ -72,8 +72,8 @@ export default function Goosies2024() {
             <div className="mobile-only container py-8 flex flex-col gap-8">
                 <div className="">
                     <Image
-                        height="1000"
-                        width="1000"
+                        height={1000}
+                        width={1000}
                         src="/img/goosies/goosies2024.png"
                         alt="Goosies Poster for 2024"
                         className="object-cover"
