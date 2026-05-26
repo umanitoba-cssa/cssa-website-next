@@ -22,16 +22,26 @@ export function getCompressedImageProps(
     };
 }
 
-export function getCompressedBannerImageProps(
-    displaySizeDesktop: number,
-    displaySizeMobile: number,
-    quality = 75,
-) {
+/**
+ * getCompressedBannerImageProps
+ *
+ * Returns Next.js <Image> props optimised for full-width hero/banner images.
+ * Marks the image as high-priority so the browser fetches it immediately,
+ * avoiding LCP penalties.
+ *
+ * Usage:
+ *   <Image src={src} alt={alt} fill {...getCompressedBannerImageProps()} />
+ *
+ * @param desktopMaxWidth - The largest width the image is rendered at on desktop (default: 1920)
+ * @param quality         - Compression quality 1–100 (default: 65)
+ */
+export function getCompressedBannerImageProps(desktopMaxWidth = 1920, quality = 65) {
     return {
         priority: true,
         fetchPriority: 'high' as const,
         loading: 'eager' as const,
-        sizes: `(max-width: 768px) ${displaySizeMobile}px, ${displaySizeDesktop}px`,
+        // 100vw on mobile (full viewport), fixed cap on desktop
+        sizes: `(max-width: 768px) 100vw, ${desktopMaxWidth}px`,
         quality,
     };
 }
