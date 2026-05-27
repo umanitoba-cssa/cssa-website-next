@@ -2,6 +2,13 @@ import { IProfile } from './team';
 
 export const PrevExecsProfiles = [
     {
+        name: 'Lyle Arcinas',
+        group: 'Exec',
+        position: 'President',
+        image: '/img/team/prevExecs/lyle.png',
+        year: '2024 - 2025',
+    },
+    {
         name: 'Okiki Fasanmi',
         group: 'Exec',
         position: 'Vice President',

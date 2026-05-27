@@ -4,9 +4,10 @@ import { Button } from './ui/button';
 interface INavbarButton {
     href: string;
     label: string;
+    tabNavigable: boolean;
 }
 
-export const NavbarButton = ({ href, label }: INavbarButton) => {
+export const NavbarButton = ({ href, label, tabNavigable }: INavbarButton) => {
     return (
         <>
             <div className="desktop-only">
@@ -16,15 +17,19 @@ export const NavbarButton = ({ href, label }: INavbarButton) => {
                     </Link>
                 </div>
             </div>
-            <div className="mobile-only w-full">
-                <Link href={href}>
-                    <Button
-                        variant="ghost"
-                        className="font-sans text-2xl w-full text-center">
-                        <div className="flex flex-col justify-center h-full w-full">{label}</div>
-                    </Button>
-                </Link>
-            </div>
+            {tabNavigable && (
+                <div className="mobile-only w-full">
+                    <Link href={href}>
+                        <Button
+                            variant="ghost"
+                            className="font-sans text-2xl w-full text-center">
+                            <div className="flex flex-col justify-center h-full w-full">
+                                {label}
+                            </div>
+                        </Button>
+                    </Link>
+                </div>
+            )}
         </>
     );
 };

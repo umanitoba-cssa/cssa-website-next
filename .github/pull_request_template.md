@@ -30,4 +30,4 @@ Ensure you've tested the following, if applicable. Select all that apply.
 - [ ] Other testing:
 
 ---
-> **Note:** Ensure you put **`[skip ci]`** in the code review title if these are changes that shouldn’t run the CI, such as documentation changes
+> **Note:** Ensure you put **`[skip ci]`** in the commit message AND code review title if these are changes that shouldn’t run the CI, such as documentation changes

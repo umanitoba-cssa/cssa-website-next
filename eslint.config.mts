@@ -5,12 +5,16 @@ import tseslint from 'typescript-eslint';
 import reactPlugin from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
 import prettierPlugin from 'eslint-plugin-prettier';
+import jsxA11y from 'eslint-plugin-jsx-a11y';
 import { defineConfig } from 'eslint/config';
 
 export default defineConfig([
+    // Accessibility recommended config
+    jsxA11y.flatConfigs.recommended,
+
     // Ignore files and folders
     {
-        ignores: ['node_modules/**', '.next/**', 'dist/**', 'build/**', '*.md'],
+        ignores: ['node_modules/**', '.next/**', 'dist/**', 'build/**', '*.md', 'next-env.d.ts'],
     },
 
     // -----------------------------

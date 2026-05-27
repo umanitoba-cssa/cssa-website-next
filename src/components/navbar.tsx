@@ -13,6 +13,7 @@ export const Navbar = () => {
                 key={route.href}
                 href={route.href}
                 label={route.title}
+                tabNavigable={navOpen}
             />
         );
     });
@@ -50,13 +51,24 @@ export const Navbar = () => {
                             setNavOpen(!navOpen);
                         }}
                         variant="outline"
-                        className="p-2">
-                        <IoMdMenu className="h-8 w-8" />
+                        className="p-2"
+                        aria-label="Toggle Menu">
+                        <IoMdMenu
+                            className="h-8 w-8"
+                            aria-label="Menu"
+                        />
                     </Button>
                 </div>
                 <div
+                    role="button"
+                    tabIndex={-1}
                     onClick={() => {
                         setNavOpen(false);
+                    }}
+                    onKeyDown={(e) => {
+                        if (e.key === 'Escape') {
+                            setNavOpen(false);
+                        }
                     }}
                     data-open={navOpen}
                     className="flex flex-col gap-2 items-center overflow-hidden transition-[max-height] duration-300 ease-in-out data-[open=false]:h-0 data-[open=true]:max-h-screen">

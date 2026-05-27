@@ -133,7 +133,7 @@ export const ResearchersInfo = [
         ],
     },
     {
-        fullName: 'Houda El Mimouni',
+        fullName: 'Houda Elmimouni',
         email: 'houda.elmimouni@umanitoba.ca',
         image: '/img/researchers/houda-elmimouni.jpg',
         lab: hciLab,

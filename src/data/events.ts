@@ -34,14 +34,14 @@ export const RecentEvents: Map<string, IEventLink> = new Map([
         },
     ],
     [
-        'goosies-2024',
+        'goosies-2025',
         {
-            title: 'Goosies 2024',
+            title: 'Goosies 2025',
             description: goosiesDescription,
-            href: 'events/goosies-2024',
+            href: 'events/goosies-2025',
             internal: true,
             linkText: 'View Photos →',
-            image: '/img/goosies/2024photos/ccdr 2025-04-25 192550.801.jpeg',
+            image: '/img/goosies/2025photos/ccdr 2025-04-25 192550.801.jpeg',
         },
     ],
     [
@@ -82,13 +82,13 @@ export const OlderEvents: Map<string, IEventLink> = new Map([
         },
     ],
     [
-        'goosies-2023',
+        'goosies-2024',
         {
-            title: 'Goosies 2023',
+            title: 'Goosies 2024',
             description: goosiesDescription,
-            href: 'events/goosies-2023',
+            href: 'events/goosies-2024',
             internal: true,
-            linkText: 'View Photos →',
+            linkText: 'See page →',
             image: '/img/backgrounds/home.jpg',
         },
     ],
@@ -116,7 +116,10 @@ const AllUpcomingEvents: IUpcomingEvent[] = [
 ];
 
 export const UpcomingEvents: IUpcomingEvent[] = AllUpcomingEvents.filter((event) => {
-    return new Date(event.date.replace(/(\d+)(st|nd|rd|th)/, '$1')) > new Date();
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const eventDate = new Date(event.date.replace(/(\d+)(st|nd|rd|th)/, '$1'));
+    return eventDate >= today;
 }).sort((a, b) => {
     // sort by time
     return (

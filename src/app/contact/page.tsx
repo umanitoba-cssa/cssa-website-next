@@ -16,14 +16,15 @@ export type FormData = {
 };
 
 const Contact: FC = () => {
-    const { register, handleSubmit, setValue } = useForm<FormData>();
+    const { register, handleSubmit, setValue, reset } = useForm<FormData>();
 
     const onSubmit = useCallback(
         (data: FormData) => {
             sendEmail(data);
             setValue('recaptchaToken', undefined);
+            reset();
         },
-        [setValue],
+        [setValue, reset],
     );
 
     useEffect(() => {
@@ -66,11 +67,11 @@ const Contact: FC = () => {
                         id="contact-form"
                         onSubmit={handleSubmit(onSubmit)}>
                         <div className="mb-5">
-                            <p>Name</p>
                             <label
                                 htmlFor="name"
-                                className="mb-3 block text-base font-medium text-black"
-                            />
+                                className="mb-3 block text-xl">
+                                Name
+                            </label>
                             <input
                                 type="text"
                                 placeholder="Full Name"
@@ -79,11 +80,11 @@ const Contact: FC = () => {
                             />
                         </div>
                         <div className="mb-5">
-                            <p>Email Address</p>
                             <label
                                 htmlFor="email"
-                                className="mb-3 block text-base font-medium text-black"
-                            />
+                                className="mb-3 block text-xl">
+                                Email Address
+                            </label>
                             <input
                                 type="email"
                                 placeholder="example@domain.com"
@@ -92,11 +93,11 @@ const Contact: FC = () => {
                             />
                         </div>
                         <div className="mb-5">
-                            <p>Message</p>
                             <label
                                 htmlFor="message"
-                                className="mb-3 block text-base font-medium text-black"
-                            />
+                                className="mb-3 block text-xl">
+                                Message
+                            </label>
                             <textarea
                                 rows={4}
                                 placeholder="Type your message"

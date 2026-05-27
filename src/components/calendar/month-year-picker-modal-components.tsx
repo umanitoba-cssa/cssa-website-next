@@ -1,3 +1,5 @@
+import React from 'react';
+
 interface YearSelectorProps {
     selectedYear: number;
     setSelectedYear: (year: number) => void;
@@ -18,42 +20,62 @@ interface MonthGridProps {
     selectedYear: number;
 }
 
-export const YearSelector = ({ selectedYear, setSelectedYear, years }: YearSelectorProps) => {
-    return (
-        <div className="mb-6">
-            <label className="block text-sm text-gray-300 mb-2 font-medium">Year</label>
-            <div className="relative">
-                <select
-                    value={selectedYear}
-                    onChange={(e) => setSelectedYear(Number(e.target.value))}
-                    className="w-full bg-gray-800 border border-gray-600 rounded-lg px-4 py-3 text-white appearance-none cursor-pointer hover:bg-gray-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    {years.map((year) => (
-                        <option
-                            key={year}
-                            value={year}
-                            className="bg-gray-800">
-                            {year}
-                        </option>
-                    ))}
-                </select>
-                <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
-                    <svg
-                        className="w-4 h-4 text-gray-400"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24">
-                        <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M19 9l-7 7-7-7"
-                        />
-                    </svg>
+export const YearSelector = React.forwardRef<HTMLSelectElement, YearSelectorProps>(
+    function YearSelector(props: YearSelectorProps, ref: React.ForwardedRef<HTMLSelectElement>) {
+        const { selectedYear, setSelectedYear, years } = props;
+        return (
+            <div className="mb-6">
+                <label
+                    htmlFor="year"
+                    className="block text-sm text-gray-300 mb-2 font-medium">
+                    Year
+                </label>
+                <div className="relative">
+                    <select
+                        ref={ref}
+                        id="year"
+                        value={selectedYear}
+                        onChange={(e) => setSelectedYear(Number(e.target.value))}
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter') {
+                                e.preventDefault();
+                                const selectElement = e.currentTarget as HTMLSelectElement;
+                                if ('showPicker' in selectElement) {
+                                    (selectElement as any).showPicker();
+                                }
+                            }
+                        }}
+                        className="w-full bg-gray-800 border border-gray-600 rounded-lg px-4 py-3 text-white appearance-none cursor-pointer hover:bg-gray-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        {years.map((year) => (
+                            <option
+                                key={year}
+                                value={year}
+                                className="bg-gray-800">
+                                {year}
+                            </option>
+                        ))}
+                    </select>
+                    <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+                        <svg
+                            className="w-4 h-4 text-gray-400"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M19 9l-7 7-7-7"
+                            />
+                        </svg>
+                    </div>
                 </div>
             </div>
-        </div>
-    );
-};
+        );
+    },
+);
+
+YearSelector.displayName = 'YearSelector';
 
 export const FooterButtons = ({ handleGoToToday, handleConfirm }: FooterButtonsProps) => {
     return (
@@ -82,8 +104,16 @@ export const MonthGrid = ({
 }: MonthGridProps) => {
     return (
         <div className="mb-6">
-            <label className="block text-sm text-gray-300 mb-2 font-medium">Month</label>
-            <div className="grid grid-cols-3 gap-2">
+            <span
+                id="month-label"
+                className="block text-sm text-gray-300 mb-2 font-medium">
+                Month
+            </span>
+
+            <div
+                role="group"
+                aria-labelledby="month-label"
+                className="grid grid-cols-3 gap-2">
                 {MONTHS.map((month, idx) => {
                     const isSelected = idx === selectedMonth;
                     const isCurrent = idx === thisMonth && selectedYear === thisYear;
@@ -91,17 +121,19 @@ export const MonthGrid = ({
                     return (
                         <button
                             key={month}
+                            type="button"
                             onClick={() => setSelectedMonth(idx)}
+                            aria-pressed={isSelected}
                             className={`
-                            px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200
-                            ${
-                                isSelected
-                                    ? 'bg-blue-600 text-white'
-                                    : 'bg-gray-800 text-gray-300 hover:bg-gray-700 hover:text-white'
-                            }
-                            ${isCurrent && !isSelected ? 'ring-1 ring-blue-400' : ''}
-                        `}>
-                            {month.slice(0, 3)}
+                                px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200
+                                ${
+                                    isSelected
+                                        ? 'bg-blue-600 text-white'
+                                        : 'bg-gray-800 text-gray-300 hover:bg-gray-700 hover:text-white'
+                                }
+                                ${isCurrent && !isSelected ? 'ring-1 ring-blue-400' : ''}
+                            `}>
+                            <span aria-label={month}>{month.slice(0, 3)}</span>
                         </button>
                     );
                 })}
