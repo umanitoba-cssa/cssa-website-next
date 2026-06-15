@@ -7,6 +7,13 @@ import { useState } from 'react';
 
 export const Navbar = () => {
     const [navOpen, setNavOpen] = useState(false);
+    const [expandedHref, setExpandedHref] = useState<string | null>(null);
+
+    const closeNav = () => {
+        setNavOpen(false);
+        setExpandedHref(null);
+    };
+
     const navbarButtons = Routes.filter((route) => route.title).map((route) => {
         return (
             <NavbarButton
@@ -14,6 +21,9 @@ export const Navbar = () => {
                 href={route.href}
                 label={route.title}
                 tabNavigable={navOpen}
+                mobileExpanded={expandedHref === route.href}
+                onMobileExpand={(href) => setExpandedHref((prev) => (prev === href ? null : href))}
+                onSubsectionClick={closeNav}
             />
         );
     });
@@ -48,7 +58,11 @@ export const Navbar = () => {
                     <h1 className="text-xl h-min">UManitoba CSSA</h1>
                     <Button
                         onClick={() => {
-                            setNavOpen(!navOpen);
+                            if (navOpen) {
+                                closeNav();
+                            } else {
+                                setNavOpen(true);
+                            }
                         }}
                         variant="outline"
                         className="p-2"
@@ -60,16 +74,6 @@ export const Navbar = () => {
                     </Button>
                 </div>
                 <div
-                    role="button"
-                    tabIndex={-1}
-                    onClick={() => {
-                        setNavOpen(false);
-                    }}
-                    onKeyDown={(e) => {
-                        if (e.key === 'Escape') {
-                            setNavOpen(false);
-                        }
-                    }}
                     data-open={navOpen}
                     className="flex flex-col gap-2 items-center overflow-hidden transition-[max-height] duration-300 ease-in-out data-[open=false]:h-0 data-[open=true]:max-h-screen">
                     <div className="mobile-only py-1" /> {/*spacer*/}
