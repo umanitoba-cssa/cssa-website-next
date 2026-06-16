@@ -1,5 +1,5 @@
 # Build stage
-FROM oven/bun:1.2.19 AS builder
+FROM oven/bun:1.3.14 AS builder
 WORKDIR /usr/src/app
 
 # Define build arguments
@@ -68,7 +68,7 @@ RUN NEXT_PUBLIC_RECAPTCHA_SITE_KEY="${NEXT_PUBLIC_RECAPTCHA_SITE_KEY}" \
     bun run build
 
 # Production stage
-FROM oven/bun:1.2.19-slim AS production
+FROM oven/bun:1.3.14-slim AS production
 WORKDIR /usr/src/app
 
 # Define runtime arguments (these need to be passed when running the container)
