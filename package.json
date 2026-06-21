@@ -27,7 +27,7 @@
         "@radix-ui/react-tabs": "^1.1.13",
         "@types/gapi.youtube": "^3.0.40",
         "@types/node-fetch": "^2.6.13",
-        "@types/nodemailer": "^7.0.4",
+        "@types/nodemailer": "^8.0.0",
         "autoprefixer": "^10.4.23",
         "class-variance-authority": "^0.7.1",
         "clsx": "^2.1.1",
