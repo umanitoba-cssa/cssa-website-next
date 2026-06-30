@@ -9,7 +9,7 @@ function getRandomPort() {
 
 function isPortFree(port: number): boolean {
     try {
-        execSync(`lsof -i :${port}`, { stdio: 'ignore' });
+        execSync(`ss -tuplen | grep ${port}`, { stdio: 'inherit' });
         return false;
     } catch {
         return true;
