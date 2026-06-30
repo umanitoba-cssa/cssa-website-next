@@ -4,13 +4,25 @@ export interface IEventLink {
     href: string;
     internal?: boolean;
     linkText?: string;
-    date?: string;
+    date?: Date;
     image?: string;
 }
 
 const goosiesDescription = 'Annual award show for the Department of Computer Science';
 
 export const RecentEvents: Map<string, IEventLink> = new Map([
+    [
+        'case-competition-2026',
+        {
+            title: 'Design & Craft Sprint',
+            date: new Date('March 21, 2026'),
+            description: 'Teams of five compete to solve a technical challenge.',
+            href: '/events/case-competition-2026',
+            internal: true,
+            linkText: 'See Page →',
+            image: '/img/case-competition/banner.png',
+        },
+    ],
     [
         'capture-the-flag-2026',
         {
@@ -42,17 +54,6 @@ export const RecentEvents: Map<string, IEventLink> = new Map([
             internal: true,
             linkText: 'View Photos →',
             image: '/img/goosies/2025photos/ccdr 2025-04-25 192550.801.jpeg',
-        },
-    ],
-    [
-        'bonfire-2024',
-        {
-            title: 'Bonfire 2024',
-            description: 'Hang around the campfire with the CSSA',
-            href: 'events/bonfire-2024',
-            internal: true,
-            linkText: 'View Photos →',
-            image: '/img/bonfire/2024photos/IMG_1753.jpeg',
         },
     ],
 ]);
@@ -92,38 +93,41 @@ export const OlderEvents: Map<string, IEventLink> = new Map([
             image: '/img/backgrounds/home.jpg',
         },
     ],
+    [
+        'bonfire-2024',
+        {
+            title: 'Bonfire 2024',
+            description: 'Hang around the campfire with the CSSA',
+            href: 'events/bonfire-2024',
+            internal: true,
+            linkText: 'View Photos →',
+            image: '/img/bonfire/2024photos/IMG_1753.jpeg',
+        },
+    ],
 ]);
 
-export interface IUpcomingEvent {
-    title: string;
-    date: string;
-    description: string;
-    image: string;
-    link?: string;
-    linkText?: string;
-}
+const AllUpcomingEvents: Map<string, IEventLink> = new Map([
+    [
+        'general-meeting-bonfire-2026',
+        {
+            title: 'Summer General Meeting & Bonfire',
+            date: new Date('July 13, 2026'),
+            description: 'Pending official description.',
+            href: '/events/general-meeting-bonfire-2026',
+            linkText: 'Learn More',
+            image: '/img/bonfire/2024photos/IMG_1670.jpeg', // pending official image
+        },
+    ],
+]);
 
-const AllUpcomingEvents: IUpcomingEvent[] = [
-    {
-        title: 'Design & Craft Sprint (Case Competition)',
-        date: 'March 21, 2026',
-        description:
-            'Love problem-solving? Join us for a case competition where teams of five compete to solve a technical challenge.',
-        image: '/img/case-competition/banner.png',
-        link: '/events/case-competition-2026',
-        linkText: 'Learn More',
-    },
-];
-
-export const UpcomingEvents: IUpcomingEvent[] = AllUpcomingEvents.filter((event) => {
+export const UpcomingEvents: IEventLink[] = (() => {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
-    const eventDate = new Date(event.date.replace(/(\d+)(st|nd|rd|th)/, '$1'));
-    return eventDate >= today;
-}).sort((a, b) => {
-    // sort by time
-    return (
-        new Date(a.date.replace(/(\d+)(st|nd|rd|th)/, '$1')).getTime() -
-        new Date(b.date.replace(/(\d+)(st|nd|rd|th)/, '$1')).getTime()
-    );
-});
+
+    return Array.from(AllUpcomingEvents.values())
+        .filter(
+            (event): event is IEventLink & { date: Date } =>
+                event.date !== undefined && event.date >= today,
+        )
+        .sort((a, b) => a.date.getTime() - b.date.getTime());
+})();

@@ -58,12 +58,14 @@ export default function UpcomingEventsSlideshow() {
                             <div className="grid lg:grid-cols-[400px_auto] gap-12 lg:gap-8 items-center p-1">
                                 {/* Image Section */}
                                 <div className="relative aspect-3/2 w-full overflow-hidden">
-                                    <Image
-                                        src={event.image}
-                                        alt={event.title}
-                                        fill
-                                        className="object-cover"
-                                    />
+                                    {event.image && (
+                                        <Image
+                                            src={event.image}
+                                            alt={event.title}
+                                            fill
+                                            className="object-cover"
+                                        />
+                                    )}
                                 </div>
 
                                 {/* Content Section */}
@@ -71,7 +73,13 @@ export default function UpcomingEventsSlideshow() {
                                     <div className="flex flex-col gap-2">
                                         <div className="flex w-fit items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-primary">
                                             <CalendarIcon className="h-3 w-3" />
-                                            <span>{event.date}</span>
+                                            <span>
+                                                {event.date?.toLocaleDateString('en-CA', {
+                                                    year: 'numeric',
+                                                    month: 'long',
+                                                    day: 'numeric',
+                                                })}
+                                            </span>
                                         </div>
                                         <h3 className="text-3xl font-bold leading-tight md:text-4xl">
                                             {event.title}
@@ -82,12 +90,12 @@ export default function UpcomingEventsSlideshow() {
                                             ? `${event.description.substring(0, 150)}...`
                                             : event.description}
                                     </p>
-                                    {event.link && (
+                                    {event.href && (
                                         <div className="pt-2">
                                             <Button
                                                 asChild
                                                 variant="outline">
-                                                <Link href={event.link}>
+                                                <Link href={event.href}>
                                                     {event.linkText || 'Learn More'}
                                                 </Link>
                                             </Button>
