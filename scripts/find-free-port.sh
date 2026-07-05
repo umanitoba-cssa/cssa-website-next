@@ -10,7 +10,7 @@ get_random_port() {
 
 is_port_free() {
     local port=$1
-    if lsof -i :"$port" >/dev/null 2>&1; then
+    if ss -tuplen | grep "$port" >/dev/null 2>&1; then
         return 1 
     else
         return 0
