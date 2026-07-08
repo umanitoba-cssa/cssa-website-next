@@ -40,7 +40,7 @@ export default function GeneralMeetingBonfire2026() {
                 </div>
 
                 <BlockHeader title="Posters" />
-                <span className="flex justify-center">
+                <div className="flex flex-col lg:flex-row justify-center gap-8">
                     <Image
                         src="/img/bonfire/2026/general-meeting-poster.png"
                         alt="Summer General Meeting Poster 2026"
@@ -55,7 +55,7 @@ export default function GeneralMeetingBonfire2026() {
                         height={400}
                         className="w-full lg:w-1/2"
                     />
-                </span>
+                </div>
             </div>
         </main>
     );
