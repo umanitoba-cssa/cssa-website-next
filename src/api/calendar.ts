@@ -35,23 +35,26 @@ export async function getCalendarEvents(opts: {
         maxResults: 250,
     });
 
-    return (res.data.items ?? [])
-        .map((e) => {
-            const start = e.start?.dateTime ?? e.start?.date;
-            const iso = toISODate(start);
-            if (!iso) return null;
-            const internalHref = extractInternalHref(e.description);
+    const events: IEventLink[] = [];
 
-            return {
-                title: e.summary ?? '(No title)',
-                description: e.description ?? '',
-                href: internalHref ?? '',
-                internal: false,
-                linkText: 'Open →',
-                date: iso,
-            };
-        })
-        .filter(Boolean) as IEventLink[];
+    for (const e of res.data.items ?? []) {
+        const start = e.start?.dateTime ?? e.start?.date;
+        const iso = toISODate(start);
+        if (!iso) continue;
+
+        const internalHref = extractInternalHref(e.description);
+
+        events.push({
+            title: e.summary ?? '(No title)',
+            description: e.description ?? '',
+            href: internalHref ?? '',
+            internal: false,
+            linkText: 'Open →',
+            date: new Date(iso),
+        });
+    }
+
+    return events;
 }
 
 export async function getEvents() {
