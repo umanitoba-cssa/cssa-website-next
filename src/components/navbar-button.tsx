@@ -1,9 +1,10 @@
 'use client';
 import Link from 'next/link';
 import { Button } from './ui/button';
-import { useRef, useState } from 'react';
+import { useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { NAV_SECTIONS } from '@/data/nav-sections';
+import { ChevronDown, ChevronUp, ChevronRight } from 'lucide-react';
 
 interface INavbarButton {
     href: string;
@@ -23,19 +24,20 @@ export const NavbarButton = ({
     onSubsectionClick,
 }: INavbarButton) => {
     const [dropdownOpen, setDropdownOpen] = useState(false);
-    const hoverTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+    const hoverTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
     const router = useRouter();
 
     const sections = NAV_SECTIONS[href];
     const hasSections = sections && sections.length > 0;
 
     const handleMouseEnter = () => {
-        if (hoverTimeout.current) clearTimeout(hoverTimeout.current);
-        setDropdownOpen(true);
+        if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
+        hoverTimeoutRef.current = setTimeout(() => setDropdownOpen(true), 300);
     };
 
     const handleMouseLeave = () => {
-        hoverTimeout.current = setTimeout(() => setDropdownOpen(false), 150);
+        if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
+        setDropdownOpen(false);
     };
 
     const handleSectionClick = (anchor: string) => {
@@ -107,45 +109,67 @@ export const NavbarButton = ({
 
             {tabNavigable && (
                 <div className="mobile-only w-full">
-                    <Button
-                        variant="ghost"
-                        className="font-sans text-2xl w-full text-center"
+                    <div
+                        className="flex flex-row items-center w-full"
                         style={{
                             borderBottom: mobileExpanded
                                 ? '2px solid #eab308'
                                 : '2px solid transparent',
-                            borderRadius: mobileExpanded ? '4px 4px 0 0' : undefined,
                             transition: 'border-color 0.15s',
-                            background: 'transparent',
-                        }}
-                        onClick={() => {
-                            if (hasSections) {
-                                onMobileExpand(href);
-                            } else {
-                                router.push(href);
-                            }
                         }}>
-                        <div className="flex flex-row justify-center items-center w-full">
+                        <Link
+                            href={href}
+                            onClick={onSubsectionClick}
+                            className="flex-1 py-2 font-sans text-2xl text-center text-white">
                             {label}
-                        </div>
-                    </Button>
+                        </Link>
+
+                        {hasSections && (
+                            <Button
+                                variant="ghost"
+                                className="px-3 py-2"
+                                style={{ background: 'transparent' }}
+                                onClick={() => onMobileExpand(href)}
+                                aria-label={
+                                    mobileExpanded ? 'Collapse sections' : 'Expand sections'
+                                }>
+                                {mobileExpanded ? (
+                                    <ChevronUp
+                                        className="h-5 w-5"
+                                        style={{ color: '#eab308' }}
+                                    />
+                                ) : (
+                                    <ChevronDown
+                                        className="h-5 w-5"
+                                        style={{ color: '#eab308' }}
+                                    />
+                                )}
+                            </Button>
+                        )}
+                    </div>
 
                     {hasSections && mobileExpanded && (
-                        <ul className="flex flex-col gap-1 pl-4 pb-2">
+                        <ul className="flex flex-col pb-2">
                             {sections.map((section) => (
                                 <li key={section.anchor}>
                                     <button
                                         onClick={() => handleSectionClick(section.anchor)}
-                                        className="w-full text-left text-base font-sans px-3 py-1 rounded text-white/80 hover:text-white transition-colors duration-100"
-                                        style={{ background: 'transparent' }}
-                                        onMouseEnter={(e) =>
-                                            (e.currentTarget.style.background =
-                                                'rgba(26,55,100,0.9)')
-                                        }
-                                        onMouseLeave={(e) =>
-                                            (e.currentTarget.style.background = 'transparent')
-                                        }>
+                                        className="w-full text-left text-base font-sans px-6 py-2 flex flex-row items-center justify-between transition-colors duration-100"
+                                        style={{
+                                            background: 'transparent',
+                                            color: 'rgba(255,255,255,0.65)',
+                                        }}
+                                        onMouseEnter={(e) => {
+                                            e.currentTarget.style.background =
+                                                'rgba(26,55,100,0.9)';
+                                            e.currentTarget.style.color = 'rgba(255,255,255,1)';
+                                        }}
+                                        onMouseLeave={(e) => {
+                                            e.currentTarget.style.background = 'transparent';
+                                            e.currentTarget.style.color = 'rgba(255,255,255,0.65)';
+                                        }}>
                                         {section.label}
+                                        <ChevronRight className="h-3 w-3 shrink-0 opacity-40" />
                                     </button>
                                 </li>
                             ))}
