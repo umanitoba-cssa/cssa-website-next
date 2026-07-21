@@ -4,7 +4,7 @@ import { Button } from './ui/button';
 import { useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { NAV_SECTIONS } from '@/data/nav-sections';
-import { ChevronDown, ChevronUp, ChevronRight } from 'lucide-react';
+import { ChevronDown, ChevronUp } from 'lucide-react';
 
 interface INavbarButton {
     href: string;
@@ -32,7 +32,7 @@ export const NavbarButton = ({
 
     const handleMouseEnter = () => {
         if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
-        hoverTimeoutRef.current = setTimeout(() => setDropdownOpen(true), 300);
+        setDropdownOpen(true);
     };
 
     const handleMouseLeave = () => {
@@ -68,7 +68,7 @@ export const NavbarButton = ({
                 {hasSections && dropdownOpen && (
                     <div
                         role="menu"
-                        className="absolute left-1/2 -translate-x-1/2 top-full mt-2 z-50 min-w-[200px] rounded-md shadow-lg overflow-hidden"
+                        className="absolute left-1/2 -translate-x-1/2 top-full z-50 min-w-[200px] rounded-md shadow-lg overflow-hidden"
                         style={{
                             background: '#1a2744',
                             border: '1px solid rgba(255,255,255,0.12)',
@@ -154,7 +154,7 @@ export const NavbarButton = ({
                                 <li key={section.anchor}>
                                     <button
                                         onClick={() => handleSectionClick(section.anchor)}
-                                        className="w-full text-left text-base font-sans px-6 py-2 flex flex-row items-center justify-between transition-colors duration-100"
+                                        className="w-full text-left text-base font-sans px-6 py-2 flex flex-row items-center transition-colors duration-100"
                                         style={{
                                             background: 'transparent',
                                             color: 'rgba(255,255,255,0.65)',
@@ -169,7 +169,6 @@ export const NavbarButton = ({
                                             e.currentTarget.style.color = 'rgba(255,255,255,0.65)';
                                         }}>
                                         {section.label}
-                                        <ChevronRight className="h-3 w-3 shrink-0 opacity-40" />
                                     </button>
                                 </li>
                             ))}
