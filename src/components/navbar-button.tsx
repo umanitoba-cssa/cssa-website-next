@@ -68,7 +68,7 @@ export const NavbarButton = ({
                 {hasSections && dropdownOpen && (
                     <div
                         role="menu"
-                        className="absolute left-1/2 -translate-x-1/2 top-full z-50 min-w-[200px] rounded-md shadow-lg overflow-hidden"
+                        className="absolute left-1/2 -translate-x-1/2 top-full z-50 min-w-[200px] rounded-md shadow-lg overflow-hidden bg-cssa-navy"
                         style={{
                             background: '#1a2744',
                             border: '1px solid rgba(255,255,255,0.12)',
@@ -89,15 +89,7 @@ export const NavbarButton = ({
                                     <button
                                         role="menuitem"
                                         onClick={() => handleSectionClick(section.anchor)}
-                                        className="w-full text-left px-4 py-2 text-base font-sans text-white whitespace-nowrap transition-colors duration-100"
-                                        style={{ background: 'transparent' }}
-                                        onMouseEnter={(e) =>
-                                            (e.currentTarget.style.background =
-                                                'rgba(26,55,100,0.9)')
-                                        }
-                                        onMouseLeave={(e) =>
-                                            (e.currentTarget.style.background = 'transparent')
-                                        }>
+                                        className="w-full text-left px-4 py-2 text-base font-sans text-white whitespace-nowrap bg-transparent hover:bg-cssa-blue/40 transition-colors duration-100">
                                         {section.label}
                                     </button>
                                 </li>
@@ -110,13 +102,9 @@ export const NavbarButton = ({
             {tabNavigable && (
                 <div className="mobile-only w-full">
                     <div
-                        className="flex flex-row items-center w-full"
-                        style={{
-                            borderBottom: mobileExpanded
-                                ? '2px solid #eab308'
-                                : '2px solid transparent',
-                            transition: 'border-color 0.15s',
-                        }}>
+                        className={`flex flex-row items-center w-full border-b-2 transition-colors duration-150 ${
+                            mobileExpanded ? 'border-cssa-gold' : 'border-transparent'
+                        }`}>
                         <Link
                             href={href}
                             onClick={onSubsectionClick}
@@ -134,15 +122,9 @@ export const NavbarButton = ({
                                     mobileExpanded ? 'Collapse sections' : 'Expand sections'
                                 }>
                                 {mobileExpanded ? (
-                                    <ChevronUp
-                                        className="h-5 w-5"
-                                        style={{ color: '#eab308' }}
-                                    />
+                                    <ChevronUp className="h-5 w-5 text-cssa-gold" />
                                 ) : (
-                                    <ChevronDown
-                                        className="h-5 w-5"
-                                        style={{ color: '#eab308' }}
-                                    />
+                                    <ChevronDown className="h-5 w-5 text-cssa-gold" />
                                 )}
                             </Button>
                         )}
