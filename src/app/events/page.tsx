@@ -107,7 +107,9 @@ export default async function Events() {
                 image="/img/backgrounds/events.jpg"
             />
             <div className="flex flex-col container py-12 gap-12">
-                <div className="flex flex-col gap-8 p-4">
+                <div
+                    id="recent-events"
+                    className="flex flex-col gap-8 p-4">
                     <BlockHeader title="Recent Events" />
                     <p>All latest events ran by the CSSA.</p>
 
@@ -120,7 +122,9 @@ export default async function Events() {
                     </Carousel>
                 </div>
 
-                <div className="flex flex-col gap-8 p-4">
+                <div
+                    id="older-events"
+                    className="flex flex-col gap-8 p-4">
                     <BlockHeader title="Older Events" />
                     <p>Some older events ran by the CSSA.</p>
 
@@ -133,7 +137,9 @@ export default async function Events() {
                     </Carousel>
                 </div>
 
-                <div className="flex flex-col gap-8 p-4">
+                <div
+                    id="calendar"
+                    className="flex flex-col gap-8 p-4">
                     <BlockHeader title="Calendar" />
                     <p>Calendar View of events ran by the CSSA.</p>
 

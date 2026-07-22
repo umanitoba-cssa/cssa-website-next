@@ -182,7 +182,9 @@ export default async function Resources() {
                 image="/img/backgrounds/resources.png"
             />
             <div className="flex flex-col container py-12 gap-12">
-                <div className="flex flex-col gap-8">
+                <div
+                    id="cssa-resources"
+                    className="flex flex-col gap-8">
                     <BlockHeader title="CSSA Resources" />
                     <p>All the internal materials provided by the CSSA.</p>
 
@@ -195,7 +197,9 @@ export default async function Resources() {
                     </Carousel>
                 </div>
 
-                <div className="flex flex-col gap-8">
+                <div
+                    id="degree-resources"
+                    className="flex flex-col gap-8">
                     <BlockHeader title="Degree Resources" />
                     <p>
                         Questions about courses, programs, or Computer Science Co-op? Take a look at
@@ -210,7 +214,9 @@ export default async function Resources() {
                     </Carousel>
                 </div>
 
-                <div className="flex flex-col gap-8">
+                <div
+                    id="course-help"
+                    className="flex flex-col gap-8">
                     <BlockHeader title="Course Help" />
                     <p>Lectures and course resources on YouTube made by our instructors.</p>
 
@@ -222,7 +228,9 @@ export default async function Resources() {
                     </Tabs>
                 </div>
 
-                <div className="flex flex-col gap-8">
+                <div
+                    id="cssa-meeting-archives"
+                    className="flex flex-col gap-8">
                     <BlockHeader title="CSSA Meeting Archives" />
                     <p>Recordings of our general meetings.</p>
                     <Carousel

@@ -18,12 +18,16 @@ export default function Home() {
             <div className="container py-8 flex flex-col gap-8">
                 {/* Upcoming Events */}
                 {UpcomingEvents.length > 0 && (
-                    <div className="flex flex-col gap-8">
+                    <div
+                        id="upcoming-events"
+                        className="flex flex-col gap-8">
                         <BlockHeader title="Upcoming Events" />
                         <UpcomingEventsSlideshow />
                     </div>
                 )}
-                <div className="flex flex-col gap-4">
+                <div
+                    id="who-we-are"
+                    className="flex flex-col gap-4">
                     <BlockHeader title="Who we are" />
                     <p>
                         The Computer Science Students’ Association (CSSA) is the official voice and
@@ -37,7 +41,9 @@ export default function Home() {
                 </div>
 
                 {/* What we do */}
-                <div className="flex flex-col gap-8">
+                <div
+                    id="what-we-do"
+                    className="flex flex-col gap-8">
                     <BlockHeader title="What we do" />
                     <div className="grid lg:grid-cols-[400px_auto] gap-12 lg:gap-8 items-center">
                         {Teasers.filter((item) => item.section === 'What we do').map((item) => (
@@ -69,7 +75,9 @@ export default function Home() {
                 </div>
 
                 {/* How we support */}
-                <div className="flex flex-col gap-8">
+                <div
+                    id="how-we-support"
+                    className="flex flex-col gap-8">
                     <BlockHeader title="How we support" />
                     <div className="grid lg:grid-cols-[400px_auto] gap-12 lg:gap-8 items-center">
                         {Teasers.filter((item) => item.section === 'How we support').map((item) => (
