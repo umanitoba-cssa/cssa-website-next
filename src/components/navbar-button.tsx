@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { Button } from './ui/button';
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { NAV_SECTIONS } from '@/data/nav-sections';
 import { ChevronDown, ChevronUp } from 'lucide-react';
@@ -24,21 +24,10 @@ export const NavbarButton = ({
     onSubsectionClick,
 }: INavbarButton) => {
     const [dropdownOpen, setDropdownOpen] = useState(false);
-    const hoverTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
     const router = useRouter();
 
     const sections = NAV_SECTIONS[href];
     const hasSections = sections && sections.length > 0;
-
-    const handleMouseEnter = () => {
-        if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
-        setDropdownOpen(true);
-    };
-
-    const handleMouseLeave = () => {
-        if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
-        setDropdownOpen(false);
-    };
 
     const handleSectionClick = (anchor: string) => {
         setDropdownOpen(false);
@@ -54,8 +43,12 @@ export const NavbarButton = ({
             <div
                 role="navigation"
                 className="desktop-only relative"
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}>
+                onMouseEnter={() => {
+                    setDropdownOpen(true);
+                }}
+                onMouseLeave={() => {
+                    setDropdownOpen(false);
+                }}>
                 <div className="font-sans text-2xl text-center">
                     <Link
                         href={href}
@@ -68,19 +61,7 @@ export const NavbarButton = ({
                 {hasSections && dropdownOpen && (
                     <div
                         role="menu"
-                        className="absolute left-1/2 -translate-x-1/2 top-full z-50 min-w-[200px] rounded-md shadow-lg overflow-hidden bg-cssa-navy"
-                        style={{
-                            background: '#1a2744',
-                            border: '1px solid rgba(255,255,255,0.12)',
-                        }}>
-                        <div
-                            className="absolute -top-[6px] left-1/2 -translate-x-1/2 w-3 h-3 rotate-45"
-                            style={{
-                                background: '#1a2744',
-                                borderLeft: '1px solid rgba(255,255,255,0.12)',
-                                borderTop: '1px solid rgba(255,255,255,0.12)',
-                            }}
-                        />
+                        className="absolute left-1/2 -translate-x-1/2 top-full z-50 min-w-[200px] rounded-md shadow-lg overflow-hidden bg-blue-950 border border-white/10">
                         <ul className="py-1">
                             {sections.map((section) => (
                                 <li
@@ -115,8 +96,7 @@ export const NavbarButton = ({
                         {hasSections && (
                             <Button
                                 variant="ghost"
-                                className="px-3 py-2"
-                                style={{ background: 'transparent' }}
+                                className="px-3 py-2 bg-transparent"
                                 onClick={() => onMobileExpand(href)}
                                 aria-label={
                                     mobileExpanded ? 'Collapse sections' : 'Expand sections'
@@ -136,20 +116,7 @@ export const NavbarButton = ({
                                 <li key={section.anchor}>
                                     <button
                                         onClick={() => handleSectionClick(section.anchor)}
-                                        className="w-full text-left text-base font-sans px-6 py-2 flex flex-row items-center transition-colors duration-100"
-                                        style={{
-                                            background: 'transparent',
-                                            color: 'rgba(255,255,255,0.65)',
-                                        }}
-                                        onMouseEnter={(e) => {
-                                            e.currentTarget.style.background =
-                                                'rgba(26,55,100,0.9)';
-                                            e.currentTarget.style.color = 'rgba(255,255,255,1)';
-                                        }}
-                                        onMouseLeave={(e) => {
-                                            e.currentTarget.style.background = 'transparent';
-                                            e.currentTarget.style.color = 'rgba(255,255,255,0.65)';
-                                        }}>
+                                        className="w-full text-left text-base font-sans px-6 py-2 flex flex-row items-center text-white/65 hover:text-white hover:bg-cssa-blue/40 transition-colors duration-100">
                                         {section.label}
                                     </button>
                                 </li>
