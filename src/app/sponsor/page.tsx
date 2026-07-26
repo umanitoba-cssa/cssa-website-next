@@ -10,7 +10,9 @@ export default function Sponsor() {
                     image="/img/backgrounds/sponsors.jpg"
                 />
                 <div className="container py-12 flex flex-col gap-12">
-                    <div className="flex flex-col gap-8">
+                    <div
+                        id="why-sponsor-us"
+                        className="flex flex-col gap-8">
                         <BlockHeader title="Why Sponsor Us?" />
                         <p>
                             Our events draw a diverse audience of potential customers, partners, and
@@ -25,7 +27,9 @@ export default function Sponsor() {
                             further helping them discover or cultivate their passions in the field.
                         </p>
                     </div>
-                    <div className="flex flex-col gap-8">
+                    <div
+                        id="sponsorship-package"
+                        className="flex flex-col gap-8">
                         <BlockHeader title="Sponsorship Package" />
                         <p>
                             View or download our{' '}
@@ -38,7 +42,9 @@ export default function Sponsor() {
                             .
                         </p>
                     </div>
-                    <div className="flex flex-col gap-8">
+                    <div
+                        id="contact-us"
+                        className="flex flex-col gap-8">
                         <BlockHeader title="Contact Us" />
                         <p>
                             To inquire about sponsorships, please email us at{' '}

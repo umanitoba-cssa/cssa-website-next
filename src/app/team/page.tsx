@@ -62,7 +62,9 @@ export default function Team() {
                 </Select>
 
                 {filterByYear([...ExecProfiles, ...PrevExecsProfiles], year).length > 0 && (
-                    <>
+                    <div
+                        id="executive-team"
+                        className="flex flex-col gap-8">
                         <BlockHeader title="Executive Team" />
                         <div className="flex flex-row gap-4 flex-wrap justify-center">
                             {filterByYear([...ExecProfiles, ...PrevExecsProfiles], year).map(
@@ -77,11 +79,13 @@ export default function Team() {
                                 ),
                             )}
                         </div>
-                    </>
+                    </div>
                 )}
 
                 {filterByYear(PromotionsProfiles, year).length > 0 && (
-                    <>
+                    <div
+                        id="promotions-committee"
+                        className="flex flex-col gap-8">
                         <BlockHeader title="Promotions Committee" />
                         <div className="flex flex-row gap-4 flex-wrap justify-center">
                             {filterByYear(PromotionsProfiles, year).map((profile) => (
@@ -94,11 +98,13 @@ export default function Team() {
                                 />
                             ))}
                         </div>
-                    </>
+                    </div>
                 )}
 
                 {filterByYear(EventsProfiles, year).length > 0 && (
-                    <>
+                    <div
+                        id="events-committee"
+                        className="flex flex-col gap-8">
                         <BlockHeader title="Events Committee" />
                         <div className="flex flex-row gap-4 flex-wrap justify-center">
                             {filterByYear(EventsProfiles, year).map((profile) => (
@@ -111,11 +117,13 @@ export default function Team() {
                                 />
                             ))}
                         </div>
-                    </>
+                    </div>
                 )}
 
                 {filterByYear(TechnologyProfiles, year).length > 0 && (
-                    <>
+                    <div
+                        id="technology-committee"
+                        className="flex flex-col gap-8">
                         <BlockHeader title="Technology Committee" />
                         <div className="flex flex-row gap-4 flex-wrap justify-center">
                             {filterByYear(TechnologyProfiles, year).map((profile) => (
@@ -128,11 +136,13 @@ export default function Team() {
                                 />
                             ))}
                         </div>
-                    </>
+                    </div>
                 )}
 
                 {filterByYear(AdvocacyProfiles, year).length > 0 && (
-                    <>
+                    <div
+                        id="advocacy-committee"
+                        className="flex flex-col gap-8">
                         <BlockHeader title="Advocacy Committee" />
                         <div className="flex flex-row gap-4 flex-wrap justify-center">
                             {filterByYear(AdvocacyProfiles, year).map((profile) => (
@@ -145,11 +155,13 @@ export default function Team() {
                                 />
                             ))}
                         </div>
-                    </>
+                    </div>
                 )}
 
                 {filterByYear(StudentResourcesProfiles, year).length > 0 && (
-                    <>
+                    <div
+                        id="student-resources-committee"
+                        className="flex flex-col gap-8">
                         <BlockHeader title="Student Resources Committee" />
                         <div className="flex flex-row gap-4 flex-wrap justify-center">
                             {filterByYear(StudentResourcesProfiles, year).map((profile) => (
@@ -162,11 +174,13 @@ export default function Team() {
                                 />
                             ))}
                         </div>
-                    </>
+                    </div>
                 )}
 
                 {filterByYear(MerchProfiles, year).length > 0 && (
-                    <>
+                    <div
+                        id="merch-committee"
+                        className="flex flex-col gap-8">
                         <BlockHeader title="Merch Committee" />
                         <div className="flex flex-row gap-4 flex-wrap justify-center">
                             {filterByYear(MerchProfiles, year).map((profile) => (
@@ -179,11 +193,13 @@ export default function Team() {
                                 />
                             ))}
                         </div>
-                    </>
+                    </div>
                 )}
 
                 {filterByYear(LoungeProfiles, year).length > 0 && (
-                    <>
+                    <div
+                        id="lounge-affairs"
+                        className="flex flex-col gap-8">
                         <BlockHeader title="Lounge Affairs" />
                         <div className="flex flex-row gap-4 flex-wrap justify-center">
                             {filterByYear(LoungeProfiles, year).map((profile) => (
@@ -196,7 +212,7 @@ export default function Team() {
                                 />
                             ))}
                         </div>
-                    </>
+                    </div>
                 )}
             </div>
 

@@ -50,7 +50,9 @@ const Contact: FC = () => {
                 image="/img/backgrounds/contact.jpg"
             />
             <div className="container py-12 flex flex-col gap-12">
-                <div className="flex flex-col gap-8">
+                <div
+                    id="contact-email"
+                    className="flex flex-col gap-8">
                     <BlockHeader title="Contact Email" />
                     <p>
                         If you&apos;d like to get in touch by email, please contact us at{' '}
@@ -61,7 +63,9 @@ const Contact: FC = () => {
                         </a>
                     </p>
                 </div>
-                <div className="flex flex-col gap-8">
+                <div
+                    id="contact-form"
+                    className="flex flex-col gap-8">
                     <BlockHeader title="Contact Form" />
                     <form
                         id="contact-form"

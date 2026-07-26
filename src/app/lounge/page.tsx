@@ -45,7 +45,9 @@ export default async function Lounge() {
                 image="/img/backgrounds/lounge.jpg"
             />
             <div className="container py-12 flex flex-col gap-12">
-                <div className="flex flex-col gap-8">
+                <div
+                    id="lounge-location"
+                    className="flex flex-col gap-8">
                     <BlockHeader title="Lounge Location" />
                     <p>You can find our lounge at EITC E1-586.</p>
                     <div className="aspect-video w-full">
@@ -57,7 +59,9 @@ export default async function Lounge() {
                         />
                     </div>
                 </div>
-                <div className="flex flex-col gap-8">
+                <div
+                    id="lounge-menu"
+                    className="flex flex-col gap-8">
                     <BlockHeader title="Lounge Canteen Menu" />
                     <div className="flex flex-col gap-8">{menuItems}</div>
                 </div>
