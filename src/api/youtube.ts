@@ -1,3 +1,5 @@
+/// <reference types="gapi.youtube" />
+
 export interface IVideoData {
     title: string;
     description: string;
