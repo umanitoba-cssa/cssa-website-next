@@ -12,6 +12,17 @@ const goosiesDescription = 'Annual award show for the Department of Computer Sci
 
 export const RecentEvents: Map<string, IEventLink> = new Map([
     [
+        'general-meeting-bonfire-2026',
+        {
+            title: 'Summer General Meeting & Bonfire',
+            date: new Date('July 13, 2026'),
+            description: "Have some s'mores by a campfire and meet new people!",
+            href: '/events/general-meeting-bonfire-2026',
+            linkText: 'Learn More',
+            image: '/img/bonfire/2026/combined-poster.png',
+        },
+    ],
+    [
         'case-competition-2026',
         {
             title: 'Design & Craft Sprint',
@@ -106,19 +117,7 @@ export const OlderEvents: Map<string, IEventLink> = new Map([
     ],
 ]);
 
-const AllUpcomingEvents: Map<string, IEventLink> = new Map([
-    [
-        'general-meeting-bonfire-2026',
-        {
-            title: 'Summer General Meeting & Bonfire',
-            date: new Date('July 13, 2026'),
-            description: "Have some s'mores by a campfire and meet new people!",
-            href: '/events/general-meeting-bonfire-2026',
-            linkText: 'Learn More',
-            image: '/img/bonfire/2026/combined-poster.png',
-        },
-    ],
-]);
+const AllUpcomingEvents: Map<string, IEventLink> = new Map([]);
 
 export const UpcomingEvents: IEventLink[] = (() => {
     const today = new Date();
