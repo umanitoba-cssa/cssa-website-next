@@ -1,21 +1,50 @@
 #!/usr/bin/env bash
 
-set -a
-source .env
-set +a
+set -euo pipefail
+
+if [ -f .env ]; then
+    set -a
+    source .env
+    set +a
+else
+    echo "Error: .env file not found"
+    exit 1
+fi
+
+: "${CLOUDFLARE_ACCOUNT_ID:?Error: CLOUDFLARE_ACCOUNT_ID is required but not set. You can get it from Cloudflare Dashboard}"
+: "${CLOUDFLARE_TUNNEL_ID:?Error: CLOUDFLARE_TUNNEL_ID is required but not set. You can get it from the Cloudflare Dashboard }"
+: "${CLOUDFLARE_API_TOKEN:?Error: CLOUDFLARE_API_TOKEN is required but not set. You can get it from the Cloudflare Dashboard}"
 
 API_URL="https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/cfd_tunnel/${CLOUDFLARE_TUNNEL_ID}/configurations"
 
 BASE_DOMAIN=umanitobacssa.ca
 TARGET_HOST=192.168.100.15
 
-check_config_successful() {
-    config=$1
-    if ! echo "$config" | jq -e '.success == true' >/dev/null 2>&1; then
-        echo "Error: GET failed" >&2
+validate_number() {
+    local value=$1 label=$2 min=$3 max=$4
+    if ! [[ "$value" =~ ^[0-9]+$ ]]; then
+        echo "Error: $label must be a number, got '$value'" >&2
+        exit 1
+    fi
+    if ((10#$value < min || 10#$value > max)); then
+        echo "Error: $label must be between $min-$max, got '$value'" >&2
         exit 1
     fi
 }
+
+check_config_successful() {
+    config=$1
+    if ! command -v jq >/dev/null 2>&1; then
+        echo "Error: 'jq' is not installed." >&2
+        exit 1
+    fi
+
+    if ! echo "$config" | jq -e '.success == true' >/dev/null 2>&1; then
+        echo "Error: API request failed or invalid JSON response returned:" >&2
+        exit 1
+    fi
+}
+
 get_tunnel_config() {
     tunnel_config=$(curl -s "$API_URL" -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN")
 
@@ -29,7 +58,7 @@ create() {
         --arg hostname "${pr_number}-preview.${BASE_DOMAIN}" \
         '[.result.config.ingress[]? | select(.hostname == $hostname)] | length > 0')
 
-    if $exists; then
+    if [ "$exists" = "true" ]; then
         echo "PR #${pr_number} already has a preview — replacing it"
     fi
     new_ingress=$(echo "$tunnel_config" | jq \
@@ -56,7 +85,7 @@ delete() {
         --arg hostname "${pr_number}-preview.${BASE_DOMAIN}" \
         '[.result.config.ingress[]? | select(.hostname == $hostname)] | length > 0')
 
-    if ! $exists; then
+    if ! [ "$exists" = "true" ]; then
         echo "No entry found for PR #${pr_number}, nothing to delete"
         exit
     fi
@@ -85,29 +114,21 @@ main() {
     case "$action" in
     create)
         if [ $# -eq 1 ]; then
+            if [ ! -x ./scripts/find-free-port.sh ]; then
+                echo "Error: ./scripts/find-free-port.sh not found or not executable" >&2
+                exit 1
+            fi
             port_number=$(./scripts/find-free-port.sh)
-            if ! [[ "$port_number" =~ ^[0-9]+$ ]]; then
-                echo "Error: port must be a number, got '$port_number'" >&2
-                exit 1
-            fi
+            validate_number "$port_number" "port" 1 65535
             pr_number=$1
-            if ! [[ "$pr_number" =~ ^[0-9]+$ ]]; then
-                echo "Error: port must be a number, got '$pr_number'" >&2
-                exit 1
-            fi
+            validate_number "$pr_number" "pr number" 1 999999
         elif [ $# -eq 2 ]; then
             port_number=$1
+            validate_number "$port_number" "port" 1 65535
             pr_number=$2
+            validate_number "$pr_number" "pr number" 1 999999
         else
             echo "Usage: $0 create <port> <pr_number>  (or just <pr_number> to auto-pick a port)" >&2
-            exit 1
-        fi
-        if ! [[ "$port_number" =~ ^[0-9]+$ ]]; then
-            echo "Error: port must be a number, got '$port_number'" >&2
-            exit 1
-        fi
-        if ! [[ "$pr_number" =~ ^[0-9]+$ ]]; then
-            echo "Error: port must be a number, got '$pr_number'" >&2
             exit 1
         fi
         create
@@ -119,10 +140,7 @@ main() {
             exit 1
         fi
         pr_number=$1
-        if ! [[ "$pr_number" =~ ^[0-9]+$ ]]; then
-            echo "Error: port must be a number, got '$pr_number'" >&2
-            exit 1
-        fi
+        validate_number "$pr_number" "pr number" 1 999999
         delete
         echo "config updated successfully"
         ;;
