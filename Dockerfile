@@ -2,104 +2,59 @@
 FROM oven/bun:1.3.14 AS builder
 WORKDIR /usr/src/app
 
-# Define build arguments
-ARG YOUTUBE_API_KEY
-ARG SMTP_USERNAME
-ARG SMTP_PASSWORD
-ARG GOOGLE_CLIENT_ID
-ARG GOOGLE_SERVICE_ACCOUNT_EMAIL
-ARG GOOGLE_PRIVATE_KEY
-ARG GOOGLE_CALENDAR_ID
-ARG CANTEEN_SHEEET_ID
-ARG GITHUB_APP_ID
-ARG GITHUB_PRIVATE_KEY
+# Public / client-side variables
 ARG NEXT_PUBLIC_RECAPTCHA_SITE_KEY
-ARG RECAPTCHA_SECRET_KEY
-
-# Set environment variables from build args
 ENV NEXT_PUBLIC_RECAPTCHA_SITE_KEY=${NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
-ENV RECAPTCHA_SECRET_KEY=${RECAPTCHA_SECRET_KEY}
-ENV YOUTUBE_API_KEY=${YOUTUBE_API_KEY}
-ENV SMTP_USERNAME=${SMTP_USERNAME}
-ENV SMTP_PASSWORD=${SMTP_PASSWORD}
-ENV GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
-ENV GOOGLE_SERVICE_ACCOUNT_EMAIL=${GOOGLE_SERVICE_ACCOUNT_EMAIL}
-ENV GOOGLE_PRIVATE_KEY=${GOOGLE_PRIVATE_KEY}
-ENV GOOGLE_CALENDAR_ID=${GOOGLE_CALENDAR_ID}
-ENV CANTEEN_SHEEET_ID=${CANTEEN_SHEEET_ID}
-ENV GITHUB_APP_ID=${GITHUB_APP_ID}
-ENV GITHUB_PRIVATE_KEY=${GITHUB_PRIVATE_KEY}
 
-# Copy only package files first to leverage caching
+# Copy package files first to leverage caching
 COPY package.json bun.lock ./
 RUN bun install --frozen-lockfile --ignore-scripts
 
-# Copy only necessary files for build
+# Copy necessary source files
 COPY tsconfig.json next.config.mjs ./
 COPY scripts ./scripts/
 COPY src/ ./src/
 COPY public/ ./public/
 COPY tailwind.config.ts postcss.config.mjs ./
 
-# Set environment to production and build
+# Set environment to production
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
-RUN NEXT_PUBLIC_RECAPTCHA_SITE_KEY="${NEXT_PUBLIC_RECAPTCHA_SITE_KEY}" \
-    RECAPTCHA_SECRET_KEY="${RECAPTCHA_SECRET_KEY}" \
-    YOUTUBE_API_KEY="${YOUTUBE_API_KEY}" \
-    SMTP_USERNAME="${SMTP_USERNAME}" \
-    SMTP_PASSWORD="${SMTP_PASSWORD}" \
-    GOOGLE_CLIENT_ID="${GOOGLE_CLIENT_ID}" \
-    GOOGLE_SERVICE_ACCOUNT_EMAIL="${GOOGLE_SERVICE_ACCOUNT_EMAIL}" \
-    GOOGLE_PRIVATE_KEY="${GOOGLE_PRIVATE_KEY}" \
-    GOOGLE_CALENDAR_ID="${GOOGLE_CALENDAR_ID}" \
-    CANTEEN_SHEEET_ID="${CANTEEN_SHEEET_ID}" \
-    NEXT_PUBLIC_RECAPTCHA_SITE_KEY="${NEXT_PUBLIC_RECAPTCHA_SITE_KEY}" \
-    RECAPTCHA_SECRET_KEY="${RECAPTCHA_SECRET_KEY}" \
-    YOUTUBE_API_KEY="${YOUTUBE_API_KEY}" \
-    SMTP_USERNAME="${SMTP_USERNAME}" \
-    SMTP_PASSWORD="${SMTP_PASSWORD}" \
-    GOOGLE_CLIENT_ID="${GOOGLE_CLIENT_ID}" \
-    GOOGLE_SERVICE_ACCOUNT_EMAIL="${GOOGLE_SERVICE_ACCOUNT_EMAIL}" \
-    GOOGLE_PRIVATE_KEY="${GOOGLE_PRIVATE_KEY}" \
-    CANTEEN_SHEEET_ID="${CANTEEN_SHEEET_ID}" \
-    GITHUB_APP_ID="${GITHUB_APP_ID}" \
-    GITHUB_PRIVATE_KEY="${GITHUB_PRIVATE_KEY}" \
+
+# Mount individual secrets and load them during build.
+# BuildKit mounts each secret as a file under /run/secrets/<id>.
+RUN --mount=type=secret,id=YOUTUBE_API_KEY \
+    --mount=type=secret,id=SMTP_USERNAME \
+    --mount=type=secret,id=SMTP_PASSWORD \
+    --mount=type=secret,id=GOOGLE_CLIENT_ID \
+    --mount=type=secret,id=GOOGLE_SERVICE_ACCOUNT_EMAIL \
+    --mount=type=secret,id=GOOGLE_PRIVATE_KEY \
+    --mount=type=secret,id=CANTEEN_SHEEET_ID \
+    --mount=type=secret,id=GITHUB_APP_ID \
+    --mount=type=secret,id=GITHUB_PRIVATE_KEY \
+    --mount=type=secret,id=GOOGLE_CALENDAR_ID \
+    --mount=type=secret,id=RECAPTCHA_SECRET_KEY \
+    export YOUTUBE_API_KEY="$(cat /run/secrets/YOUTUBE_API_KEY)" && \
+    export SMTP_USERNAME="$(cat /run/secrets/SMTP_USERNAME)" && \
+    export SMTP_PASSWORD="$(cat /run/secrets/SMTP_PASSWORD)" && \
+    export GOOGLE_CLIENT_ID="$(cat /run/secrets/GOOGLE_CLIENT_ID)" && \
+    export GOOGLE_SERVICE_ACCOUNT_EMAIL="$(cat /run/secrets/GOOGLE_SERVICE_ACCOUNT_EMAIL)" && \
+    export GOOGLE_PRIVATE_KEY="$(cat /run/secrets/GOOGLE_PRIVATE_KEY)" && \
+    export CANTEEN_SHEEET_ID="$(cat /run/secrets/CANTEEN_SHEEET_ID)" && \
+    export GITHUB_APP_ID="$(cat /run/secrets/GITHUB_APP_ID)" && \
+    export GITHUB_PRIVATE_KEY="$(cat /run/secrets/GITHUB_PRIVATE_KEY)" && \
+    export GOOGLE_CALENDAR_ID="$(cat /run/secrets/GOOGLE_CALENDAR_ID)" && \
+    export RECAPTCHA_SECRET_KEY="$(cat /run/secrets/RECAPTCHA_SECRET_KEY)" && \
     bun run build
 
 # Production stage
 FROM oven/bun:1.3.14-slim AS production
 WORKDIR /usr/src/app
 
-# Define runtime arguments (these need to be passed when running the container)
-ARG YOUTUBE_API_KEY
-ARG SMTP_USERNAME
-ARG SMTP_PASSWORD
-ARG GOOGLE_CLIENT_ID
-ARG GOOGLE_SERVICE_ACCOUNT_EMAIL
-ARG GOOGLE_PRIVATE_KEY
-ARG GOOGLE_CALENDAR_ID
-ARG CANTEEN_SHEEET_ID
-ARG GITHUB_APP_ID
-ARG GITHUB_PRIVATE_KEY
 ARG NEXT_PUBLIC_RECAPTCHA_SITE_KEY
-ARG RECAPTCHA_SECRET_KEY
-
-# Set environment variables for runtime
-ENV YOUTUBE_API_KEY=${YOUTUBE_API_KEY}
-ENV SMTP_USERNAME=${SMTP_USERNAME}
-ENV SMTP_PASSWORD=${SMTP_PASSWORD}
-ENV GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
-ENV GOOGLE_SERVICE_ACCOUNT_EMAIL=${GOOGLE_SERVICE_ACCOUNT_EMAIL}
-ENV GOOGLE_PRIVATE_KEY=${GOOGLE_PRIVATE_KEY}
-ENV GOOGLE_CALENDAR_ID=${GOOGLE_CALENDAR_ID}
-ENV CANTEEN_SHEEET_ID=${CANTEEN_SHEEET_ID}
-ENV GITHUB_APP_ID=${GITHUB_APP_ID}
-ENV GITHUB_PRIVATE_KEY=${GITHUB_PRIVATE_KEY}
 ENV NEXT_PUBLIC_RECAPTCHA_SITE_KEY=${NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
-ENV RECAPTCHA_SECRET_KEY=${RECAPTCHA_SECRET_KEY}
 
-# Copy only runtime dependencies
+# Copy production runtime dependencies
 COPY package.json bun.lock ./
 RUN bun install --frozen-lockfile --production --ignore-scripts
 
