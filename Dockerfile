@@ -21,9 +21,30 @@ COPY tailwind.config.ts postcss.config.mjs ./
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 
-# Mount the secret file directly as .env so Next.js reads it
-# Because the mount only lasts for this RUN command, .env will NOT be saved in the image layers.
-RUN --mount=type=secret,id=build_env,target=/usr/src/app/.env \
+# Mount individual secrets and load them during build.
+# BuildKit mounts each secret as a file under /run/secrets/<id>.
+RUN --mount=type=secret,id=YOUTUBE_API_KEY \
+    --mount=type=secret,id=SMTP_USERNAME \
+    --mount=type=secret,id=SMTP_PASSWORD \
+    --mount=type=secret,id=GOOGLE_CLIENT_ID \
+    --mount=type=secret,id=GOOGLE_SERVICE_ACCOUNT_EMAIL \
+    --mount=type=secret,id=GOOGLE_PRIVATE_KEY \
+    --mount=type=secret,id=CANTEEN_SHEEET_ID \
+    --mount=type=secret,id=GITHUB_APP_ID \
+    --mount=type=secret,id=GITHUB_PRIVATE_KEY \
+    --mount=type=secret,id=GOOGLE_CALENDAR_ID \
+    --mount=type=secret,id=RECAPTCHA_SECRET_KEY \
+    export YOUTUBE_API_KEY="$(cat /run/secrets/YOUTUBE_API_KEY)" && \
+    export SMTP_USERNAME="$(cat /run/secrets/SMTP_USERNAME)" && \
+    export SMTP_PASSWORD="$(cat /run/secrets/SMTP_PASSWORD)" && \
+    export GOOGLE_CLIENT_ID="$(cat /run/secrets/GOOGLE_CLIENT_ID)" && \
+    export GOOGLE_SERVICE_ACCOUNT_EMAIL="$(cat /run/secrets/GOOGLE_SERVICE_ACCOUNT_EMAIL)" && \
+    export GOOGLE_PRIVATE_KEY="$(cat /run/secrets/GOOGLE_PRIVATE_KEY)" && \
+    export CANTEEN_SHEEET_ID="$(cat /run/secrets/CANTEEN_SHEEET_ID)" && \
+    export GITHUB_APP_ID="$(cat /run/secrets/GITHUB_APP_ID)" && \
+    export GITHUB_PRIVATE_KEY="$(cat /run/secrets/GITHUB_PRIVATE_KEY)" && \
+    export GOOGLE_CALENDAR_ID="$(cat /run/secrets/GOOGLE_CALENDAR_ID)" && \
+    export RECAPTCHA_SECRET_KEY="$(cat /run/secrets/RECAPTCHA_SECRET_KEY)" && \
     bun run build
 
 # Production stage
