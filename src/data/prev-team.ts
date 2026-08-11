@@ -57,6 +57,15 @@ export const PrevExecsProfiles = [
         image: '/img/team/execs/kc.JPG',
         year: '2024 - 2025',
     },
+    {
+        name: 'Peter Vu',
+        group: 'Exec',
+        position: 'Director of Student Affairs',
+        image: '/img/team/prevExecs/peter.jpg',
+        linkedin: 'https://linkedin.com/in/petervudev',
+        github: 'https://github.com/pieberrykinnie',
+        year: '2024 - 2025',
+    },
 ];
 
 export const filterByYear = (profile: IProfile[], year: string) => {
