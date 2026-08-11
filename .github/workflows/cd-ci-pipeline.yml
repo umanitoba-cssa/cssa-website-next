@@ -91,6 +91,22 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
+      - name: Create Build Environment File
+        run: |
+          cat << 'EOF' > /tmp/build_env
+          YOUTUBE_API_KEY="${{ secrets.YOUTUBE_API_KEY }}"
+          SMTP_USERNAME="${{ secrets.SMTP_USERNAME }}"
+          SMTP_PASSWORD="${{ secrets.SMTP_PASSWORD }}"
+          GOOGLE_CLIENT_ID="${{ secrets.GOOGLE_CLIENT_ID }}"
+          GOOGLE_SERVICE_ACCOUNT_EMAIL="${{ secrets.GOOGLE_SERVICE_ACCOUNT_EMAIL }}"
+          GOOGLE_PRIVATE_KEY="${{ secrets.GOOGLE_PRIVATE_KEY }}"
+          CANTEEN_SHEEET_ID="${{ secrets.CANTEEN_SHEEET_ID }}"
+          GITHUB_APP_ID="${{ secrets._GITHUB_APP_ID }}"
+          GITHUB_PRIVATE_KEY="${{ secrets._GITHUB_PRIVATE_KEY }}"
+          GOOGLE_CALENDAR_ID="${{ secrets.GOOGLE_CALENDAR_ID }}"
+          RECAPTCHA_SECRET_KEY="${{ secrets.RECAPTCHA_SECRET_KEY }}"
+          EOF
+
       - name: Build Docker Image
         uses: docker/build-push-action@v5
         with:
@@ -106,18 +122,13 @@ jobs:
           outputs: type=docker
           build-args: |
             NEXT_PUBLIC_RECAPTCHA_SITE_KEY=${{ secrets.NEXT_PUBLIC_RECAPTCHA_SITE_KEY }}
-          secrets: |
-            "build_env=YOUTUBE_API_KEY=${{ secrets.YOUTUBE_API_KEY }}
-            SMTP_USERNAME=${{ secrets.SMTP_USERNAME }}
-            SMTP_PASSWORD=${{ secrets.SMTP_PASSWORD }}
-            GOOGLE_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }}
-            GOOGLE_SERVICE_ACCOUNT_EMAIL=${{ secrets.GOOGLE_SERVICE_ACCOUNT_EMAIL }}
-            GOOGLE_PRIVATE_KEY=\"${{ secrets.GOOGLE_PRIVATE_KEY }}\"
-            CANTEEN_SHEEET_ID=${{ secrets.CANTEEN_SHEEET_ID }}
-            GITHUB_APP_ID=${{ secrets._GITHUB_APP_ID }}
-            GITHUB_PRIVATE_KEY=\"${{ secrets._GITHUB_PRIVATE_KEY }}\"
-            GOOGLE_CALENDAR_ID=${{ secrets.GOOGLE_CALENDAR_ID }}
-            RECAPTCHA_SECRET_KEY=${{ secrets.RECAPTCHA_SECRET_KEY }}"
+          secret-files: |
+            build_env=/tmp/build_env
+
+      # Clean up local secrets file immediately after build
+      - name: Clean up Build Environment File
+        if: always()
+        run: rm -f /tmp/build_env
 
       - name: Save Docker Image Artifact
         run: |
