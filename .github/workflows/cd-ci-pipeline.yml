@@ -150,22 +150,47 @@ jobs:
         shell: bash
         env:
           ANSIBLE_HOST_KEY_CHECKING: 'False'
+          # Store sensitive variables in step env to prevent CLI exposure
+          GOOGLE_PRIVATE_KEY: ${{ secrets.GOOGLE_PRIVATE_KEY }}
+          GITHUB_PRIVATE_KEY: ${{ secrets._GITHUB_PRIVATE_KEY }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          RECAPTCHA_SECRET_KEY: ${{ secrets.RECAPTCHA_SECRET_KEY }}
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
         run: |
-          ansible-playbook -i localhost, .ansible/playbook/ansible_deploy_container.yml \
-            --user root-main-web \
-            --extra-vars "port=${{ needs.set-port.outputs.PORT }} \
-              container_name=cssa-${{ needs.set-port.outputs.ENVIRONMENT }} \
-              image_name=${{ needs.set-port.outputs.IMAGE_NAME }}:${{ github.run_number }}-${{ github.run_attempt }} \
-              artifact_path=/tmp/${{ needs.set-port.outputs.ENVIRONMENT }}/${{ needs.set-port.outputs.IMAGE_NAME }}.tar \
-              next_public_recaptcha_site_key=${{ secrets.NEXT_PUBLIC_RECAPTCHA_SITE_KEY }} \
-              recaptcha_secret_key=${{ secrets.RECAPTCHA_SECRET_KEY }} \
-              youtube_api_key=${{ secrets.YOUTUBE_API_KEY }} \
-              smtp_username=${{ secrets.SMTP_USERNAME }} \
-              smtp_password=${{ secrets.SMTP_PASSWORD }} \
-              google_client_id=${{ secrets.GOOGLE_CLIENT_ID }} \
-              google_service_account_email=${{ secrets.GOOGLE_SERVICE_ACCOUNT_EMAIL }} \
-              google_private_key=${{ secrets.GOOGLE_PRIVATE_KEY }} \
-              canteen_sheet_id=${{ secrets.CANTEEN_SHEEET_ID }} \
-              github_app_id=${{ secrets._GITHUB_APP_ID }} \
-              github_private_key=${{ secrets._GITHUB_PRIVATE_KEY }} \
-              google_calendar_id=${{ secrets.GOOGLE_CALENDAR_ID }}"
+          jq -n \
+            --arg port "${{ needs.set-port.outputs.PORT }}" \
+            --arg container_name "cssa-${{ needs.set-port.outputs.ENVIRONMENT }}" \
+            --arg image_name "${{ needs.set-port.outputs.IMAGE_NAME }}:${{ github.run_number }}-${{ github.run_attempt }}" \
+            --arg artifact_path "/tmp/${{ needs.set-port.outputs.ENVIRONMENT }}/${{ needs.set-port.outputs.IMAGE_NAME }}.tar" \
+            --arg next_public_recaptcha_site_key "${{ secrets.NEXT_PUBLIC_RECAPTCHA_SITE_KEY }}" \
+            --arg recaptcha_secret_key "$RECAPTCHA_SECRET_KEY" \
+            --arg youtube_api_key "$YOUTUBE_API_KEY" \
+            --arg smtp_username "${{ secrets.SMTP_USERNAME }}" \
+            --arg smtp_password "$SMTP_PASSWORD" \
+            --arg google_client_id "${{ secrets.GOOGLE_CLIENT_ID }}" \
+            --arg google_service_account_email "${{ secrets.GOOGLE_SERVICE_ACCOUNT_EMAIL }}" \
+            --arg google_private_key "$GOOGLE_PRIVATE_KEY" \
+            --arg canteen_sheet_id "${{ secrets.CANTEEN_SHEEET_ID }}" \
+            --arg github_app_id "${{ secrets._GITHUB_APP_ID }}" \
+            --arg github_private_key "$GITHUB_PRIVATE_KEY" \
+            --arg google_calendar_id "${{ secrets.GOOGLE_CALENDAR_ID }}" \
+            '{
+              port: $port,
+              container_name: $container_name,
+              image_name: $image_name,
+              artifact_path: $artifact_path,
+              next_public_recaptcha_site_key: $next_public_recaptcha_site_key,
+              recaptcha_secret_key: $recaptcha_secret_key,
+              youtube_api_key: $youtube_api_key,
+              smtp_username: $smtp_username,
+              smtp_password: $smtp_password,
+              google_client_id: $google_client_id,
+              google_service_account_email: $google_service_account_email,
+              google_private_key: $google_private_key,
+              canteen_sheet_id: $canteen_sheet_id,
+              github_app_id: $github_app_id,
+              github_private_key: $github_private_key,
+              google_calendar_id: $google_calendar_id
+            }' | ansible-playbook -i localhost, .ansible/playbook/ansible_deploy_container.yml \
+                --user root-main-web \
+                --extra-vars @-
