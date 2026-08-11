@@ -59,6 +59,7 @@ export const PrevExecsProfiles = [
     },
     {
         name: 'Peter Vu',
+        group: 'Exec',
         position: 'Director of Student Affairs',
         image: '/img/team/prevExecs/peter.jpg',
         linkedin: 'https://linkedin.com/in/petervudev',
