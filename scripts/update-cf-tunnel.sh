@@ -40,7 +40,7 @@ check_config_successful() {
     fi
 
     if ! echo "$config" | jq -e '.success == true' >/dev/null 2>&1; then
-        echo "Error: API request failed or invalid JSON response returned:" >&2
+        echo "Error: API request failed or invalid JSON response returned: $config" >&2
         exit 1
     fi
 }
@@ -65,11 +65,12 @@ create() {
         --arg hostname "${pr_number}-preview.${BASE_DOMAIN}" \
         --arg service "https://${TARGET_HOST}:${port_number}" \
         '
-  .result.config.ingress
+  (.result.config.ingress // [])
   | map(select(.hostname != $hostname)) as $filtered
   | ($filtered | map(select(.hostname != null))) as $named
   | ($filtered | map(select(.hostname == null))) as $catchall
-  | $named + [{hostname: $hostname, service: $service}] + $catchall
+  | (if ($catchall | length) == 0 then [{service: "http_status:404"}] else $catchall end) as $catchall_final
+  | $named + [{hostname: $hostname, service: $service}] + $catchall_final
   ')
     config=$(jq -n --argjson ingress "$new_ingress" '{config: {ingress: $ingress}}')
 
@@ -92,7 +93,7 @@ delete() {
     new_ingress=$(echo "$tunnel_config" | jq \
         --arg hostname "${pr_number}-preview.${BASE_DOMAIN}" \
         '
-  .result.config.ingress
+  (.result.config.ingress // [])
   | map(select(.hostname != $hostname))
   ')
     config=$(jq -n --argjson ingress "$new_ingress" '{config: {ingress: $ingress}}')
