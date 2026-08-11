@@ -150,14 +150,13 @@ jobs:
         shell: bash
         env:
           ANSIBLE_HOST_KEY_CHECKING: 'False'
-          # Store sensitive variables in step env to prevent CLI exposure
           GOOGLE_PRIVATE_KEY: ${{ secrets.GOOGLE_PRIVATE_KEY }}
           GITHUB_PRIVATE_KEY: ${{ secrets._GITHUB_PRIVATE_KEY }}
           SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
           RECAPTCHA_SECRET_KEY: ${{ secrets.RECAPTCHA_SECRET_KEY }}
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
         run: |
-          jq -n \
+          EXTRA_VARS=$(jq -n \
             --arg port "${{ needs.set-port.outputs.PORT }}" \
             --arg container_name "cssa-${{ needs.set-port.outputs.ENVIRONMENT }}" \
             --arg image_name "${{ needs.set-port.outputs.IMAGE_NAME }}:${{ github.run_number }}-${{ github.run_attempt }}" \
@@ -191,6 +190,7 @@ jobs:
               github_app_id: $github_app_id,
               github_private_key: $github_private_key,
               google_calendar_id: $google_calendar_id
-            }' | ansible-playbook -i localhost, .ansible/playbook/ansible_deploy_container.yml \
-                --user root-main-web \
-                --extra-vars @-
+            }')
+
+          ansible-playbook -i "localhost," -c local .ansible/playbook/ansible_deploy_container.yml \
+            --extra-vars "$EXTRA_VARS"
