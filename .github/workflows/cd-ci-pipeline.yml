@@ -112,10 +112,10 @@ jobs:
             SMTP_PASSWORD=${{ secrets.SMTP_PASSWORD }}
             GOOGLE_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }}
             GOOGLE_SERVICE_ACCOUNT_EMAIL=${{ secrets.GOOGLE_SERVICE_ACCOUNT_EMAIL }}
-            GOOGLE_PRIVATE_KEY=${{ secrets.GOOGLE_PRIVATE_KEY }}
+            GOOGLE_PRIVATE_KEY=\"${{ secrets.GOOGLE_PRIVATE_KEY }}\"
             CANTEEN_SHEEET_ID=${{ secrets.CANTEEN_SHEEET_ID }}
             GITHUB_APP_ID=${{ secrets._GITHUB_APP_ID }}
-            GITHUB_PRIVATE_KEY=${{ secrets._GITHUB_PRIVATE_KEY }}
+            GITHUB_PRIVATE_KEY=\"${{ secrets._GITHUB_PRIVATE_KEY }}\"
             GOOGLE_CALENDAR_ID=${{ secrets.GOOGLE_CALENDAR_ID }}
             RECAPTCHA_SECRET_KEY=${{ secrets.RECAPTCHA_SECRET_KEY }}"
 

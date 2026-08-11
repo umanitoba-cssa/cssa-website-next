@@ -2,7 +2,7 @@
 FROM oven/bun:1.3.14 AS builder
 WORKDIR /usr/src/app
 
-# Public / client-side variables (safe to be in build args)
+# Public / client-side variables
 ARG NEXT_PUBLIC_RECAPTCHA_SITE_KEY
 ENV NEXT_PUBLIC_RECAPTCHA_SITE_KEY=${NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
 
@@ -17,14 +17,13 @@ COPY src/ ./src/
 COPY public/ ./public/
 COPY tailwind.config.ts postcss.config.mjs ./
 
-# Set environment to production and build
+# Set environment to production
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 
-# Temporarily mount secrets during static page compilation.
-# Secrets are loaded into memory and NOT written to image layers.
-RUN --mount=type=secret,id=build_env \
-    export $(cat /run/secrets/build_env | xargs) && \
+# Mount the secret file directly as .env so Next.js reads it
+# Because the mount only lasts for this RUN command, .env will NOT be saved in the image layers.
+RUN --mount=type=secret,id=build_env,target=/usr/src/app/.env \
     bun run build
 
 # Production stage
