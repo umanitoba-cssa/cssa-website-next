@@ -4,6 +4,6 @@ services:
     image: ${REGISTRY_IMAGE}:${IMAGE_TAG}
     restart: always
     ports:
-      - "${PORT}:3000"
+      - '${PORT}:3000'
     env_file:
       - .env
