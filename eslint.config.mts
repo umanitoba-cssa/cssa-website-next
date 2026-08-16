@@ -14,7 +14,15 @@ export default defineConfig([
 
     // Ignore files and folders
     {
-        ignores: ['node_modules/**', '.next/**', 'dist/**', 'build/**', '*.md', 'next-env.d.ts', '*.yml'],
+        ignores: [
+            'node_modules/**',
+            '.next/**',
+            'dist/**',
+            'build/**',
+            '*.md',
+            'next-env.d.ts',
+            '*.yml',
+        ],
     },
 
     // -----------------------------
