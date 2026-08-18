@@ -16,6 +16,15 @@ export async function getCalendarEvents(opts: {
     timeMin: string;
     timeMax: string;
 }): Promise<IEventLink[]> {
+    const PROD_ENV = process.env.NODE_ENV === 'production' && process.env.LOCAL_DEV !== 'true';
+    // If credentials are missing, skip calling Calendar API.
+    if (!process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL || !process.env.GOOGLE_PRIVATE_KEY) {
+        const msg = 'Missing Google service account credentials';
+        if (PROD_ENV) throw new Error(msg);
+        console.warn(msg + '; skipping Calendar API');
+        return [];
+    }
+
     const auth = new Auth.GoogleAuth({
         scopes: ['https://www.googleapis.com/auth/calendar.readonly'],
         credentials: {
@@ -58,9 +67,12 @@ export async function getCalendarEvents(opts: {
 }
 
 export async function getEvents() {
+    const PROD_ENV = process.env.NODE_ENV === 'production' && process.env.LOCAL_DEV !== 'true';
     const calendarId = process.env.GOOGLE_CALENDAR_ID;
     if (!calendarId) {
-        console.warn('Missing env CALENDAR_ID');
+        const msg = 'Missing env CALENDAR_ID';
+        if (PROD_ENV) throw new Error(msg);
+        console.warn(msg);
         return [];
     }
 

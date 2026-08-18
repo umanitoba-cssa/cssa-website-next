@@ -2,6 +2,10 @@
 FROM oven/bun:1.3.14 AS builder
 WORKDIR /usr/src/app
 
+# Local Docker override: set to "true" for local builds
+ARG LOCAL_DEV=false
+ENV LOCAL_DEV=${LOCAL_DEV}
+
 # Public / client-side variables
 ARG NEXT_PUBLIC_RECAPTCHA_SITE_KEY
 ENV NEXT_PUBLIC_RECAPTCHA_SITE_KEY=${NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
@@ -50,6 +54,9 @@ RUN --mount=type=secret,id=YOUTUBE_API_KEY \
 # Production stage
 FROM oven/bun:1.3.14-slim AS production
 WORKDIR /usr/src/app
+
+ARG LOCAL_DEV=false
+ENV LOCAL_DEV=${LOCAL_DEV}
 
 ARG NEXT_PUBLIC_RECAPTCHA_SITE_KEY
 ENV NEXT_PUBLIC_RECAPTCHA_SITE_KEY=${NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
