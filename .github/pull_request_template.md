@@ -1,5 +1,4 @@
-## Jira Issue Reference
-- **Jira Issue:** [TECH-#](link)
+<!-- Please link the issue for this PR in the "Development" section on the side after the PR is created -->
 
 ## Type of Change
 - [ ] Bug Fix
