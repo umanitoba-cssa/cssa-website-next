@@ -1,0 +1,9 @@
+services:
+  web:
+    container_name: ${CONTAINER_NAME}
+    image: ${REGISTRY_IMAGE}:${IMAGE_TAG}
+    restart: always
+    ports:
+      - '${PORT}:3000'
+    env_file:
+      - .env
