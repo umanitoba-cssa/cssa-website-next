@@ -151,13 +151,17 @@ jobs:
       - name: Determine port
         id: port
         run: |
-          DEPLOY_DIR="${{ steps.dirs.outputs.DEPLOY_DIR }}"
-          if [[ -f "$DEPLOY_DIR/.env" ]] && grep -q '^PORT=' "$DEPLOY_DIR/.env"; then
-            PORT=$(grep '^PORT=' "$DEPLOY_DIR/.env" | cut -d '=' -f2)
+          if [[ "$ENVIRONMENT" == "staging" ]]; then
+            echo "PORT=4000" >> "$GITHUB_OUTPUT"
           else
-            PORT=$(./scripts/find-free-port.sh)
+            DEPLOY_DIR="${{ steps.dirs.outputs.DEPLOY_DIR }}"
+            if [[ -f "$DEPLOY_DIR/.env" ]] && grep -q '^PORT=' "$DEPLOY_DIR/.env"; then
+              PORT=$(grep '^PORT=' "$DEPLOY_DIR/.env" | cut -d '=' -f2)
+            else
+              PORT=$(./scripts/find-free-port.sh)
+            fi
+            echo "PORT=$PORT" >> "$GITHUB_OUTPUT"
           fi
-          echo "PORT=$PORT" >> "$GITHUB_OUTPUT"
 
       - name: Write .env file
         run: |
