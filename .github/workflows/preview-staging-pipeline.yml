@@ -116,6 +116,7 @@ jobs:
     runs-on: [self-hosted, webhost]
     environment:
       name: ${{ needs.build-and-push.outputs.ENVIRONMENT }}
+      url: ${{ steps.dirs.outputs.DEPLOY_URL }}
     env:
       ENVIRONMENT: ${{ needs.build-and-push.outputs.ENVIRONMENT }}
       IMAGE_TAG: ${{ needs.build-and-push.outputs.IMAGE_TAG }}
@@ -131,10 +132,12 @@ jobs:
             echo "DEPLOY_DIR=/srv/deployments/staging" >> "$GITHUB_OUTPUT"
             echo "CONTAINER_NAME=cssa-staging" >> "$GITHUB_OUTPUT"
             echo "COMPOSE_PROJECT_NAME=staging" >> "$GITHUB_OUTPUT"
+            echo "DEPLOY_URL=https://staging.umanitobacssa.ca" >> "$GITHUB_OUTPUT"
           else
             echo "DEPLOY_DIR=/srv/deployments/preview-pr-${PR_NUMBER}" >> "$GITHUB_OUTPUT"
             echo "CONTAINER_NAME=cssa-pr-${PR_NUMBER}" >> "$GITHUB_OUTPUT"
             echo "COMPOSE_PROJECT_NAME=preview-pr-${PR_NUMBER}" >> "$GITHUB_OUTPUT"
+            echo "DEPLOY_URL=https://${PR_NUMBER}-preview.umanitobacssa.ca" >> "$GITHUB_OUTPUT"
           fi
 
       - name: Ensure deployment directory exists
