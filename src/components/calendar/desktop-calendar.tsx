@@ -91,7 +91,7 @@ export function DesktopCalendar({
                 )}
             </div>
 
-            <div className="overflow-x-auto pb-4 -mx-2 px-2 hidden sm:block">
+            <div className="overflow-x-auto pb-4 -mx-2 px-2 hidden min-[715px]:block">
                 <div className="min-w-[600px]">
                     {/* Weekday labels */}
                     <div className="grid grid-cols-7 gap-1 text-white mb-4 sm:mb-6 font-roboto text-xs font-medium uppercase opacity-60">
