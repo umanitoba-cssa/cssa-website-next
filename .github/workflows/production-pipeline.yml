@@ -13,6 +13,7 @@ on:
 
 jobs:
   build-and-push:
+    if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     outputs:
       ENVIRONMENT: ${{steps.vars.outputs.ENVIRONMENT}}
@@ -73,6 +74,7 @@ jobs:
             "RECAPTCHA_SECRET_KEY=${{ secrets.RECAPTCHA_SECRET_KEY }}"
 
   deploy:
+    if: github.event_name == 'workflow_dispatch'
     needs: [ build-and-push]
     runs-on: [self-hosted, webhost]
     environment:
