@@ -1,5 +1,10 @@
 name: Preview/Staging Workflow
 
+permissions:
+  contents: read
+  packages: write
+  id-token: write
+
 on:
   pull_request:
     branches:
@@ -16,7 +21,6 @@ jobs:
 
       - name: Install Bun
         uses: oven-sh/setup-bun@v2
-
 
       - name: Install dependencies
         run: bun install --ignore-scripts --frozen-lockfile
@@ -172,7 +176,7 @@ jobs:
       - name: Copy docker-compose.yml
         run: cp docker-compose.yml "${{ steps.dirs.outputs.DEPLOY_DIR }}/docker-compose.yml"
 
-      - name: Update Cloudflare tunnel and deploy
+      - name: Update Cloudflare tunnel and deploy (Preview)
         if: env.ENVIRONMENT == 'preview'
         working-directory: ${{ steps.dirs.outputs.DEPLOY_DIR }}
         env:
@@ -187,7 +191,7 @@ jobs:
           docker compose pull
           docker compose up -d --remove-orphans
 
-      - name: Deploy (staging — no tunnel churn)
+      - name: Deploy (staging)
         if: env.ENVIRONMENT == 'staging'
         working-directory: ${{ steps.dirs.outputs.DEPLOY_DIR }}
         run: |
