@@ -17,11 +17,6 @@ jobs:
       - name: Install Bun
         uses: oven-sh/setup-bun@v2
 
-      - name: Fix PATH for act
-        if: ${{ env.ACT }}
-        run: |
-          ACT_TOOL_PATHS=$(cat /etc/environment | grep "PATH=" | sed -e 's/PATH=//' | tr ":" "\n" | grep "${ACT_TOOLSDIRECTORY}" | tr '\n' ':' | tr -d ':')
-          echo ":${ACT_TOOL_PATHS}" >> "$GITHUB_PATH"
 
       - name: Install dependencies
         run: bun install --ignore-scripts --frozen-lockfile
@@ -38,11 +33,6 @@ jobs:
       - name: Install Bun
         uses: oven-sh/setup-bun@v2
 
-      - name: Fix PATH for act
-        if: ${{ env.ACT }}
-        run: |
-          ACT_TOOL_PATHS=$(cat /etc/environment | grep "PATH=" | sed -e 's/PATH=//' | tr ":" "\n" | grep "${ACT_TOOLSDIRECTORY}" | tr '\n' ':' | tr -d ':')
-          echo ":${ACT_TOOL_PATHS}" >> "$GITHUB_PATH"
 
       - name: Install dependencies
         run: bun install --ignore-scripts --frozen-lockfile
@@ -75,12 +65,6 @@ jobs:
 
       - name: Install Bun
         uses: oven-sh/setup-bun@v2
-
-      - name: Fix PATH for act
-        if: ${{ env.ACT }}
-        run: |
-          ACT_TOOL_PATHS=$(cat /etc/environment | grep "PATH=" | sed -e 's/PATH=//' | tr ":" "\n" | grep "${ACT_TOOLSDIRECTORY}" | tr '\n' ':' | tr -d ':')
-          echo ":${ACT_TOOL_PATHS}" >> "$GITHUB_PATH"
 
       - name: Install dependencies
         run: bun install --ignore-scripts --frozen-lockfile
