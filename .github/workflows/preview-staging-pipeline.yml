@@ -200,7 +200,7 @@ jobs:
           trap '${{ github.workspace }}/scripts/update-cf-tunnel.sh delete ${{ env.PR_NUMBER }}' ERR
 
           ${{ github.workspace }}/scripts/update-cf-tunnel.sh create "${{ steps.port.outputs.PORT }}" "${{ env.PR_NUMBER }}"
-          
+
           cd "${{ steps.dirs.outputs.DEPLOY_DIR }}"
           docker compose pull
           docker compose up -d --remove-orphans
