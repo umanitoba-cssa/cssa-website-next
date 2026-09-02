@@ -166,23 +166,23 @@ jobs:
       - name: Write .env file
         run: |
           cat > "${{ steps.dirs.outputs.DEPLOY_DIR }}/.env" <<EOF
-          COMPOSE_PROJECT_NAME=${{ steps.dirs.outputs.COMPOSE_PROJECT_NAME }}
-          CONTAINER_NAME=${{ steps.dirs.outputs.CONTAINER_NAME }}
-          PORT=${{ steps.port.outputs.PORT }}
-          REGISTRY_IMAGE=ghcr.io/umanitoba-cssa/cssa-website-next
-          IMAGE_TAG=${{ env.IMAGE_TAG }}
-          NEXT_PUBLIC_RECAPTCHA_SITE_KEY=${{ secrets.NEXT_PUBLIC_RECAPTCHA_SITE_KEY }}
-          YOUTUBE_API_KEY=${{ secrets.YOUTUBE_API_KEY }}
-          SMTP_USERNAME=${{ secrets.SMTP_USERNAME }}
-          SMTP_PASSWORD=${{ secrets.SMTP_PASSWORD }}
-          GOOGLE_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }}
-          GOOGLE_SERVICE_ACCOUNT_EMAIL=${{ secrets.GOOGLE_SERVICE_ACCOUNT_EMAIL }}
-          GOOGLE_PRIVATE_KEY=${{ secrets.GOOGLE_PRIVATE_KEY }}
-          CANTEEN_SHEEET_ID=${{ secrets.CANTEEN_SHEEET_ID }}
-          GITHUB_APP_ID=${{ secrets._GITHUB_APP_ID }}
-          GITHUB_PRIVATE_KEY=${{ secrets._GITHUB_PRIVATE_KEY }}
-          GOOGLE_CALENDAR_ID=${{ secrets.GOOGLE_CALENDAR_ID }}
-          RECAPTCHA_SECRET_KEY=${{ secrets.RECAPTCHA_SECRET_KEY }}
+          COMPOSE_PROJECT_NAME="${{ steps.dirs.outputs.COMPOSE_PROJECT_NAME }}"
+          CONTAINER_NAME="${{ steps.dirs.outputs.CONTAINER_NAME }}"
+          PORT="${{ steps.port.outputs.PORT }}"
+          REGISTRY_IMAGE="ghcr.io/umanitoba-cssa/cssa-website-next"
+          IMAGE_TAG="${{ env.IMAGE_TAG }}"
+          NEXT_PUBLIC_RECAPTCHA_SITE_KEY="${{ secrets.NEXT_PUBLIC_RECAPTCHA_SITE_KEY }}"
+          YOUTUBE_API_KEY="${{ secrets.YOUTUBE_API_KEY }}"
+          SMTP_USERNAME="${{ secrets.SMTP_USERNAME }}"
+          SMTP_PASSWORD="${{ secrets.SMTP_PASSWORD }}"
+          GOOGLE_CLIENT_ID="${{ secrets.GOOGLE_CLIENT_ID }}"
+          GOOGLE_SERVICE_ACCOUNT_EMAIL="${{ secrets.GOOGLE_SERVICE_ACCOUNT_EMAIL }}"
+          GOOGLE_PRIVATE_KEY="${{ secrets.GOOGLE_PRIVATE_KEY }}"
+          CANTEEN_SHEEET_ID="${{ secrets.CANTEEN_SHEEET_ID }}"
+          GITHUB_APP_ID="${{ secrets._GITHUB_APP_ID }}"
+          GITHUB_PRIVATE_KEY="${{ secrets._GITHUB_PRIVATE_KEY }}"
+          GOOGLE_CALENDAR_ID="${{ secrets.GOOGLE_CALENDAR_ID }}"
+          RECAPTCHA_SECRET_KEY="${{ secrets.RECAPTCHA_SECRET_KEY }}"
           EOF
 
       - name: Copy docker-compose.yml
