@@ -205,6 +205,22 @@ jobs:
           docker compose pull
           docker compose up -d --remove-orphans
 
+      - name: Health check deployed URL
+        if: env.ENVIRONMENT == 'preview' || env.ENVIRONMENT == 'staging'
+        run: |
+          url="${{ needs.build-and-push.outputs.DEPLOY_URL }}"
+          for i in $(seq 1 5); do
+            status=$(curl -s -o /dev/null -w '%{http_code}' "$url")
+            if [[ "$status" -ge 200 && "$status" -lt 400 ]]; then
+              echo "Health check passed ($status)"
+              exit 0
+            fi
+            echo "Attempt $i: got $status, retrying in 10s..."
+            sleep 10
+          done
+          echo "Health check failed after 5 attempts"
+          exit 1
+
       - name: Roll back Cloudflare tunnel on failure (Preview only)
         if: failure() && env.ENVIRONMENT == 'preview'
         env:
