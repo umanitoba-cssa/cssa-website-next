@@ -208,7 +208,11 @@ jobs:
 
       - name: Health check deployed URL
         run: |
-          url="${{ needs.build-and-push.outputs.DEPLOY_URL }}"
+          if [[ "$ENVIRONMENT" == "staging" ]]; then
+            url="https://staging.umanitobacssa.ca"
+          else
+            url="https://${PR_NUMBER}-preview.umanitobacssa.ca"
+          fi
           for i in $(seq 1 5); do
             status=$(curl -s -o /dev/null -w '%{http_code}' "$url")
             if [[ "$status" -ge 200 && "$status" -lt 400 ]]; then
