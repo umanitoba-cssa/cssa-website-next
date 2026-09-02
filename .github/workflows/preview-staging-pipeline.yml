@@ -197,9 +197,9 @@ jobs:
           CLOUDFLARE_TUNNEL_ID: ${{ secrets.CLOUDFLARE_TUNNEL_ID }}
         run: |
           set -e
-          trap '${{ github.workspace }}/scripts/cloudflare-tunnel.sh delete ${{ env.PR_NUMBER }}' ERR
+          trap '${{ github.workspace }}/scripts/update-cf-tunnel.sh delete ${{ env.PR_NUMBER }}' ERR
 
-          ${{ github.workspace }}/scripts/cloudflare-tunnel.sh create "${{ steps.port.outputs.PORT }}" "${{ env.PR_NUMBER }}"
+          ${{ github.workspace }}/scripts/update-cf-tunnel.sh create "${{ steps.port.outputs.PORT }}" "${{ env.PR_NUMBER }}"
           docker compose pull
           docker compose up -d --remove-orphans
 
@@ -235,7 +235,7 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           CLOUDFLARE_TUNNEL_ID: ${{ secrets.CLOUDFLARE_TUNNEL_ID }}
-        run: ${{ github.workspace }}/scripts/cloudflare-tunnel.sh delete "${PR_NUMBER}"
+        run: ${{ github.workspace }}/scripts/updaye-cf-tunnel.sh delete "${PR_NUMBER}"
 
       - name: Prune dangling images
         run: docker image prune -f
