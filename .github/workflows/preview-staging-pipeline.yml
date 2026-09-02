@@ -119,7 +119,7 @@ jobs:
 
   deploy:
     needs: [eslint, prettier, build-and-push]
-    if: github.event_name == 'workflow_dispatch' && github.event.action != 'closed'
+    if: github.event.action != 'closed'
     runs-on: [self-hosted, webhost]
     environment:
       name: ${{ needs.build-and-push.outputs.ENVIRONMENT }}
