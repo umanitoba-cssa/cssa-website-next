@@ -190,7 +190,6 @@ jobs:
 
       - name: Update Cloudflare tunnel and deploy (Preview)
         if: env.ENVIRONMENT == 'preview'
-        working-directory: ${{ steps.dirs.outputs.DEPLOY_DIR }}
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
