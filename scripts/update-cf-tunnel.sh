@@ -14,6 +14,7 @@ fi
 : "${CLOUDFLARE_ACCOUNT_ID:?Error: CLOUDFLARE_ACCOUNT_ID is required but not set. You can get it from Cloudflare Dashboard}"
 : "${CLOUDFLARE_TUNNEL_ID:?Error: CLOUDFLARE_TUNNEL_ID is required but not set. You can get it from the Cloudflare Dashboard }"
 : "${CLOUDFLARE_API_TOKEN:?Error: CLOUDFLARE_API_TOKEN is required but not set. You can get it from the Cloudflare Dashboard}"
+: "${CLOUDFLARE_ZONE_ID:?Error: CLOUDFLARE_ZONE_ID is required but not set. You can get it from the Cloudflare Dashboard}"
 
 API_URL="https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/cfd_tunnel/${CLOUDFLARE_TUNNEL_ID}/configurations"
 
@@ -72,11 +73,40 @@ create() {
   | (if ($catchall | length) == 0 then [{service: "http_status:404"}] else $catchall end) as $catchall_final
   | $named + [{hostname: $hostname, service: $service}] + $catchall_final
   ')
-    config=$(jq -n --argjson ingress "$new_ingress" '{config: {ingress: $ingress}}')
+    ingress_config=$(jq -n --argjson ingress "$new_ingress" '{config: {ingress: $ingress}}')
 
-    new_tunnel_config=$(curl -s "$API_URL" -X PUT -H "Content-Type: application/json" -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" -d "$config")
-
+    new_tunnel_config=$(curl -s "$API_URL" -X PUT -H "Content-Type: application/json" -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" -d "$ingress_config")
     check_config_successful "$new_tunnel_config"
+
+    dns_hostname="${pr_number}-preview.${BASE_DOMAIN}"
+    existing_dns=$(curl -s "https://api.cloudflare.com/client/v4/zones/${CLOUDFLARE_ZONE_ID}/dns_records?type=CNAME&name=${dns_hostname}" \
+        -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN")
+    check_config_successful "$existing_dns"
+
+    dns_record_count=$(echo "$existing_dns" | jq '.result | length')
+
+    if [ "$dns_record_count" -eq 0 ]; then
+        dns_body=$(jq -n \
+            --arg name "$dns_hostname" \
+            --arg content "${CLOUDFLARE_TUNNEL_ID}.cfargotunnel.com" \
+            '{
+              name: $name,
+              ttl: 3600,
+              type: "CNAME",
+              content: $content,
+              proxied: true
+            }')
+
+        dns_response=$(curl -s "https://api.cloudflare.com/client/v4/zones/${CLOUDFLARE_ZONE_ID}/dns_records" \
+            -X POST \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+            -d "$dns_body")
+        check_config_successful "$dns_response"
+        echo "DNS record created for ${dns_hostname}"
+    else
+        echo "DNS record for ${dns_hostname} already exists — skipping"
+    fi
 }
 
 delete() {
@@ -96,11 +126,25 @@ delete() {
   (.result.config.ingress // [])
   | map(select(.hostname != $hostname))
   ')
-    config=$(jq -n --argjson ingress "$new_ingress" '{config: {ingress: $ingress}}')
+    ingress_config=$(jq -n --argjson ingress "$new_ingress" '{config: {ingress: $ingress}}')
 
-    new_tunnel_config=$(curl -s "$API_URL" -X PUT -H "Content-Type: application/json" -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" -d "$config")
-
+    new_tunnel_config=$(curl -s "$API_URL" -X PUT -H "Content-Type: application/json" -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" -d "$ingress_config")
     check_config_successful "$new_tunnel_config"
+
+    dns_hostname="${pr_number}-preview.${BASE_DOMAIN}"
+    existing_dns=$(curl -s "https://api.cloudflare.com/client/v4/zones/${CLOUDFLARE_ZONE_ID}/dns_records?type=CNAME&name=${dns_hostname}" \
+        -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN")
+    check_config_successful "$existing_dns"
+
+    dns_record_id=$(echo "$existing_dns" | jq -r '.result[0].id // empty')
+
+    if [ -n "$dns_record_id" ]; then
+        dns_response=$(curl -s "https://api.cloudflare.com/client/v4/zones/${CLOUDFLARE_ZONE_ID}/dns_records/${dns_record_id}" \
+            -X DELETE \
+            -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN")
+        check_config_successful "$dns_response"
+        echo "DNS record for ${dns_hostname} removed"
+    fi
 }
 
 main() {
