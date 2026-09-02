@@ -4,6 +4,8 @@ permissions:
   contents: read
   packages: write
   id-token: write
+  issues: write
+  pull-requests: write
 
 on:
   pull_request:
@@ -188,28 +190,51 @@ jobs:
       - name: Copy docker-compose.yml
         run: cp docker-compose.yml "${{ steps.dirs.outputs.DEPLOY_DIR }}/docker-compose.yml"
 
-      - name: Update Cloudflare tunnel and deploy (Preview)
+      - name: Create Cloudflare tunnel entry (Preview only)
         if: env.ENVIRONMENT == 'preview'
         working-directory: ${{ steps.dirs.outputs.DEPLOY_DIR }}
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           CLOUDFLARE_TUNNEL_ID: ${{ secrets.CLOUDFLARE_TUNNEL_ID }}
-        run: |
-          set -e
-          trap '${{ github.workspace }}/scripts/update-cf-tunnel.sh delete ${{ env.PR_NUMBER }}' ERR
+        run: ${{ github.workspace }}/scripts/update-cf-tunnel.sh create "${{ steps.port.outputs.PORT }}" "${{ env.PR_NUMBER }}"
 
-          ${{ github.workspace }}/scripts/update-cf-tunnel.sh create "${{ steps.port.outputs.PORT }}" "${{ env.PR_NUMBER }}"
-
-          docker compose pull
-          docker compose up -d --remove-orphans
-
-      - name: Deploy (staging)
-        if: env.ENVIRONMENT == 'staging'
+      - name: Deploy
         working-directory: ${{ steps.dirs.outputs.DEPLOY_DIR }}
         run: |
           docker compose pull
           docker compose up -d --remove-orphans
+
+      - name: Roll back Cloudflare tunnel on failure (Preview only)
+        if: failure() && env.ENVIRONMENT == 'preview'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_TUNNEL_ID: ${{ secrets.CLOUDFLARE_TUNNEL_ID }}
+        run: ${{ github.workspace }}/scripts/update-cf-tunnel.sh delete "${{ env.PR_NUMBER }}"
+
+  send_summary_for_pr:
+    runs-on: ubuntu-latest
+    needs: [deploy, build-and-push]
+    if: always() && github.event_name == 'pull_request' && github.event.action != 'closed'
+    steps:
+      - name: Send Deployment Summary for PR
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const deployStatus = '${{ needs.deploy.result }}';
+            const statusIcon = deployStatus === 'success' ? '✅ Success' : '⛔ Failed';
+            const environment = '${{ needs.build-and-push.outputs.ENVIRONMENT }}';
+            const deployUrl = '${{ needs.build-and-push.outputs.DEPLOY_URL }}';
+            const prNumber = context.issue.number;
+            const urlCell = deployStatus === 'success' ? `[${deployUrl}](${deployUrl})` : '—';
+
+            github.rest.issues.createComment({
+              issue_number: prNumber,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `# Deployment Status - PR #${prNumber} Run ${{ github.run_number }}.${{ github.run_attempt }}\n\n| Environment | Status | Deployment URL |\n|---|---|---|\n| \`${environment}\` | ${statusIcon} | ${urlCell} |
+            `});
 
   cleanup:
     if: github.event.action == 'closed'
