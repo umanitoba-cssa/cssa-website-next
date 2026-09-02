@@ -70,6 +70,8 @@ jobs:
             echo "IMAGE_TAG=preview-pr-${PR_NUM}" >> "$GITHUB_OUTPUT"
             echo "DEPLOY_URL=https://${PR_NUM}-preview.umanitobacssa.ca" >> "$GITHUB_OUTPUT"
           fi
+          echo "--- DEBUG: contents of GITHUB_OUTPUT ---"
+          cat "$GITHUB_OUTPUT"
 
       - name: Checkout repository
         uses: actions/checkout@v7
@@ -207,7 +209,6 @@ jobs:
           docker compose up -d --remove-orphans
 
       - name: Health check deployed URL
-        if: env.ENVIRONMENT == 'preview' || env.ENVIRONMENT == 'staging'
         run: |
           url="${{ needs.build-and-push.outputs.DEPLOY_URL }}"
           for i in $(seq 1 5); do
