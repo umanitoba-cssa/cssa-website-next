@@ -201,15 +201,15 @@ jobs:
 
           ${{ github.workspace }}/scripts/update-cf-tunnel.sh create "${{ steps.port.outputs.PORT }}" "${{ env.PR_NUMBER }}"
 
-          docker compose --project-directory "${{ steps.dirs.outputs.DEPLOY_DIR }}" -f "${{ steps.dirs.outputs.DEPLOY_DIR }}/docker-compose.yml" pull
-          docker compose --project-directory "${{ steps.dirs.outputs.DEPLOY_DIR }}" -f "${{ steps.dirs.outputs.DEPLOY_DIR }}/docker-compose.yml" up -d --remove-orphans
+          docker compose pull
+          docker compose up -d --remove-orphans
 
       - name: Deploy (staging)
         if: env.ENVIRONMENT == 'staging'
         working-directory: ${{ steps.dirs.outputs.DEPLOY_DIR }}
         run: |
-          docker compose --project-directory "${{ steps.dirs.outputs.DEPLOY_DIR }}" -f "${{ steps.dirs.outputs.DEPLOY_DIR }}/docker-compose.yml" pull
-          docker compose --project-directory "${{ steps.dirs.outputs.DEPLOY_DIR }}" -f "${{ steps.dirs.outputs.DEPLOY_DIR }}/docker-compose.yml" up -d --remove-orphans
+          docker compose pull
+          docker compose up -d --remove-orphans
 
   cleanup:
     if: github.event.action == 'closed'
