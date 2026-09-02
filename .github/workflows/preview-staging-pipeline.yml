@@ -188,11 +188,6 @@ jobs:
       - name: Copy docker-compose.yml
         run: cp docker-compose.yml "${{ steps.dirs.outputs.DEPLOY_DIR }}/docker-compose.yml"
 
-      - name: Verify compose file landed
-        run: |
-          ls -la "${{ steps.dirs.outputs.DEPLOY_DIR }}"
-          cat "${{ steps.dirs.outputs.DEPLOY_DIR }}/docker-compose.yml"
-
       - name: Update Cloudflare tunnel and deploy (Preview)
         if: env.ENVIRONMENT == 'preview'
         working-directory: ${{ steps.dirs.outputs.DEPLOY_DIR }}
@@ -205,6 +200,8 @@ jobs:
           trap '${{ github.workspace }}/scripts/update-cf-tunnel.sh delete ${{ env.PR_NUMBER }}' ERR
 
           ${{ github.workspace }}/scripts/update-cf-tunnel.sh create "${{ steps.port.outputs.PORT }}" "${{ env.PR_NUMBER }}"
+          
+          cd "${{ steps.dirs.outputs.DEPLOY_DIR }}"
           docker compose pull
           docker compose up -d --remove-orphans
 
