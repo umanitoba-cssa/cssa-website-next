@@ -168,7 +168,7 @@ jobs:
           cat > "${{ steps.dirs.outputs.DEPLOY_DIR }}/.env" <<EOF
           COMPOSE_PROJECT_NAME="${{ steps.dirs.outputs.COMPOSE_PROJECT_NAME }}"
           CONTAINER_NAME="${{ steps.dirs.outputs.CONTAINER_NAME }}"
-          PORT="${{ steps.port.outputs.PORT }}"
+          PORT=${{ steps.port.outputs.PORT }}
           REGISTRY_IMAGE="ghcr.io/umanitoba-cssa/cssa-website-next"
           IMAGE_TAG="${{ env.IMAGE_TAG }}"
           NEXT_PUBLIC_RECAPTCHA_SITE_KEY="${{ secrets.NEXT_PUBLIC_RECAPTCHA_SITE_KEY }}"
