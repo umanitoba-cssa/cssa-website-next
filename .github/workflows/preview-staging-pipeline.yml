@@ -197,7 +197,7 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           CLOUDFLARE_TUNNEL_ID: ${{ secrets.CLOUDFLARE_TUNNEL_ID }}
-        run: ${{ github.workspace }}/scripts/update-cf-tunnel.sh create "${{ steps.port.outputs.PORT }}" "${{ env.PR_NUMBER }}"
+        run: ${{ github.workspace }}/scripts/update-cf-tunnel.sh create ${{ steps.port.outputs.PORT }} ${{ env.PR_NUMBER }}
 
       - name: Deploy
         working-directory: ${{ steps.dirs.outputs.DEPLOY_DIR }}
@@ -223,11 +223,12 @@ jobs:
 
       - name: Roll back Cloudflare tunnel on failure (Preview only)
         if: failure() && env.ENVIRONMENT == 'preview'
+        working-directory: ${{ steps.dirs.outputs.DEPLOY_DIR }}
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           CLOUDFLARE_TUNNEL_ID: ${{ secrets.CLOUDFLARE_TUNNEL_ID }}
-        run: ${{ github.workspace }}/scripts/update-cf-tunnel.sh delete "${{ env.PR_NUMBER }}"
+        run: ${{ github.workspace }}/scripts/update-cf-tunnel.sh delete ${{ env.PR_NUMBER }}
 
   send_summary_for_pr:
     runs-on: ubuntu-latest
