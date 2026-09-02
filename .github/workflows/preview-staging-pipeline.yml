@@ -60,7 +60,7 @@ jobs:
       - name: Determine environment and tag
         id: vars
         run: |
-          PR_NUM="${{ github.event.number || github.event.inputs.pr_number }}"
+          PR_NUM="${{ github.event.number }}"
           if [[ "${{ github.base_ref }}" == "release" ]]; then
             echo "ENVIRONMENT=staging" >> "$GITHUB_OUTPUT"
             echo "IMAGE_TAG=staging" >> "$GITHUB_OUTPUT"
@@ -70,8 +70,6 @@ jobs:
             echo "IMAGE_TAG=preview-pr-${PR_NUM}" >> "$GITHUB_OUTPUT"
             echo "DEPLOY_URL=https://${PR_NUM}-preview.umanitobacssa.ca" >> "$GITHUB_OUTPUT"
           fi
-          echo "--- DEBUG: contents of GITHUB_OUTPUT ---"
-          cat "$GITHUB_OUTPUT"
 
       - name: Checkout repository
         uses: actions/checkout@v7
@@ -131,7 +129,7 @@ jobs:
     env:
       ENVIRONMENT: ${{ needs.build-and-push.outputs.ENVIRONMENT }}
       IMAGE_TAG: ${{ needs.build-and-push.outputs.IMAGE_TAG }}
-      PR_NUMBER: ${{ github.event.number || github.event.inputs.pr_number }}
+      PR_NUMBER: ${{ github.event.number }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7

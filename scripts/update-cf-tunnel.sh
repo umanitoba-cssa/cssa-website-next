@@ -64,7 +64,7 @@ create() {
     fi
     new_ingress=$(echo "$tunnel_config" | jq \
         --arg hostname "${pr_number}-preview.${BASE_DOMAIN}" \
-        --arg service "https://${TARGET_HOST}:${port_number}" \
+        --arg service "http://${TARGET_HOST}:${port_number}" \
         '
   (.result.config.ingress // [])
   | map(select(.hostname != $hostname)) as $filtered
