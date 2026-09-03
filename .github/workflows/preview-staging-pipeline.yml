@@ -208,7 +208,7 @@ jobs:
 
       - name: Health check deployed URL
         run: |
-          url="${{ needs.build-and-push.outputs.DEPLOY_URL }}"
+          url="https://umanitobacssa.ca"
           curl -v -m 5 $url
 
       - name: Roll back Cloudflare tunnel on failure (Preview only)
