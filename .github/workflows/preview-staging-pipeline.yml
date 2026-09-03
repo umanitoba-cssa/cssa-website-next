@@ -221,7 +221,7 @@ jobs:
 
           echo "Initiating health check for $url..."
           for i in $(seq 1 5); do
-            status=$(curl -s -o /dev/null -w '%{http_code}' "$url")
+            status=$(curl -s -o /dev/null -w '%{http_code}' "$url" || echo "000")
             if [[ "$status" -ge 200 && "$status" -lt 400 ]]; then
               echo "Health check passed ($status)"
               exit 0
