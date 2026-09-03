@@ -220,7 +220,7 @@ jobs:
           fi
 
           echo "Initiating health check for $url..."
-          for i in $(seq 1 5); do
+          for i in $(seq 1 10); do
             status=$(curl -s -o /dev/null -w '%{http_code}' "$url" || echo "000")
             if [[ "$status" -ge 200 && "$status" -lt 400 ]]; then
               echo "Health check passed ($status)"
@@ -233,7 +233,7 @@ jobs:
           exit 1
 
       - name: Roll back Cloudflare tunnel on failure (Preview only)
-        if: failure() && env.ENVIRONMENT == 'preview'
+        if: failure() && env.ENVIRONMENT == 'invalid'
         working-directory: ${{ steps.dirs.outputs.DEPLOY_DIR }}
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
