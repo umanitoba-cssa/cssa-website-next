@@ -207,12 +207,19 @@ jobs:
           docker compose up -d --remove-orphans
 
       - name: Health check deployed URL
-        uses: jtalk/url-health-check-action@v5
-        with:
-          url: ${{ needs.build-and-push.outputs.DEPLOY_URL }}
-          max-attempts: 12
-          retry-delay: 5s
-          retry-all: true
+        run: |
+          url="${{ needs.build-and-push.outputs.DEPLOY_URL }}"
+          for i in $(seq 1 30); do
+            status=$(curl -s -o /dev/null -w '%{http_code}' --dns-servers 1.1.1.1 --connect-timeout 5 "$url") || status="000"
+            if [[ "$status" -ge 200 && "$status" -lt 400 ]]; then
+              echo "Health check passed ($status)"
+              exit 0
+            fi
+            echo "Attempt $i: got $status, retrying in 20s..."
+            sleep 20
+          done
+          echo "Health check failed after 10 minutes"
+          exit 1
 
       - name: Roll back Cloudflare tunnel on failure (Preview only)
         if: failure() && env.ENVIRONMENT == 'preview'
