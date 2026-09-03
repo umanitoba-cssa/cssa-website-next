@@ -213,6 +213,7 @@ jobs:
           else
             url="https://${PR_NUMBER}-preview.umanitobacssa.ca"
           fi
+          echo "$url"
           for i in $(seq 1 5); do
             status=$(curl -s -o /dev/null -w '%{http_code}' "$url")
             if [[ "$status" -ge 200 && "$status" -lt 400 ]]; then
