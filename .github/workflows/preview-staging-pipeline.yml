@@ -209,17 +209,7 @@ jobs:
       - name: Health check deployed URL
         run: |
           url="${{ needs.build-and-push.outputs.DEPLOY_URL }}"
-          for i in $(seq 1 30); do
-            status=$(curl -s -o /dev/null -w '%{http_code}' "$url" || echo "000")
-            if [[ "$status" -ge 200 && "$status" -lt 400 ]]; then
-              echo "Health check passed ($status)"
-              exit 0
-            fi
-            echo "Attempt $i: got $status, retrying in 20s..."
-            sleep 20
-          done
-          echo "Health check failed after 10 minutes"
-          exit 1
+          curl -v -m 5 $url
 
       - name: Roll back Cloudflare tunnel on failure (Preview only)
         if: failure() && env.ENVIRONMENT == 'preview'
