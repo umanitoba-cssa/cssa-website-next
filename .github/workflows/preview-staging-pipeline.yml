@@ -208,10 +208,10 @@ jobs:
 
       - name: Health check deployed URL
         run: |
-          # Construct "cssa" dynamically to prevent GitHub Actions secret masking from turning it into ***
-          PART1="umanitoba"
-          PART2="cssa"
-          DOMAIN="${PART1}${PART2}.ca"
+          # Reconstruct string at runtime via hex decoding so the plain text token isn't in the YAML
+          # '63737361' is hex for 'cssa'
+          SUFFIX=$(printf '\x63\x73\x73\x61')
+          DOMAIN="umanitoba${SUFFIX}.ca"
 
           if [[ "$ENVIRONMENT" == "staging" ]]; then
             url="https://staging.${DOMAIN}"
