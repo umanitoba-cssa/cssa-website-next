@@ -210,8 +210,7 @@ jobs:
         run: |
           domain="${PR_NUMBER}-preview.umanitobacssa.ca"
           url="${{ needs.build-and-push.outputs.DEPLOY_URL }}"
-          # Cloudflare's public Anycast IP
-          CF_IP="104.21.32.1"
+          CF_IP=$(dig +short @1.1.1.1 "$DOMAIN" | grep -m1 -E '^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$')
           for i in $(seq 1 30); do
             status=$(curl -s -o /dev/null -w '%{http_code}' --resolve "${domain}:443:${CF_IP}" --connect-timeout 5 "$url") || status="000"
             if [[ "$status" -ge 200 && "$status" -lt 400 ]]; then
