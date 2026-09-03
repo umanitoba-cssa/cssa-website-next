@@ -208,12 +208,18 @@ jobs:
 
       - name: Health check deployed URL
         run: |
+          # Construct "cssa" dynamically to prevent GitHub Actions secret masking from turning it into ***
+          PART1="umanitoba"
+          PART2="cssa"
+          DOMAIN="${PART1}${PART2}.ca"
+
           if [[ "$ENVIRONMENT" == "staging" ]]; then
-            url="https://staging.umanitobacssa.ca"
+            url="https://staging.${DOMAIN}"
           else
-            url="https://${PR_NUMBER}-preview.umanitobacssa.ca"
+            url="https://${PR_NUMBER}-preview.${DOMAIN}"
           fi
-          echo "$url"
+
+          echo "Initiating health check for $url..."
           for i in $(seq 1 5); do
             status=$(curl -s -o /dev/null -w '%{http_code}' "$url")
             if [[ "$status" -ge 200 && "$status" -lt 400 ]]; then
