@@ -208,7 +208,11 @@ jobs:
 
       - name: Health check deployed URL
         run: |
-          domain="${PR_NUMBER}-preview.umanitobacssa.ca"
+          if [[ "$ENVIRONMENT" == "staging" ]]; then
+            domain="staging.umanitobacssa.ca"
+          else
+            domain="${PR_NUMBER}-preview.umanitobacssa.ca"
+          fi
           url="${{ needs.build-and-push.outputs.DEPLOY_URL }}"
           CF_IP=$(dig +short @1.1.1.1 "$domain" | grep -m1 -E '^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$')
           for i in $(seq 1 30); do
