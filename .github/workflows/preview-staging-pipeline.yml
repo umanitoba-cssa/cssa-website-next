@@ -284,9 +284,6 @@ jobs:
         working-directory: ${{ steps.dirs.outputs.DEPLOY_DIR }}
         run: docker compose down -v || true
 
-      - name: Remove deployment directory
-        run: rm -rf "${{ steps.dirs.outputs.DEPLOY_DIR }}"
-
       - name: Delete Cloudflare tunnel entry
         working-directory: ${{ steps.dirs.outputs.DEPLOY_DIR }}
         env:
@@ -295,6 +292,9 @@ jobs:
           CLOUDFLARE_TUNNEL_ID: ${{ secrets.CLOUDFLARE_TUNNEL_ID }}
           CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
         run: ${{ github.workspace }}/scripts/update-cf-tunnel.sh delete "${PR_NUMBER}"
+
+      - name: Remove deployment directory
+        run: rm -rf "${{ steps.dirs.outputs.DEPLOY_DIR }}"
 
       - name: Prune dangling images
         run: docker image prune -f
