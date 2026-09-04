@@ -12,7 +12,7 @@ else
 fi
 
 : "${CLOUDFLARE_ACCOUNT_ID:?Error: CLOUDFLARE_ACCOUNT_ID is required but not set. You can get it from Cloudflare Dashboard}"
-: "${CLOUDFLARE_TUNNEL_ID:?Error: CLOUDFLARE_TUNNEL_ID is required but not set. You can get it from the Cloudflare Dashboard }"
+: "${CLOUDFLARE_TUNNEL_ID:?Error: CLOUDFLARE_TUNNEL_ID is required but not set. You can get it from the Cloudflare Dashboard}"
 : "${CLOUDFLARE_API_TOKEN:?Error: CLOUDFLARE_API_TOKEN is required but not set. You can get it from the Cloudflare Dashboard}"
 : "${CLOUDFLARE_ZONE_ID:?Error: CLOUDFLARE_ZONE_ID is required but not set. You can get it from the Cloudflare Dashboard}"
 

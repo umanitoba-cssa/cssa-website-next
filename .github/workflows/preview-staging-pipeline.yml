@@ -3,7 +3,6 @@ name: Preview/Staging Workflow
 permissions:
   contents: read
   packages: write
-  id-token: write
   issues: write
   pull-requests: write
 
@@ -70,6 +69,12 @@ jobs:
             echo "IMAGE_TAG=preview-pr-${PR_NUM}" >> "$GITHUB_OUTPUT"
             echo "DEPLOY_URL=https://${PR_NUM}-preview.umanitobacssa.ca" >> "$GITHUB_OUTPUT"
           fi
+
+      - name: Log Output
+        run: |
+          echo "${{ steps.vars.outputs.ENVIRONMENT }}"
+          echo "${{ steps.vars.outputs.IMAGE_TAG }}"
+          echo "${{ steps.vars.outputs.DEPLOY_URL }}"
 
       - name: Checkout repository
         uses: actions/checkout@v7
@@ -157,7 +162,9 @@ jobs:
             echo "PORT=4000" >> "$GITHUB_OUTPUT"
           else
             DEPLOY_DIR="${{ steps.dirs.outputs.DEPLOY_DIR }}"
-            if [[ -f "$DEPLOY_DIR/.env" ]] && grep -q '^PORT=' "$DEPLOY_DIR/.env"; then
+            if [[ -f "$DEPLOY_DIR/.env" ]] && grep -q '^CF_PORT=' "$DEPLOY_DIR/.env"; then
+              PORT=$(grep '^CF_PORT=' "$DEPLOY_DIR/.env" | cut -d '=' -f2)
+            elif [[ -f "$DEPLOY_DIR/.env" ]] && grep -q '^PORT=' "$DEPLOY_DIR/.env"; then
               PORT=$(grep '^PORT=' "$DEPLOY_DIR/.env" | cut -d '=' -f2)
             else
               PORT=$(./scripts/find-free-port.sh)
@@ -215,16 +222,16 @@ jobs:
           fi
           url="${{ needs.build-and-push.outputs.DEPLOY_URL }}"
           CF_IP=$(dig +short @1.1.1.1 "$domain" | grep -m1 -E '^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$')
-          for i in $(seq 1 30); do
+          for i in $(seq 1 15); do
             status=$(curl -s -o /dev/null -w '%{http_code}' --resolve "${domain}:443:${CF_IP}" --connect-timeout 5 "$url") || status="000"
             if [[ "$status" -ge 200 && "$status" -lt 400 ]]; then
               echo "Health check passed ($status)"
               exit 0
             fi
-            echo "Attempt $i: got $status, retrying in 20s..."
-            sleep 20
+            echo "Attempt $i: got $status, retrying in 7s..."
+            sleep 8
           done
-          echo "Health check failed after 10 minutes"
+          echo "Health check failed after 2 minutes"
           exit 1
 
       - name: Roll back Cloudflare tunnel on failure (Preview only)
@@ -286,7 +293,7 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           CLOUDFLARE_TUNNEL_ID: ${{ secrets.CLOUDFLARE_TUNNEL_ID }}
           CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
-        run: ${{ github.workspace }}/scripts/updaye-cf-tunnel.sh delete "${PR_NUMBER}"
+        run: ${{ github.workspace }}/scripts/update-cf-tunnel.sh delete "${PR_NUMBER}"
 
       - name: Prune dangling images
         run: docker image prune -f
