@@ -17,6 +17,11 @@ on:
   workflow_dispatch:
 
 jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Testing logging
+        run: echo "Testing logging"
   set-port:
     runs-on: ubuntu-latest
     outputs:
@@ -47,6 +52,7 @@ jobs:
           fi
       - name: Debug outputs
         run: |
+          echo "$GITHUB_OUTPUT"
           echo "PORT: ${{ steps.set-port.outputs.PORT }}"
           echo "ENVIRONMENT: ${{ steps.set-port.outputs.ENVIRONMENT }}"
           echo "IMAGE_NAME: ${{ steps.set-port.outputs.IMAGE_NAME }}"
