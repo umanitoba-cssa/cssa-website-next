@@ -72,9 +72,9 @@ jobs:
 
       - name: Log Output
         run: |
-          echo "${{ steps.vars.outputs.ENVIRONMENT }}"
-          echo "${{ steps.vars.outputs.IMAGE_TAG }}"
-          echo "${{ steps.vars.outputs.DEPLOY_URL }}"
+          echo "ENVIRONMENT=${{ steps.vars.outputs.ENVIRONMENT }}"
+          echo "IMAGE_TAG=${{ steps.vars.outputs.IMAGE_TAG }}"
+          echo "DEPLOY_URL=${{ steps.vars.outputs.DEPLOY_URL }}"
 
       - name: Checkout repository
         uses: actions/checkout@v7
@@ -228,7 +228,7 @@ jobs:
               echo "Health check passed ($status)"
               exit 0
             fi
-            echo "Attempt $i: got $status, retrying in 7s..."
+            echo "Attempt $i: got $status, retrying in 8s..."
             sleep 8
           done
           echo "Health check failed after 2 minutes"
