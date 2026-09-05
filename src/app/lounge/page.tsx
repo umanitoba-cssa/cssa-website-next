@@ -15,8 +15,11 @@ import {
 
 export default async function Lounge() {
     const menu = await getLoungeMenu();
+    const isLocalDockerBuild = process.env.LOCAL_DEV === 'true';
+    const menuCategories = Object.keys(menu);
+    const loungeMenuUnavailable = isLocalDockerBuild && menuCategories.length === 0;
 
-    const menuItems = Object.keys(menu).map((category) => {
+    const menuItems = menuCategories.map((category) => {
         const rows = menu[category].map((item) => {
             return (
                 <TableRow key={item.Item}>
@@ -63,7 +66,11 @@ export default async function Lounge() {
                     id="lounge-menu"
                     className="flex flex-col gap-8">
                     <BlockHeader title="Lounge Canteen Menu" />
-                    <div className="flex flex-col gap-8">{menuItems}</div>
+                    {loungeMenuUnavailable ? (
+                        <div className="p-4 text-cssa-gold">Failed to fetch lounge menu.</div>
+                    ) : (
+                        <div className="flex flex-col gap-8">{menuItems}</div>
+                    )}
                 </div>
             </div>
         </main>

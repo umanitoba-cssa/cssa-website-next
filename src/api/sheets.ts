@@ -8,6 +8,15 @@ interface ICanteenItem {
 }
 
 export async function getSheetsCells(sheetId: string, range: string) {
+    const PROD_ENV = process.env.NODE_ENV === 'production' && process.env.LOCAL_DEV !== 'true';
+    // If credentials are missing, skip calling Google Sheets
+    if (!process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL || !process.env.GOOGLE_PRIVATE_KEY) {
+        const msg = 'Missing Google service account credentials';
+        if (PROD_ENV) throw new Error(msg);
+        console.warn(msg + '; skipping Sheets API');
+        return null;
+    }
+
     const auth = new Auth.GoogleAuth({
         scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly'],
         credentials: {
@@ -28,14 +37,21 @@ export async function getSheetsCells(sheetId: string, range: string) {
 }
 
 export async function getLoungeMenu() {
+    const PROD_ENV = process.env.NODE_ENV === 'production' && process.env.LOCAL_DEV !== 'true';
     if (!process.env.CANTEEN_SHEEET_ID) {
-        throw new Error('Missing environment variable CANTEEN_SHEEET_ID');
+        const msg = 'Missing environment variable CANTEEN_SHEEET_ID';
+        if (PROD_ENV) throw new Error(msg);
+        console.warn(msg + '; returning empty menu');
+        return {} as Record<string, ICanteenItem[]>;
     }
 
     const data = await getSheetsCells(process.env.CANTEEN_SHEEET_ID, "'Website CSV Export'!A:C");
 
     if (!data) {
-        throw new Error('Failed to fetch canteen data');
+        const msg = 'Failed to fetch canteen data';
+        if (PROD_ENV) throw new Error(msg);
+        console.warn(msg + '; returning empty menu');
+        return {} as Record<string, ICanteenItem[]>;
     }
 
     const objects: ICanteenItem[] = data.slice(1).map((row) => ({
