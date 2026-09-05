@@ -1,0 +1,300 @@
+name: Preview/Staging Workflow
+
+permissions:
+  contents: read
+  packages: write
+  issues: write
+  pull-requests: write
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - closed
+    branches:
+      - release
+      - main
+  workflow_dispatch:
+
+jobs:
+  eslint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Install Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Install dependencies
+        run: bun install --ignore-scripts --frozen-lockfile
+
+      - name: Run ESLint
+        run: bun run eslint .
+
+  prettier:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Install Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Install dependencies
+        run: bun install --ignore-scripts --frozen-lockfile
+
+      - name: Run Prettier check
+        run: bun run prettier --check .
+
+  build-and-push:
+    if: github.event.action != 'closed'
+    runs-on: ubuntu-latest
+    outputs:
+      ENVIRONMENT: ${{ steps.vars.outputs.ENVIRONMENT }}
+      IMAGE_TAG: ${{ steps.vars.outputs.IMAGE_TAG }}
+      DEPLOY_URL: ${{ steps.vars.outputs.DEPLOY_URL }}
+    steps:
+      - name: Determine environment and tag
+        id: vars
+        run: |
+          PR_NUM="${{ github.event.number }}"
+          if [[ "${{ github.base_ref }}" == "release" ]]; then
+            echo "ENVIRONMENT=staging" >> "$GITHUB_OUTPUT"
+            echo "IMAGE_TAG=staging" >> "$GITHUB_OUTPUT"
+            echo "DEPLOY_URL=https://staging.umanitobacssa.ca" >> "$GITHUB_OUTPUT"
+          else
+            echo "ENVIRONMENT=preview" >> "$GITHUB_OUTPUT"
+            echo "IMAGE_TAG=preview-pr-${PR_NUM}" >> "$GITHUB_OUTPUT"
+            echo "DEPLOY_URL=https://${PR_NUM}-preview.umanitobacssa.ca" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Log Output
+        run: |
+          echo "ENVIRONMENT=${{ steps.vars.outputs.ENVIRONMENT }}"
+          echo "IMAGE_TAG=${{ steps.vars.outputs.IMAGE_TAG }}"
+          echo "DEPLOY_URL=${{ steps.vars.outputs.DEPLOY_URL }}"
+
+      - name: Checkout repository
+        uses: actions/checkout@v7
+        with:
+          submodules: recursive
+
+      - name: Install Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Install dependencies
+        run: bun install --ignore-scripts --frozen-lockfile
+
+      - name: Sync markdown content
+        run: bun run sync-markdown
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v4
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v4
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v7
+        with:
+          context: .
+          platforms: linux/amd64
+          push: true
+          tags: ghcr.io/umanitoba-cssa/cssa-website-next:${{ steps.vars.outputs.IMAGE_TAG }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          build-args: |
+            NEXT_PUBLIC_RECAPTCHA_SITE_KEY=${{ secrets.NEXT_PUBLIC_RECAPTCHA_SITE_KEY }}
+          secrets: |
+            "YOUTUBE_API_KEY=${{ secrets.YOUTUBE_API_KEY }}"
+            "SMTP_USERNAME=${{ secrets.SMTP_USERNAME }}"
+            "SMTP_PASSWORD=${{ secrets.SMTP_PASSWORD }}"
+            "GOOGLE_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }}"
+            "GOOGLE_SERVICE_ACCOUNT_EMAIL=${{ secrets.GOOGLE_SERVICE_ACCOUNT_EMAIL }}"
+            "GOOGLE_PRIVATE_KEY=${{ secrets.GOOGLE_PRIVATE_KEY }}"
+            "CANTEEN_SHEEET_ID=${{ secrets.CANTEEN_SHEEET_ID }}"
+            "GITHUB_APP_ID=${{ secrets._GITHUB_APP_ID }}"
+            "GITHUB_PRIVATE_KEY=${{ secrets._GITHUB_PRIVATE_KEY }}"
+            "GOOGLE_CALENDAR_ID=${{ secrets.GOOGLE_CALENDAR_ID }}"
+            "RECAPTCHA_SECRET_KEY=${{ secrets.RECAPTCHA_SECRET_KEY }}"
+
+  deploy:
+    needs: [eslint, prettier, build-and-push]
+    if: github.event.action != 'closed'
+    runs-on: [self-hosted, webhost]
+    environment:
+      name: ${{ needs.build-and-push.outputs.ENVIRONMENT }}
+      url: ${{ needs.build-and-push.outputs.DEPLOY_URL }}
+    env:
+      ENVIRONMENT: ${{ needs.build-and-push.outputs.ENVIRONMENT }}
+      IMAGE_TAG: ${{ needs.build-and-push.outputs.IMAGE_TAG }}
+      PR_NUMBER: ${{ github.event.number }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Determine deployment directory and names
+        id: dirs
+        run: |
+          if [[ "$ENVIRONMENT" == "staging" ]]; then
+            echo "DEPLOY_DIR=/srv/deployments/staging" >> "$GITHUB_OUTPUT"
+            echo "CONTAINER_NAME=cssa-staging" >> "$GITHUB_OUTPUT"
+            echo "COMPOSE_PROJECT_NAME=staging" >> "$GITHUB_OUTPUT"
+          else
+            echo "DEPLOY_DIR=/srv/deployments/preview-pr-${PR_NUMBER}" >> "$GITHUB_OUTPUT"
+            echo "CONTAINER_NAME=cssa-pr-${PR_NUMBER}" >> "$GITHUB_OUTPUT"
+            echo "COMPOSE_PROJECT_NAME=preview-pr-${PR_NUMBER}" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Ensure deployment directory exists
+        run: mkdir -p "${{ steps.dirs.outputs.DEPLOY_DIR }}"
+
+      - name: Determine port
+        id: port
+        run: |
+          if [[ "$ENVIRONMENT" == "staging" ]]; then
+            echo "PORT=4000" >> "$GITHUB_OUTPUT"
+          else
+            DEPLOY_DIR="${{ steps.dirs.outputs.DEPLOY_DIR }}"
+            if [[ -f "$DEPLOY_DIR/.env" ]] && grep -q '^CF_PORT=' "$DEPLOY_DIR/.env"; then
+              PORT=$(grep '^CF_PORT=' "$DEPLOY_DIR/.env" | cut -d '=' -f2)
+            elif [[ -f "$DEPLOY_DIR/.env" ]] && grep -q '^PORT=' "$DEPLOY_DIR/.env"; then
+              PORT=$(grep '^PORT=' "$DEPLOY_DIR/.env" | cut -d '=' -f2)
+            else
+              PORT=$(./scripts/find-free-port.sh)
+            fi
+            echo "PORT=$PORT" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Write .env file
+        run: |
+          cat > "${{ steps.dirs.outputs.DEPLOY_DIR }}/.env" <<EOF
+          COMPOSE_PROJECT_NAME="${{ steps.dirs.outputs.COMPOSE_PROJECT_NAME }}"
+          CONTAINER_NAME="${{ steps.dirs.outputs.CONTAINER_NAME }}"
+          CF_PORT=${{ steps.port.outputs.PORT }}
+          REGISTRY_IMAGE="ghcr.io/umanitoba-cssa/cssa-website-next"
+          IMAGE_TAG="${{ env.IMAGE_TAG }}"
+          NEXT_PUBLIC_RECAPTCHA_SITE_KEY="${{ secrets.NEXT_PUBLIC_RECAPTCHA_SITE_KEY }}"
+          YOUTUBE_API_KEY="${{ secrets.YOUTUBE_API_KEY }}"
+          SMTP_USERNAME="${{ secrets.SMTP_USERNAME }}"
+          SMTP_PASSWORD="${{ secrets.SMTP_PASSWORD }}"
+          GOOGLE_CLIENT_ID="${{ secrets.GOOGLE_CLIENT_ID }}"
+          GOOGLE_SERVICE_ACCOUNT_EMAIL="${{ secrets.GOOGLE_SERVICE_ACCOUNT_EMAIL }}"
+          GOOGLE_PRIVATE_KEY="${{ secrets.GOOGLE_PRIVATE_KEY }}"
+          CANTEEN_SHEEET_ID="${{ secrets.CANTEEN_SHEEET_ID }}"
+          GITHUB_APP_ID="${{ secrets._GITHUB_APP_ID }}"
+          GITHUB_PRIVATE_KEY="${{ secrets._GITHUB_PRIVATE_KEY }}"
+          GOOGLE_CALENDAR_ID="${{ secrets.GOOGLE_CALENDAR_ID }}"
+          RECAPTCHA_SECRET_KEY="${{ secrets.RECAPTCHA_SECRET_KEY }}"
+          EOF
+
+      - name: Copy docker-compose.yml
+        run: cp docker-compose.yml "${{ steps.dirs.outputs.DEPLOY_DIR }}/docker-compose.yml"
+
+      - name: Create Cloudflare tunnel entry (Preview only)
+        if: env.ENVIRONMENT == 'preview'
+        working-directory: ${{ steps.dirs.outputs.DEPLOY_DIR }}
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_TUNNEL_ID: ${{ secrets.CLOUDFLARE_TUNNEL_ID }}
+          CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
+        run: ${{ github.workspace }}/scripts/update-cf-tunnel.sh create ${{ steps.port.outputs.PORT }} ${{ env.PR_NUMBER }}
+
+      - name: Deploy
+        working-directory: ${{ steps.dirs.outputs.DEPLOY_DIR }}
+        run: |
+          docker compose pull
+          docker compose up -d --remove-orphans
+
+      - name: Health check deployed URL
+        run: |
+          if [[ "$ENVIRONMENT" == "staging" ]]; then
+            domain="staging.umanitobacssa.ca"
+          else
+            domain="${PR_NUMBER}-preview.umanitobacssa.ca"
+          fi
+          url="${{ needs.build-and-push.outputs.DEPLOY_URL }}"
+          CF_IP=$(dig +short @1.1.1.1 "$domain" | grep -m1 -E '^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$')
+          for i in $(seq 1 15); do
+            status=$(curl -s -o /dev/null -w '%{http_code}' --resolve "${domain}:443:${CF_IP}" --connect-timeout 5 "$url") || status="000"
+            if [[ "$status" -ge 200 && "$status" -lt 400 ]]; then
+              echo "Health check passed ($status)"
+              exit 0
+            fi
+            echo "Attempt $i: got $status, retrying in 8s..."
+            sleep 8
+          done
+          echo "Health check failed after 2 minutes"
+          exit 1
+
+      - name: Roll back Cloudflare tunnel on failure (Preview only)
+        if: failure() && env.ENVIRONMENT == 'preview'
+        working-directory: ${{ steps.dirs.outputs.DEPLOY_DIR }}
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_TUNNEL_ID: ${{ secrets.CLOUDFLARE_TUNNEL_ID }}
+          CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
+        run: ${{ github.workspace }}/scripts/update-cf-tunnel.sh delete ${{ env.PR_NUMBER }}
+
+  send_summary_for_pr:
+    runs-on: ubuntu-latest
+    needs: [deploy, build-and-push]
+    if: always() && github.event_name == 'pull_request' && github.event.action != 'closed'
+    steps:
+      - name: Send Deployment Summary for PR
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const deployStatus = '${{ needs.deploy.result }}';
+            const statusIcon = deployStatus === 'success' ? '✅ Success' : '⛔ Failed';
+            const environment = '${{ needs.build-and-push.outputs.ENVIRONMENT }}';
+            const deployUrl = '${{ needs.build-and-push.outputs.DEPLOY_URL }}';
+            const prNumber = context.issue.number;
+            const urlCell = deployStatus === 'success' ? `[${deployUrl}](${deployUrl})` : '—';
+
+            github.rest.issues.createComment({
+              issue_number: prNumber,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `# Deployment Status - PR #${prNumber} Run ${{ github.run_number }}.${{ github.run_attempt }}\n\n| Environment | Status | Deployment URL |\n|---|---|---|\n| \`${environment}\` | ${statusIcon} | ${urlCell} |
+            `});
+
+  cleanup:
+    if: github.event.action == 'closed'
+    runs-on: [self-hosted, webhost]
+    env:
+      PR_NUMBER: ${{ github.event.number }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Determine deployment directory
+        id: dirs
+        run: echo "DEPLOY_DIR=/srv/deployments/preview-pr-${PR_NUMBER}" >> "$GITHUB_OUTPUT"
+
+      - name: Tear down containers
+        working-directory: ${{ steps.dirs.outputs.DEPLOY_DIR }}
+        run: docker compose down -v || true
+
+      - name: Delete Cloudflare tunnel entry
+        working-directory: ${{ steps.dirs.outputs.DEPLOY_DIR }}
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_TUNNEL_ID: ${{ secrets.CLOUDFLARE_TUNNEL_ID }}
+          CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
+        run: ${{ github.workspace }}/scripts/update-cf-tunnel.sh delete "${PR_NUMBER}"
+
+      - name: Remove deployment directory
+        run: rm -rf "${{ steps.dirs.outputs.DEPLOY_DIR }}"
+
+      - name: Prune dangling images
+        run: docker image prune -f
