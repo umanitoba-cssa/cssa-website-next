@@ -15,12 +15,10 @@ import {
 
 export default async function Lounge() {
     const menu = await getLoungeMenu();
-    const isLocalDockerBuild = process.env.LOCAL_DEV === 'true';
-    const menuCategories = Object.keys(menu);
-    const loungeMenuUnavailable = isLocalDockerBuild && menuCategories.length === 0;
+    const loungeMenuUnavailable = menu === null;
 
-    const menuItems = menuCategories.map((category) => {
-        const rows = menu[category].map((item) => {
+    const menuItems = Object.entries(menu ?? {}).map(([category, items]) => {
+        const rows = items.map((item) => {
             return (
                 <TableRow key={item.Item}>
                     <TableCell>{item.Item}</TableCell>

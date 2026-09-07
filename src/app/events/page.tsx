@@ -21,8 +21,7 @@ import { getEvents } from '@/api/calendar';
 
 export default async function Events() {
     const events = await getEvents();
-    const isLocalDockerBuild = process.env.LOCAL_DEV === 'true';
-    const calendarUnavailable = events.length === 0 && isLocalDockerBuild;
+    const calendarUnavailable = events === null;
 
     const recentEvents = Array.from(RecentEvents.values()).map((link, index) => {
         return (
