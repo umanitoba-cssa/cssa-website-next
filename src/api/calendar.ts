@@ -18,8 +18,7 @@ export async function getCalendarEvents(opts: {
 }): Promise<IEventLink[] | null> {
     // If credentials are missing, skip calling Calendar API.
     if (!process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL || !process.env.GOOGLE_PRIVATE_KEY) {
-        const msg = 'Missing Google service account credentials';
-        console.warn(msg + '; skipping Calendar API');
+        console.warn('Missing Google service account credentials; skipping Calendar API');
         return null;
     }
 

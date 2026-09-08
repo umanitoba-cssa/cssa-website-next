@@ -10,8 +10,7 @@ interface ICanteenItem {
 export async function getSheetsCells(sheetId: string, range: string) {
     // If credentials are missing, skip calling Google Sheets
     if (!process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL || !process.env.GOOGLE_PRIVATE_KEY) {
-        const msg = 'Missing Google service account credentials';
-        console.warn(msg + '; skipping Sheets API');
+        console.warn('Missing Google service account credentials; skipping Sheets API');
         return null;
     }
 
@@ -36,16 +35,14 @@ export async function getSheetsCells(sheetId: string, range: string) {
 
 export async function getLoungeMenu() {
     if (!process.env.CANTEEN_SHEEET_ID) {
-        const msg = 'Missing environment variable CANTEEN_SHEEET_ID';
-        console.warn(msg + '; returning unavailable menu');
+        console.warn('Missing environment variable CANTEEN_SHEEET_ID; returning unavailable menu');
         return null;
     }
 
     const data = await getSheetsCells(process.env.CANTEEN_SHEEET_ID, "'Website CSV Export'!A:C");
 
     if (!data) {
-        const msg = 'Failed to fetch canteen data';
-        console.warn(msg + '; returning unavailable menu');
+        console.warn('Failed to fetch canteen data; returning unavailable menu');
         return null;
     }
 
