@@ -12,7 +12,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  lint:
+  lint-and-format:
     uses: ./.github/workflows/lint-pipeline.yml
 
   build-and-push:
@@ -76,7 +76,7 @@ jobs:
             "RECAPTCHA_SECRET_KEY=${{ secrets.RECAPTCHA_SECRET_KEY }}"
 
   deploy:
-    needs: [lint, build-and-push]
+    needs: [lint-and-format, build-and-push]
     runs-on: [self-hosted, webhost]
     environment:
       name: ${{ needs.build-and-push.outputs.ENVIRONMENT }}
