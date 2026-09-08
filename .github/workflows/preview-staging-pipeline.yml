@@ -18,35 +18,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  eslint:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v7
-
-      - name: Install Bun
-        uses: oven-sh/setup-bun@v2
-
-      - name: Install dependencies
-        run: bun install --ignore-scripts --frozen-lockfile
-
-      - name: Run ESLint
-        run: bun run eslint .
-
-  prettier:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v7
-
-      - name: Install Bun
-        uses: oven-sh/setup-bun@v2
-
-      - name: Install dependencies
-        run: bun install --ignore-scripts --frozen-lockfile
-
-      - name: Run Prettier check
-        run: bun run prettier --check .
+  lint:
+    uses: ./.github/workflows/lint-pipeline.yml
 
   build-and-push:
     if: github.event.action != 'closed'
@@ -125,7 +98,7 @@ jobs:
             "RECAPTCHA_SECRET_KEY=${{ secrets.RECAPTCHA_SECRET_KEY }}"
 
   deploy:
-    needs: [eslint, prettier, build-and-push]
+    needs: [lint, build-and-push]
     if: github.event.action != 'closed'
     runs-on: [self-hosted, webhost]
     environment:
