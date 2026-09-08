@@ -1,5 +1,5 @@
 # Build stage
-FROM oven/bun:1.3.14 AS builder
+FROM oven/bun:1.4.2 AS builder
 WORKDIR /usr/src/app
 
 # Public / client-side variables
@@ -48,7 +48,7 @@ RUN --mount=type=secret,id=YOUTUBE_API_KEY \
     bun run build
 
 # Production stage
-FROM oven/bun:1.3.14-slim AS production
+FROM oven/bun:1.4.2-slim AS production
 WORKDIR /usr/src/app
 
 ARG NEXT_PUBLIC_RECAPTCHA_SITE_KEY
