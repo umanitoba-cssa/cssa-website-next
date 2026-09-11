@@ -268,7 +268,7 @@ jobs:
             `});
 
   cleanup:
-    if: github.event.action == 'closed'
+    if: github.event.action == 'closed' && github.base_ref == 'main'
     runs-on: [self-hosted, webhost]
     env:
       PR_NUMBER: ${{ github.event.number }}
