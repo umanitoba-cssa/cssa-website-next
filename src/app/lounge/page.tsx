@@ -15,9 +15,10 @@ import {
 
 export default async function Lounge() {
     const menu = await getLoungeMenu();
+    const loungeMenuUnavailable = menu === null;
 
-    const menuItems = Object.keys(menu).map((category) => {
-        const rows = menu[category].map((item) => {
+    const menuItems = Object.entries(menu ?? {}).map(([category, items]) => {
+        const rows = items.map((item) => {
             return (
                 <TableRow key={item.Item}>
                     <TableCell>{item.Item}</TableCell>
@@ -63,7 +64,11 @@ export default async function Lounge() {
                     id="lounge-menu"
                     className="flex flex-col gap-8">
                     <BlockHeader title="Lounge Canteen Menu" />
-                    <div className="flex flex-col gap-8">{menuItems}</div>
+                    {loungeMenuUnavailable ? (
+                        <div className="p-4 text-cssa-gold">Failed to fetch lounge menu.</div>
+                    ) : (
+                        <div className="flex flex-col gap-8">{menuItems}</div>
+                    )}
                 </div>
             </div>
         </main>
