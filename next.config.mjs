@@ -7,7 +7,7 @@ const nextConfig = {
         ],
         qualities: [50, 75],
     },
-    output: 'standalone'
+    output: 'standalone',
 };
 
 export default nextConfig;
