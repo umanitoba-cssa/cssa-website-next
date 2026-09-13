@@ -270,4 +270,4 @@ jobs:
         run: rm -rf "${{ steps.dirs.outputs.DEPLOY_DIR }}"
 
       - name: Prune dangling images
-        run: docker image prune -f
+        run: docker image prune -af
