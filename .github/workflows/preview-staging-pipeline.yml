@@ -18,35 +18,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  eslint:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v7
-
-      - name: Install Bun
-        uses: oven-sh/setup-bun@v2
-
-      - name: Install dependencies
-        run: bun install --ignore-scripts --frozen-lockfile
-
-      - name: Run ESLint
-        run: bun run eslint .
-
-  prettier:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v7
-
-      - name: Install Bun
-        uses: oven-sh/setup-bun@v2
-
-      - name: Install dependencies
-        run: bun install --ignore-scripts --frozen-lockfile
-
-      - name: Run Prettier check
-        run: bun run prettier --check .
+  lint-and-format:
+    uses: ./.github/workflows/lint-pipeline.yml
 
   build-and-push:
     if: github.event.action != 'closed'
@@ -125,7 +98,7 @@ jobs:
             "RECAPTCHA_SECRET_KEY=${{ secrets.RECAPTCHA_SECRET_KEY }}"
 
   deploy:
-    needs: [eslint, prettier, build-and-push]
+    needs: [lint-and-format, build-and-push]
     if: github.event.action != 'closed'
     runs-on: [self-hosted, webhost]
     environment:
@@ -268,7 +241,7 @@ jobs:
             `});
 
   cleanup:
-    if: github.event.action == 'closed'
+    if: github.event.action == 'closed' && github.base_ref == 'main'
     runs-on: [self-hosted, webhost]
     env:
       PR_NUMBER: ${{ github.event.number }}
@@ -297,4 +270,4 @@ jobs:
         run: rm -rf "${{ steps.dirs.outputs.DEPLOY_DIR }}"
 
       - name: Prune dangling images
-        run: docker image prune -f
+        run: docker image prune -af

@@ -21,6 +21,7 @@ import { getEvents } from '@/api/calendar';
 
 export default async function Events() {
     const events = await getEvents();
+    const calendarUnavailable = events === null;
 
     const recentEvents = Array.from(RecentEvents.values()).map((link, index) => {
         return (
@@ -143,7 +144,11 @@ export default async function Events() {
                     <BlockHeader title="Calendar" />
                     <p>Calendar View of events ran by the CSSA.</p>
 
-                    <CalendarClientWrapper events={events} />
+                    {calendarUnavailable ? (
+                        <div className="p-4 text-cssa-gold">Failed to fetch calendar events.</div>
+                    ) : (
+                        <CalendarClientWrapper events={events} />
+                    )}
                 </div>
             </div>
         </main>
