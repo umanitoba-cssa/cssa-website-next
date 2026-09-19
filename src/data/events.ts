@@ -65,7 +65,7 @@ export const RecentEvents: Map<string, IEventLink> = new Map([
             href: 'events/case-competition-2025',
             internal: true,
             linkText: 'See Page →',
-            image: '/',
+            image: '/img/capture-the-flag/2025photos/IMG_0426.jpg',
         },
     ],
     [

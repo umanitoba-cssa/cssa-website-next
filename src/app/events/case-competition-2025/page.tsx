@@ -1,37 +1,29 @@
 import BlockHeader from '@/components/block-header';
+import PageHeader from '@/components/page-header';
 import SponsorCard from '@/components/sponsor-card';
-import Image from 'next/image';
 
 export default function CaseComp2025() {
     return (
-        <main className="flex flex-col bg-[#2b3b74] text-[#ffffff]">
-            <div className="w-full bg-[#2b3b74] h-72 sm:h-80 md:h-96 lg:h-[600px] xl:h-[800px] relative">
-                <Image
-                    src=""
-                    alt="Case Competition 2025"
-                    fill
-                    className="object-contain"
-                />
-            </div>
-
+        <main className="flex flex-col">
+            <PageHeader
+                title="Case Competition 2025"
+                image="/img/capture-the-flag/2025photos/IMG_0426.jpg"
+            />
             <div className="container py-12 flex flex-col gap-12">
-                <div className="flex flex-col items-center  pb-8">
+                <hr className="border-t-4 border-cssa-gold" />
+                <div className="flex flex-col items-center gap-5">
                     <h3>PRESENTED BY</h3>
-
-                    <div className="flex flex-col items-center gap-5 my-5">
-                        <h4>Sponsors</h4>
-                        <div className="flex flex-wrap gap-5 justify-center items-center">
-                            <SponsorCard
-                                name="Payworks"
-                                image="/img/sponsors/payworks.svg"
-                                website="https://payworks.ca/"
-                            />
-                            <SponsorCard
-                                name="G3"
-                                image="/img/sponsors/g3-logo.svg"
-                                website="https://g3.ca"
-                            />
-                        </div>
+                    <div className="flex flex-wrap gap-5 justify-center items-center">
+                        <SponsorCard
+                            name="Payworks"
+                            image="/img/sponsors/payworks.svg"
+                            website="https://payworks.ca/"
+                        />
+                        <SponsorCard
+                            name="G3"
+                            image="/img/sponsors/g3-logo.svg"
+                            website="https://g3.ca"
+                        />
                     </div>
                 </div>
 
