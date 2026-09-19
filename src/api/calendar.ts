@@ -15,7 +15,13 @@ export async function getCalendarEvents(opts: {
     calendarId: string;
     timeMin: string;
     timeMax: string;
-}): Promise<IEventLink[]> {
+}): Promise<IEventLink[] | null> {
+    // If credentials are missing, skip calling Calendar API.
+    if (!process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL || !process.env.GOOGLE_PRIVATE_KEY) {
+        console.warn('Missing Google service account credentials; skipping Calendar API');
+        return null;
+    }
+
     const auth = new Auth.GoogleAuth({
         scopes: ['https://www.googleapis.com/auth/calendar.readonly'],
         credentials: {
@@ -57,11 +63,12 @@ export async function getCalendarEvents(opts: {
     return events;
 }
 
-export async function getEvents() {
+export async function getEvents(): Promise<IEventLink[] | null> {
     const calendarId = process.env.GOOGLE_CALENDAR_ID;
     if (!calendarId) {
-        console.warn('Missing env CALENDAR_ID');
-        return [];
+        const msg = 'Missing env CALENDAR_ID';
+        console.warn(msg);
+        return null;
     }
 
     const start = new Date(2022, 0, 1, 0, 0, 0);

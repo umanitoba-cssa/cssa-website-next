@@ -1,27 +1,26 @@
-# Build stage
-FROM oven/bun:1.4.2 AS builder
+# Dependencies stage, for improved caching
+FROM oven/bun:1.4.2 AS deps
 WORKDIR /usr/src/app
-
-# Public / client-side variables
-ARG NEXT_PUBLIC_RECAPTCHA_SITE_KEY
-ENV NEXT_PUBLIC_RECAPTCHA_SITE_KEY=${NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
 
 # Copy package files first to leverage caching
 COPY package.json bun.lock ./
 RUN bun install --frozen-lockfile --ignore-scripts
 
-# Copy necessary source files
-COPY tsconfig.json next.config.mjs ./
-COPY scripts ./scripts/
-COPY src/ ./src/
-COPY public/ ./public/
-COPY tailwind.config.ts postcss.config.mjs ./
+# Build stage
+FROM oven/bun:1.4.2 AS builder
+WORKDIR /usr/src/app
 
-# Set environment to production
+COPY --from=deps /usr/src/app/node_modules ./node_modules
+COPY . .
+
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 
-# Mount individual secrets and load them during build.
+# Gets baked in at build time and so doesn't need to go into the production stage
+ARG NEXT_PUBLIC_RECAPTCHA_SITE_KEY
+ENV NEXT_PUBLIC_RECAPTCHA_SITE_KEY=${NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+
+# Mount secrets and run the build
 # BuildKit mounts each secret as a file under /run/secrets/<id>.
 RUN --mount=type=secret,id=YOUTUBE_API_KEY \
     --mount=type=secret,id=SMTP_USERNAME \
@@ -51,28 +50,16 @@ RUN --mount=type=secret,id=YOUTUBE_API_KEY \
 FROM oven/bun:1.4.2-slim AS production
 WORKDIR /usr/src/app
 
-ARG NEXT_PUBLIC_RECAPTCHA_SITE_KEY
-ENV NEXT_PUBLIC_RECAPTCHA_SITE_KEY=${NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
-
-# Copy production runtime dependencies
-COPY package.json bun.lock ./
-RUN bun install --frozen-lockfile --production --ignore-scripts
-
-# Copy built app from builder stage
-COPY --from=builder /usr/src/app/scripts ./scripts
-COPY --from=builder /usr/src/app/.next ./.next
-COPY --from=builder /usr/src/app/public ./public
-COPY --from=builder /usr/src/app/next.config.mjs ./
-COPY --from=builder /usr/src/app/tailwind.config.ts ./
-COPY --from=builder /usr/src/app/postcss.config.mjs ./
-COPY --from=builder /usr/src/app/src/content ./src/content
-
-RUN mkdir -p /usr/src/app/.next/cache/images \
-    && chown -R bun:bun /usr/src/app/.next
-
-# Expose port and run
-EXPOSE 3000
-USER bun
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
-ENTRYPOINT ["bun", "run", "start"]
+ENV PORT=3000
+ENV HOSTNAME="0.0.0.0"
+
+# Copy minimal static assets and traced server bundle
+COPY --from=builder /usr/src/app/public ./public
+COPY --from=builder /usr/src/app/.next/standalone ./
+COPY --from=builder /usr/src/app/.next/static ./.next/static
+
+EXPOSE 3000
+
+CMD ["server.js"]
