@@ -37,7 +37,7 @@ export default function Sponsor() {
                                 className="underline"
                                 target="_blank"
                                 href="/docs/sponsorshipPackage.pdf">
-                                2025-2026 Sponsorship Package here
+                                2026-2027 Sponsorship Package here
                             </a>
                             .
                         </p>
