@@ -2,9 +2,9 @@
 
 import BlockHeader from '@/components/block-header';
 import PageHeader from '@/components/page-header';
-import { FC, useCallback, useEffect } from 'react';
-import { useForm } from 'react-hook-form';
-import sendEmail from '@/utils/send-email';
+import { FC, useEffect } from 'react';
+// import { useForm } from 'react-hook-form';
+// import sendEmail from '@/utils/send-email';
 
 const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
@@ -16,32 +16,35 @@ export type FormData = {
 };
 
 const Contact: FC = () => {
-    const { register, handleSubmit, setValue, reset } = useForm<FormData>();
+    // NOTE: The contact form has been temporarily removed from this page as it was not functioning and the CSSA did not want to miss important messages.
+    // Please uncomment any commented in the commit that added this comment when re-adding the contact form.
 
-    const onSubmit = useCallback(
-        (data: FormData) => {
-            sendEmail(data);
-            setValue('recaptchaToken', undefined);
-            reset();
-        },
-        [setValue, reset],
-    );
+    // const { register, handleSubmit, setValue, reset } = useForm<FormData>();
 
-    useEffect(() => {
-        const script = document.createElement('script');
-        script.src = 'https://www.google.com/recaptcha/api.js';
-        document.body.appendChild(script);
+    // const onSubmit = useCallback(
+    //     (data: FormData) => {
+    //         sendEmail(data);
+    //         setValue('recaptchaToken', undefined);
+    //         reset();
+    //     },
+    //     [setValue, reset],
+    // );
 
-        (window as any).onRecaptchaSubmit = (token: string) => {
-            setValue('recaptchaToken', token);
-            (document.getElementById('contact-form') as HTMLFormElement)?.requestSubmit();
-        };
+    // useEffect(() => {
+    //     const script = document.createElement('script');
+    //     script.src = 'https://www.google.com/recaptcha/api.js';
+    //     document.body.appendChild(script);
 
-        return () => {
-            delete (window as any).onRecaptchaSubmit;
-            script.remove();
-        };
-    }, [setValue]);
+    //     (window as any).onRecaptchaSubmit = (token: string) => {
+    //         setValue('recaptchaToken', token);
+    //         (document.getElementById('contact-form') as HTMLFormElement)?.requestSubmit();
+    //     };
+
+    //     return () => {
+    //         delete (window as any).onRecaptchaSubmit;
+    //         script.remove();
+    //     };
+    // }, [setValue]);
 
     return (
         <main className="flex flex-col">
@@ -63,7 +66,7 @@ const Contact: FC = () => {
                         </a>
                     </p>
                 </div>
-                <div
+                {/* <div
                     id="contact-form"
                     className="flex flex-col gap-8">
                     <BlockHeader title="Contact Form" />
@@ -119,7 +122,7 @@ const Contact: FC = () => {
                             </button>
                         </div>
                     </form>
-                </div>
+                </div> */}
             </div>
         </main>
     );
