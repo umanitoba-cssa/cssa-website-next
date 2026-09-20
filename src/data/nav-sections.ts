@@ -46,6 +46,6 @@ export const NAV_SECTIONS: Record<string, INavSection[]> = {
     ],
     '/contact': [
         { label: 'Contact Email', anchor: 'contact-email' },
-        // { label: 'Contact Form', anchor: 'contact-form' },
+        { label: 'Contact Form', anchor: 'contact-form' },
     ],
 };

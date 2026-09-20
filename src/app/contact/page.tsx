@@ -2,9 +2,9 @@
 
 import BlockHeader from '@/components/block-header';
 import PageHeader from '@/components/page-header';
-import { FC, useEffect } from 'react';
-// import { useForm } from 'react-hook-form';
-// import sendEmail from '@/utils/send-email';
+import { FC, useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import sendEmail from '@/utils/send-email';
 
 const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
@@ -16,35 +16,52 @@ export type FormData = {
 };
 
 const Contact: FC = () => {
-    // NOTE: The contact form has been temporarily removed from this page as it was not functioning and the CSSA did not want to miss important messages.
-    // Please uncomment any commented in the commit that added this comment when re-adding the contact form.
+    const { register, handleSubmit, reset } = useForm<FormData>();
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
-    // const { register, handleSubmit, setValue, reset } = useForm<FormData>();
+    useEffect(() => {
+        // Load reCAPTCHA script with explicit render mode
+        const script = document.createElement('script');
+        script.src = `https://www.google.com/recaptcha/api.js?render=${siteKey}`;
+        script.async = true;
+        script.defer = true;
+        document.body.appendChild(script);
 
-    // const onSubmit = useCallback(
-    //     (data: FormData) => {
-    //         sendEmail(data);
-    //         setValue('recaptchaToken', undefined);
-    //         reset();
-    //     },
-    //     [setValue, reset],
-    // );
+        return () => {
+            script.remove();
+        };
+    }, []);
 
-    // useEffect(() => {
-    //     const script = document.createElement('script');
-    //     script.src = 'https://www.google.com/recaptcha/api.js';
-    //     document.body.appendChild(script);
+    const onSubmit = async (data: FormData) => {
+        try {
+            setIsSubmitting(true);
 
-    //     (window as any).onRecaptchaSubmit = (token: string) => {
-    //         setValue('recaptchaToken', token);
-    //         (document.getElementById('contact-form') as HTMLFormElement)?.requestSubmit();
-    //     };
+            if (typeof window === 'undefined' || !(window as any).grecaptcha) {
+                alert('reCAPTCHA script has not loaded yet.');
+                return;
+            }
 
-    //     return () => {
-    //         delete (window as any).onRecaptchaSubmit;
-    //         script.remove();
-    //     };
-    // }, [setValue]);
+            const token = await new Promise<string>((resolve, reject) => {
+                (window as any).grecaptcha.ready(() => {
+                    (window as any).grecaptcha
+                        .execute(siteKey, { action: 'submit' })
+                        .then(resolve)
+                        .catch(reject);
+                });
+            });
+
+            const payload = { ...data, recaptchaToken: token };
+            await sendEmail(payload); // Throws an error if !res.ok
+
+            reset();
+            alert('Message sent successfully!'); // Single success alert
+        } catch (err: any) {
+            console.error(err);
+            alert(err.message || 'Failed to send message. Please try again.');
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
 
     return (
         <main className="flex flex-col">
@@ -66,13 +83,11 @@ const Contact: FC = () => {
                         </a>
                     </p>
                 </div>
-                {/* <div
+                <div
                     id="contact-form"
                     className="flex flex-col gap-8">
                     <BlockHeader title="Contact Form" />
-                    <form
-                        id="contact-form"
-                        onSubmit={handleSubmit(onSubmit)}>
+                    <form onSubmit={handleSubmit(onSubmit)}>
                         <div className="mb-5">
                             <label
                                 htmlFor="name"
@@ -114,15 +129,14 @@ const Contact: FC = () => {
                         </div>
                         <div>
                             <button
-                                className="g-recaptcha hover:shadow-form rounded-md bg-cssa-blue py-3 px-8 text-base font-semibold text-white outline-none"
-                                data-sitekey={siteKey}
-                                data-callback="onRecaptchaSubmit"
-                                data-action="submit">
-                                Submit
+                                type="submit"
+                                disabled={isSubmitting}
+                                className="hover:shadow-form rounded-md bg-cssa-blue py-3 px-8 text-base font-semibold text-white outline-none disabled:opacity-50">
+                                {isSubmitting ? 'Sending...' : 'Submit'}
                             </button>
                         </div>
                     </form>
-                </div> */}
+                </div>
             </div>
         </main>
     );
