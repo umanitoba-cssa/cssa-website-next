@@ -58,6 +58,17 @@ export const RecentEvents: Map<string, IEventLink> = new Map([
         },
     ],
     [
+        'case-comp-2025',
+        {
+            title: 'Case Competition 2025',
+            description: 'Teams of five compete to solve a technical challenge.',
+            href: 'events/case-competition-2025',
+            internal: true,
+            linkText: 'See Page →',
+            image: '/img/capture-the-flag/2025photos/IMG_0426.jpg',
+        },
+    ],
+    [
         'goosies-2025',
         {
             title: 'Goosies 2025',
