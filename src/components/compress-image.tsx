@@ -3,13 +3,11 @@
  *
  * Returns Next.js <Image> props with responsive sizes and quality.
  * Use with fill for correct responsive image delivery.
- *
  * Usage:
  *   <Image src={src} alt={alt} fill {...getCompressedImageProps(208, 180)} />
- *
  * @param displaySizeDesktop - The largest dimension the image is rendered at (px) on desktop
- * @param displaySizeMobile - The largest dimension the image is rendered at (px) on mobile
- * @param quality     - Compression quality 1–100 (default: 50)
+ * @param displaySizeMobile  - The largest dimension the image is rendered at (px) on mobile
+ * @param quality            - Compression quality 1–100 (default: 50)
  */
 export function getCompressedImageProps(
     displaySizeDesktop: number,
