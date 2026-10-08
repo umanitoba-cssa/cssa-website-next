@@ -28,9 +28,9 @@ export const ExecProfiles = [
         position: 'President',
         image: '/img/team/execs/ryann.jpg',
         image_silly: '/img/team/execs/ryann-silly.jpg',
-        goals: "Reach students who don't know about CSSA yet, help them find their way into the club, and leave the club in a stronger position for the future.",
+        goals: 'I hope to make connections with new students who are unaware of the club yet and to show them the path into the club! Furthermore, to set up the club for a stronger future in connections and governance.',
         interests_hobbies:
-            'Very into music — plays piano and acoustic guitar, composes music, and spends a lot of time listening to it.',
+            'In my free time out of tech time, I like to play my piano and acoustic guitar. I really enjoy music composition!',
         year: '2026 - 2027',
     },
     {
@@ -40,10 +40,9 @@ export const ExecProfiles = [
         position: 'Vice President',
         image: '/img/team/execs/adeeb.jpg',
         image_silly: '/img/team/execs/adeeb-silly.jpg',
-        goals: 'Make CSSA feel more inclusive and less intimidating, especially for students who might not know where they fit in or how to get involved.',
+        goals: 'I have a ton of plans for this year, but the most important one is making CSSA feel more inclusive. I felt pretty intimidated during my first year(s) and I hope to help others not feel the same.',
         interests_hobbies:
-            'Big football/soccer fan and has been playing and watching since he was 7. \
-        Also really likes Joji and Bojack Horseman.',
+            "I love (obsess over) soccer, I have been watching/playing football ⚽️ since I was 7. I've been a Joji fan since before he was Joji. I love Bojack Horseman, the show and NOT the character.",
         year: '2026 - 2027',
         website: 'https://sheikhadeeb.com/',
         github: 'https://github.com/SheikhAdeeb',
@@ -56,9 +55,9 @@ export const ExecProfiles = [
         position: 'Director of Internal Affairs',
         image: '/img/team/execs/miah.jpg',
         image_silly: '/img/team/execs/miah-silly.jpg',
-        goals: "Make things easier for the exec team by having better systems in place, whether that's Discord tools, documentation, or scheduling.",
+        goals: "I hope to create a more intuitive system so all the other execs have the tools necessary  to do their job whether that's though a discord meetings bot, clear documentation or scheduling!",
         interests_hobbies:
-            'Likes running, organizing basically everything, tinkering with Neovim, and getting into homelabbing. Uses Obsidian for pretty much everything.',
+            " I enjoy running, breaking my Neovim config and ORGANIZING (you don't want to ask me how), the latter of which some might consider an obsession. \n Since this is unsolicited, I use Obsidian for everything* while Notion for Scheduling. I am a retired Weeb, Freiren is Beyond Good 🥁 (if you know you know), and currently getting myself into homelabbing. I would not suggest it in this economy :(",
         year: '2026 - 2027',
     },
     {
@@ -68,9 +67,9 @@ export const ExecProfiles = [
         position: 'Director of Lounge Affairs',
         image: '/img/team/execs/jasmine.jpg',
         image_silly: '/img/team/execs/jasmine-silly.jpg',
-        goals: 'Make the CS Lounge a more welcoming and organized place where students can relax, meet people, and feel like they belong.',
+        goals: 'I hope to make the CS Lounge a more welcoming, organized and inclusive space where students can relax, connect with others and feel like they belong.',
         interests_hobbies:
-            'Interested in making the CS Lounge a friendly place where people can relax and connect with each other.',
+            'Aside from academics  and all ,  I love listening to music, singing, eating homemade food and overall just hanging out with my friends. Oh yesss I like to yap too. Iykyk.',
         year: '2026 - 2027',
     },
     {
@@ -80,11 +79,10 @@ export const ExecProfiles = [
         position: 'Director of Promotions',
         image: '/img/team/execs/moulik.jpg',
         image_silly: '/img/team/execs/moulik-silly.jpg',
-        goals: "Get CSSA in front of as many students as possible, especially people who are new to the club. If people know what's going on and actually show up to our events, I'll consider that a win.",
+        goals: "I want to make CSSA a household name (well club) for as many students as possible, especially people who are new to the club. If people know the club's current happenings and actually show up to our events, I'll consider that a win.",
         interests_hobbies:
-            'Really into hip-hop/R&B kendrick Lamar, frank ocean , tyler the creator, vinyl and physical media. \
-        Huge video game fan, especially Metal Gear Solid, Resident Evil, the Souls games. \
-        Also likes comic books spider-man and batman.',
+            'I am REALLY into hip-hop/R&B music including Kendrick Lamar, Frank Ocean and Tyler the creator. I also collect vinyl and physical media! 📼 \
+        Huge video game nerd, especially Metal Gear Solid, Resident Evil, the Souls games. \n I LOVE comic books favourites being : Ultimate Spider-Man 🕷️ and Absolute Batman.',
         year: '2026 - 2027',
     },
     {
@@ -95,7 +93,8 @@ export const ExecProfiles = [
         image: '/img/team/execs/dhairya.jpg',
         image_silly: '/img/team/execs/dhairya-silly.jpg',
         goals: 'Build connections with people in industry and improve the financial documentation and processes that CSSA uses.',
-        interests_hobbies: 'Likes sci-fi and horror movies. Also likes pizza.',
+        interests_hobbies:
+            'Apart from academics, I like watching sci-fi and horror movies. Oh yes, I like pizza.',
         year: '2026 - 2027',
     },
     {
@@ -105,10 +104,9 @@ export const ExecProfiles = [
         position: 'Director of Technology',
         image: '/img/team/execs/aidan.jpg',
         image_silly: '/img/team/execs/aidan-silly.jpg',
-        goals: 'Improve the CSSA tech projects and the infrastructure behind them, while running the tech committee and giving students opportunities to learn and work on projects.',
+        goals: 'As director of tech I plan to work on improving existing CSSA tech projects like our website, discord bots, door sensor, and all the infrastructure and documentation that supports them.  I will also run the tech committee to aid in accomplishing these tasks and to provide mentorship and learning opportunities to interested CS students. Lastly, I also hope to bring new initiatives including an upgraded canteen system and an information dashboard to put on the new lounge TV. ',
         interests_hobbies:
-            'Likes cycling, karate, jazz, physics, gaming, and homelabbing. \
-        Says he likes to learn and yap about his many interests and projects.',
+            'Some of my interests/hobbies include: Cycling 🚴‍♂️, Karate, playing in a jazz band, home labbing, physics, gaming, and yapping about any of the above.',
         year: '2026 - 2027',
         website: 'https://aidanmcleod.ca/',
         github: 'https://github.com/ACM02',
@@ -123,7 +121,7 @@ export const ExecProfiles = [
         image_silly: '/img/team/execs/michelle-silly.jpg',
         goals: 'Help organize and run events that bring CS students together and give them more opportunities to socialize and get involved with CSSA.',
         interests_hobbies:
-            'Likes going to the gym, trying new food places, and being social. Big Drake fan, has climbed Machu Picchu, and loves playing basketball despite being really bad at it.',
+            'I like going to the gym, trying out new food places, and being social in general. I think drake is probably the greatest artist of our generation. i have climbed machu picchu. i love playing basketball even though i’m really bad at it.',
         year: '2026 - 2027',
     },
     {
@@ -133,11 +131,9 @@ export const ExecProfiles = [
         position: 'Director of Student Affairs',
         image: '/img/team/execs/nishchay.jpg',
         image_silly: '/img/team/execs/nishchay-silly.jpg',
-        goals: 'Make CSSA feel more approachable and connected. \
-        I want students to feel comfortable coming to us with questions, ideas, or just to meet people.',
+        goals: 'I want to make CSSA feel more approachable and connected for students. Whether someone has a question, an idea, or just wants to meet more people in CS, I want them to feel like there’s a place for them here.',
         interests_hobbies:
-            'Likes building things, breaking them, and figuring out how to fix them. \
-        Also into cooking, the NBA, new music, and geopolitics.',
+            "I like building things, breaking them, and figuring out how to make them work again. If an idea stays in my head long enough, there's a good chance I'll try turning it into a project. I love cooking, watching the NBA, discovering new music, and keeping up with geopolitics, usually more than I probably need to.",
         year: '2026 - 2027',
     },
     {
@@ -147,9 +143,9 @@ export const ExecProfiles = [
         position: 'Director of Advocacy',
         image: '/img/team/execs/edith.jpg',
         image_silly: '/img/team/execs/edith-silly.jpg',
-        goals: 'Represent CS students to the department and help make CSSA spaces more welcoming and inclusive.',
+        goals: 'I am honoured and excited for this opportunity to represent the CS student body to the department, and to help make our spaces more welcoming and inclusive than before!',
         interests_hobbies:
-            'Likes discovering new music, watching horror movies, and meeting new people.',
+            'I love listening to new music, reading books, and meeting new people. I spend a lot of my free time watching bad slasher movies (my all time favourite is Scream).',
         year: '2026 - 2027',
         website: 'https://edith.mom/',
         github: 'https://github.com/ediffs',
