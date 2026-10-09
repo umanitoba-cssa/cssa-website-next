@@ -84,6 +84,9 @@ export const ExecProfiles = [
             'I am REALLY into hip-hop/R&B music including Kendrick Lamar, Frank Ocean and Tyler the creator. I also collect vinyl and physical media! 📼 \
         Huge video game nerd, especially Metal Gear Solid, Resident Evil, the Souls games. \n I LOVE comic books favourites being : Ultimate Spider-Man 🕷️ and Absolute Batman.',
         year: '2026 - 2027',
+        github: 'https://github.com/MoulikB',
+        linkedin: 'https://www.linkedin.com/in/moulikbhatia/',
+        instagram: 'https://www.instagram.com/moulikbhatia/',
     },
     {
         name: 'Dhairya Patel',
