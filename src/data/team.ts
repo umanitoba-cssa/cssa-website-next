@@ -22,7 +22,7 @@ export interface IProfile {
  **/
 export const ExecProfiles = [
     {
-        name: 'Ryann',
+        name: 'Ryann Pastolero',
         pronouns: 'He/Him',
         group: 'Exec',
         position: 'President',
@@ -113,7 +113,7 @@ export const ExecProfiles = [
         linkedin: 'https://www.linkedin.com/in/aidan-c-mcleod',
     },
     {
-        name: 'Michelle',
+        name: 'Michelle Okolie',
         pronouns: 'She/Her',
         group: 'Exec',
         position: 'Director of Events',
@@ -137,7 +137,7 @@ export const ExecProfiles = [
         year: '2026 - 2027',
     },
     {
-        name: 'Edith',
+        name: 'Edith Hohner',
         pronouns: 'She/Her',
         group: 'Exec',
         position: 'Director of Advocacy',
