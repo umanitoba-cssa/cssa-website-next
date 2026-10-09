@@ -87,20 +87,34 @@ export default function ProfileModal({
                             transition={{ duration: 0.25 }}>
                             <div className="w-52 h-52 rounded-full relative overflow-hidden mx-auto m-4">
                                 <Image
-                                    src={profile?.image}
+                                    src={
+                                        profile?.image_silly ? profile.image_silly : profile?.image
+                                    }
                                     alt={profile?.name}
                                     fill
                                     className="object-cover"
-                                    {...getCompressedImageProps(208, 208)}
+                                    {...getCompressedImageProps(416, 416, 75)}
                                 />
                             </div>
 
                             <div className="text-center mb-4">
                                 <h3 className="text-2xl font-bold">{profile.name}</h3>
                                 <p className="text-lg text-gray-300">{profile.position}</p>
+                                <p className="text-sm text-gray-300 italic">{profile.pronouns}</p>
                             </div>
 
-                            <p className="text-sm mb-4">{profile.description}</p>
+                            {profile.description ? (
+                                <p className="text-sm mb-4">{profile.description}</p>
+                            ) : (
+                                <>
+                                    <h3 className="text-2xl font-bold mb-1">Goals</h3>
+                                    <p className="text-sm mb-4">{profile.goals}</p>
+                                    <h3 className="text-2xl font-bold mb-1">
+                                        Interests and Hobbies
+                                    </h3>
+                                    <p className="text-sm mb-4">{profile.interests_hobbies}</p>
+                                </>
+                            )}
 
                             <div className="flex justify-center gap-4 text-2xl">
                                 {profile?.linkedin && (

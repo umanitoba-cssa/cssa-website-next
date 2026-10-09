@@ -23,13 +23,13 @@ export default function ProfileCard({
                 if (e.key === 'Enter' || e.key === ' ') onClick?.();
             }}
             className="flex flex-col border-solid border border-gray-400 rounded-xl items-center p-4 gap-4 min-w-[17rem] max-w-[17rem] cursor-pointer">
-            <div className="w-52 h-52 bg-contain rounded-full relative overflow-hidden">
+            <div className="w-52 h-52 rounded-full relative overflow-hidden">
                 <Image
                     src={profile?.image}
                     alt={profile?.name}
                     fill
                     className="object-cover"
-                    {...getCompressedImageProps(208, 208)}
+                    {...getCompressedImageProps(416, 416, 75)}
                 />
             </div>
             <div className="text-center">
