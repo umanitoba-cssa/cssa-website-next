@@ -30,10 +30,11 @@ export default async function Events() {
                 className="md:basis-1/2 lg:basis-[30%]">
                 <div className="px-2 w-full h-full">
                     <a
+                        className="block h-full"
                         href={link.href}
                         target={link.internal ? undefined : '_blank'}
                         rel={link.internal ? undefined : 'noreferrer'}>
-                        <Card className="h-full border-primary">
+                        <Card className=" flex flex-col h-full border-primary">
                             <CardHeader>
                                 {link.image && (
                                     <img
@@ -48,7 +49,7 @@ export default async function Events() {
                                 </CardTitle>
                                 <CardDescription>{link.description}</CardDescription>
                             </CardHeader>
-                            <CardContent>
+                            <CardContent className="mt-auto">
                                 <div className="flex justify-end">
                                     <span className="text-sm text-primary hover:underline">
                                         {link.linkText}
@@ -69,10 +70,11 @@ export default async function Events() {
                 className="md:basis-1/2 lg:basis-[30%]">
                 <div className="px-2 w-full h-full">
                     <a
+                        className="block h-full"
                         href={link.href}
                         target={link.internal ? undefined : '_blank'}
                         rel={link.internal ? undefined : 'noreferrer'}>
-                        <Card className="h-full border-primary">
+                        <Card className=" flex flex-col h-full border-primary">
                             <CardHeader>
                                 {link.image && (
                                     <img
@@ -87,7 +89,7 @@ export default async function Events() {
                                 </CardTitle>
                                 <CardDescription>{link.description}</CardDescription>
                             </CardHeader>
-                            <CardContent>
+                            <CardContent className="mt-auto">
                                 <div className="flex justify-end">
                                     <span className="text-sm text-primary hover:underline">
                                         {link.linkText}
