@@ -1,107 +1,14 @@
 export const revalidate = 86400;
-// 86400 seconds = 60 * 60 * 24 , which is 1 day
 
-import './events.css';
 import BlockHeader from '@/components/block-header';
+import CalendarClientWrapper from '@/components/calendar/calendar-client-wrapper';
+import EventCarousel from '@/components/event-carousel';
 import PageHeader from '@/components/page-header';
-import {
-    Carousel,
-    CarouselContent,
-    CarouselItem,
-    CarouselNext,
-    CarouselPrevious,
-} from '@/components/ui/carousel';
-import { RecentEvents, OlderEvents } from '@/data/events';
-
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-
-import { FaExternalLinkAlt } from 'react-icons/fa';
-import CalendarClientWrapper from '../../components/calendar/calendar-client-wrapper';
 import { getEvents } from '@/api/calendar';
+import { OlderEvents, RecentEvents } from '@/data/events';
 
 export default async function Events() {
     const events = await getEvents();
-    const calendarUnavailable = events === null;
-
-    const recentEvents = Array.from(RecentEvents.values()).map((link, index) => {
-        return (
-            <CarouselItem
-                key={index}
-                className="md:basis-1/2 lg:basis-[30%]">
-                <div className="px-2 w-full h-full">
-                    <a
-                        className="block h-full"
-                        href={link.href}
-                        target={link.internal ? undefined : '_blank'}
-                        rel={link.internal ? undefined : 'noreferrer'}>
-                        <Card className=" flex flex-col h-full border-primary">
-                            <CardHeader>
-                                {link.image && (
-                                    <img
-                                        src={link.image}
-                                        alt={link.title}
-                                        className="w-full object-cover aspect-video"
-                                    />
-                                )}
-                                <CardTitle className="text-lg flex flex-row gap-2">
-                                    {link.title}
-                                    {!link.internal && <FaExternalLinkAlt className="my-auto" />}
-                                </CardTitle>
-                                <CardDescription>{link.description}</CardDescription>
-                            </CardHeader>
-                            <CardContent className="mt-auto">
-                                <div className="flex justify-end">
-                                    <span className="text-sm text-primary hover:underline">
-                                        {link.linkText}
-                                    </span>
-                                </div>
-                            </CardContent>
-                        </Card>
-                    </a>
-                </div>
-            </CarouselItem>
-        );
-    });
-
-    const olderEvents = Array.from(OlderEvents.values()).map((link, index) => {
-        return (
-            <CarouselItem
-                key={index}
-                className="md:basis-1/2 lg:basis-[30%]">
-                <div className="px-2 w-full h-full">
-                    <a
-                        className="block h-full"
-                        href={link.href}
-                        target={link.internal ? undefined : '_blank'}
-                        rel={link.internal ? undefined : 'noreferrer'}>
-                        <Card className=" flex flex-col h-full border-primary">
-                            <CardHeader>
-                                {link.image && (
-                                    <img
-                                        src={link.image}
-                                        alt={link.title}
-                                        className="w-full object-cover aspect-video"
-                                    />
-                                )}
-                                <CardTitle className="text-lg flex flex-row gap-2">
-                                    {link.title}
-                                    {!link.internal && <FaExternalLinkAlt className="my-auto" />}
-                                </CardTitle>
-                                <CardDescription>{link.description}</CardDescription>
-                            </CardHeader>
-                            <CardContent className="mt-auto">
-                                <div className="flex justify-end">
-                                    <span className="text-sm text-primary hover:underline">
-                                        {link.linkText}
-                                    </span>
-                                </div>
-                            </CardContent>
-                        </Card>
-                    </a>
-                </div>
-            </CarouselItem>
-        );
-    });
 
     return (
         <main className="flex flex-col">
@@ -114,43 +21,33 @@ export default async function Events() {
                     id="recent-events"
                     className="flex flex-col gap-8 p-4">
                     <BlockHeader title="Recent Events" />
-                    <p>All latest events ran by the CSSA.</p>
+                    <p>The latest events run by the CSSA.</p>
 
-                    <Carousel
-                        className="py-1"
-                        opts={{ align: 'center' }}>
-                        <CarouselContent>{recentEvents}</CarouselContent>
-                        <CarouselNext />
-                        <CarouselPrevious />
-                    </Carousel>
+                    <EventCarousel
+                        events={RecentEvents}
+                        label="Recent events"
+                    />
                 </div>
 
                 <div
                     id="older-events"
                     className="flex flex-col gap-8 p-4">
                     <BlockHeader title="Older Events" />
-                    <p>Some older events ran by the CSSA.</p>
+                    <p>Some older events run by the CSSA.</p>
 
-                    <Carousel
-                        className="py-1"
-                        opts={{ align: 'center' }}>
-                        <CarouselContent>{olderEvents}</CarouselContent>
-                        <CarouselNext />
-                        <CarouselPrevious />
-                    </Carousel>
+                    <EventCarousel
+                        events={OlderEvents}
+                        label="Older events"
+                    />
                 </div>
 
                 <div
                     id="calendar"
                     className="flex flex-col gap-8 p-4">
                     <BlockHeader title="Calendar" />
-                    <p>Calendar View of events ran by the CSSA.</p>
+                    <p>Calendar view of events run by the CSSA.</p>
 
-                    {calendarUnavailable ? (
-                        <div className="p-4 text-cssa-gold">Failed to fetch calendar events.</div>
-                    ) : (
-                        <CalendarClientWrapper events={events} />
-                    )}
+                    <CalendarClientWrapper events={events ?? []} />
                 </div>
             </div>
         </main>
