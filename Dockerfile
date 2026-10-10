@@ -1,5 +1,5 @@
 # Dependencies stage, for improved caching
-FROM oven/bun:1.4.2 AS deps
+FROM oven/bun:1.4.3 AS deps
 WORKDIR /usr/src/app
 
 # Copy package files first to leverage caching
@@ -7,7 +7,7 @@ COPY package.json bun.lock ./
 RUN bun install --frozen-lockfile --ignore-scripts
 
 # Build stage
-FROM oven/bun:1.4.2 AS builder
+FROM oven/bun:1.4.3 AS builder
 WORKDIR /usr/src/app
 
 COPY --from=deps /usr/src/app/node_modules ./node_modules
@@ -47,7 +47,7 @@ RUN --mount=type=secret,id=YOUTUBE_API_KEY \
     bun run build
 
 # Production stage
-FROM oven/bun:1.4.2-slim AS production
+FROM oven/bun:1.4.3-slim AS production
 WORKDIR /usr/src/app
 
 ENV NODE_ENV=production
