@@ -65,11 +65,17 @@ function MakePlaylistCards(videos: IVideoData[]) {
 }
 
 export default async function Resources() {
+    const playlistCollections: { category: string; playlists: IPlaylist[] }[] = [];
+
     for (const collection of PlaylistCollections) {
+        const playlists: IPlaylist[] = [];
+
         for (const playlist of collection.playlists) {
             const videos = await GetPlaylistData(playlist.playlistId);
-            playlist.videos = videos;
+            playlists.push({ ...playlist, videos });
         }
+
+        playlistCollections.push({ ...collection, playlists });
     }
 
     const resourceCards = ResourceLinks.map((link, index) => {
@@ -103,10 +109,11 @@ export default async function Resources() {
                 className="md:basis-1/2 lg:basis-[30%]">
                 <div className="px-2 w-full h-full">
                     <a
+                        className="block h-full"
                         href={link.href}
                         target={link.internal ? undefined : '_blank'}
                         rel={link.internal ? undefined : 'noreferrer'}>
-                        <Card className="h-full border-primary">
+                        <Card className="flex h-full flex-col border-primary">
                             <CardHeader>
                                 <CardTitle className="text-lg flex flex-row gap-2">
                                     {link.title}
@@ -114,7 +121,7 @@ export default async function Resources() {
                                 </CardTitle>
                                 <CardDescription>{link.description}</CardDescription>
                             </CardHeader>
-                            <CardContent>
+                            <CardContent className="mt-auto">
                                 <div className="flex justify-end">
                                     <span className="text-sm text-primary hover:underline">
                                         {link.linkText}
@@ -128,7 +135,7 @@ export default async function Resources() {
         );
     });
 
-    const collectionTabs = PlaylistCollections.map((collection, index) => {
+    const collectionTabs = playlistCollections.map((collection, index) => {
         return (
             <TabsTrigger
                 key={index}
@@ -138,7 +145,7 @@ export default async function Resources() {
         );
     });
 
-    const collectionContent = PlaylistCollections.map((collection, index) => {
+    const collectionContent = playlistCollections.map((collection, index) => {
         const playlistAccordions = collection.playlists.map((playlist, index) => {
             const videoCards = MakePlaylistCards(playlist.videos ?? []);
             return (
@@ -221,7 +228,7 @@ export default async function Resources() {
                     <p>Lectures and course resources on YouTube made by our instructors.</p>
 
                     <Tabs
-                        defaultValue={PlaylistCollections[0].category}
+                        defaultValue={playlistCollections[0].category}
                         className="w-full">
                         <TabsList className="w-full">{collectionTabs}</TabsList>
                         {collectionContent}
