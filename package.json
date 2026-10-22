@@ -60,14 +60,14 @@
         "zod": "^4.3.4"
     },
     "devDependencies": {
-        "@eslint/js": "^9.39.2",
+        "@eslint/js": "^10.0.0",
         "@types/eslint-plugin-jsx-a11y": "^6.10.1",
         "@types/jsonwebtoken": "^9.0.10",
         "@types/node": "^26.0.0",
         "@types/prismjs": "^1.26.5",
         "@types/react": "^19.2.7",
         "@types/react-dom": "^19.2.3",
-        "eslint": "^9.39.2",
+        "eslint": "^10.0.0",
         "eslint-config-next": "^16.1.1",
         "eslint-config-prettier": "^10.1.8",
         "eslint-plugin-jsx-a11y": "^6.10.2",
