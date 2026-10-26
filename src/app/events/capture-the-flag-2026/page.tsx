@@ -136,6 +136,7 @@ export default function CTF2026() {
                                     src={award.src}
                                     fill
                                     alt={award.alt}
+                                    sizes="(min-width: 768px) 400px, 100vw"
                                     className="object-contain"
                                 />
                             </div>

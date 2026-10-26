@@ -126,6 +126,7 @@ export default function GameJam2025() {
                                 src={award.src}
                                 fill
                                 alt={award.alt}
+                                sizes="(min-width: 768px) 700px, 100vw"
                                 className={`object-contain`}
                             />
                         </div>

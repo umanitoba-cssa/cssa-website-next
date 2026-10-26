@@ -63,6 +63,7 @@ export default function UpcomingEventsSlideshow() {
                                             src={event.image}
                                             alt={event.title}
                                             fill
+                                            sizes="(min-width: 1024px) 400px, 100vw"
                                             className="object-cover"
                                         />
                                     )}

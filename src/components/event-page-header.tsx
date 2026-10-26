@@ -10,6 +10,7 @@ export default function EventPageHeader({ alt, image }: { alt: string; image: st
                         fill
                         src={image}
                         alt={alt}
+                        sizes="(max-width: 1920px) 100vw, 1920px"
                     />
                     <div className="w-full h-full p-12 relative" />
                 </div>
@@ -21,6 +22,7 @@ export default function EventPageHeader({ alt, image }: { alt: string; image: st
                         fill
                         src={image}
                         alt={alt}
+                        sizes="100vw"
                     />
                 </div>
             </div>
