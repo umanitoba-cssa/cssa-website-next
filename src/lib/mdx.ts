@@ -270,7 +270,11 @@ export function processLinks(content: string, markdownSlug: string, contentDir: 
             return `[${text}](${url})`;
         }
         // Convert relative file paths to absolute
-        return `[${text}](/resources/${contentDir}/${markdownSlug}/${url})`;
+        const target =
+            contentDir === 'guides' && !url.includes('#') && !path.extname(url.split('?')[0])
+                ? `${url}#markdown-content`
+                : url;
+        return `[${text}](/resources/${contentDir}/${markdownSlug}/${target})`;
     });
 }
 
