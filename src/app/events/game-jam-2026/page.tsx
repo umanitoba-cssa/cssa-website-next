@@ -60,10 +60,9 @@ export default function GameJam2026() {
                     We&apos;d like to thank all our sponsors who allow us to put on events like this
                     for Computer Science students!
                 </p>
-
-                <div className="flex justify-around ">
+                <div className="flex flex-wrap justify-center lg:justify-around items-start gap-x-12 gap-y-8">
                     <div className="flex flex-col items-center gap-5">
-                        <h4 className="pt-10">Season Sponsor</h4>
+                        <h4 className="md:pt-10">Season Sponsor</h4>
                         <div className="flex flex-wrap gap-12 justify-center items-center">
                             <SponsorCard
                                 name="ID Fusion"
@@ -74,7 +73,7 @@ export default function GameJam2026() {
                     </div>
 
                     <div className="flex flex-col items-center gap-5">
-                        <h4 className="pt-10">Silver Sponsor</h4>
+                        <h4 className="md:pt-10">Silver Sponsor</h4>
                         <div className="flex flex-wrap gap-12 justify-center items-center">
                             <SponsorCard
                                 name="Niche"
@@ -85,7 +84,7 @@ export default function GameJam2026() {
                     </div>
 
                     <div className="flex flex-col items-center gap-5">
-                        <h4 className="pt-10">Bronze Sponsor</h4>
+                        <h4 className="md:pt-10">Bronze Sponsor</h4>
                         <div className="flex flex-wrap gap-12 justify-center items-center">
                             <SponsorCard
                                 name="G3"
