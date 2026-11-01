@@ -234,7 +234,7 @@ export default function GameJam2026() {
                     </a>{' '}
                     <a
                         rel="noreferrer"
-                        href="https://itch.io/jam/cssa-game-jam-2026">
+                        href="https://itch.io/jam/um-cssa-game-jam-2026">
                         <Button
                             className="w-full"
                             variant="default"
