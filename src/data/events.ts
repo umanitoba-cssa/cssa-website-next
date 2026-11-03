@@ -25,7 +25,7 @@ export const RecentEvents: ReadonlyMap<string, IEventCard> = new Map([
             href: '/events/game-jam-2026',
             internal: true,
             linkText: 'View Page →',
-            image: '/img/game-jam/2026/gj_banner.svg',
+            image: '/img/game-jam/2026/gj_banner.png',
         },
     ],
     [

@@ -6,10 +6,10 @@ import SponsorCard from '@/components/sponsor-card';
 
 export default function GameJam2026() {
     return (
-        <main className="flex flex-col bg-[#84a2ce] text-[#0C1118]">
+        <main className="flex flex-col bg-[#05114b] ">
             <EventPageHeader
                 alt="Game Jam Logo"
-                image="/img/game-jam/2026/gj_banner.svg"
+                image="/img/game-jam/2026/gj_banner.png"
             />
             <div className="container py-12 flex flex-col gap-12">
                 <BlockHeader title="Theme" />
