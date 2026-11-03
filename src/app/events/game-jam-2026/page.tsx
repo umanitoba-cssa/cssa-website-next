@@ -50,8 +50,8 @@ export default function GameJam2026() {
                     <Image
                         src="/img/game-jam/2026/schedule.png"
                         alt="Game Jam 2026 Schedule"
-                        width={400}
-                        height={400}
+                        width={600}
+                        height={600}
                         className="w-full lg:w-1/2"
                     />
                 </div>
