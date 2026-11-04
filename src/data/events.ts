@@ -135,7 +135,20 @@ export const OlderEvents: ReadonlyMap<string, IEventCard> = new Map([
     ],
 ]);
 
-const AllUpcomingEvents: Map<string, IEventLink> = new Map([]);
+const AllUpcomingEvents: Map<string, IEventLink> = new Map([
+    [
+        'game-jam-2026',
+        {
+            title: 'Game Jam 2026',
+            date: new Date('November 13, 2026'),
+            description: 'Compete to build a game',
+            href: '/events/game-jam-2026',
+            internal: true,
+            linkText: 'View Page →',
+            image: '/img/game-jam/2026/gj_banner.png',
+        },
+    ],
+]);
 
 export const UpcomingEvents: IEventLink[] = (() => {
     const today = new Date();
