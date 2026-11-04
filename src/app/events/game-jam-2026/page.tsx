@@ -1,0 +1,256 @@
+import BlockHeader from '@/components/block-header';
+import EventPageHeader from '@/components/event-page-header';
+import { Button } from '@/components/ui/button';
+import Image from 'next/image';
+import SponsorCard from '@/components/sponsor-card';
+
+export default function GameJam2026() {
+    return (
+        <main className="flex flex-col ">
+            <div className="w-full max-w-[1200px] mx-auto px-4">
+                <Image
+                    src="/img/game-jam/2026/gj_banner.png"
+                    alt="Game Jam Logo"
+                    width={3456}
+                    height={1926}
+                    sizes="(max-width: 900px) 100vw, 900px"
+                    priority
+                    className="w-full h-auto"
+                />
+            </div>
+            <div className="container py-12 flex flex-col gap-12">
+                <BlockHeader title="Theme" />
+                <p>Find out at our opening ceremony!</p>
+                <BlockHeader title="Rules" />
+                <p>
+                    Participants must follow our{' '}
+                    <a
+                        className="underline"
+                        href="https://umanitobacssa.ca/docs/discordTOU.pdf"
+                        target="_blank"
+                        rel="noreferrer">
+                        Discord Terms of Use
+                    </a>{' '}
+                    This includes:
+                </p>
+                <ul>
+                    <li>- Be respectful of your fellow peers.</li>
+                    <li>
+                        - No NSFW content or discussion of illegal/questionable content/activities.
+                    </li>
+                    <li>- Disruptive Behaviour is prohibited.</li>
+                    <li>
+                        - Racism, sexism, homophobia, transphobia, or other interactions which
+                        conform to hate speech are not tolerated.
+                    </li>
+                    <li>- We ask that you follow those guidelines in person and on the discord.</li>
+                </ul>
+                <BlockHeader title="Event Details" />
+                <p> Location: EITC Atrium and EITC E3-270</p>
+                <p>
+                    {' '}
+                    Date/Time: Friday November 13th, 2026 @ 8:30am to Saturday November 14th, 2026 @
+                    7pm
+                </p>
+                <BlockHeader title="Schedule" />
+                <div className="flex justify-center">
+                    <Image
+                        src="/img/game-jam/2026/schedule.png"
+                        alt="Game Jam 2026 Schedule"
+                        width={600}
+                        height={600}
+                        className="w-full lg:w-1/2"
+                    />
+                </div>
+                <BlockHeader title="Sponsors" />
+                <p>
+                    We&apos;d like to thank all our sponsors who allow us to put on events like this
+                    for Computer Science students!
+                </p>
+                <div className="flex flex-wrap justify-center lg:justify-around items-start gap-x-12 gap-y-8">
+                    <div className="flex flex-col items-center gap-5">
+                        <h4 className="md:pt-10">Season Sponsor</h4>
+                        <div className="flex flex-wrap gap-12 justify-center items-center">
+                            <SponsorCard
+                                name="ID Fusion"
+                                image="/img/sponsors/id-fusion-logo.svg"
+                                website="https://idfusion.com/"
+                            />
+                        </div>
+                    </div>
+
+                    <div className="flex flex-col items-center gap-5">
+                        <h4 className="md:pt-10">Silver Sponsor</h4>
+                        <div className="flex flex-wrap gap-12 justify-center items-center">
+                            <SponsorCard
+                                name="Niche"
+                                image="/img/sponsors/niche-logo.svg"
+                                website="https://nicherms.com"
+                            />
+                        </div>
+                    </div>
+
+                    <div className="flex flex-col items-center gap-5">
+                        <h4 className="md:pt-10">Bronze Sponsor</h4>
+                        <div className="flex flex-wrap gap-12 justify-center items-center">
+                            <SponsorCard
+                                name="G3"
+                                image="/img/sponsors/g3-logo.svg"
+                                website="https://g3.ca"
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <div className="flex gap-5" />
+                <BlockHeader title="Award Categories" />
+                <div className="flex justify-center">
+                    <Image
+                        src="/img/game-jam/2026/award-categories.png"
+                        alt="Game Jam 2026 Award Categories"
+                        width={400}
+                        height={400}
+                        className="w-full lg:w-1/2"
+                    />
+                </div>
+                {/* <BlockHeader title="Award Winners" />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {[
+                        {
+                            id: 1,
+                            src: '/img/game-jam/2026/awards/audience-choice.png',
+                            alt: 'Audience Choice',
+                        },
+                        {
+                            id: 2,
+                            src: '/img/game-jam/2026/awards/best-by-minority.png',
+                            alt: 'Best By Minority',
+                        },
+                        {
+                            id: 3,
+                            src: '/img/game-jam/2026/awards/best-game-environment.png',
+                            alt: 'Best Game Environment',
+                        },
+                        {
+                            id: 4,
+                            src: '/img/game-jam/2026/awards/best-overall.png',
+                            alt: 'Best Overall',
+                        },
+                        {
+                            id: 5,
+                            src: '/img/game-jam/2026/awards/best-solo-game.png',
+                            alt: 'Best Solo Game',
+                        },
+                        {
+                            id: 6,
+                            src: '/img/game-jam/2026/awards/most-promising-game.png',
+                            alt: 'Most Promising Game',
+                        },
+                    ].map((award) => (
+                        <div
+                            key={award.id}
+                            className="relative w-full m-2"
+                            style={{ aspectRatio: '16/9' }}>
+                            <Image
+                                src={award.src}
+                                fill
+                                alt={award.alt}
+                                sizes="(min-width: 768px) 700px, 100vw"
+                                className={`object-contain`}
+                            />
+                        </div>
+                    ))}
+                </div> */}
+                <BlockHeader title="Resources" />
+                <ul>
+                    <li>
+                        -{' '}
+                        <a
+                            rel="noreferrer"
+                            className="underline"
+                            href="https://itch.io/game-development/engines/most-projects">
+                            Most used game engines
+                        </a>{' '}
+                        - This resource is there to help you see what other projects are being
+                        developed in.
+                    </li>
+                    <li>
+                        -{' '}
+                        <a
+                            rel="noreferrer"
+                            className="underline"
+                            href="https://toolsntechniques.ca/topic03/topic-3.html">
+                            The Comp1002 basic Git guide
+                        </a>{' '}
+                        and{' '}
+                        <a
+                            rel="noreferrer"
+                            className="underline"
+                            href="https://toolsntechniques.ca/topic04/topic-2.html">
+                            advanced Git guide
+                        </a>{' '}
+                        - These were created to support Comp1002 but they could also be useful in
+                        quickly going over Git.
+                    </li>
+                </ul>
+                <BlockHeader title="Registration" />
+                <p>
+                    Please register by joining our{' '}
+                    <a
+                        rel="noreferrer"
+                        className="underline"
+                        href="https://discord.umanitobacssa.ca/gamejam-2026">
+                        discord
+                    </a>{' '}
+                    and following the instructions in <i>#welcome</i> <br />
+                    <br />
+                    Teams are recommended to be a team of 4 participants (not everyone needs to be a
+                    coder). 5 team members maximum. All users should register on the discord. Only{' '}
+                    <b>ONE</b> user needs to submit their project to this page. You may also
+                    register solo.
+                    <br />
+                    <br />
+                    To ensure that you are all set up for the jam we recommend that you have:
+                </p>
+                <ul>
+                    <li>
+                        -{' '}
+                        <a
+                            rel="noreferrer"
+                            className="underline"
+                            href="https://itch.io">
+                            Itch.io
+                        </a>{' '}
+                        account if you are leading a team
+                    </li>
+                </ul>
+                <p>
+                    If you do not have a team, you can look for a team in the{' '}
+                    <i>#looking-for-a-team</i> channel in the server to find a team.
+                </p>
+                <div
+                    rel="noreferrer"
+                    className="grid grid-cols-2 text-center table-auto gap-8">
+                    <a href="https://discord.umanitobacssa.ca/gamejam-2026">
+                        <Button
+                            className="w-full"
+                            variant="default"
+                            size="lg">
+                            Join the Discord
+                        </Button>
+                    </a>{' '}
+                    <a
+                        rel="noreferrer"
+                        href="https://itch.io/jam/um-cssa-game-jam-2026">
+                        <Button
+                            className="w-full"
+                            variant="default"
+                            size="lg">
+                            Itch.io Page
+                        </Button>
+                    </a>
+                </div>
+            </div>
+        </main>
+    );
+}
