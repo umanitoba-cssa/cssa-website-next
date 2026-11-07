@@ -165,9 +165,6 @@ export default function CTF2026() {
                         </tbody>
                     </table>
                 </div>
-
-                <BlockHeader title="Prizes" />
-                <p>To be revealed at the event.</p>
             </div>
         </main>
     );
