@@ -8,9 +8,15 @@ export interface IEventLink {
     image?: string;
 }
 
+export interface IEventCard extends IEventLink {
+    internal: boolean;
+    linkText: string;
+    image: string;
+}
+
 const goosiesDescription = 'Annual award show for the Department of Computer Science';
 
-export const RecentEvents: Map<string, IEventLink> = new Map([
+export const RecentEvents: ReadonlyMap<string, IEventCard> = new Map([
     [
         'general-meeting-bonfire-2026',
         {
@@ -19,7 +25,7 @@ export const RecentEvents: Map<string, IEventLink> = new Map([
             description: "Have some s'mores by a campfire and meet new people!",
             href: '/events/general-meeting-bonfire-2026',
             internal: true,
-            linkText: 'See Page →',
+            linkText: 'View Page →',
             image: '/img/bonfire/2026/combined-poster.png',
         },
     ],
@@ -31,7 +37,7 @@ export const RecentEvents: Map<string, IEventLink> = new Map([
             description: 'Teams of five compete to solve a technical challenge.',
             href: '/events/case-competition-2026',
             internal: true,
-            linkText: 'See Page →',
+            linkText: 'View Page →',
             image: '/img/case-competition/banner.png',
         },
     ],
@@ -40,9 +46,9 @@ export const RecentEvents: Map<string, IEventLink> = new Map([
         {
             title: 'Capture The Flag 2026',
             description: 'Compete with a team in cybersecurity challenges',
-            href: 'events/capture-the-flag-2026',
+            href: '/events/capture-the-flag-2026',
             internal: true,
-            linkText: 'See Page →',
+            linkText: 'View Page →',
             image: '/img/capture-the-flag/2026photos/IMG_1320.JPG',
         },
     ],
@@ -51,9 +57,9 @@ export const RecentEvents: Map<string, IEventLink> = new Map([
         {
             title: 'Game Jam 2025',
             description: 'Compete to build a game with the theme "Evolution"',
-            href: 'events/game-jam-2025',
+            href: '/events/game-jam-2025',
             internal: true,
-            linkText: 'See Page →',
+            linkText: 'View Page →',
             image: '/img/game-jam/2025/gj_banner.svg',
         },
     ],
@@ -62,7 +68,7 @@ export const RecentEvents: Map<string, IEventLink> = new Map([
         {
             title: 'Goosies 2025',
             description: goosiesDescription,
-            href: 'events/goosies-2025',
+            href: '/events/goosies-2025',
             internal: true,
             linkText: 'View Photos →',
             image: '/img/goosies/2025photos/ccdr 2025-04-25 192550.801.jpeg',
@@ -70,14 +76,14 @@ export const RecentEvents: Map<string, IEventLink> = new Map([
     ],
 ]);
 
-export const OlderEvents: Map<string, IEventLink> = new Map([
+export const OlderEvents: ReadonlyMap<string, IEventCard> = new Map([
     [
         'capture-the-flag-2025',
         {
             title: 'Capture The Flag 2025',
             description:
                 'Compete with a team in cybersecurity challenges with the theme "Murder Mystery"',
-            href: 'events/capture-the-flag-2025',
+            href: '/events/capture-the-flag-2025',
             internal: true,
             linkText: 'View Photos →',
             image: '/img/capture-the-flag/2025photos/IMG_0818.jpeg',
@@ -88,9 +94,9 @@ export const OlderEvents: Map<string, IEventLink> = new Map([
         {
             title: 'Game Jam 2024',
             description: 'Compete with a team to build a game with the theme "Under Pressure"',
-            href: 'events/game-jam-2024',
+            href: '/events/game-jam-2024',
             internal: true,
-            linkText: 'See Page →',
+            linkText: 'View Page →',
             image: '/img/game-jam/2024/banner.svg',
         },
     ],
@@ -99,9 +105,9 @@ export const OlderEvents: Map<string, IEventLink> = new Map([
         {
             title: 'Goosies 2024',
             description: goosiesDescription,
-            href: 'events/goosies-2024',
+            href: '/events/goosies-2024',
             internal: true,
-            linkText: 'See page →',
+            linkText: 'View Page →',
             image: '/img/backgrounds/home.jpg',
         },
     ],
@@ -110,7 +116,7 @@ export const OlderEvents: Map<string, IEventLink> = new Map([
         {
             title: 'Bonfire 2024',
             description: 'Hang around the campfire with the CSSA',
-            href: 'events/bonfire-2024',
+            href: '/events/bonfire-2024',
             internal: true,
             linkText: 'View Photos →',
             image: '/img/bonfire/2024photos/IMG_1753.jpeg',

@@ -64,6 +64,7 @@ export default function GameJam2024() {
                                 src={award.src}
                                 fill
                                 alt={award.alt}
+                                sizes="(min-width: 768px) 700px, 100vw"
                                 className={`object-contain`}
                             />
                         </div>
@@ -106,6 +107,7 @@ export default function GameJam2024() {
                                 src={src}
                                 fill
                                 alt={`Day ${idx + 1} Schedule`}
+                                sizes="(min-width: 1024px) 33vw, 100vw"
                                 className="object-contain"
                             />
                         </div>

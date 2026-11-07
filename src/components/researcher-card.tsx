@@ -25,6 +25,7 @@ export default function ResearcherCard({
                     src={researcher?.image}
                     alt={researcher?.fullName}
                     fill
+                    sizes="(max-width: 640px) calc(100vw - 2rem), 173px"
                     className="object-cover object-center rounded-xl"
                 />
             </div>

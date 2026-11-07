@@ -53,6 +53,7 @@ export default function Home() {
                                         fill
                                         src={item.src}
                                         alt={item.title}
+                                        sizes="(min-width: 1024px) 400px, 100vw"
                                         className="object-cover"
                                     />
                                 </div>
@@ -87,6 +88,7 @@ export default function Home() {
                                         fill
                                         src={item.src}
                                         alt={item.title}
+                                        sizes="(min-width: 1024px) 400px, 100vw"
                                         className="object-cover"
                                     />
                                 </div>

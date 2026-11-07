@@ -87,6 +87,7 @@ export default function ResearcherModal({
                                                     src={researcher?.image}
                                                     alt={researcher?.fullName}
                                                     fill
+                                                    sizes="240px"
                                                     className="object-cover"
                                                 />
                                             </div>

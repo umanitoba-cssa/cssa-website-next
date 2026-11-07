@@ -10,6 +10,7 @@ export default function CTF2026() {
                     src="/img/case-competition/banner.png"
                     alt="Design & Craft Sprint"
                     fill
+                    sizes="100vw"
                     className="object-contain"
                 />
             </div>
