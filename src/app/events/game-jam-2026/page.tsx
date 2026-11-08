@@ -46,7 +46,7 @@ export default function GameJam2026() {
                     <li>- We ask that you follow those guidelines in person and on the discord.</li>
                 </ul>
                 <BlockHeader title="Event Details" />
-                <p> Location: EITC Atrium and EITC E3-270</p>
+                <p> Location: EITC E2-110 and EITC E3-270</p>
                 <p>
                     {' '}
                     Date/Time: Friday November 13th, 2026 @ 8:30am to Saturday November 14th, 2026 @
@@ -84,7 +84,7 @@ export default function GameJam2026() {
                         <div className="flex flex-wrap gap-12 justify-center items-center">
                             <SponsorCard
                                 name="Niche"
-                                image="/img/sponsors/niche-logo.svg"
+                                image="/img/sponsors/niche-logo-blue.png"
                                 website="https://nicherms.com"
                             />
                         </div>

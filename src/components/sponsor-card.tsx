@@ -12,14 +12,14 @@ export default function SponsorCard({ name, image, website }: ISponsor) {
             <a href={website}>
                 <div className="flex flex-col border-solid border border-cssa-navy rounded-xl items-center p-4 gap-4 min-w-[17rem] max-w-[17rem] bg-white bg-opacity-70">
                     {image && (
-                        <div className="w-52 h-52 object-cover bg-contain relative overflow-hidden content-center">
+                        <div className="w-52 h-52 relative overflow-hidden">
                             <Image
                                 src={image}
                                 alt={name}
-                                width={0}
-                                height={0}
-                                style={{ width: '100%', height: 'auto' }}
-                                className=""
+                                fill
+                                sizes="208px"
+                                quality={90}
+                                className="object-contain"
                             />
                         </div>
                     )}
