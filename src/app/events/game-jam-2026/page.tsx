@@ -108,8 +108,8 @@ export default function GameJam2026() {
                     <Image
                         src="/img/game-jam/2026/award-categories.png"
                         alt="Game Jam 2026 Award Categories"
-                        width={400}
-                        height={400}
+                        width={1080}
+                        height={1350}
                         className="w-full lg:w-1/2"
                     />
                 </div>
