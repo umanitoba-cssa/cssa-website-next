@@ -48,11 +48,11 @@ export default async function GuidesPage() {
                                 <div
                                     className="px-2 w-full h-full"
                                     key={index}>
-                                    <Link href={href}>
+                                    <Link href={`/${href}`}>
                                         <Card className="h-full">
                                             <CardHeader>
                                                 <CardTitle className="text-lg flex flex-row gap-2">
-                                                    {title}{' '}
+                                                    {title}
                                                     <FaExternalLinkAlt className="my-auto" />
                                                 </CardTitle>
                                                 <CardDescription>{description}</CardDescription>
