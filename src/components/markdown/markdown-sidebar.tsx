@@ -50,7 +50,7 @@ const MarkdownSidebar: React.FC<MarkdownSidebarProps> = ({ markdown, rootPath, c
                         <ul className="space-y-3">
                             <li>
                                 <Link
-                                    href={basePath}
+                                    href={`${basePath}#markdown-content`}
                                     onClick={closeMobileMenu}
                                     className={cn(
                                         'block py-1 hover:text-primary transition-colors',
@@ -65,7 +65,7 @@ const MarkdownSidebar: React.FC<MarkdownSidebarProps> = ({ markdown, rootPath, c
                             {markdown.sections.map((section) => (
                                 <li key={section.slug}>
                                     <Link
-                                        href={path.join(basePath, section.slug)}
+                                        href={`${path.join(basePath, section.slug)}#markdown-content`}
                                         onClick={closeMobileMenu}
                                         className={cn(
                                             'block py-1 hover:text-primary transition-colors',
@@ -89,7 +89,7 @@ const MarkdownSidebar: React.FC<MarkdownSidebarProps> = ({ markdown, rootPath, c
                 <ul className="space-y-3">
                     <li>
                         <Link
-                            href={basePath}
+                            href={`${basePath}#markdown-content`}
                             className={cn(
                                 'block py-1 hover:text-primary transition-colors',
                                 isRootPath && activeSection === ''
@@ -103,7 +103,7 @@ const MarkdownSidebar: React.FC<MarkdownSidebarProps> = ({ markdown, rootPath, c
                     {markdown.sections.map((section) => (
                         <li key={section.slug}>
                             <Link
-                                href={path.join(basePath, section.slug)}
+                                href={`${path.join(basePath, section.slug)}#markdown-content`}
                                 className={cn(
                                     'block py-1 hover:text-primary transition-colors',
                                     activeSection === section.slug

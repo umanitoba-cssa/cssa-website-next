@@ -98,14 +98,14 @@ export default async function SectionPage({ params }: SectionPageProps) {
                                 asChild>
                                 {prevSection ? (
                                     <Link
-                                        href={`/resources/guides/${guideSlug}/${prevSection.slug}`}>
+                                        href={`/resources/guides/${guideSlug}/${prevSection.slug}#markdown-content`}>
                                         <ChevronLeft className="h-4 w-4" />
                                         <p className="desktop-only text-base">
                                             {prevSection.title}
                                         </p>
                                     </Link>
                                 ) : (
-                                    <Link href={`/resources/guides/${guideSlug}`}>
+                                    <Link href={`/resources/guides/${guideSlug}#markdown-content`}>
                                         <ChevronLeft className="h-4 w-4" />
                                         <p className="desktop-only text-base">Guide Overview</p>
                                     </Link>
@@ -117,7 +117,7 @@ export default async function SectionPage({ params }: SectionPageProps) {
                                     className="border-cssa-blue text-white bg-cssa-blue/20 transition-colors flex items-center gap-2"
                                     asChild>
                                     <Link
-                                        href={`/resources/guides/${guideSlug}/${nextSection.slug}`}>
+                                        href={`/resources/guides/${guideSlug}/${nextSection.slug}#markdown-content`}>
                                         <p className="desktop-only text-base">
                                             {nextSection.title}
                                         </p>

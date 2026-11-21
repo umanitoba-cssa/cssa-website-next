@@ -153,8 +153,9 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({ source, className }) 
 
     return (
         <article
+            id="markdown-content"
             className={cn(
-                'markdown-content markdown-body prose prose-headings:scroll-mt-20 max-w-none',
+                'markdown-content markdown-body prose scroll-mt-20 prose-headings:scroll-mt-20 max-w-none',
                 'prose-table:overflow-hidden prose-table:border-collapse prose-th:bg-cssa-blue prose-th:text-white',
                 className,
             )}
