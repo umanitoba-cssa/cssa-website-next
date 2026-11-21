@@ -27,6 +27,15 @@ export const GuideList: IMarkdownPart[] = [
     },
 ];
 
+export const OldGuides: IResourceLink[] = [
+    {
+        title: 'First Year Guide (2024)',
+        description:
+            'The old guide to your first year at the UofM as a First Year. See Guides for the updated version.',
+        href: 'docs/firstYearGuide.pdf',
+    },
+];
+
 export const GeneralMeetingPart: IMarkdownPart = {
     slug: 'general-meeting',
     repoURL: 'https://github.com/umanitoba-cssa/general-meeting',
@@ -71,12 +80,6 @@ export const CSSALinks: IResourceLink[] = [
         href: 'resources/guides',
         internal: true,
         linkText: 'Browse guides →',
-    },
-    {
-        title: 'First Year Guide (2024)',
-        description:
-            'The old guide to your first year at the UofM as a First Year. See Guides for the updated version.',
-        href: 'docs/firstYearGuide.pdf',
     },
     {
         title: 'Researchers',

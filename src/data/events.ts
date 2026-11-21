@@ -18,6 +18,17 @@ const goosiesDescription = 'Annual award show for the Department of Computer Sci
 
 export const RecentEvents: ReadonlyMap<string, IEventCard> = new Map([
     [
+        'game-jam-2026',
+        {
+            title: 'Game Jam 2026',
+            description: 'Compete to build a game',
+            href: '/events/game-jam-2026',
+            internal: true,
+            linkText: 'View Page →',
+            image: '/img/game-jam/2026/gj_banner.png',
+        },
+    ],
+    [
         'general-meeting-bonfire-2026',
         {
             title: 'Summer General Meeting & Bonfire',
@@ -53,17 +64,6 @@ export const RecentEvents: ReadonlyMap<string, IEventCard> = new Map([
         },
     ],
     [
-        'game-jam-2025',
-        {
-            title: 'Game Jam 2025',
-            description: 'Compete to build a game with the theme "Evolution"',
-            href: '/events/game-jam-2025',
-            internal: true,
-            linkText: 'View Page →',
-            image: '/img/game-jam/2025/gj_banner.svg',
-        },
-    ],
-    [
         'goosies-2025',
         {
             title: 'Goosies 2025',
@@ -77,6 +77,17 @@ export const RecentEvents: ReadonlyMap<string, IEventCard> = new Map([
 ]);
 
 export const OlderEvents: ReadonlyMap<string, IEventCard> = new Map([
+    [
+        'game-jam-2025',
+        {
+            title: 'Game Jam 2025',
+            description: 'Compete to build a game with the theme "Evolution"',
+            href: '/events/game-jam-2025',
+            internal: true,
+            linkText: 'View Page →',
+            image: '/img/game-jam/2025/gj_banner.svg',
+        },
+    ],
     [
         'capture-the-flag-2025',
         {
@@ -124,7 +135,20 @@ export const OlderEvents: ReadonlyMap<string, IEventCard> = new Map([
     ],
 ]);
 
-const AllUpcomingEvents: Map<string, IEventLink> = new Map([]);
+const AllUpcomingEvents: Map<string, IEventLink> = new Map([
+    [
+        'game-jam-2026',
+        {
+            title: 'Game Jam 2026',
+            date: new Date('November 13, 2026'),
+            description: 'Compete to build a game',
+            href: '/events/game-jam-2026',
+            internal: true,
+            linkText: 'View Page →',
+            image: '/img/game-jam/2026/gj_banner.png',
+        },
+    ],
+]);
 
 export const UpcomingEvents: IEventLink[] = (() => {
     const today = new Date();
