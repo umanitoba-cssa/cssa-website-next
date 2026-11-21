@@ -1,5 +1,4 @@
 import BlockHeader from '@/components/block-header';
-import EventPageHeader from '@/components/event-page-header';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import SponsorCard from '@/components/sponsor-card';
@@ -20,7 +19,7 @@ export default function GameJam2026() {
             </div>
             <div className="container py-12 flex flex-col gap-12">
                 <BlockHeader title="Theme" />
-                <p>Find out at our opening ceremony!</p>
+                <p>This year&apos;s theme is &quot;Cosmos&quot;</p>
                 <BlockHeader title="Rules" />
                 <p>
                     Participants must follow our{' '}

@@ -18,7 +18,7 @@ export default function SponsorCard({ name, image, website }: ISponsor) {
                                 alt={name}
                                 fill
                                 sizes="208px"
-                                quality={90}
+                                quality={75}
                                 className="object-contain"
                             />
                         </div>
